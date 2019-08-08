@@ -20,7 +20,7 @@ class _ProfileClient extends State<ProfileClient> {
     return Scaffold(
         key: _scaffoldKeyprofile,
         drawer: Container(
-          width: 260.0,
+          width: MediaQuery.of(context).size.width*.8 ,
           decoration: BoxDecoration(
             color: Color(0xFF272D34),
           ),
@@ -250,7 +250,7 @@ class _ProfileClient extends State<ProfileClient> {
         body: new Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-            color: Colors.deepPurpleAccent,
+            color: Colors.deepPurpleAccent,//aqui cambiar
             image: DecorationImage(
               colorFilter: new ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.dstATop),
@@ -262,8 +262,8 @@ class _ProfileClient extends State<ProfileClient> {
           child: Column(
             children: <Widget>[
               Container(
-                width: MediaQuery.of(context).size.width,
-                height: (MediaQuery.of(context).size.height / 2) + 60,
+                width: MediaQuery.of(context).size.width ,
+                height: (MediaQuery.of(context).size.height / 2)+60,
                 decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.only(
@@ -291,8 +291,8 @@ class _ProfileClient extends State<ProfileClient> {
                       ],
                     ),
                     Container(
-                      width: 100,
-                      height: 100,
+                      width: MediaQuery.of(context).size.height *.15,
+                      height: MediaQuery.of(context).size.height *.15,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -309,7 +309,7 @@ class _ProfileClient extends State<ProfileClient> {
                           client['APELLIDO_P'].toString() +
                           " " +
                           client['APELLIDO_M'].toString(),
-                      style: TextStyle(fontSize: 22.0, color: Colors.white),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.height *.04, color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
@@ -369,11 +369,13 @@ class _ProfileClient extends State<ProfileClient> {
                 ),
               ),
               Expanded(
+
                 child: ListView.builder(
                   itemCount: 7,
                   key: new GlobalKey(),
                   itemBuilder: (BuildContext context, int position) {
                     return Card(
+
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -402,7 +404,7 @@ class _ProfileClient extends State<ProfileClient> {
                                 height: 5,
                               ),
                               Container(
-                                width: 220,
+                                width: MediaQuery.of(context).size.width*.6,
                                 child: Text(
                                     " Presiona demasiado durante la realizacion del proyecto y el pago se retraso bastante.",
                                     textAlign: TextAlign.justify,

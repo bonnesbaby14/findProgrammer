@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
 import 'homeClient.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
@@ -26,7 +25,7 @@ class ViewProjectClient extends StatefulWidget {
 
 class _ViewProjectClient extends State<ViewProjectClient> {
   String ID;
-  final AsyncMemoizer _asyncMemoizer = AsyncMemoizer();
+   AsyncMemoizer _asyncMemoizer2 = AsyncMemoizer();
   _ViewProjectClient(this.ID);
   var dataProject, reqFuncionales, reqNoFuncionales, avances, desarrollador;
 
@@ -41,7 +40,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
-          width: 260.0,
+          width:  MediaQuery.of(context).size.width*.8 ,
           decoration: BoxDecoration(
             color: Color(0xFF272D34),
           ),
@@ -271,7 +270,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
         body: FutureBuilder(
-          future: _asyncMemoizer.runOnce(() async {
+          future: _asyncMemoizer2.runOnce(() async {
             await getInfooProject();
             await getReqFProject();
             await getReqNFProject();
@@ -355,7 +354,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                   children: <Widget>[
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      height: (MediaQuery.of(context).size.height / 2) + 50,
+                      height: (MediaQuery.of(context).size.height / 2) + 73,
                       decoration: BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.only(
@@ -404,7 +403,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                             ],
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Container(
                             alignment: Alignment.center,
@@ -412,19 +411,19 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                             child: Text(
                               dataProject[0]['TITULO'].toString(),
                               style: TextStyle(
-                                  fontSize: 25.0, color: Colors.white),
+                                  fontSize: 23.0, color: Colors.white),
                             ),
                           ),
                           Container(
                             width: (MediaQuery.of(context).size.width / 4) * 3,
-                            height: 90,
+                            height: MediaQuery.of(context).size.height * .18,
                             child: ListView(
                               children: <Widget>[
                                 Text(
                                   dataProject[0]['DESCRIPCION'].toString(),
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
-                                      fontSize: 14.0, color: Colors.white),
+                                      fontSize: 13.0, color: Colors.white),
                                 ),
                               ],
                             ),
@@ -448,7 +447,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             size: 30,
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 8,
                                           ),
                                           Text(
                                             "Editar Proyecto",
@@ -470,7 +469,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             size: 30,
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 8,
                                           ),
                                           Text(
                                             "  Contactar\nProgramador",
@@ -492,7 +491,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             size: 30,
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 8,
                                           ),
                                           Text(
                                             "Proyecto en \n  desarrollo",
@@ -514,7 +513,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             size: 30,
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 8,
                                           ),
                                           Text(
                                             "Obtener  \n  Codigo",
@@ -536,7 +535,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             size: 30,
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 8,
                                           ),
                                           Text(
                                             "Cancelar \n proyecto ",
@@ -558,7 +557,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             size: 30,
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 8,
                                           ),
                                           Text(
                                             "  Reportar \nProgramador",
@@ -582,7 +581,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                               size: 30,
                                             ),
                                             SizedBox(
-                                              height: 10,
+                                              height: 8,
                                             ),
                                             Text(
                                               "  Programadores \n    Interesados",
@@ -605,7 +604,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             size: 30,
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 8,
                                           ),
                                           Text(
                                             "Proyecto \nTerminado",

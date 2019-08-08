@@ -29,12 +29,12 @@ class _FirstScreen extends State<FirstScreen> {
         child: new ListView(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: 100.0),
+              padding: EdgeInsets.only(top:(MediaQuery.of(context).size.height)*.15),
               child: Center(
                 child: Icon(
                   Icons.devices_other,
                   color: Colors.white,
-                  size: 60.0,
+                  size: (MediaQuery.of(context).size.height)*.17,
                 ),
               ),
             ),
@@ -60,10 +60,13 @@ class _FirstScreen extends State<FirstScreen> {
                 ],
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height *.1 ,
+            ),
             new Container(
               width: MediaQuery.of(context).size.width,
               margin:
-                  const EdgeInsets.only(left: 30.0, right: 30.0, top: 150.0),
+                  const EdgeInsets.only(left: 30.0, right: 30.0, top: 0),
               alignment: Alignment.center,
               child: new Row(
                 children: <Widget>[

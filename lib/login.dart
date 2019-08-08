@@ -194,7 +194,7 @@ class _Login extends State<Login> {
                 ),
               ),
               SizedBox(
-                height: 70.0,
+                height: ((MediaQuery.of(context).size.height)/10)-30,
               ),
               Theme(
                 data: ThemeData(

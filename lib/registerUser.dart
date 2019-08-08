@@ -39,7 +39,7 @@ class _RegisterUser extends State<RegisterUser> {
             ),
           ),
           child: ListView(
-            padding: EdgeInsets.fromLTRB(22.0, 0, 22.0, 0),
+            padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
             children: <Widget>[
               SizedBox(
                 height: kToolbarHeight,
@@ -298,8 +298,9 @@ class _RegisterUser extends State<RegisterUser> {
               SizedBox(
                 height: 30.0,
               ),
-
-              Theme(
+Container(
+  width: MediaQuery.of(context).size.width-10,
+  child:  Theme(
                   data: ThemeData(
                       hintColor: white,
                       primaryColor: white,
@@ -353,6 +354,7 @@ class _RegisterUser extends State<RegisterUser> {
                                 primaryColor: white,
                                 primaryColorDark: white),
                             child: Radio(
+                              
                               onChanged: (int e) {
                                 setState(() {
                                   _groupvalue = e;
@@ -368,8 +370,10 @@ class _RegisterUser extends State<RegisterUser> {
                     ],
                   )),
 
+),
+             
               SizedBox(
-                height: 55.0,
+                height:MediaQuery.of(context).size.height * .03
               ),
               Align(
                 child: SizedBox(
