@@ -24,11 +24,13 @@ class _RegisterUser extends State<RegisterUser> {
 
   @override
   Widget build(BuildContext context) {
+      double mediaw=MediaQuery.of(context).size.width;
+  double mediah=MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
         body: new Container(
-          height: MediaQuery.of(context).size.height,
+          height: mediah,
           decoration: BoxDecoration(
             color: Colors.deepPurpleAccent,
             image: DecorationImage(
@@ -299,7 +301,7 @@ class _RegisterUser extends State<RegisterUser> {
                 height: 30.0,
               ),
 Container(
-  width: MediaQuery.of(context).size.width-10,
+  width: mediaw-10,
   child:  Theme(
                   data: ThemeData(
                       hintColor: white,
@@ -373,7 +375,7 @@ Container(
 ),
              
               SizedBox(
-                height:MediaQuery.of(context).size.height * .03
+                height:mediah * .03
               ),
               Align(
                 child: SizedBox(

@@ -8,15 +8,18 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreen extends State<FirstScreen> {
+  
   @override
   Widget build(BuildContext context) {
+  double mediaw=MediaQuery.of(context).size.width;
+  double mediah=MediaQuery.of(context).size.height;
     return Scaffold(
         body: WillPopScope(
           onWillPop: (){
           return;
           },
       child: Container(
-        height: MediaQuery.of(context).size.height,
+        height: mediah,
         decoration: BoxDecoration(
           color: Colors.deepPurpleAccent,
           image: DecorationImage(
@@ -29,16 +32,16 @@ class _FirstScreen extends State<FirstScreen> {
         child: new ListView(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top:(MediaQuery.of(context).size.height)*.15),
+              padding: EdgeInsets.only(top:(mediah)*.15),
               child: Center(
                 child: Icon(
                   Icons.devices_other,
                   color: Colors.white,
-                  size: (MediaQuery.of(context).size.height)*.17,
+                  size: (mediah)*.17,
                 ),
               ),
             ),
-            Container(
+            Container( 
               padding: EdgeInsets.only(top: 5.0),
               child: new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -61,10 +64,10 @@ class _FirstScreen extends State<FirstScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height *.1 ,
+              height: mediah *.1 ,
             ),
             new Container(
-              width: MediaQuery.of(context).size.width,
+              width: mediaw,
               margin:
                   const EdgeInsets.only(left: 30.0, right: 30.0, top: 0),
               alignment: Alignment.center,
@@ -105,7 +108,7 @@ class _FirstScreen extends State<FirstScreen> {
               ),
             ),
             new Container(
-              width: MediaQuery.of(context).size.width,
+              width: mediaw,
               margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 30.0),
               alignment: Alignment.center,
               child: new Row(

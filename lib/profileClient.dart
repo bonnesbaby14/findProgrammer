@@ -17,10 +17,12 @@ class _ProfileClient extends State<ProfileClient> {
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyprofile = new GlobalKey<ScaffoldState>();
+      double mediaw=MediaQuery.of(context).size.width;
+  double mediah=MediaQuery.of(context).size.height;
     return Scaffold(
         key: _scaffoldKeyprofile,
         drawer: Container(
-          width: MediaQuery.of(context).size.width*.8 ,
+          width: mediaw*.8 ,
           decoration: BoxDecoration(
             color: Color(0xFF272D34),
           ),
@@ -248,7 +250,7 @@ class _ProfileClient extends State<ProfileClient> {
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
         body: new Container(
-          height: MediaQuery.of(context).size.height,
+          height: mediah,
           decoration: BoxDecoration(
             color: Colors.deepPurpleAccent,//aqui cambiar
             image: DecorationImage(
@@ -262,8 +264,8 @@ class _ProfileClient extends State<ProfileClient> {
           child: Column(
             children: <Widget>[
               Container(
-                width: MediaQuery.of(context).size.width ,
-                height: (MediaQuery.of(context).size.height / 2)+60,
+                width: mediaw ,
+                height: (mediah / 2)+60,
                 decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.only(
@@ -291,8 +293,8 @@ class _ProfileClient extends State<ProfileClient> {
                       ],
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.height *.15,
-                      height: MediaQuery.of(context).size.height *.15,
+                      width: mediah *.15,
+                      height: mediah*.15,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -309,7 +311,7 @@ class _ProfileClient extends State<ProfileClient> {
                           client['APELLIDO_P'].toString() +
                           " " +
                           client['APELLIDO_M'].toString(),
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.height *.04, color: Colors.white),
+                      style: TextStyle(fontSize: mediah *.04, color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
@@ -404,7 +406,7 @@ class _ProfileClient extends State<ProfileClient> {
                                 height: 5,
                               ),
                               Container(
-                                width: MediaQuery.of(context).size.width*.6,
+                                width: mediaw*.6,
                                 child: Text(
                                     " Presiona demasiado durante la realizacion del proyecto y el pago se retraso bastante.",
                                     textAlign: TextAlign.justify,

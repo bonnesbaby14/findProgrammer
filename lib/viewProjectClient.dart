@@ -37,10 +37,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   @override
   Widget build(BuildContext context) {
    var _scaffoldKey = new GlobalKey<ScaffoldState>();
+     double mediaw=MediaQuery.of(context).size.width;
+  double mediah=MediaQuery.of(context).size.height;
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
-          width:  MediaQuery.of(context).size.width*.8 ,
+          width:  mediaw*.8 ,
           decoration: BoxDecoration(
             color: Color(0xFF272D34),
           ),
@@ -339,7 +341,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 ));
               }
               return Container(
-                height: MediaQuery.of(context).size.height,
+                height: mediah,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
                   image: DecorationImage(
@@ -353,8 +355,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: (MediaQuery.of(context).size.height / 2) + 73,
+                      width: mediaw,
+                      height: (mediah / 2) + 73,
                       decoration: BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.only(
@@ -415,8 +417,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                             ),
                           ),
                           Container(
-                            width: (MediaQuery.of(context).size.width / 4) * 3,
-                            height: MediaQuery.of(context).size.height * .18,
+                            width: (mediaw / 4) * 3,
+                            height: mediah * .18,
                             child: ListView(
                               children: <Widget>[
                                 Text(
@@ -834,7 +836,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
               );
             } else {
               return Container(
-                height: MediaQuery.of(context).size.height,
+                height: mediah,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
                   image: DecorationImage(
@@ -848,8 +850,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: (MediaQuery.of(context).size.height / 2) + 50,
+                      width: mediaw,
+                      height: (mediah / 2) + 50,
                       decoration: BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.only(
@@ -910,7 +912,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                             ),
                           ),
                           Container(
-                            width: (MediaQuery.of(context).size.width / 4) * 3,
+                            width: (mediaw / 4) * 3,
                             height: 90,
                             child: ListView(
                               children: <Widget>[
