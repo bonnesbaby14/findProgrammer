@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "806092114986",
+    "firebase_url": "https://findprogrammerceti.firebaseio.com",
+    "project_id": "findprogrammerceti",
+    "storage_bucket": "findprogrammerceti.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806092114986:android:af165c9144e0142c",
+        "android_client_info": {
+          "package_name": "glacsoftwaresolutions.findprogrammer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806092114986-hnru709o16ik6rj79c8ddmcpn4g0c2tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBdPwoDylS_b57laMPggkUtGH9tdDTQy0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806092114986-hnru709o16ik6rj79c8ddmcpn4g0c2tp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
