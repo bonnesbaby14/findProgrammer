@@ -5,6 +5,10 @@ import 'package:findprogrammer/homeProgrammer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:findprogrammer/models/cliente.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 import 'componentes/helperSQFLITE.dart';
 import 'main.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -27,6 +31,26 @@ class _Login extends State<Login> {
   TextEditingController contrasena = TextEditingController();
   TextEditingController mail = TextEditingController();
   Helper helper = new Helper();
+   
+  
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = new GoogleSignIn(scopes: ['email']);
+
+
+
+  Future  _testSing()async{
+    await googleSignIn.signIn();
+    print("innicios de sesion");
+    print(googleSignIn.currentUser.displayName);
+    await print(googleSignIn.currentUser.id);
+  }
+
+/*
+   _testSing(){
+  googleSignIn.signOut();
+  }
+*/
+
   Future<List> login() async {
     try {
       final response = await http
@@ -341,7 +365,9 @@ class _Login extends State<Login> {
                   width: 270.0,
                   child: OutlineButton(
                     borderSide: BorderSide(color: Colors.white),
-                    onPressed: () {},
+                    onPressed: () {
+                      _testSing();
+                    },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
