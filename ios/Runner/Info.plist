@@ -63,8 +63,8 @@
 	<key>NSCameraUsageDescription</key>
 	<string>LoadImageToProfile</string>
 
-<key>NSMicrophoneUsageDescription</key>
-<string>LoadImageToProfile</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>LoadImageToProfile</string>
 
 </dict>
 </plist>
