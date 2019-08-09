@@ -57,14 +57,7 @@
 	</array>
 	<!-- End of the Google Sign-in Section -->
 
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>LoadImageToProfile</string>
-
-	<key>NSCameraUsageDescription</key>
-	<string>LoadImageToProfile</string>
-
-	<key>NSMicrophoneUsageDescription</key>
-	<string>LoadImageToProfile</string>
+	
 
 </dict>
 </plist>
