@@ -34,16 +34,31 @@ class _Login extends State<Login> {
    
   
   final FirebaseAuth _auth=FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = new GoogleSignIn(scopes: ['email']);
+  final GoogleSignIn googleSignIn = new GoogleSignIn();
 
 
 
   Future  _testSing()async{
-    await googleSignIn.signIn();
-    print("innicios de sesion");
-    print(googleSignIn.currentUser.displayName);
-    await print(googleSignIn.currentUser.id);
+
+final GoogleSignInAccount googleuser=await googleSignIn.signIn();
+final GoogleSignInAuthentication googleaut=await googleuser.authentication;
+final AuthCredential credential=GoogleAuthProvider.getCredential(
+  accessToken: googleaut.accessToken,
+  idToken: googleaut.idToken
+);
+final FirebaseUser user= (await _auth.signInWithCredential(credential)).user;
+print(user.providerId);
+print(user.email);
+
+
   }
+
+  // Future  _testSing()async{
+  //   await googleSignIn.signIn();
+  //   print("innicios de sesion");
+  //   print(googleSignIn.currentUser.displayName);
+  //   await print(googleSignIn.currentUser.id);
+  // }
 
 /*
    _testSing(){
@@ -366,7 +381,8 @@ class _Login extends State<Login> {
                   child: OutlineButton(
                     borderSide: BorderSide(color: Colors.white),
                     onPressed: () {
-                      _testSing();
+                       _testSing() ;
+                    //googleSignIn.signOut();
                     },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
