@@ -4,18 +4,12 @@ import 'package:findprogrammer/homeClient.dart';
 import 'package:findprogrammer/homeProgrammer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:findprogrammer/models/cliente.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import 'componentes/helperSQFLITE.dart';
 import 'main.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:groovin_material_icons/groovin_material_icons.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart' as path;
 
 class Login extends StatefulWidget {
   @override
@@ -31,26 +25,20 @@ class _Login extends State<Login> {
   TextEditingController contrasena = TextEditingController();
   TextEditingController mail = TextEditingController();
   Helper helper = new Helper();
-   
-  
-  final FirebaseAuth _auth=FirebaseAuth.instance;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = new GoogleSignIn();
 
-
-
-  Future  _testSing()async{
-
-final GoogleSignInAccount googleuser=await googleSignIn.signIn();
-final GoogleSignInAuthentication googleaut=await googleuser.authentication;
-final AuthCredential credential=GoogleAuthProvider.getCredential(
-  accessToken: googleaut.accessToken,
-  idToken: googleaut.idToken
-);
-final FirebaseUser user= (await _auth.signInWithCredential(credential)).user;
-print(user.providerId);
-print(user.email);
-
-
+  Future _testSing() async {
+    final GoogleSignInAccount googleuser = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleaut =
+        await googleuser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleaut.accessToken, idToken: googleaut.idToken);
+    final FirebaseUser user =
+        (await _auth.signInWithCredential(credential)).user;
+    print(user.providerId);
+    print(user.email);
   }
 
   // Future  _testSing()async{
@@ -233,7 +221,7 @@ print(user.email);
                 ),
               ),
               SizedBox(
-                height: ((MediaQuery.of(context).size.height)/10)-30,
+                height: ((MediaQuery.of(context).size.height) / 10) - 30,
               ),
               Theme(
                 data: ThemeData(
@@ -381,8 +369,8 @@ print(user.email);
                   child: OutlineButton(
                     borderSide: BorderSide(color: Colors.white),
                     onPressed: () {
-                       _testSing() ;
-                    //googleSignIn.signOut();
+                      _testSing();
+                      //googleSignIn.signOut();
                     },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
