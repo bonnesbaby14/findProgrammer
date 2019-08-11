@@ -39,6 +39,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
           Navigator.pop(context);
         },
         child: Scaffold(
+          
           key: _scaffoldKeyhome,
           drawer: Container(
             width: 260.0,
@@ -46,6 +47,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
               color: Color(0xFF272D34),
             ),
             child: Column(
+              
               children: <Widget>[
                 SizedBox(
                   height: 30,
@@ -346,7 +348,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
           title: Text("Mensajes"),
           backgroundColor: Color(0xFF272D34),
         ),
-          resizeToAvoidBottomPadding: false,
+          resizeToAvoidBottomPadding: true,
           backgroundColor: Colors.white,
           body: Container(
           color: Colors.white,
