@@ -127,7 +127,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.transparent.withOpacity(0.3),
+                        
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     child: Row(
                       children: <Widget>[
@@ -141,7 +141,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                     child: Icon(
                                       GroovinMaterialIcons.flash_circle,
                                       size: 35,
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ),
@@ -342,12 +342,187 @@ class _ChatProgrammer extends State<ChatProgrammer> {
               ],
             ),
           ),
-          appBar: null,
+          appBar: AppBar(
+          title: Text("Mensajes"),
+          backgroundColor: Color(0xFF272D34),
+        ),
           resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.white,
-          body: null
+          body: Container(
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child: FutureBuilder(
+                  future: loadMessage(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return ListView.builder(
+                          itemCount: 15,
+                          itemBuilder: (context, int item) {
+                            return false?Column(
+                              children: <Widget>[
+                                Row(
+                                  
+                                  children: <Widget>[
+                                  
+                                  Padding(padding: EdgeInsets.only(left: 20), child: Text("01:58 a.m   11/08/2019"),),
+                                  Expanded(child: Text(""),),
+                                ],),
+                                Container(
+                              margin: EdgeInsets.only(bottom: 1, top: 1),
+                              child: Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .03,
+                                  ),
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          gradient: LinearGradient(
+                                              begin: Alignment.topRight,
+                                              end: Alignment.bottomLeft,
+                                              stops: [
+                                                0.1,
+                                                1
+                                              ],
+                                              colors: [
+                                                Color(0xFF610B5E),
+                                                Color(0xFFBDBDBD)
+                                              ])),
+                                      child: Container(
+                                          margin: EdgeInsets.all(20),
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .60,
+                                            child: Text(
+                                                "ww dddddd",style: TextStyle(color: Colors.white  ),),
+                                          )
+                                          )
+                                          ),
+                                          SizedBox(
+                                    width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .20,
+                                  ),
+                                ],
+                              ),
+                            )
+
+                              ],
+                            ):Column(
+                              children: <Widget>[
+                                 Row(
+                                  
+                                  children: <Widget>[
+                                  Expanded(child: Text(""),),
+                                  Padding(padding: EdgeInsets.only(right: 20), child: Text("01:58 a.m   11/08/2019"),),
+                                  
+                                ],),
+
+Container(
+                              margin: EdgeInsets.only(bottom: 1, top: 1),
+                              child: Row(
+                                children: <Widget>[
+                                    SizedBox(
+                                    width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .20,
+                                  ),
+                                  
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          gradient: LinearGradient(
+                                              begin: Alignment.topRight,
+                                              end: Alignment.bottomLeft,
+                                              stops: [
+                                                0.1,
+                                                1
+                                              ],
+                                              colors: [
+                                                Color(0xFFBDBDBD),
+                                                Color(0xFF08088A)
+                                              ])),
+                                      child: Container(
+                                          margin: EdgeInsets.all(20),
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .65,
+                                            child: Text(
+                                                "loremdddd",style: TextStyle(color: Colors.white),),
+                                          )
+                                          )
+                                          ),
+                                        SizedBox(
+                                    width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .02,
+                                  ),
+                                ],
+                              ),
+                            )
+                              ],
+                            )
+                            
+                            
+                            ;
+                          });
+                    } else {
+                      return ListView();
+                    }
+                  },
+                ),
+              ),
+              Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: TextField(
+                        decoration:
+                            InputDecoration.collapsed(hintText: "Mensaje"),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: (){
+
+                    },
+                    icon: Icon(
+                      Icons.send,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 1,
+              )
+            ],
+          ),
+        ),
         )
     );
   }
+
+ Future loadMessage() async {}
 
 }
