@@ -554,7 +554,7 @@ var _keydos= new GlobalKey();
   Future getProject() async {
     try{
     final response = await http
-        .post("http://192.168.0.6/findprogrammerDB/loadMyProjects.php", body: {
+        .post("https://findprogrammerceti.000webhostapp.com/loadMyProjects.php", body: {
       "ID": client['ID_CLIENTE'].toString(),
     });
 

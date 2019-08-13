@@ -643,7 +643,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   Future getProjects() async {
     try {
       final response = await http
-          .post("http://192.168.0.6/findprogrammerDB/loadProjects.php", body: {
+          .post("https://findprogrammerceti.000webhostapp.com/loadProjects.php", body: {
         "ID": desarrollador['ID_DESARROLLADOR'].toString(),
         "F_D_WEB": desarrollador["F_D_WEB"].toString(),
         "F_D_M_ANDROID": desarrollador["F_D_M_ANDROID"].toString(),
