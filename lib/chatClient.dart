@@ -9,7 +9,7 @@ import 'componentes/helperSQFLITE.dart';
 import 'package:http/http.dart' as http;
 import 'customIcons.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 var contextoS;
 bool bva = false;
@@ -18,7 +18,7 @@ List<Map<String, dynamic>> clientList = List();
 Map<String, dynamic> client = Map();
 var myProjects;
 FirebaseAuth _auth = FirebaseAuth.instance;
-Firestore _firestore = Firestore.instance;
+
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
