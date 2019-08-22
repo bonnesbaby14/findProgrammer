@@ -367,7 +367,7 @@ class _ProfileClient extends State<ProfileClient> {
                         ),
                       ],
                     ),
-                  ],
+                  ], 
                 ),
               ),
               Expanded(
