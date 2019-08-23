@@ -54,10 +54,12 @@ class _Login extends State<Login> {
   }
 */
 
+
+
   Future<List> login() async {
     try {
       final response = await http
-          .post("https://findprogrammerceti.000webhostapp.com//login.php", body: {
+          .post("https://findprogrammerceti.000webhostapp.com/login.php", body: {
         "mail": mail.text.toLowerCase().trim(),
         "password": contrasena.text,
       }).catchError((eeee) {
@@ -66,6 +68,7 @@ class _Login extends State<Login> {
       });
 
       var datauser = json.decode(response.body);
+      print(datauser.toString());
 
       if (datauser.length == 0) {
         showDialog(

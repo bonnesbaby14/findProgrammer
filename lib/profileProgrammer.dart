@@ -14,13 +14,16 @@ class ProfileProgrammer extends StatefulWidget {
 }
 
 class _ProfileProgrammer extends State<ProfileProgrammer> {
-  @override
+
+@override
   Widget build(BuildContext context) {
+        double mediaw=MediaQuery.of(context).size.width;
+  double mediah=MediaQuery.of(context).size.height;
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
-            width: 260.0,
+            width: mediaw*.8,
             decoration: BoxDecoration(
               color: Color(0xFF272D34),
             ),
@@ -323,7 +326,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
         body: new Container(
-          height: MediaQuery.of(context).size.height,
+          height: mediah,
           decoration: BoxDecoration(
             color: Colors.deepPurpleAccent,
             image: DecorationImage(
@@ -338,7 +341,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
             children: <Widget>[
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: (MediaQuery.of(context).size.height / 2) + 60,
+                height: (mediah/ 2) + 60,
                 decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.only(
@@ -366,9 +369,8 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                       ],
                     ),
                     Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
+  width: mediah *.15,
+                      height: mediah*.15,     decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.fill,
@@ -384,7 +386,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                           desarrollador['APELLIDO_P'].toString() +
                           " " +
                           desarrollador['APELLIDO_M'].toString(),
-                      style: TextStyle(fontSize: 22.0, color: Colors.white),
+                      style: TextStyle(fontSize: mediah *.04, color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
@@ -396,7 +398,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                     SizedBox(
                       height: 10,
                     ),
-                    Row(
+                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
@@ -422,30 +424,22 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                           ),
                         ),
                         Padding(
-                            padding: EdgeInsets.all(10),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            RegisterProgrammer()));
-                              },
-                              child: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    GroovinMaterialIcons.edit_outline,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  Text(
-                                    "Editar Perfil",
-                                    style: TextStyle(
-                                        fontSize: 14.0, color: Colors.white),
-                                  ),
-                                ],
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: <Widget>[
+                              Icon(
+                                GroovinMaterialIcons.edit_outline,
+                                color: Colors.white,
+                                size: 30,
                               ),
-                            )),
+                              Text(
+                                "Editar Perfil",
+                                style: TextStyle(
+                                    fontSize: 14.0, color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ],
