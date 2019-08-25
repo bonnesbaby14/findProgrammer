@@ -102,6 +102,7 @@ class _Login extends State<Login> {
         mail.text = "";
         contrasena.text = "";
         setState(() {});
+
       } else {
         if (datauser[0] == 1) {
           Map<String, dynamic> MapDesarrollador = Map();
@@ -109,7 +110,7 @@ class _Login extends State<Login> {
           print(response.body);
 
           MapDesarrollador['ID_DESARROLLADOR'] =
-              datauser[1]['ID_DESARROLLADOR'];
+              datauser[1]['USUARIO'];
           MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
           MapDesarrollador['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
           MapDesarrollador['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
@@ -145,12 +146,16 @@ class _Login extends State<Login> {
           } else {}
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomeProgrammer()));
+
+
+
+
         } else if (datauser[0] == 2) {
           Map<String, dynamic> MapCliente = Map();
 
           print(response.body);
 
-          MapCliente['ID_CLIENTE'] = datauser[1]['ID_CLIENTE'];
+          MapCliente['ID_CLIENTE'] = datauser[1]['ID_USUARIO'];
           MapCliente['NOMBRE'] = datauser[1]['NOMBRE'];
           MapCliente['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
           MapCliente['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
@@ -168,6 +173,7 @@ class _Login extends State<Login> {
 //insertar datos del programador logueado.
           var insertCliente = await helper.InsertCliente(MapCliente);
           print("//$insertCliente//");
+
           if (insertCliente == 1) {
           } else {}
 
