@@ -590,7 +590,7 @@ class _Homeclient extends State<Homeclient> {
       client = clientList.first;
       print("se obtuvo el cliente");
        print(client);
-       print("ID"+client['ID_CLIENTE'].toString()+"sssss");
+       print("ID"+client['ID_USUARIO'].toString()+"sssss");
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient" + e.toString());
     }
@@ -599,11 +599,11 @@ class _Homeclient extends State<Homeclient> {
 
   Future getProject() async {
     try {
-      print("ID"+client['ID_CLIENTE'].toString());
+      print("ID"+client['ID_USUARIO'].toString());
       final response = await http.post(
           "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
           body: {
-            "ID": client['ID_CLIENTE'].toString(),
+            "ID": client['ID_USUARIO'].toString(),
           });
 
       var datauser = json.decode(response.body);

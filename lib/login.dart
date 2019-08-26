@@ -109,23 +109,20 @@ class _Login extends State<Login> {
 
           print(response.body);
 
-          MapDesarrollador['ID_DESARROLLADOR'] =
-              datauser[1]['USUARIO'];
+          MapDesarrollador['ID_USUARIO'] =datauser[1]['USUARIO'];
           MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
           MapDesarrollador['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
           MapDesarrollador['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
           MapDesarrollador['CORREO'] = datauser[1]['CORREO'];
           MapDesarrollador['FOTO'] = datauser[1]['FOTO'];
           MapDesarrollador['CALIFICACION'] = datauser[1]['CALIFICACION'];
-          MapDesarrollador['F_ESTADO_REGISTRO'] =
-              datauser[1]['F_ESTADO_REGISTRO'];
+          MapDesarrollador['F_ESTADO_REGISTRO'] =datauser[1]['F_ESTADO_REGISTRO'];
           MapDesarrollador['PASSWORD'] = datauser[1]['PASSWORD'];
           MapDesarrollador['TELEFONO'] = datauser[1]['TELEFONO'];
           MapDesarrollador['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
           MapDesarrollador['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
           MapDesarrollador['CURP'] = datauser[1]['CURP'];
-          MapDesarrollador['F_USUARIO_APRUEBA'] =
-              datauser[1]['F_USUARIO_APRUEBA'];
+          MapDesarrollador['F_USUARIO_APRUEBA'] =datauser[1]['F_USUARIO_APRUEBA'];
           MapDesarrollador['F_D_WEB'] = datauser[1]['F_D_WEB'];
           MapDesarrollador['F_D_M_ANDROID'] = datauser[1]['F_D_M_ANDROID'];
           MapDesarrollador['F_D_M_IOS'] = datauser[1]['F_D_M_IOS'];
@@ -133,11 +130,10 @@ class _Login extends State<Login> {
           MapDesarrollador['F_D_E_MAC'] = datauser[1]['F_D_E_MAC'];
           MapDesarrollador['F_D_REDES'] = datauser[1]['F_D_REDES'];
           MapDesarrollador['PREPARACION'] = datauser[1]['PREPARACION'];
-          MapDesarrollador['PROYECTOS_TRABAJADOS'] =
-              datauser[1]['PROYECTOS_TRABAJADOS'];
-          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =
-              datauser[1]['F_SISTEMA_BLOQUEADO'];
-
+          MapDesarrollador['PROYECTOS_TRABAJADOS'] =datauser[1]['PROYECTOS_TRABAJADOS'];
+          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =datauser[1]['F_SISTEMA_BLOQUEADO'];
+          print(MapDesarrollador.toString());
+          
 //insertar datos del programador logueado.
           var insertDesarrollador =
               await helper.InsertDesarrollador(MapDesarrollador);
@@ -155,7 +151,7 @@ class _Login extends State<Login> {
 
           print(response.body);
 
-          MapCliente['ID_CLIENTE'] = datauser[1]['ID_USUARIO'];
+          MapCliente['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
           MapCliente['NOMBRE'] = datauser[1]['NOMBRE'];
           MapCliente['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
           MapCliente['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
@@ -169,6 +165,8 @@ class _Login extends State<Login> {
           MapCliente['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
           MapCliente['CURP'] = datauser[1]['CURP'];
           MapCliente['F_USUARIO_APRUEBA'] = datauser[1]['F_USUARIO_APRUEBA'];
+
+          print(MapCliente.toString());
 
 //insertar datos del programador logueado.
           var insertCliente = await helper.InsertCliente(MapCliente);
