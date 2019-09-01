@@ -543,36 +543,30 @@ class _Homeclient extends State<Homeclient> {
                       width: 250,
                       height: 250,
                       child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        elevation: 100,
-                        color: Color.fromARGB(1000,75, 74, 75),
-                        child: Column(
-                          
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(20),
-                              child: SizedBox(
-                              height: 120,
-                              width: 120,
-                              child: CircularProgressIndicator(
-                                
-                                strokeWidth: 10,
-                          valueColor: new AlwaysStoppedAnimation(
-                              Colors.white
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 100,
+                          color: Color.fromARGB(1000, 75, 74, 75),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 10,
+                                    valueColor: new AlwaysStoppedAnimation(
+                                        Colors.white),
+                                  ),
+                                ),
                               ),
-                        ),
-                            ),
-                            ),
-                        Text("Cargando",
-                                                style: TextStyle(
-                                                    fontSize: 30.0,
-                                                    color: Colors.white)
-                                                    )
-                          ],
-                        )
-                      ),
+                              Text("Cargando",
+                                  style: TextStyle(
+                                      fontSize: 30.0, color: Colors.white))
+                            ],
+                          )),
                     ),
                   )
                 ],
@@ -589,8 +583,8 @@ class _Homeclient extends State<Homeclient> {
       clientList = await helper.SelectCliente();
       client = clientList.first;
       print("se obtuvo el cliente");
-       print(client);
-       print("ID"+client['ID_USUARIO'].toString()+"sssss");
+      print(client);
+      print("ID" + client['ID_USUARIO'].toString() + "sssss");
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient" + e.toString());
     }
@@ -599,7 +593,7 @@ class _Homeclient extends State<Homeclient> {
 
   Future getProject() async {
     try {
-      print("ID"+client['ID_USUARIO'].toString());
+      print("ID" + client['ID_USUARIO'].toString());
       final response = await http.post(
           "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
           body: {

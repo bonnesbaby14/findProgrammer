@@ -576,7 +576,9 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                 ),
               );
             } else {
-              return Container(
+              return Stack(
+                children: <Widget>[
+                  Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
@@ -624,7 +626,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                             height: 10,
                           ),
                           Text(
-                            "___________________",
+                            "_________________",
                             style:
                                 TextStyle(fontSize: 25.0, color: Colors.white),
                           ),
@@ -632,7 +634,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                             height: 10,
                           ),
                           Text(
-                            "por: ___________________",
+                            "por: _______________",
                             style:
                                 TextStyle(fontSize: 18.0, color: Colors.white),
                           ),
@@ -642,7 +644,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                             child: ListView(
                               children: <Widget>[
                                 Text(
-                                  "_________________________________________________________",
+                                  "___________________________________________",
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                       fontSize: 14.0, color: Colors.white),
@@ -699,14 +701,20 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                               children: <Widget>[
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("___________________",
+                                  child: Text("___________",
                                       style: TextStyle(
                                           fontSize: 26.0, color: Colors.white)),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
                                   child: Text(
-                                      "___________________                          ",
+                                      "_____________                          ",
+                                      style: TextStyle(
+                                          fontSize: 14.0, color: Colors.white)),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                  child: Text("____________",
                                       style: TextStyle(
                                           fontSize: 14.0, color: Colors.white)),
                                 ),
@@ -718,13 +726,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("___________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("-___________________",
+                                  child: Text("-_______________",
                                       style: TextStyle(
                                           fontSize: 14.0, color: Colors.white)),
                                 ),
@@ -750,13 +752,13 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("___________________",
+                                  child: Text("_____________",
                                       style: TextStyle(
                                           fontSize: 14.0, color: Colors.white)),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("___________________",
+                                  child: Text("______________",
                                       style: TextStyle(
                                           fontSize: 14.0, color: Colors.white)),
                                 ),
@@ -779,13 +781,13 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("___________________",
+                                  child: Text("____________",
                                       style: TextStyle(
                                           fontSize: 27.0, color: Colors.white)),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("___________________",
+                                  child: Text("____________",
                                       style: TextStyle(
                                           fontSize: 14.0, color: Colors.white)),
                                 ),
@@ -800,6 +802,39 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                     ),
                   ],
                 ),
+              ),
+              Center(
+                        child: SizedBox(
+                          width: 250,
+                          height: 250,
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              elevation: 100,
+                              color: Color.fromARGB(1000, 75, 74, 75),
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(20),
+                                    child: SizedBox(
+                                      height: 120,
+                                      width: 120,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 10,
+                                        valueColor: new AlwaysStoppedAnimation(
+                                            Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Text("Cargando",
+                                      style: TextStyle(
+                                          fontSize: 30.0, color: Colors.white))
+                                ],
+                              )),
+                        ),
+                      )
+                ],
               );
             }
           },
@@ -809,7 +844,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
   Future getInfooProject() async {
     try {
       final response = await http.post(
-          "http://192.168.84.51/findprogrammerDB/loadInfoProject.php",
+          "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
       var dataProject = json.decode(response.body);
@@ -819,7 +854,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqFProject() async {
     final response = await http.post(
-        "http://192.168.84.51/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
     var dataProject = json.decode(response.body);
@@ -828,9 +863,8 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqNFProject() async {
     final response = await http.post(
-        "http://192.168.84.51/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
-        
 
     var dataProject = json.decode(response.body);
     this.reqNoFuncionales = dataProject;
@@ -838,7 +872,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getAvancesProject() async {
     final response = await http.post(
-        "http://192.168.84.51/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 
     var dataProject = json.decode(response.body);
@@ -847,7 +881,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getClientProject() async {
     final response = await http.post(
-        "http://192.168.84.51/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "5"});
 
     var dataProject = json.decode(response.body);

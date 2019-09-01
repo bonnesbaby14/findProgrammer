@@ -5,6 +5,7 @@ import 'package:findprogrammer/homeProgrammer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'main.dart';
@@ -54,20 +55,31 @@ class _Login extends State<Login> {
   }
 */
 
-
-
   Future<List> login() async {
+    print(mail.text.toLowerCase().trim());
+    print(contrasena.text);
     try {
-      final response = await http
-          .post("https://findprogrammerceti.000webhostapp.com/login.php", body: {
-        "mail": mail.text.toLowerCase().trim(),
-        "password": contrasena.text,
-      }).catchError((eeee) {
-        print("sssss");
-        return null;
+      final response = await http.post(
+          //"https://findprogrammerceti.000webhostapp.com/login.php",
+          "http://192.168.0.3/findprogrammerDB/login.php",
+          body: {
+            "mail": mail.text.toLowerCase().trim(),
+            "password": contrasena.text,
+          }).catchError((eeee) {
+        print("eRROR CON EL LOGIN");
       });
+      print(response.body);
+      print("se accedio");
+      var datauser;
+      try {
+        datauser = json.decode(response.body);
+      } catch (e) {
+        Navigator.pop(context);
 
-      var datauser = json.decode(response.body);
+        print("hubo un error con el servidor");
+        return null;
+      }
+
       print(datauser.toString());
 
       if (datauser.length == 0) {
@@ -102,27 +114,28 @@ class _Login extends State<Login> {
         mail.text = "";
         contrasena.text = "";
         setState(() {});
-
       } else {
         if (datauser[0] == 1) {
           Map<String, dynamic> MapDesarrollador = Map();
 
           print(response.body);
 
-          MapDesarrollador['ID_USUARIO'] =datauser[1]['USUARIO'];
+          MapDesarrollador['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
           MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
           MapDesarrollador['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
           MapDesarrollador['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
           MapDesarrollador['CORREO'] = datauser[1]['CORREO'];
           MapDesarrollador['FOTO'] = datauser[1]['FOTO'];
           MapDesarrollador['CALIFICACION'] = datauser[1]['CALIFICACION'];
-          MapDesarrollador['F_ESTADO_REGISTRO'] =datauser[1]['F_ESTADO_REGISTRO'];
+          MapDesarrollador['F_ESTADO_REGISTRO'] =
+              datauser[1]['F_ESTADO_REGISTRO'];
           MapDesarrollador['PASSWORD'] = datauser[1]['PASSWORD'];
           MapDesarrollador['TELEFONO'] = datauser[1]['TELEFONO'];
           MapDesarrollador['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
           MapDesarrollador['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
           MapDesarrollador['CURP'] = datauser[1]['CURP'];
-          MapDesarrollador['F_USUARIO_APRUEBA'] =datauser[1]['F_USUARIO_APRUEBA'];
+          MapDesarrollador['F_USUARIO_APRUEBA'] =
+              datauser[1]['F_USUARIO_APRUEBA'];
           MapDesarrollador['F_D_WEB'] = datauser[1]['F_D_WEB'];
           MapDesarrollador['F_D_M_ANDROID'] = datauser[1]['F_D_M_ANDROID'];
           MapDesarrollador['F_D_M_IOS'] = datauser[1]['F_D_M_IOS'];
@@ -130,22 +143,20 @@ class _Login extends State<Login> {
           MapDesarrollador['F_D_E_MAC'] = datauser[1]['F_D_E_MAC'];
           MapDesarrollador['F_D_REDES'] = datauser[1]['F_D_REDES'];
           MapDesarrollador['PREPARACION'] = datauser[1]['PREPARACION'];
-          MapDesarrollador['PROYECTOS_TRABAJADOS'] =datauser[1]['PROYECTOS_TRABAJADOS'];
-          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =datauser[1]['F_SISTEMA_BLOQUEADO'];
+          MapDesarrollador['PROYECTOS_TRABAJADOS'] =
+              datauser[1]['PROYECTOS_TRABAJADOS'];
+          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =
+              datauser[1]['F_SISTEMA_BLOQUEADO'];
           print(MapDesarrollador.toString());
-          
+
 //insertar datos del programador logueado.
           var insertDesarrollador =
               await helper.InsertDesarrollador(MapDesarrollador);
           print("//$insertDesarrollador//");
-          if (insertDesarrollador == 1) {
-          } else {}
+
+          Navigator.pop(context);
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomeProgrammer()));
-
-
-
-
         } else if (datauser[0] == 2) {
           Map<String, dynamic> MapCliente = Map();
 
@@ -172,9 +183,7 @@ class _Login extends State<Login> {
           var insertCliente = await helper.InsertCliente(MapCliente);
           print("//$insertCliente//");
 
-          if (insertCliente == 1) {
-          } else {}
-
+          Navigator.pop(context);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Homeclient()));
         }
@@ -182,7 +191,7 @@ class _Login extends State<Login> {
 
       return datauser;
     } on Exception {
-      print("sssskiki");
+      print("Excepcion en funcion login");
     }
   }
 
@@ -343,6 +352,42 @@ class _Login extends State<Login> {
                       }
 
                       login();
+                      showDialog(
+                          context: context,
+                          builder: (context) => Center(
+                                child: SizedBox(
+                                  width: 250,
+                                  height: 250,
+                                  child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      elevation: 100,
+                                      color: Color.fromARGB(1000, 75, 74, 75),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: EdgeInsets.all(20),
+                                            child: SizedBox(
+                                              height: 120,
+                                              width: 120,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 10,
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                          Text("Cargando",
+                                              style: TextStyle(
+                                                  fontSize: 30.0,
+                                                  color: Colors.white))
+                                        ],
+                                      )),
+                                ),
+                              ));
                     },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(

@@ -2,6 +2,8 @@ import 'package:findprogrammer/registerProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
 import 'homeProgrammer.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
@@ -14,100 +16,100 @@ class ProfileProgrammer extends StatefulWidget {
 }
 
 class _ProfileProgrammer extends State<ProfileProgrammer> {
-
-@override
+  var comments;
+  @override
   Widget build(BuildContext context) {
-        double mediaw=MediaQuery.of(context).size.width;
-  double mediah=MediaQuery.of(context).size.height;
+    double mediaw = MediaQuery.of(context).size.width;
+    double mediah = MediaQuery.of(context).size.height;
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
-            width: mediaw*.8,
-            decoration: BoxDecoration(
-              color: Color(0xFF272D34),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 30,
-                ),
+          width: mediaw * .8,
+          decoration: BoxDecoration(
+            color: Color(0xFF272D34),
+          ),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 30,
+              ),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                   
-                  },
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(15),
-                                child: Container(
-                                  width: 35,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/mountains.jpeg'),
-                                      )),
-                                ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(15),
+                              child: Container(
+                                width: 35,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(
+                                          'assets/images/mountains.jpeg'),
+                                    )),
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: desarrollador == null
-                                    ? Text(
-                                        "Cargando",
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: desarrollador == null
+                                  ? Text(
+                                      "Cargando",
+                                      style: TextStyle(
+                                          fontSize: 15.0, color: Colors.white),
+                                    )
+                                  : Container(
+                                      width: 150,
+                                      child: Text(
+                                        desarrollador['NOMBRE'].toString() +
+                                            " " +
+                                            desarrollador['APELLIDO_P']
+                                                .toString() +
+                                            " " +
+                                            desarrollador['APELLIDO_M']
+                                                .toString(),
                                         style: TextStyle(
                                             fontSize: 15.0,
                                             color: Colors.white),
-                                      )
-                                    : Container(
-                                        width: 150,
-                                        child: Text(
-                                          desarrollador['NOMBRE'].toString() +
-                                              " " +
-                                              desarrollador['APELLIDO_P']
-                                                  .toString() +
-                                              " " +
-                                              desarrollador['APELLIDO_M']
-                                                  .toString(),
-                                          style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: Colors.white),
-                                        ),
                                       ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
+                                    ),
+                            )
+                          ],
+                        )),
+                  ],
                 ),
+              ),
 //linea de separacin
-                Padding(
-                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  child: Container(
-                    width: 450.0,
-                    height: 0.5,
-                    color: Colors.deepPurpleAccent,
-                  ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                child: Container(
+                  width: 450.0,
+                  height: 0.5,
+                  color: Colors.deepPurpleAccent,
                 ),
-                SizedBox(
-                  height: 15,
-                ),
-                GestureDetector(
-                  onTap: (){
-                    Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeProgrammer()));
-                  },
-                  child: Container(
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeProgrammer()));
+                },
+                child: Container(
                   decoration: BoxDecoration(
-                      
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Row(
                     children: <Widget>[
@@ -138,190 +140,190 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                     ],
                   ),
                 ),
-                ),
-                //otro widget
+              ),
+              //otro widget
 
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.check_all,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.check_all,
+                                  size: 35,
+                                  color: Colors.grey,
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "Proyectos Realizados",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                "Proyectos Realizados",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
                               ),
-                            ],
-                          )),
-                    ],
-                  ),
+                            ),
+                          ],
+                        )),
+                  ],
                 ),
+              ),
 //nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.worker,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.worker,
+                                  size: 35,
+                                  color: Colors.grey,
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos en Desarrollo",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-
-//nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.new_box,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
-                                ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Proyectos en Desarrollo",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos Disponibles",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
+                            )
+                          ],
+                        )),
+                  ],
                 ),
-//nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.keyboard,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Ingresar Codigo",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
+              ),
 
 //nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.exit_to_app,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.new_box,
+                                  size: 35,
+                                  color: Colors.grey,
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Cerrar Sesion",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Proyectos Disponibles",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
                 ),
-              ],
-            ),
+              ),
+//nuevo wighet
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.keyboard,
+                                  size: 35,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Ingresar Codigo",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+
+//nuevo wighet
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.exit_to_app,
+                                  size: 35,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Cerrar Sesion",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+            ],
           ),
+        ),
         appBar: null,
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
@@ -341,7 +343,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
             children: <Widget>[
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: (mediah/ 2) + 60,
+                height: (mediah / 2) + 60,
                 decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.only(
@@ -369,8 +371,9 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                       ],
                     ),
                     Container(
-  width: mediah *.15,
-                      height: mediah*.15,     decoration: BoxDecoration(
+                      width: mediah * .15,
+                      height: mediah * .15,
+                      decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.fill,
@@ -386,7 +389,8 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                           desarrollador['APELLIDO_P'].toString() +
                           " " +
                           desarrollador['APELLIDO_M'].toString(),
-                      style: TextStyle(fontSize: mediah *.04, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: mediah * .04, color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
@@ -398,7 +402,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                     SizedBox(
                       height: 10,
                     ),
-                     Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
@@ -446,9 +450,17 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                 ),
               ),
               Expanded(
-                child: ListView(
-                  children: <Widget>[
-                    Card(
+                child:FutureBuilder(
+                  future: getComments(),
+                  builder: (context,snapshot){
+                    if(snapshot.connectionState==ConnectionState.done){
+                      print("la conexion se cerro");
+                      print(comments);
+                                    return ListView.builder(
+                                      itemCount: comments.length,
+                                      itemBuilder:(BuildContext context,int position){
+
+                                        return Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -469,7 +481,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                               SizedBox(
                                 height: 25,
                               ),
-                              Text(" Alvaro Pintor",
+                              Text(comments[position]['nombre'].toString()+" "+comments[position]['apellido_P'].toString()+" "+comments[position]['apellido_M'].toString(),
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                       fontSize: 20.0, color: Colors.white)),
@@ -479,7 +491,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                               Container(
                                 width: 220,
                                 child: Text(
-                                    "Tardo mucho para entregar los avances del proyecto pero el sistema quedo perfecto.",
+                                    comments[position]['COMENTARIO'].toString(),
                                     textAlign: TextAlign.justify,
                                     style: TextStyle(
                                       fontSize: 10.0,
@@ -493,150 +505,42 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                           ),
                         ],
                       ),
-                    ),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 10,
-                      color: Color.fromARGB(450, 41, 39, 42),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Icon(
-                              Icons.star_half,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Column(
-                            children: <Widget>[
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Text(" Alvaro Pintor",
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Colors.white)),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 220,
-                                child: Text(
-                                    " Presiona demasiado durante la realizacion del proyecto y el pago se retraso bastante.",
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      fontSize: 10.0,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 10,
-                      color: Color.fromARGB(450, 41, 39, 42),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Icon(
-                              Icons.star_half,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Column(
-                            children: <Widget>[
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Text(" Alvaro Pintor",
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Colors.white)),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 220,
-                                child: Text(
-                                    " Presiona demasiado durante la realizacion del proyecto y el pago se retraso bastante.",
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      fontSize: 10.0,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 10,
-                      color: Color.fromARGB(450, 41, 39, 42),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Icon(
-                              Icons.star_half,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Column(
-                            children: <Widget>[
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Text(" Alvaro Pintor",
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Colors.white)),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 220,
-                                child: Text(
-                                    " Presiona demasiado durante la realizacion del proyecto y el pago se retraso bastante.",
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      fontSize: 10.0,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                    );
+                                      },
+                                    );
+
+
+                    }else{
+                      print("la conexion no se ha cerrado");
+                      
+                       return CircularProgressIndicator(
+                                       strokeWidth: 10,
+                                     );
+
+                    }
+                  },
+                )
               ),
             ],
           ),
         ));
+  }
+
+  Future getComments() async {
+    print("=========================================================================");
+    print("se esta obteiendo los comentarios");
+    print(desarrollador['ID_USUARIO']);
+    try {
+      final response = await http.post(
+          "http://192.168.0.3/findprogrammerDB/loadComments.php",
+          body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
+
+      var comments = json.decode(response.body);
+      this.comments = comments;
+      print("se obtuvieron los comentarios");
+    } catch (f) {
+      print("hubo un error obteniendo los comentarios");
+      print(f.toString());
+    }
   }
 }

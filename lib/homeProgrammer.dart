@@ -32,102 +32,145 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
     var _keydos = new GlobalKey();
 
-    return WillPopScope(
-        onWillPop: () {
-          //esto es provicional para pruebas
-          helper.DeleteDesarrollador();
-          Navigator.pop(context);
-        },
-        child: Scaffold(
-          key: _scaffoldKeyhome,
-          drawer: Container(
-            width: 260.0,
-            decoration: BoxDecoration(
-              color: Color(0xFF272D34),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 30,
-                ),
+    return RefreshIndicator(
+      onRefresh: ()async{
+        await Future.delayed(Duration(milliseconds: 500));
+        setState(() {
+          
+        });
+      },
+      child: WillPopScope(
+          onWillPop: () {
+            //esto es provicional para pruebas
+            helper.DeleteDesarrollador();
+            Navigator.pop(context);
+          },
+          child: Scaffold(
+            key: _scaffoldKeyhome,
+            drawer: Container(
+              width: 260.0,
+              decoration: BoxDecoration(
+                color: Color(0xFF272D34),
+              ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 30,
+                  ),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileProgrammer()));
-                  },
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(15),
-                                child: Container(
-                                  width: 35,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/mountains.jpeg'),
-                                      )),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileProgrammer()));
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(15),
+                                  child: Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              'assets/images/mountains.jpeg'),
+                                        )),
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: desarrollador == null
-                                    ? Text(
-                                        "Cargando",
-                                        style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.white),
-                                      )
-                                    : Container(
-                                        width: 150,
-                                        child: Text(
-                                          desarrollador['NOMBRE'].toString() +
-                                              " " +
-                                              desarrollador['APELLIDO_P']
-                                                  .toString() +
-                                              " " +
-                                              desarrollador['APELLIDO_M']
-                                                  .toString(),
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: desarrollador == null
+                                      ? Text(
+                                          "Cargando",
                                           style: TextStyle(
                                               fontSize: 15.0,
                                               color: Colors.white),
+                                        )
+                                      : Container(
+                                          width: 150,
+                                          child: Text(
+                                            desarrollador['NOMBRE'].toString() +
+                                                " " +
+                                                desarrollador['APELLIDO_P']
+                                                    .toString() +
+                                                " " +
+                                                desarrollador['APELLIDO_M']
+                                                    .toString(),
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.white),
+                                          ),
                                         ),
-                                      ),
-                              )
-                            ],
-                          )),
-                    ],
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
-                ),
 //linea de separacin
-                Padding(
-                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  child: Container(
-                    width: 450.0,
-                    height: 0.5,
-                    color: Colors.white,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                    child: Container(
+                      width: 450.0,
+                      height: 0.5,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
+                  SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.transparent.withOpacity(0.3),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.flash_circle,
+                                        size: 35,
+                                        color: Colors.deepPurpleAccent,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      "Tendencias",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //otro widget
+
+                  Container(
                     decoration: BoxDecoration(
-                        color: Colors.transparent.withOpacity(0.3),
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     child: Row(
                       children: <Widget>[
@@ -139,16 +182,16 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                   padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
                                   child: Container(
                                     child: Icon(
-                                      GroovinMaterialIcons.flash_circle,
+                                      GroovinMaterialIcons.check_all,
                                       size: 35,
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(10),
                                   child: Text(
-                                    "Tendencias",
+                                    "Proyectos Realizados",
                                     style: TextStyle(
                                         fontSize: 17.0, color: Colors.white),
                                   ),
@@ -158,506 +201,531 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                       ],
                     ),
                   ),
-                ),
-                //otro widget
-
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.check_all,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "Proyectos Realizados",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
 //nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.worker,
-                                    size: 35,
-                                    color: Colors.grey,
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.worker,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos en Desarrollo",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Proyectos en Desarrollo",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
-                ),
 
 //nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.new_box,
-                                    size: 35,
-                                    color: Colors.grey,
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.new_box,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos Disponibles",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Proyectos Disponibles",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
-                ),
 //nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.keyboard,
-                                    size: 35,
-                                    color: Colors.grey,
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.keyboard,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Ingresar Codigo",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Ingresar Codigo",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
-                ),
 
 //nuevo wighet
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.exit_to_app,
-                                    size: 35,
-                                    color: Colors.grey,
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.exit_to_app,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Cerrar Sesion",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Cerrar Sesion",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          appBar: null,
-          resizeToAvoidBottomPadding: false,
-          backgroundColor: Colors.white,
-          body: FutureBuilder(
-            key: _keydos,
-            future: getProjects(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                print("spuestamente la conexion se cerro clave");
-                return new Container(
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    image: DecorationImage(
-                      colorFilter: new ColorFilter.mode(
-                          Colors.black.withOpacity(0.3), BlendMode.dstATop),
-                      image: AssetImage('assets/images/mountains.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  padding: EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: kToolbarHeight,
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  IconButton(
-                                    onPressed: () {
-                                      _scaffoldKeyhome.currentState
-                                          .openDrawer();
-                                    },
-                                    icon: Icon(
-                                      CustomIcons.menu,
-                                      color: Colors.white,
-                                      size: 42,
-                                    ),
-                                  ),
-                                  Text(
-                                    "   Bienvenido",
-                                    style: TextStyle(
-                                        fontSize: 30.0, color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(70, 0, 0, 0),
-                                child: Container(
-                                  width: 450.0,
-                                  height: 1.5,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          )),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                      ),
-                      Text(
-                        "Tendencias                       ",
-                        style: TextStyle(fontSize: 30.0, color: Colors.white),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
-                        child: Container(
-                          width: 450.0,
-                          height: 1.5,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: projects == null ? 0 : projects.length,
-                          itemBuilder: (BuildContext context, int position) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ViewProjectProgrammerInfo(
-                                                 projects[position]
-                                                    ['ID_PROYECTO']
-                                                )));
-                              },
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                elevation: 10,
-                                color: Color.fromARGB(450, 41, 39, 42),
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.face,
-                                      size: 100,
-                                      color: Colors.white,
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                        Container(
-                                          width: ((MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4) *
-                                                  2) +
-                                              20,
-                                          child: Text(
-                                              projects[position]['TITULO']
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: 30.0,
-                                                  color: Colors.white)),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Container(
-                                          width: ((MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4) *
-                                              2),
-                                          child: Text(
-                                              projects[position]
-                                                      ['FECHA_DE_INICIO']
-                                                  .toString(),
-                                              style: TextStyle(
-                                                fontSize: 20.0,
-                                                color: Colors.white,
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                );
-              } else {
-                print("spuestamente la conexion no ha terminado clave ");
+            appBar: null,
+            resizeToAvoidBottomPadding: false,
+            backgroundColor: Colors.white,
+            body: FutureBuilder(
+              key: _keydos,
+              future: getProjects(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  print("spuestamente la conexion se cerro clave");
+                  print(
+                      "esta es la respuesta del servidor-----------------------------------");
+                  print(projects);
 
-                return Container(
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    image: DecorationImage(
-                      colorFilter: new ColorFilter.mode(
-                          Colors.black.withOpacity(0.3), BlendMode.dstATop),
-                      image: AssetImage('assets/images/mountains.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  padding: EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: kToolbarHeight,
+                  return new Container(
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      image: DecorationImage(
+                        colorFilter: new ColorFilter.mode(
+                            Colors.black.withOpacity(0.3), BlendMode.dstATop),
+                        image: AssetImage('assets/images/mountains.jpg'),
+                        fit: BoxFit.cover,
                       ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  IconButton(
-                                    onPressed: () {
-                                      _scaffoldKeyhome.currentState
-                                          .openDrawer();
-                                    },
-                                    icon: Icon(
-                                      CustomIcons.menu,
-                                      color: Colors.white,
-                                      size: 42,
-                                    ),
-                                  ),
-                                  Text(
-                                    "   Bienvenido",
-                                    style: TextStyle(
-                                        fontSize: 30.0, color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(70, 0, 0, 0),
-                                child: Container(
-                                  width: 450.0,
-                                  height: 1.5,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          )),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: 5,
-                          itemBuilder: (BuildContext context, int position) {
-                            return GestureDetector(
-                              onTap: () {},
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                elevation: 10,
-                                color: Color.fromARGB(450, 41, 39, 42),
-                                child: Row(
+                    ),
+                    padding: EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: kToolbarHeight,
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
                                   children: <Widget>[
-                                    Icon(
-                                      Icons.face,
-                                      size: 100,
-                                      color: Colors.white,
+                                    IconButton(
+                                      onPressed: () {
+                                        _scaffoldKeyhome.currentState
+                                            .openDrawer();
+                                      },
+                                      icon: Icon(
+                                        CustomIcons.menu,
+                                        color: Colors.white,
+                                        size: 42,
+                                      ),
                                     ),
-                                    Column(
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                        Container(
-                                          width: ((MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4) *
-                                                  2) +
-                                              20,
-                                          child: Text("___________",
-                                              style: TextStyle(
-                                                  fontSize: 30.0,
-                                                  color: Colors.white)),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Container(
-                                          width: ((MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4) *
-                                              2),
-                                          child: Text("________",
-                                              style: TextStyle(
-                                                fontSize: 20.0,
-                                                color: Colors.white,
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                      ],
+                                    Text(
+                                      "   Bienvenido",
+                                      style: TextStyle(
+                                          fontSize: 30.0, color: Colors.white),
                                     ),
                                   ],
                                 ),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(70, 0, 0, 0),
+                                  child: Container(
+                                    width: 450.0,
+                                    height: 1.5,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        ),
+                        Text(
+                          "Tendencias                       ",
+                          style: TextStyle(fontSize: 30.0, color: Colors.white),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+                          child: Container(
+                            width: 450.0,
+                            height: 1.5,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: projects == null ? 0 : projects.length,
+                            itemBuilder: (BuildContext context, int position) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewProjectProgrammerInfo(
+                                                  projects[position]
+                                                      ['ID_PROYECTO'])));
+                                },
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  elevation: 10,
+                                  color: Color.fromARGB(450, 41, 39, 42),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.face,
+                                        size: 100,
+                                        color: Colors.white,
+                                      ),
+                                      Column(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                          Container(
+                                            width: ((MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        4) *
+                                                    2) +
+                                                20,
+                                            child: Text(
+                                                projects[position]['TITULO']
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 30.0,
+                                                    color: Colors.white)),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                            width: ((MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4) *
+                                                2),
+                                            child: Text(
+                                                projects[position]
+                                                        ['FECHA_DE_PUBLICACION']
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  color: Colors.white,
+                                                )),
+                                          ),
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  print("spuestamente la conexion no ha terminado clave ");
+
+                  return Stack(
+                    children: <Widget>[
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          image: DecorationImage(
+                            colorFilter: new ColorFilter.mode(
+                                Colors.black.withOpacity(0.3),
+                                BlendMode.dstATop),
+                            image: AssetImage('assets/images/mountains.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        padding: EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: kToolbarHeight,
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        IconButton(
+                                          onPressed: () {
+                                            _scaffoldKeyhome.currentState
+                                                .openDrawer();
+                                          },
+                                          icon: Icon(
+                                            CustomIcons.menu,
+                                            color: Colors.white,
+                                            size: 42,
+                                          ),
+                                        ),
+                                        Text(
+                                          "   Bienvenido",
+                                          style: TextStyle(
+                                              fontSize: 30.0,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(70, 0, 0, 0),
+                                      child: Container(
+                                        width: 450.0,
+                                        height: 1.5,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: 5,
+                                itemBuilder:
+                                    (BuildContext context, int position) {
+                                  return GestureDetector(
+                                    onTap: () {},
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      elevation: 10,
+                                      color: Color.fromARGB(450, 41, 39, 42),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.face,
+                                            size: 100,
+                                            color: Colors.white,
+                                          ),
+                                          Column(
+                                            children: <Widget>[
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                              Container(
+                                                width: ((MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            4) *
+                                                        2) +
+                                                    20,
+                                                child: Text("___________",
+                                                    style: TextStyle(
+                                                        fontSize: 30.0,
+                                                        color: Colors.white)),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Container(
+                                                width: ((MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        4) *
+                                                    2),
+                                                child: Text("________",
+                                                    style: TextStyle(
+                                                      fontSize: 20.0,
+                                                      color: Colors.white,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          },
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      Center(
+                        child: SizedBox(
+                          width: 250,
+                          height: 250,
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              elevation: 100,
+                              color: Color.fromARGB(1000, 75, 74, 75),
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(20),
+                                    child: SizedBox(
+                                      height: 120,
+                                      width: 120,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 10,
+                                        valueColor: new AlwaysStoppedAnimation(
+                                            Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  Text("Cargando",
+                                      style: TextStyle(
+                                          fontSize: 30.0, color: Colors.white))
+                                ],
+                              )),
+                        ),
+                      )
                     ],
-                  ),
-                );
-                ;
-              }
-            },
-          ),
-        ));
+                  );
+                  
+                }
+              },
+            ),
+          )),
+    );
   }
 
   void getDesarrollador() async {
     try {
       desarrolladorList = await helper.SelectDesarrollador();
       desarrollador = desarrolladorList.first;
+      print("se obtuvo el desarrollador********************************");
     } catch (e) {
       print("aqui hay un error de no se que, funcion getDesarrollador");
     }
-    setState(() {});
   }
 
   Future getProjects() async {
     try {
-      final response = await http
-          .post("https://findprogrammerceti.000webhostapp.com/loadProjects.php", body: {
-        "ID": desarrollador['ID_DESARROLLADOR'].toString(),
-        "F_D_WEB": desarrollador["F_D_WEB"].toString(),
-        "F_D_M_ANDROID": desarrollador["F_D_M_ANDROID"].toString(),
-        "F_D_M_IOS": desarrollador["F_D_M_IOS"].toString(),
-        "F_D_E_WINDOWS": desarrollador["F_D_E_WINDOWS"].toString(),
-        "F_D_E_MAC": desarrollador["F_D_E_MAC"].toString(),
-        "F_D_REDES": desarrollador["F_D_REDES"].toString(),
-      });
+      print("-------------------------------------");
+      print(desarrollador['ID_USUARIO'].toString());
+      print(desarrollador['F_D_WEB'].toString());
+      print(desarrollador['F_D_M_ANDROID'].toString());
+      print(desarrollador['F_D_M_IOS'].toString());
+      print(desarrollador['F_D_E_MAC'].toString());
+      print(desarrollador['F_D_REDES'].toString());
+
+      print("-------------------------------------");
+
+
+      final response = await http.post(
+          "http://192.168.0.3/findProgrammerDB/loadProjects.php",
+         
+         // "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
+          body: {
+            "ID": desarrollador['ID_USUARIO'].toString(),
+            "F_D_WEB": desarrollador["F_D_WEB"].toString(),
+            "F_D_M_ANDROID": desarrollador["F_D_M_ANDROID"].toString(),
+            "F_D_M_IOS": desarrollador["F_D_M_IOS"].toString(),
+            "F_D_E_WINDOWS": desarrollador["F_D_E_WINDOWS"].toString(),
+            "F_D_E_MAC": desarrollador["F_D_E_MAC"].toString(),
+            "F_D_REDES": desarrollador["F_D_REDES"].toString(),
+          });
 
       var datauser = json.decode(response.body);
-
+print(datauser);
       projects = datauser;
-      print("esta es la respuesta del servidor");
+      print("se obtuvo los proyectos********************************");
       print(projects);
-    } catch (d) {}
+    } catch (d) {
+      print("hubo un error obteniendo los proyectoss");
+      print(d.toString());
+    }
   }
 }
