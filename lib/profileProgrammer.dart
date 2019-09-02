@@ -3,6 +3,7 @@ import 'customIcons.dart';
 import 'homeProgrammer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'viewDevelopmentProjects.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
@@ -142,38 +143,46 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
               ),
               //otro widget
 
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.check_all,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Proyectos Realizados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+              GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopmentProjects() ));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.worker,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Proyectos en Desarrollo",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+
 //nuevo wighet
               SizedBox(
                 height: 15,
@@ -535,7 +544,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
     print(desarrollador['ID_USUARIO']);
     try {
       final response = await http.post(
-          "http://192.168.0.3/findprogrammerDB/loadComments.php",
+          "http://192.168.84.114/findprogrammerDB/loadComments.php",
           body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
 
       var comments = json.decode(response.body);

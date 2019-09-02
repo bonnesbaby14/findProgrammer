@@ -19,16 +19,15 @@ var contextoS;
 Helper helper = new Helper();
 var projects;
 
-class ViewDevelopment extends StatefulWidget {
+class ViewDevelopmentProjects extends StatefulWidget {
   @override
-  _ViewDevelopment createState() => new _ViewDevelopment();
+  _ViewDevelopmentProjects createState() => new _ViewDevelopmentProjects();
 }
 
-class _ViewDevelopment extends State<ViewDevelopment> {
+class _ViewDevelopmentProjects extends State<ViewDevelopmentProjects> {
   @override
   void initState() {
     // TODO: implement initState
-  
   }
 
   @override
@@ -211,7 +210,11 @@ class _ViewDevelopment extends State<ViewDevelopment> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=>ViewProjectProgrammerPanel()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext) =>
+                                  ViewProjectProgrammerPanel()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -475,7 +478,6 @@ class _ViewDevelopment extends State<ViewDevelopment> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         ),
-                        
                         Expanded(
                           child: ListView.builder(
                             itemCount: projects == null ? 0 : projects.length,
@@ -485,9 +487,8 @@ class _ViewDevelopment extends State<ViewDevelopment> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>ViewProjectProgrammerPanel()
-                                              
-                                              ));
+                                          builder: (context) =>
+                                              ViewProjectProgrammerPanel()));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -726,27 +727,23 @@ class _ViewDevelopment extends State<ViewDevelopment> {
     );
   }
 
-
-
   Future getDevelopmentsProjects() async {
     try {
-
-
       print("-------------------------------------");
 
       final response = await http.post(
-          "http://192.168.0.3/findProgrammerDB/loadDevelopmentProjects.php",
+          "http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
 
           // "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),
-
           });
 
       var datauser = json.decode(response.body);
       print(datauser);
       projects = datauser;
-      print("se obtuvo los proyectos en desarrollo********************************");
+      print(
+          "se obtuvo los proyectos en desarrollo********************************");
       print(projects);
     } catch (d) {
       print("hubo un error obteniendo los proyectos en desarrollo");

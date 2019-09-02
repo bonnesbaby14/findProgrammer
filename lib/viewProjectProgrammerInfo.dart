@@ -4,6 +4,7 @@ import 'customIcons.dart';
 import 'package:async/async.dart';
 import 'profileProgrammer.dart';
 import 'package:http/http.dart' as http;
+import 'viewDevelopmentProjects.dart';
 import 'package:flutter/cupertino.dart';
 import 'homeProgrammer.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -100,7 +101,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                   ],
                 ),
               ),
-//linea de separacin
+//linea de separa84.114
               Padding(
                 padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                 child: Container(
@@ -191,38 +192,45 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.worker,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos en Desarrollo",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+              GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopmentProjects() ));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.worker,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Proyectos en Desarrollo",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
 
 //nuevo wighet
               SizedBox(
@@ -868,7 +876,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
   Future getInfooProject() async {
     try {
       final response = await http.post(
-          "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+          "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
       var dataProject = json.decode(response.body);
@@ -878,7 +886,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqFProject() async {
     final response = await http.post(
-        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
     var dataProject = json.decode(response.body);
@@ -887,7 +895,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqNFProject() async {
     final response = await http.post(
-        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
 
     var dataProject = json.decode(response.body);
@@ -896,7 +904,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getAvancesProject() async {
     final response = await http.post(
-        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 
     var dataProject = json.decode(response.body);
@@ -905,7 +913,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getClientProject() async {
     final response = await http.post(
-        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "5"});
 
     var dataProject = json.decode(response.body);

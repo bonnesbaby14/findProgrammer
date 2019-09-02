@@ -210,7 +210,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopment() ));
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopmentProjects() ));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -760,7 +760,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       print("-------------------------------------");
 
       final response = await http.post(
-          "http://192.168.0.3/findProgrammerDB/loadProjects.php",
+          "http://192.168.84.114/findProgrammerDB/loadProjects.php",
 
           // "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
           body: {
