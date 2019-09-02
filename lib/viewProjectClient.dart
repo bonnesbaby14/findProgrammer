@@ -4,6 +4,7 @@ import 'package:findprogrammer/profileClient.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
+import 'login.dart';
 import 'homeClient.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -29,10 +30,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   _ViewProjectClient(this.ID);
   var dataProject, reqFuncionales, reqNoFuncionales, avances, desarrollador;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -232,39 +229,86 @@ class _ViewProjectClient extends State<ViewProjectClient> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    //color: Colors.transparent.withOpacity(0.3),
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.exit_to_app,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => new CupertinoAlertDialog(
+                                title: Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.devices_other,
+                                      size: 80,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text("Cerrar Sesion",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20)),
+                                  ],
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Cerrar Sesion",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+                                content:
+                                    Text("¿Seguro que quieres cerrar sesion?"),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Login()));
+                                    },
+                                    child: Text("Cerrar Sesion",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Cancelar",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                ],
+                              ));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.exit_to_app,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Cerrar Sesion",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  )
             ],
           ),
         ),
@@ -1390,7 +1434,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future getInfooProject() async {
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //  "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+            "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+        
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
       var dataProject = json.decode(response.body);
@@ -1400,7 +1446,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getReqFProject() async {
     final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+       // "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+       
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
     var dataProject = json.decode(response.body);
@@ -1409,8 +1457,10 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getReqNFProject() async {
     final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+       // "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
+      
 
     var dataProject = json.decode(response.body);
     this.reqNoFuncionales = dataProject;
@@ -1418,7 +1468,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getAvancesProject() async {
     final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+        
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 
     var dataProject = json.decode(response.body);
@@ -1428,7 +1480,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getDesarrolladorProject() async {
     final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        "http://192.168.0.3/findprogrammerDB/loadInfoProject.php",
+        
         body: {"ID_PROYECTO": this.ID, "TYPE": "5"});
 
     var dataProject = json.decode(response.body);

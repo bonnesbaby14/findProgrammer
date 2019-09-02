@@ -3,9 +3,10 @@ import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'viewProjectProgrammerPanel.dart';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
-import 'viewDevelopmentProjects.dart';
+import 'homeProgrammer.dart';
 import 'package:flutter/cupertino.dart';
 import 'customIcons.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -13,21 +14,21 @@ import 'package:groovin_material_icons/groovin_material_icons.dart';
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 List<Map<String, dynamic>> desarrolladorList = List();
-Map<String, dynamic> desarrollador = Map();
+
 var contextoS;
 Helper helper = new Helper();
 var projects;
 
-class HomeProgrammer extends StatefulWidget {
+class ViewDevelopment extends StatefulWidget {
   @override
-  _HomeProgrammer createState() => new _HomeProgrammer();
+  _ViewDevelopment createState() => new _ViewDevelopment();
 }
 
-class _HomeProgrammer extends State<HomeProgrammer> {
+class _ViewDevelopment extends State<ViewDevelopment> {
   @override
   void initState() {
     // TODO: implement initState
-    getDesarrollador();
+  
   }
 
   @override
@@ -210,7 +211,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopment() ));
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=>ViewProjectProgrammerPanel()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -412,7 +413,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
             backgroundColor: Colors.white,
             body: FutureBuilder(
               key: _keydos,
-              future: getProjects(),
+              future: getDevelopmentsProjects(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   print("spuestamente la conexion se cerro clave");
@@ -455,7 +456,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                       ),
                                     ),
                                     Text(
-                                      "   Bienvenido",
+                                      "   En desarrollo",
                                       style: TextStyle(
                                           fontSize: 30.0, color: Colors.white),
                                     ),
@@ -474,18 +475,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         ),
-                        Text(
-                          "Tendencias                       ",
-                          style: TextStyle(fontSize: 30.0, color: Colors.white),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
-                          child: Container(
-                            width: 450.0,
-                            height: 1.5,
-                            color: Colors.white,
-                          ),
-                        ),
+                        
                         Expanded(
                           child: ListView.builder(
                             itemCount: projects == null ? 0 : projects.length,
@@ -495,10 +485,9 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              ViewProjectProgrammerInfo(
-                                                  projects[position]
-                                                      ['ID_PROYECTO'])));
+                                          builder: (context) =>ViewProjectProgrammerPanel()
+                                              
+                                              ));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -609,7 +598,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                           ),
                                         ),
                                         Text(
-                                          "   Bienvenido",
+                                          "   En desarrollo",
                                           style: TextStyle(
                                               fontSize: 30.0,
                                               color: Colors.white),
@@ -737,49 +726,30 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     );
   }
 
-  void getDesarrollador() async {
-    try {
-      desarrolladorList = await helper.SelectDesarrollador();
-      desarrollador = desarrolladorList.first;
-      print("se obtuvo el desarrollador********************************");
-    } catch (e) {
-      print("aqui hay un error de no se que, funcion getDesarrollador");
-    }
-  }
 
-  Future getProjects() async {
+
+  Future getDevelopmentsProjects() async {
     try {
-      print("-------------------------------------");
-      print(desarrollador['ID_USUARIO'].toString());
-      print(desarrollador['F_D_WEB'].toString());
-      print(desarrollador['F_D_M_ANDROID'].toString());
-      print(desarrollador['F_D_M_IOS'].toString());
-      print(desarrollador['F_D_E_MAC'].toString());
-      print(desarrollador['F_D_REDES'].toString());
+
 
       print("-------------------------------------");
 
       final response = await http.post(
-          "http://192.168.0.3/findProgrammerDB/loadProjects.php",
+          "http://192.168.0.3/findProgrammerDB/loadDevelopmentProjects.php",
 
           // "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),
-            "F_D_WEB": desarrollador["F_D_WEB"].toString(),
-            "F_D_M_ANDROID": desarrollador["F_D_M_ANDROID"].toString(),
-            "F_D_M_IOS": desarrollador["F_D_M_IOS"].toString(),
-            "F_D_E_WINDOWS": desarrollador["F_D_E_WINDOWS"].toString(),
-            "F_D_E_MAC": desarrollador["F_D_E_MAC"].toString(),
-            "F_D_REDES": desarrollador["F_D_REDES"].toString(),
+
           });
 
       var datauser = json.decode(response.body);
       print(datauser);
       projects = datauser;
-      print("se obtuvo los proyectos********************************");
+      print("se obtuvo los proyectos en desarrollo********************************");
       print(projects);
     } catch (d) {
-      print("hubo un error obteniendo los proyectoss");
+      print("hubo un error obteniendo los proyectos en desarrollo");
       print(d.toString());
     }
   }

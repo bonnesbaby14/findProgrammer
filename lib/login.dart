@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'package:findprogrammer/firstScreen.dart';
 import 'package:findprogrammer/homeClient.dart';
 import 'package:findprogrammer/homeProgrammer.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,6 +32,7 @@ class _Login extends State<Login> {
   final GoogleSignIn googleSignIn = new GoogleSignIn();
 
   Future _testSing() async {
+    try{
     final GoogleSignInAccount googleuser = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleaut =
         await googleuser.authentication;
@@ -40,6 +42,10 @@ class _Login extends State<Login> {
         (await _auth.signInWithCredential(credential)).user;
     print(user.providerId);
     print(user.email);
+    }catch(e){
+print("error firabase auth");
+print(e.toString());
+    }
   }
 
   // Future  _testSing()async{
@@ -66,7 +72,7 @@ class _Login extends State<Login> {
             "mail": mail.text.toLowerCase().trim(),
             "password": contrasena.text,
           }).catchError((eeee) {
-        print("eRROR CON EL LOGIN");
+        print("ERROR CON EL LOGIN");
       });
       print(response.body);
       print("se accedio");
@@ -202,7 +208,9 @@ class _Login extends State<Login> {
       backgroundColor: Colors.white,
       body: WillPopScope(
         onWillPop: () {
-          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context)=>FirstScreen()
+          ));
           return;
         },
         child: new Container(

@@ -1,4 +1,3 @@
-import 'package:findprogrammer/registerProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
 import 'homeProgrammer.dart';
@@ -450,84 +449,88 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                 ),
               ),
               Expanded(
-                child:FutureBuilder(
-                  future: getComments(),
-                  builder: (context,snapshot){
-                    if(snapshot.connectionState==ConnectionState.done){
-                      print("la conexion se cerro");
-                      print(comments);
-                                    return ListView.builder(
-                                      itemCount: comments.length,
-                                      itemBuilder:(BuildContext context,int position){
-
-                                        return Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 10,
-                      color: Color.fromARGB(450, 41, 39, 42),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Icon(
-                              Icons.star_half,
-                              size: 50,
-                              color: Colors.white,
-                            ),
+                  child: FutureBuilder(
+                future: getComments(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    print("la conexion se cerro");
+                    print(comments);
+                    return ListView.builder(
+                      itemCount: comments.length,
+                      itemBuilder: (BuildContext context, int position) {
+                        return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                          Column(
+                          elevation: 10,
+                          color: Color.fromARGB(450, 41, 39, 42),
+                          child: Row(
                             children: <Widget>[
-                              SizedBox(
-                                height: 25,
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Icon(
+                                  Icons.star_half,
+                                  size: 50,
+                                  color: Colors.white,
+                                ),
                               ),
-                              Text(comments[position]['nombre'].toString()+" "+comments[position]['apellido_P'].toString()+" "+comments[position]['apellido_M'].toString(),
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 20.0, color: Colors.white)),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 220,
-                                child: Text(
-                                    comments[position]['COMENTARIO'].toString(),
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      fontSize: 10.0,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 25,
+                              Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 25,
+                                  ),
+                                  Text(
+                                      comments[position]['nombre'].toString() +
+                                          " " +
+                                          comments[position]['apellido_P']
+                                              .toString() +
+                                          " " +
+                                          comments[position]['apellido_M']
+                                              .toString(),
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                          fontSize: 20.0, color: Colors.white)),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    width: 220,
+                                    child: Text(
+                                        comments[position]['COMENTARIO']
+                                            .toString(),
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          color: Colors.white,
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 25,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        );
+                      },
                     );
-                                      },
-                                    );
+                  } else {
+                    print("la conexion no se ha cerrado");
 
-
-                    }else{
-                      print("la conexion no se ha cerrado");
-                      
-                       return CircularProgressIndicator(
-                                       strokeWidth: 10,
-                                     );
-
-                    }
-                  },
-                )
-              ),
+                    return CircularProgressIndicator(
+                      strokeWidth: 10,
+                    );
+                  }
+                },
+              )),
             ],
           ),
         ));
   }
 
   Future getComments() async {
-    print("=========================================================================");
+    print(
+        "=========================================================================");
     print("se esta obteiendo los comentarios");
     print(desarrollador['ID_USUARIO']);
     try {

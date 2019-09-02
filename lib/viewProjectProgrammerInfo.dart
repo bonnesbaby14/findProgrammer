@@ -112,36 +112,45 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.flash_circle,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeProgrammer()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.flash_circle,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Tendencias",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "Tendencias",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
                               ),
-                            ),
-                          ],
-                        )),
-                  ],
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
               //otro widget
@@ -579,261 +588,276 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
               return Stack(
                 children: <Widget>[
                   Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurpleAccent,
-                  image: DecorationImage(
-                    colorFilter: new ColorFilter.mode(
-                        Colors.black.withOpacity(0.5), BlendMode.dstATop),
-                    image: AssetImage('assets/images/mountains.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                padding: EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: (MediaQuery.of(context).size.height / 2) + 50,
-                      decoration: BoxDecoration(
-                          color: Colors.deepPurpleAccent,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30))),
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurpleAccent,
+                      image: DecorationImage(
+                        colorFilter: new ColorFilter.mode(
+                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                        image: AssetImage('assets/images/mountains.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: (MediaQuery.of(context).size.height / 2) + 50,
+                          decoration: BoxDecoration(
+                              color: Colors.deepPurpleAccent,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30))),
+                          child: Column(
                             children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: IconButton(
-                                    onPressed: () {
-                                      _scaffoldKey.currentState.openDrawer();
-                                    },
-                                    icon: Icon(
-                                      CustomIcons.menu,
-                                      color: Colors.white,
-                                      size: 42,
-                                    )),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: IconButton(
+                                        onPressed: () {
+                                          _scaffoldKey.currentState
+                                              .openDrawer();
+                                        },
+                                        icon: Icon(
+                                          CustomIcons.menu,
+                                          color: Colors.white,
+                                          size: 42,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "_________________",
+                                style: TextStyle(
+                                    fontSize: 25.0, color: Colors.white),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "por: _______________",
+                                style: TextStyle(
+                                    fontSize: 18.0, color: Colors.white),
+                              ),
+                              Container(
+                                width:
+                                    (MediaQuery.of(context).size.width / 4) * 3,
+                                height: 90,
+                                child: ListView(
+                                  children: <Widget>[
+                                    Text(
+                                      "___________________________________________",
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                          fontSize: 14.0, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 100,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Icon(
+                                              GroovinMaterialIcons
+                                                  .comment_question,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              " Solicitar \nProyecto ",
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "_________________",
-                            style:
-                                TextStyle(fontSize: 25.0, color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "por: _______________",
-                            style:
-                                TextStyle(fontSize: 18.0, color: Colors.white),
-                          ),
-                          Container(
-                            width: (MediaQuery.of(context).size.width / 4) * 3,
-                            height: 90,
-                            child: ListView(
-                              children: <Widget>[
-                                Text(
-                                  "___________________________________________",
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 14.0, color: Colors.white),
+                        ),
+                        Expanded(
+                          child: ListView(
+                            children: <Widget>[
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                InkWell(
-                                  onTap: () {},
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          GroovinMaterialIcons.comment_question,
-                                          color: Colors.white,
-                                          size: 30,
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          " Solicitar \nProyecto ",
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: Text("___________",
+                                          style: TextStyle(
+                                              fontSize: 26.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_____________                          ",
                                           style: TextStyle(
                                               fontSize: 14.0,
-                                              color: Colors.white),
-                                        ),
-                                      ],
+                                              color: Colors.white)),
                                     ),
-                                  ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text("____________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text("___________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text("-_______________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: ListView(
-                        children: <Widget>[
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("___________",
-                                      style: TextStyle(
-                                          fontSize: 26.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_____________                          ",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("____________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("___________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("-_______________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 17, 0, 0),
-                                  child: Text("Avances",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("_____________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("______________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("____________",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("____________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Center(
-                        child: SizedBox(
-                          width: 250,
-                          height: 250,
-                          child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
                               ),
-                              elevation: 100,
-                              color: Color.fromARGB(1000, 75, 74, 75),
-                              child: Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(20),
-                                    child: SizedBox(
-                                      height: 120,
-                                      width: 120,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 10,
-                                        valueColor: new AlwaysStoppedAnimation(
-                                            Colors.white),
-                                      ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 17, 0, 0),
+                                      child: Text("Avances",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
                                     ),
-                                  ),
-                                  Text("Cargando",
-                                      style: TextStyle(
-                                          fontSize: 30.0, color: Colors.white))
-                                ],
-                              )),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text("_____________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text("______________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: Text("____________",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: Text("____________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      )
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 250,
+                      height: 250,
+                      child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 100,
+                          color: Color.fromARGB(1000, 75, 74, 75),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 10,
+                                    valueColor: new AlwaysStoppedAnimation(
+                                        Colors.white),
+                                  ),
+                                ),
+                              ),
+                              Text("Cargando",
+                                  style: TextStyle(
+                                      fontSize: 30.0, color: Colors.white))
+                            ],
+                          )),
+                    ),
+                  )
                 ],
               );
             }

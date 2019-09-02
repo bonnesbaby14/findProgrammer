@@ -892,31 +892,7 @@ showDialog(
 }
 
 void alertLogOut(context){
-  showDialog(
-        context: context,
-      builder: (context)=>  new CupertinoAlertDialog(
-          title: Column(
-            children: <Widget>[
-                Icon(Icons.devices_other,size: 80,color: Colors.deepPurpleAccent,),
-                SizedBox(height: 20,),
-                Text("Cerrar Sesion",style: TextStyle(color: Colors.black,fontSize: 20 )),
-
-            ],
-          ),
-          content: Text("¿Seguro que quieres cerrar sesion?"),
-          
-          actions: <Widget>[
-            FlatButton(
-              onPressed: (){},
-              child: Text("Cerrar Sesion",style: TextStyle(color: Colors.black,fontSize: 15 )),
-            ),
-            FlatButton(
-              onPressed: (){},
-              child: Text("Cancelar",style: TextStyle(color: Colors.black,fontSize: 15 )),
-            ),
-          ],
-        )
-      );
+  
 
 
 }
