@@ -31,176 +31,6 @@ class _Login extends State<Login> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = new GoogleSignIn();
 
-  Future _testSing() async {
-    try{
-    final GoogleSignInAccount googleuser = await googleSignIn.signIn();
-    final GoogleSignInAuthentication googleaut =
-        await googleuser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleaut.accessToken, idToken: googleaut.idToken);
-    final FirebaseUser user =
-        (await _auth.signInWithCredential(credential)).user;
-    print(user.providerId);
-    print(user.email);
-    }catch(e){
-print("error firabase auth");
-print(e.toString());
-    }
-  }
-
-  // Future  _testSing()async{
-  //   await googleSignIn.signIn();
-  //   print("innicios de sesion");
-  //   print(googleSignIn.currentUser.displayName);
-  //   await print(googleSignIn.currentUser.id);
-  // }
-
-/*
-   _testSing(){
-  googleSignIn.signOut();
-  }
-*/
-
-  Future<List> login() async {
-    print(mail.text.toLowerCase().trim());
-    print(contrasena.text);
-    try {
-      final response = await http.post(
-          //"https://findprogrammerceti.000webhostapp.com/login.php",
-          "http://192.168.84.114/findprogrammerDB/login.php",
-          body: {
-            "mail": mail.text.toLowerCase().trim(),
-            "password": contrasena.text,
-          }).catchError((eeee) {
-        print("ERROR CON EL LOGIN");
-      });
-      print(response.body);
-      print("se accedio");
-      var datauser;
-      try {
-        datauser = json.decode(response.body);
-      } catch (e) {
-        Navigator.pop(context);
-
-        print("hubo un error con el servidor");
-        return null;
-      }
-
-      print(datauser.toString());
-
-      if (datauser.length == 0) {
-        showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("Iniciar Sesión",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Text("El correo o la contraseña son incorrectas"),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ));
-        mail.text = "";
-        contrasena.text = "";
-        setState(() {});
-      } else {
-        if (datauser[0] == 1) {
-          Map<String, dynamic> MapDesarrollador = Map();
-
-          print(response.body);
-
-          MapDesarrollador['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
-          MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
-          MapDesarrollador['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
-          MapDesarrollador['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
-          MapDesarrollador['CORREO'] = datauser[1]['CORREO'];
-          MapDesarrollador['FOTO'] = datauser[1]['FOTO'];
-          MapDesarrollador['CALIFICACION'] = datauser[1]['CALIFICACION'];
-          MapDesarrollador['F_ESTADO_REGISTRO'] =
-              datauser[1]['F_ESTADO_REGISTRO'];
-          MapDesarrollador['PASSWORD'] = datauser[1]['PASSWORD'];
-          MapDesarrollador['TELEFONO'] = datauser[1]['TELEFONO'];
-          MapDesarrollador['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
-          MapDesarrollador['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
-          MapDesarrollador['CURP'] = datauser[1]['CURP'];
-          MapDesarrollador['F_USUARIO_APRUEBA'] =
-              datauser[1]['F_USUARIO_APRUEBA'];
-          MapDesarrollador['F_D_WEB'] = datauser[1]['F_D_WEB'];
-          MapDesarrollador['F_D_M_ANDROID'] = datauser[1]['F_D_M_ANDROID'];
-          MapDesarrollador['F_D_M_IOS'] = datauser[1]['F_D_M_IOS'];
-          MapDesarrollador['F_D_E_WINDOWS'] = datauser[1]['F_D_E_WINDOWS'];
-          MapDesarrollador['F_D_E_MAC'] = datauser[1]['F_D_E_MAC'];
-          MapDesarrollador['F_D_REDES'] = datauser[1]['F_D_REDES'];
-          MapDesarrollador['PREPARACION'] = datauser[1]['PREPARACION'];
-          MapDesarrollador['PROYECTOS_TRABAJADOS'] =
-              datauser[1]['PROYECTOS_TRABAJADOS'];
-          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =
-              datauser[1]['F_SISTEMA_BLOQUEADO'];
-          print(MapDesarrollador.toString());
-
-//insertar datos del programador logueado.
-          var insertDesarrollador =
-              await helper.InsertDesarrollador(MapDesarrollador);
-          print("//$insertDesarrollador//");
-
-          Navigator.pop(context);
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => HomeProgrammer()));
-        } else if (datauser[0] == 2) {
-          Map<String, dynamic> MapCliente = Map();
-
-          print(response.body);
-
-          MapCliente['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
-          MapCliente['NOMBRE'] = datauser[1]['NOMBRE'];
-          MapCliente['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
-          MapCliente['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
-          MapCliente['CORREO'] = datauser[1]['CORREO'];
-          MapCliente['FOTO'] = datauser[1]['FOTO'];
-          MapCliente['CALIFICACION'] = datauser[1]['CALIFICACION'];
-          MapCliente['F_ESTADO_REGISTRO'] = datauser[1]['F_ESTADO_REGISTRO'];
-          MapCliente['PASSWORD'] = datauser[1]['PASSWORD'];
-          MapCliente['TELEFONO'] = datauser[1]['TELEFONO'];
-          MapCliente['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
-          MapCliente['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
-          MapCliente['CURP'] = datauser[1]['CURP'];
-          MapCliente['F_USUARIO_APRUEBA'] = datauser[1]['F_USUARIO_APRUEBA'];
-
-          print(MapCliente.toString());
-
-//insertar datos del programador logueado.
-          var insertCliente = await helper.InsertCliente(MapCliente);
-          print("//$insertCliente//");
-
-          Navigator.pop(context);
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Homeclient()));
-        }
-      }
-
-      return datauser;
-    } on Exception {
-      print("Excepcion en funcion login");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -208,9 +38,8 @@ print(e.toString());
       backgroundColor: Colors.white,
       body: WillPopScope(
         onWillPop: () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context)=>FirstScreen()
-          ));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => FirstScreen()));
           return;
         },
         child: new Container(
@@ -458,5 +287,176 @@ print(e.toString());
         ),
       ),
     );
+  }
+
+  Future _testSing() async {
+    try {
+      final GoogleSignInAccount googleuser = await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleaut =
+          await googleuser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+          accessToken: googleaut.accessToken, idToken: googleaut.idToken);
+      final FirebaseUser user =
+          (await _auth.signInWithCredential(credential)).user;
+      print(user.providerId);
+      print(user.email);
+    } catch (e) {
+      print("error firabase auth");
+      print(e.toString());
+    }
+  }
+
+  // Future  _testSing()async{
+  //   await googleSignIn.signIn();
+  //   print("innicios de sesion");
+  //   print(googleSignIn.currentUser.displayName);
+  //   await print(googleSignIn.currentUser.id);
+  // }
+
+/*
+   _testSing(){
+  googleSignIn.signOut();
+  }
+*/
+
+  Future<List> login() async {
+    print(mail.text.toLowerCase().trim());
+    print(contrasena.text);
+    try {
+      final response = await http.post(
+          //"https://findprogrammerceti.000webhostapp.com/login.php",
+          // "http://192.168.84.114/findprogrammerDB/login.php",
+                  "http://192.168.0.5/findprogrammerDB/login.php",
+          body: {
+            "mail": mail.text.toLowerCase().trim(),
+            "password": contrasena.text,
+          }).catchError((eeee) {
+        print("ERROR CON EL LOGIN");
+      });
+      print(response.body);
+      print("se accedio");
+      var datauser;
+      try {
+        datauser = json.decode(response.body);
+      } catch (e) {
+        Navigator.pop(context);
+
+        print("hubo un error con el servidor");
+        return null;
+      }
+
+      print(datauser.toString());
+
+      if (datauser.length == 0) {
+        showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("Iniciar Sesión",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("El correo o la contraseña son incorrectas"),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ));
+        mail.text = "";
+        contrasena.text = "";
+        setState(() {});
+      } else {
+        if (datauser[0] == 1) {
+          Map<String, dynamic> MapDesarrollador = Map();
+
+          print(response.body);
+
+          MapDesarrollador['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
+          MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
+          MapDesarrollador['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
+          MapDesarrollador['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
+          MapDesarrollador['CORREO'] = datauser[1]['CORREO'];
+          MapDesarrollador['FOTO'] = datauser[1]['FOTO'];
+          MapDesarrollador['CALIFICACION'] = datauser[1]['CALIFICACION'];
+          MapDesarrollador['F_ESTADO_REGISTRO'] =
+              datauser[1]['F_ESTADO_REGISTRO'];
+          MapDesarrollador['PASSWORD'] = datauser[1]['PASSWORD'];
+          MapDesarrollador['TELEFONO'] = datauser[1]['TELEFONO'];
+          MapDesarrollador['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
+          MapDesarrollador['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
+          MapDesarrollador['CURP'] = datauser[1]['CURP'];
+          MapDesarrollador['F_USUARIO_APRUEBA'] =
+              datauser[1]['F_USUARIO_APRUEBA'];
+          MapDesarrollador['F_D_WEB'] = datauser[1]['F_D_WEB'];
+          MapDesarrollador['F_D_M_ANDROID'] = datauser[1]['F_D_M_ANDROID'];
+          MapDesarrollador['F_D_M_IOS'] = datauser[1]['F_D_M_IOS'];
+          MapDesarrollador['F_D_E_WINDOWS'] = datauser[1]['F_D_E_WINDOWS'];
+          MapDesarrollador['F_D_E_MAC'] = datauser[1]['F_D_E_MAC'];
+          MapDesarrollador['F_D_REDES'] = datauser[1]['F_D_REDES'];
+          MapDesarrollador['PREPARACION'] = datauser[1]['PREPARACION'];
+          MapDesarrollador['PROYECTOS_TRABAJADOS'] =
+              datauser[1]['PROYECTOS_TRABAJADOS'];
+          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =
+              datauser[1]['F_SISTEMA_BLOQUEADO'];
+          print(MapDesarrollador.toString());
+
+//insertar datos del programador logueado.
+          var insertDesarrollador =
+              await helper.InsertDesarrollador(MapDesarrollador);
+          print("//$insertDesarrollador//");
+
+          Navigator.pop(context);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HomeProgrammer()));
+        } else if (datauser[0] == 2) {
+          Map<String, dynamic> MapCliente = Map();
+
+          print(response.body);
+
+          MapCliente['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
+          MapCliente['NOMBRE'] = datauser[1]['NOMBRE'];
+          MapCliente['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
+          MapCliente['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
+          MapCliente['CORREO'] = datauser[1]['CORREO'];
+          MapCliente['FOTO'] = datauser[1]['FOTO'];
+          MapCliente['CALIFICACION'] = datauser[1]['CALIFICACION'];
+          MapCliente['F_ESTADO_REGISTRO'] = datauser[1]['F_ESTADO_REGISTRO'];
+          MapCliente['PASSWORD'] = datauser[1]['PASSWORD'];
+          MapCliente['TELEFONO'] = datauser[1]['TELEFONO'];
+          MapCliente['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
+          MapCliente['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
+          MapCliente['CURP'] = datauser[1]['CURP'];
+          MapCliente['F_USUARIO_APRUEBA'] = datauser[1]['F_USUARIO_APRUEBA'];
+
+          print(MapCliente.toString());
+
+//insertar datos del programador logueado.
+          var insertCliente = await helper.InsertCliente(MapCliente);
+          print("//$insertCliente//");
+
+          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Homeclient()));
+        }
+      }
+
+      return datauser;
+    } on Exception {
+      print("Excepcion en funcion login");
+    }
   }
 }

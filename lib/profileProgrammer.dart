@@ -544,7 +544,8 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
     print(desarrollador['ID_USUARIO']);
     try {
       final response = await http.post(
-          "http://192.168.84.114/findprogrammerDB/loadComments.php",
+          // "http://192.168.84.114/findprogrammerDB/loadComments.php",
+               "http://192.168.0.5/findprogrammerDB/loadComments.php",
           body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
 
       var comments = json.decode(response.body);

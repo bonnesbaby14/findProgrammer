@@ -876,7 +876,8 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
   Future getInfooProject() async {
     try {
       final response = await http.post(
-          "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+                  "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+          // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
       var dataProject = json.decode(response.body);
@@ -886,7 +887,8 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqFProject() async {
     final response = await http.post(
-        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+              "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+      //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
     var dataProject = json.decode(response.body);
@@ -895,7 +897,8 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqNFProject() async {
     final response = await http.post(
-        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+            //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
 
     var dataProject = json.decode(response.body);
@@ -904,7 +907,8 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getAvancesProject() async {
     final response = await http.post(
-        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+           //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 
     var dataProject = json.decode(response.body);
@@ -913,7 +917,8 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getClientProject() async {
     final response = await http.post(
-        "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+       // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+           "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "5"});
 
     var dataProject = json.decode(response.body);

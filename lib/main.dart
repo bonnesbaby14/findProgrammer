@@ -1,19 +1,4 @@
-import 'package:findprogrammer/chatClient.dart';
-import 'package:findprogrammer/chatProgrammer.dart';
-import 'package:findprogrammer/checkAdvances.dart';
-import 'package:findprogrammer/firstScreen.dart';
-import 'package:findprogrammer/homeClient.dart';
-import 'package:findprogrammer/homeProgrammer.dart';
-import 'package:findprogrammer/login.dart';
-import 'package:findprogrammer/profileClient.dart';
-import 'package:findprogrammer/profileProgrammer.dart';
-import 'package:findprogrammer/registerProgrammer.dart';
-import 'package:findprogrammer/registerUser.dart';
-import 'package:findprogrammer/singUp.dart';
-import 'package:findprogrammer/viewHireProgrammer.dart';
-import 'package:findprogrammer/viewProjectClient.dart';
-import 'package:findprogrammer/viewProjectProgrammerInfo.dart';
-import 'package:findprogrammer/viewReqFormal.dart';
+import 'login.dart';
 import 'package:flutter/material.dart';
 const MaterialColor white = const MaterialColor(
   0xFFFFFFFF,
