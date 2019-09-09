@@ -187,8 +187,11 @@ class _Login extends State<Login> {
                                 ));
                         return;
                       }
-
+try{
                       login();
+}catch(_){
+print("exepcionnnnnnnnnnnnnnnnnnnnnnn");
+}
                       showDialog(
                           context: context,
                           builder: (context) => Center(
@@ -319,20 +322,72 @@ class _Login extends State<Login> {
   }
 */
 
-  Future<List> login() async {
+  Future login() async {
     print(mail.text.toLowerCase().trim());
     print(contrasena.text);
     try {
       final response = await http.post(
-          //"https://findprogrammerceti.000webhostapp.com/login.php",
+          "https://findprogrammerceti.000webhostapp.com/login.php",
           // "http://192.168.84.114/findprogrammerDB/login.php",
-                  "http://192.168.0.5/findprogrammerDB/login.php",
+           //       "http://192.168.0.5/findprogrammerDB/login.php",
           body: {
             "mail": mail.text.toLowerCase().trim(),
             "password": contrasena.text,
-          }).catchError((eeee) {
+          }).timeout(Duration(seconds: 4)).whenComplete((){
+                        Navigator.pop(context);
+                        return null;
+                      }).catchError((eeee) {
+                        http.Client().close();
         print("ERROR CON EL LOGIN");
+        showDialog(
+      context: context,
+      builder: (context)=>  CupertinoAlertDialog(
+        title: Column(
+          children: <Widget>[
+            Icon(
+              Icons.devices_other,
+              size: 80,
+              color: Colors.deepPurpleAccent,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text("LOGIN",
+                style: TextStyle(color: Colors.black, fontSize: 20)),
+          ],
+        ),
+        content: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 7,
+            ),
+            Container(
+              width: 240,
+              child: Text(
+                "Algo salió mal, intentalo mas tarde",
+                textAlign: TextAlign.justify,
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          
+          FlatButton(
+            child: Text("Aceptar",
+                style: TextStyle(color: Colors.black, fontSize: 15)),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ));
       });
+      if(response==null){
+return null;
+      }
       print(response.body);
       print("se accedio");
       var datauser;
@@ -454,8 +509,8 @@ class _Login extends State<Login> {
         }
       }
 
-      return datauser;
-    } on Exception {
+      
+    } catch(_){
       print("Excepcion en funcion login");
     }
   }

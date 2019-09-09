@@ -1434,8 +1434,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future getInfooProject() async {
     try {
       final response = await http.post(
-        //  "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-            "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+            //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
@@ -1446,8 +1446,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getReqFProject() async {
     final response = await http.post(
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-       // "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
        
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
@@ -1457,8 +1457,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getReqNFProject() async {
     final response = await http.post(
-       // "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+       // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
       
 
@@ -1468,8 +1468,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getAvancesProject() async {
     final response = await http.post(
-        //"https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 

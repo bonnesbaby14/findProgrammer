@@ -732,9 +732,9 @@ class _ViewDevelopmentProjects extends State<ViewDevelopmentProjects> {
       print("-------------------------------------");
 
       final response = await http.post(
-          "http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
+          //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
 
-          // "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
+           "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),
           });
