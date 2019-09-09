@@ -32,9 +32,9 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
   Widget build(BuildContext context) {
     setState(() { 
     });
-    var _scaffoldKey = new GlobalKey<ScaffoldState>();
+    var _scaffoldKey3 = new GlobalKey<ScaffoldState>();
     return Scaffold(
-        key: _scaffoldKey,
+        key: _scaffoldKey3,
         drawer: Container(
           width: 260.0,
           decoration: BoxDecoration(
