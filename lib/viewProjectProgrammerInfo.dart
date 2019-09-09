@@ -30,6 +30,9 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      
+    });
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
         key: _scaffoldKey,
@@ -354,6 +357,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
           }),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
+              print("se entro una vez y se recopilaron los datos ");
               print("+++++++++++++++++++++++++++++++++++++++++++");
               print(reqNoFuncionales);
               print("+++++++++++++++++++++++++++++++++++++++++++");
@@ -874,6 +878,9 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
   }
 
   Future getInfooProject() async {
+    print("77777777777777777777777777777777777777777777777777777777");
+    print(this.ID);
+
     try {
       final response = await http.post(
                  
