@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
 import 'homeProgrammer.dart';
+import 'login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'viewDevelopmentProjects.dart';
@@ -25,7 +27,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
-          width: mediaw * .8,
+          width: 260.0,
           decoration: BoxDecoration(
             color: Color(0xFF272D34),
           ),
@@ -38,6 +40,10 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileProgrammer()));
                 },
                 child: Row(
                   children: <Widget>[
@@ -94,7 +100,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                 child: Container(
                   width: 450.0,
                   height: 0.5,
-                  color: Colors.deepPurpleAccent,
+                  color: Colors.white,
                 ),
               ),
               SizedBox(
@@ -110,6 +116,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
+                      color: Colors.transparent.withOpacity(0.3),
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Row(
                     children: <Widget>[
@@ -123,7 +130,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                                   child: Icon(
                                     GroovinMaterialIcons.flash_circle,
                                     size: 35,
-                                    color: Colors.grey,
+                                    color: Colors.deepPurpleAccent,
                                   ),
                                 ),
                               ),
@@ -143,50 +150,6 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
               ),
               //otro widget
 
-              GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopmentProjects() ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(15.0))),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(1),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                    child: Container(
-                                      child: Icon(
-                                        GroovinMaterialIcons.worker,
-                                        size: 35,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(9),
-                                    child: Text(
-                                      "Proyectos en Desarrollo",
-                                      style: TextStyle(
-                                          fontSize: 17.0, color: Colors.white),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-
-//nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15.0))),
@@ -200,23 +163,69 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                               padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
                               child: Container(
                                 child: Icon(
-                                  GroovinMaterialIcons.worker,
+                                  GroovinMaterialIcons.check_all,
                                   size: 35,
                                   color: Colors.grey,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(9),
+                              padding: EdgeInsets.all(10),
                               child: Text(
-                                "Proyectos en Desarrollo",
+                                "Proyectos Realizados",
                                 style: TextStyle(
                                     fontSize: 17.0, color: Colors.white),
                               ),
-                            )
+                            ),
                           ],
                         )),
                   ],
+                ),
+              ),
+//nuevo wighet
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext) =>
+                              ViewDevelopmentProjects()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.worker,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Proyectos en Desarrollo",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
 
@@ -292,41 +301,86 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                   ],
                 ),
               ),
-
 //nuevo wighet
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.exit_to_app,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => new CupertinoAlertDialog(
+                            title: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.devices_other,
+                                  size: 80,
+                                  color: Colors.deepPurpleAccent,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20)),
+                              ],
+                            ),
+                            content: Text("¿Seguro que quieres cerrar sesion?"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                },
+                                child: Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Cancelar",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                            ],
+                          ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.exit_to_app,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Cerrar Sesion",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Cerrar Sesion",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -543,10 +597,10 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
     print("se esta obteiendo los comentarios");
     print(desarrollador['ID_USUARIO']);
     try {
-      final response = await http.post(
-           "https://findprogrammerceti.000webhostapp.com/loadComments.php",
+      final response = await http
+          .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-          body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
+              body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
 
       var comments = json.decode(response.body);
       this.comments = comments;

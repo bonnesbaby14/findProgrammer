@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'customIcons.dart';
 import 'package:async/async.dart';
+import 'login.dart';
 import 'profileProgrammer.dart';
 import 'package:http/http.dart' as http;
 import 'viewDevelopmentProjects.dart';
@@ -30,171 +31,169 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() { 
-    });
+    setState(() {});
     var _scaffoldKey3 = new GlobalKey<ScaffoldState>();
     return Scaffold(
         key: _scaffoldKey3,
         drawer: Container(
-          width: 260.0,
-          decoration: BoxDecoration(
-            color: Color(0xFF272D34),
-          ),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 30,
+              width: 260.0,
+              decoration: BoxDecoration(
+                color: Color(0xFF272D34),
               ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 30,
+                  ),
 
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileProgrammer()));
-                },
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          'assets/images/mountains.jpeg'),
-                                    )),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: desarrollador == null
-                                  ? Text(
-                                      "Cargando",
-                                      style: TextStyle(
-                                          fontSize: 15.0, color: Colors.white),
-                                    )
-                                  : Container(
-                                      width: 150,
-                                      child: Text(
-                                        desarrollador['NOMBRE'].toString() +
-                                            " " +
-                                            desarrollador['APELLIDO_P']
-                                                .toString() +
-                                            " " +
-                                            desarrollador['APELLIDO_M']
-                                                .toString(),
-                                        style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-//linea de separa84.114
-              Padding(
-                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                child: Container(
-                  width: 450.0,
-                  height: 0.5,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomeProgrammer()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.flash_circle,
-                                    size: 35,
-                                    color: Colors.grey,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileProgrammer()));
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(15),
+                                  child: Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              'assets/images/mountains.jpeg'),
+                                        )),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "Tendencias",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: desarrollador == null
+                                      ? Text(
+                                          "Cargando",
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.white),
+                                        )
+                                      : Container(
+                                          width: 150,
+                                          child: Text(
+                                            desarrollador['NOMBRE'].toString() +
+                                                " " +
+                                                desarrollador['APELLIDO_P']
+                                                    .toString() +
+                                                " " +
+                                                desarrollador['APELLIDO_M']
+                                                    .toString(),
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-              //otro widget
+//linea de separacin
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                    child: Container(
+                      width: 450.0,
+                      height: 0.5,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.transparent.withOpacity(0.3),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.flash_circle,
+                                        size: 35,
+                                        color: Colors.deepPurpleAccent,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      "Tendencias",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //otro widget
 
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.check_all,
-                                  size: 35,
-                                  color: Colors.grey,
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.check_all,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Proyectos Realizados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    "Proyectos Realizados",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
 //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
+                  SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopmentProjects() ));
@@ -235,117 +234,165 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                   ),
 
 //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.new_box,
-                                  size: 35,
-                                  color: Colors.grey,
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.new_box,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos Disponibles",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Proyectos Disponibles",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
 //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.keyboard,
-                                  size: 35,
-                                  color: Colors.grey,
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.keyboard,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Ingresar Codigo",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Ingresar Codigo",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
 
 //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.exit_to_app,
-                                  size: 35,
-                                  color: Colors.grey,
+                  SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => new CupertinoAlertDialog(
+                                title: Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.devices_other,
+                                      size: 80,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text("Cerrar Sesion",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20)),
+                                  ],
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Cerrar Sesion",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
+                                content:
+                                    Text("¿Seguro que quieres cerrar sesion?"),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Login()));
+                                    },
+                                    child: Text("Cerrar Sesion",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Cancelar",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                ],
+                              ));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.exit_to_app,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Cerrar Sesion",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
         appBar: null,
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
@@ -404,7 +451,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 child: IconButton(
                                     onPressed: () {
-                                      _scaffoldKey.currentState.openDrawer();
+                                      _scaffoldKey3.currentState.openDrawer();
                                     },
                                     icon: Icon(
                                       CustomIcons.menu,
@@ -633,7 +680,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                     child: IconButton(
                                         onPressed: () {
-                                          _scaffoldKey.currentState
+                                          _scaffoldKey3.currentState
                                               .openDrawer();
                                         },
                                         icon: Icon(
@@ -882,10 +929,10 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
     try {
       final response = await http.post(
-                 
-                 // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-            "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-         
+
+          // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+
           // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
@@ -896,10 +943,9 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqFProject() async {
     final response = await http.post(
-      
-               "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-              // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-      //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
     var dataProject = json.decode(response.body);
@@ -908,8 +954,8 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqNFProject() async {
     final response = await http.post(
-           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-            //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
 
@@ -919,7 +965,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getAvancesProject() async {
     final response = await http.post(
-       "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
@@ -930,9 +976,9 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getClientProject() async {
     final response = await http.post(
-       // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-      "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-          // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "5"});
 
     var dataProject = json.decode(response.body);
