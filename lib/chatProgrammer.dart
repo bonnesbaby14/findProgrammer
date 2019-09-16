@@ -1,9 +1,12 @@
 import 'package:findprogrammer/profileProgrammer.dart';
+import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewDevelopmentProjects.dart';
+import 'package:findprogrammer/viewFinishProjects.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'homeProgrammer.dart';
 import 'login.dart';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
@@ -128,6 +131,10 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -166,36 +173,46 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                   ),
                   //otro widget
 
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.all(1),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                  child: Container(
-                                    child: Icon(
-                                      GroovinMaterialIcons.check_all,
-                                      size: 35,
-                                      color: Colors.grey,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewFinishProjects()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.check_all,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Text(
-                                    "Proyectos Realizados",
-                                    style: TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      "Proyectos Realizados",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )),
-                      ],
+                                ],
+                              )),
+                        ],
+                      ),
                     ),
                   ),
 //nuevo wighet
@@ -205,7 +222,10 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext)=> ViewDevelopmentProjects() ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewDevelopmentProjects()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -246,72 +266,147 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                   SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.all(1),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                  child: Container(
-                                    child: Icon(
-                                      GroovinMaterialIcons.new_box,
-                                      size: 35,
-                                      color: Colors.grey,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewAvailableProjects()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.new_box,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(9),
-                                  child: Text(
-                                    "Proyectos Disponibles",
-                                    style: TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            )),
-                      ],
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Proyectos Disponibles",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
                     ),
                   ),
 //nuevo wighet
                   SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.all(1),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                  child: Container(
-                                    child: Icon(
-                                      GroovinMaterialIcons.keyboard,
-                                      size: 35,
-                                      color: Colors.grey,
+
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => new CupertinoAlertDialog(
+                                title: Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.devices_other,
+                                      size: 80,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text("Codigo de Proyecto",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20)),
+                                  ],
+                                ),
+                                content: Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Container(
+                                      child: CupertinoTextField(
+                                        placeholder: "Codigo de proyecto...",
+                                        placeholderStyle:
+                                            TextStyle(color: Colors.black38),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                                width: 0.5,
+                                                color:
+                                                    Colors.deepPurpleAccent)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {},
+                                    child: Text("Aceptar",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Cancelar",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                ],
+                              ));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.keyboard,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(9),
-                                  child: Text(
-                                    "Ingresar Codigo",
-                                    style: TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            )),
-                      ],
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Ingresar Codigo",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
                     ),
                   ),
 

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
 import 'homeClient.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
+import 'login.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
@@ -13,16 +15,15 @@ class ProfileClient extends StatefulWidget {
 }
 
 class _ProfileClient extends State<ProfileClient> {
-  
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyprofile = new GlobalKey<ScaffoldState>();
-      double mediaw=MediaQuery.of(context).size.width;
-  double mediah=MediaQuery.of(context).size.height;
+    double mediaw = MediaQuery.of(context).size.width;
+    double mediah = MediaQuery.of(context).size.height;
     return Scaffold(
         key: _scaffoldKeyprofile,
         drawer: Container(
-          width: mediaw*.8 ,
+          width: 260.0,
           decoration: BoxDecoration(
             color: Color(0xFF272D34),
           ),
@@ -35,6 +36,9 @@ class _ProfileClient extends State<ProfileClient> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfileClient()));
                 },
                 child: Row(
                   children: <Widget>[
@@ -89,7 +93,7 @@ class _ProfileClient extends State<ProfileClient> {
                 child: Container(
                   width: 450.0,
                   height: 0.5,
-                  color: Colors.deepPurpleAccent,
+                  color: Colors.white,
                 ),
               ),
               SizedBox(
@@ -168,11 +172,88 @@ class _ProfileClient extends State<ProfileClient> {
               SizedBox(
                 height: 15,
               ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.transparent.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.new_box,
+                                  size: 35,
+                                  color: Colors.deepPurpleAccent,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Proyectos Publicados",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+
+//nuevo wighet
+              SizedBox(
+                height: 15,
+              ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Homeclient()));
+                  showDialog(
+                      context: context,
+                      builder: (context) => new CupertinoAlertDialog(
+                            title: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.devices_other,
+                                  size: 80,
+                                  color: Colors.deepPurpleAccent,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20)),
+                              ],
+                            ),
+                            content: Text("¿Seguro que quieres cerrar sesion?"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                },
+                                child: Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Cancelar",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                            ],
+                          ));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -187,7 +268,7 @@ class _ProfileClient extends State<ProfileClient> {
                                 padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
                                 child: Container(
                                   child: Icon(
-                                    GroovinMaterialIcons.new_box,
+                                    GroovinMaterialIcons.exit_to_app,
                                     size: 35,
                                     color: Colors.grey,
                                   ),
@@ -196,7 +277,7 @@ class _ProfileClient extends State<ProfileClient> {
                               Padding(
                                 padding: EdgeInsets.all(9),
                                 child: Text(
-                                  "Proyectos Publicados",
+                                  "Cerrar Sesion",
                                   style: TextStyle(
                                       fontSize: 17.0, color: Colors.white),
                                 ),
@@ -206,43 +287,7 @@ class _ProfileClient extends State<ProfileClient> {
                     ],
                   ),
                 ),
-              ),
-//nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.exit_to_app,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Cerrar Sesion",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+              )
             ],
           ),
         ),
@@ -252,7 +297,7 @@ class _ProfileClient extends State<ProfileClient> {
         body: new Container(
           height: mediah,
           decoration: BoxDecoration(
-            color: Colors.deepPurpleAccent,//aqui cambiar
+            color: Colors.deepPurpleAccent, //aqui cambiar
             image: DecorationImage(
               colorFilter: new ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.dstATop),
@@ -264,8 +309,8 @@ class _ProfileClient extends State<ProfileClient> {
           child: Column(
             children: <Widget>[
               Container(
-                width: mediaw ,
-                height: (mediah / 2)+60,
+                width: mediaw,
+                height: (mediah / 2) + 60,
                 decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.only(
@@ -293,8 +338,8 @@ class _ProfileClient extends State<ProfileClient> {
                       ],
                     ),
                     Container(
-                      width: mediah *.15,
-                      height: mediah*.15,
+                      width: mediah * .15,
+                      height: mediah * .15,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -311,7 +356,8 @@ class _ProfileClient extends State<ProfileClient> {
                           client['APELLIDO_P'].toString() +
                           " " +
                           client['APELLIDO_M'].toString(),
-                      style: TextStyle(fontSize: mediah *.04, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: mediah * .04, color: Colors.white),
                     ),
                     SizedBox(
                       height: 10,
@@ -367,17 +413,15 @@ class _ProfileClient extends State<ProfileClient> {
                         ),
                       ],
                     ),
-                  ], 
+                  ],
                 ),
               ),
               Expanded(
-
                 child: ListView.builder(
                   itemCount: 7,
                   key: new GlobalKey(),
                   itemBuilder: (BuildContext context, int position) {
                     return Card(
-
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -406,7 +450,7 @@ class _ProfileClient extends State<ProfileClient> {
                                 height: 5,
                               ),
                               Container(
-                                width: mediaw*.6,
+                                width: mediaw * .6,
                                 child: Text(
                                     " Presiona demasiado durante la realizacion del proyecto y el pago se retraso bastante.",
                                     textAlign: TextAlign.justify,

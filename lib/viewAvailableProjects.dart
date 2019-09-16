@@ -1,11 +1,11 @@
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
-import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
+import 'homeProgrammer.dart';
 import 'viewDevelopmentProjects.dart';
 import 'viewFinishProjects.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,24 +14,14 @@ import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
-List<Map<String, dynamic>> desarrolladorList = List();
-Map<String, dynamic> desarrollador = Map();
-var contextoS;
-Helper helper = new Helper();
 var projects;
 
-class HomeProgrammer extends StatefulWidget {
+class ViewAvailableProjects extends StatefulWidget {
   @override
-  _HomeProgrammer createState() => new _HomeProgrammer();
+  _ViewAvailableProjects createState() => new _ViewAvailableProjects();
 }
 
-class _HomeProgrammer extends State<HomeProgrammer> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    getDesarrollador();
-  }
-
+class _ViewAvailableProjects extends State<ViewAvailableProjects> {
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
@@ -46,8 +36,6 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       child: WillPopScope(
           onWillPop: () {
             //esto es provicional para pruebas
-            helper.DeleteDesarrollador();
-            Navigator.pop(context);
           },
           child: Scaffold(
             key: _scaffoldKeyhome,
@@ -135,6 +123,10 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -566,7 +558,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                         ),
                         Text(
-                          "Tendencias                       ",
+                          "Disponibles                       ",
                           style: TextStyle(fontSize: 30.0, color: Colors.white),
                         ),
                         Padding(
@@ -826,17 +818,6 @@ class _HomeProgrammer extends State<HomeProgrammer> {
             ),
           )),
     );
-  }
-
-  void getDesarrollador() async {
-    try {
-      desarrolladorList = await helper.SelectDesarrollador();
-      desarrollador = desarrolladorList.first;
-      print("se obtuvo el desarrollador********************************");
-      setState(() {});
-    } catch (e) {
-      print("aqui hay un error de no se que, funcion getDesarrollador");
-    }
   }
 
   Future getProjects() async {

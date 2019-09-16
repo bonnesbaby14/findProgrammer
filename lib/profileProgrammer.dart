@@ -1,8 +1,12 @@
+import 'viewAvailableProjects.dart';
+import 'package:findprogrammer/viewFinishProjects.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
+import 'package:findprogrammer/homeClient.dart';
 import 'homeProgrammer.dart';
 import 'login.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'viewDevelopmentProjects.dart';
@@ -27,365 +31,455 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
-          width: 260.0,
-          decoration: BoxDecoration(
-            color: Color(0xFF272D34),
-          ),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 30,
+              width: 260.0,
+              decoration: BoxDecoration(
+                color: Color(0xFF272D34),
               ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 30,
+                  ),
 
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileProgrammer()));
-                },
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(15),
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          'assets/images/mountains.jpeg'),
-                                    )),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: desarrollador == null
-                                  ? Text(
-                                      "Cargando",
-                                      style: TextStyle(
-                                          fontSize: 15.0, color: Colors.white),
-                                    )
-                                  : Container(
-                                      width: 150,
-                                      child: Text(
-                                        desarrollador['NOMBRE'].toString() +
-                                            " " +
-                                            desarrollador['APELLIDO_P']
-                                                .toString() +
-                                            " " +
-                                            desarrollador['APELLIDO_M']
-                                                .toString(),
-                                        style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.white),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileProgrammer()));
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(15),
+                                  child: Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              'assets/images/mountains.jpeg'),
+                                        )),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: desarrollador == null
+                                      ? Text(
+                                          "Cargando",
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.white),
+                                        )
+                                      : Container(
+                                          width: 150,
+                                          child: Text(
+                                            desarrollador['NOMBRE'].toString() +
+                                                " " +
+                                                desarrollador['APELLIDO_P']
+                                                    .toString() +
+                                                " " +
+                                                desarrollador['APELLIDO_M']
+                                                    .toString(),
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+//linea de separacin
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                    child: Container(
+                      width: 450.0,
+                      height: 0.5,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeProgrammer()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.transparent.withOpacity(0.3),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.flash_circle,
+                                        size: 35,
+                                        color: Colors.deepPurpleAccent,
                                       ),
                                     ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-//linea de separacin
-              Padding(
-                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                child: Container(
-                  width: 450.0,
-                  height: 0.5,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomeProgrammer()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.transparent.withOpacity(0.3),
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.flash_circle,
-                                    size: 35,
-                                    color: Colors.deepPurpleAccent,
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "Tendencias",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ],
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      "Tendencias",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              //otro widget
+                  //otro widget
 
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.check_all,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Proyectos Realizados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-//nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext) =>
-                              ViewDevelopmentProjects()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.worker,
-                                    size: 35,
-                                    color: Colors.grey,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewFinishProjects()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.check_all,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos en Desarrollo",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      "Proyectos Realizados",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
+//nuevo wighet
+                  SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewDevelopmentProjects()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.worker,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Proyectos en Desarrollo",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
 
 //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.new_box,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos Disponibles",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-//nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.keyboard,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Ingresar Codigo",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-//nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => new CupertinoAlertDialog(
-                            title: Column(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.devices_other,
-                                  size: 80,
-                                  color: Colors.deepPurpleAccent,
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text("Cerrar Sesion",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20)),
-                              ],
-                            ),
-                            content: Text("¿Seguro que quieres cerrar sesion?"),
-                            actions: <Widget>[
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()));
-                                },
-                                child: Text("Cerrar Sesion",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15)),
-                              ),
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text("Cancelar",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15)),
-                              ),
-                            ],
-                          ));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.exit_to_app,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Cerrar Sesion",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewAvailableProjects()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.new_box,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Proyectos Disponibles",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+//nuevo wighet
+                  SizedBox(
+                    height: 15,
+                  ),
+
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => new CupertinoAlertDialog(
+                                title: Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.devices_other,
+                                      size: 80,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text("Codigo de Proyecto",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20)),
+                                  ],
+                                ),
+                                content: Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Container(
+                                      child: CupertinoTextField(
+                                        placeholder: "Codigo de proyecto...",
+                                        placeholderStyle:
+                                            TextStyle(color: Colors.black38),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                                width: 0.5,
+                                                color:
+                                                    Colors.deepPurpleAccent)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {},
+                                    child: Text("Aceptar",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Cancelar",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                ],
+                              ));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.keyboard,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Ingresar Codigo",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+
+//nuevo wighet
+                  SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => new CupertinoAlertDialog(
+                                title: Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.devices_other,
+                                      size: 80,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text("Cerrar Sesion",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20)),
+                                  ],
+                                ),
+                                content:
+                                    Text("¿Seguro que quieres cerrar sesion?"),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Login()));
+                                    },
+                                    child: Text("Cerrar Sesion",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Cancelar",
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15)),
+                                  ),
+                                ],
+                              ));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.all(1),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                    child: Container(
+                                      child: Icon(
+                                        GroovinMaterialIcons.exit_to_app,
+                                        size: 35,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(9),
+                                    child: Text(
+                                      "Cerrar Sesion",
+                                      style: TextStyle(
+                                          fontSize: 17.0, color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
         appBar: null,
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
@@ -519,7 +613,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                     print("la conexion se cerro");
                     print(comments);
                     return ListView.builder(
-                      itemCount: comments.length,
+                      itemCount: comments == null ? 0 : comments.length,
                       itemBuilder: (BuildContext context, int position) {
                         return Card(
                           shape: RoundedRectangleBorder(
