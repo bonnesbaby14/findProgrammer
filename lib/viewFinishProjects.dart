@@ -142,7 +142,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.transparent.withOpacity(0.3),
+                          
                           borderRadius:
                               BorderRadius.all(Radius.circular(15.0))),
                       child: Row(
@@ -157,7 +157,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                                       child: Icon(
                                         GroovinMaterialIcons.flash_circle,
                                         size: 35,
-                                        color: Colors.deepPurpleAccent,
+                                        color: Colors.grey,
                                       ),
                                     ),
                                   ),
@@ -187,6 +187,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
+                        color: Colors.transparent.withOpacity(0.3),
                           borderRadius:
                               BorderRadius.all(Radius.circular(15.0))),
                       child: Row(
@@ -201,7 +202,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                                       child: Icon(
                                         GroovinMaterialIcons.check_all,
                                         size: 35,
-                                        color: Colors.grey,
+                                        color: Colors.deepPurpleAccent,
                                       ),
                                     ),
                                   ),

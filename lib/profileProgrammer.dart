@@ -121,7 +121,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.transparent.withOpacity(0.3),
+                          
                           borderRadius:
                               BorderRadius.all(Radius.circular(15.0))),
                       child: Row(
@@ -136,7 +136,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                                       child: Icon(
                                         GroovinMaterialIcons.flash_circle,
                                         size: 35,
-                                        color: Colors.deepPurpleAccent,
+                                        color: Colors.grey,
                                       ),
                                     ),
                                   ),
