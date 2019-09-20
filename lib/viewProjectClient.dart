@@ -1480,10 +1480,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getDesarrolladorProject() async {
     final response = await http.post(
-        //"https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         
-        body: {"ID_PROYECTO": this.ID, "TYPE": "5"});
+        body: {"ID_PROYECTO": this.ID, "TYPE": "5"}).catchError((error)async{
+          await print("error no se econctro el servidor");
+        });
 
     var dataProject = json.decode(response.body);
     this.desarrollador = dataProject;

@@ -1,7 +1,7 @@
 import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
-import 'package:findprogrammer/viewDevelopmentProjects.dart';
-import 'package:findprogrammer/viewFinishProjects.dart';
+import 'package:findprogrammer/viewDevelopmentProjectsProgrammer.dart';
+import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
 import 'homeProgrammer.dart';
@@ -157,7 +157,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewFinishProjects()));
+                              builder: (context) => ViewFinishProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -203,7 +203,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewDevelopmentProjects()));
+                              builder: (context) => ViewDevelopmentProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(

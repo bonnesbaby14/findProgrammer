@@ -1,7 +1,7 @@
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
-import 'package:findprogrammer/viewDevelopmentProjects.dart';
+import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -21,12 +21,12 @@ var contextoS;
 Helper helper = new Helper();
 var projects;
 
-class ViewFinishProjects extends StatefulWidget {
+class ViewDevelopmentProjectsProgrammer extends StatefulWidget {
   @override
-  _ViewFinishProjects createState() => new _ViewFinishProjects();
+  _ViewDevelopmentProjectsProgrammer createState() => new _ViewDevelopmentProjectsProgrammer();
 }
 
-class _ViewFinishProjects extends State<ViewFinishProjects> {
+class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsProgrammer> {
   @override
   void initState() {
     // TODO: implement initState
@@ -51,7 +51,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
           },
           child: Scaffold(
             key: _scaffoldKeyhome,
-            drawer:Container(
+            drawer: Container(
               width: 260.0,
               decoration: BoxDecoration(
                 color: Color(0xFF272D34),
@@ -183,11 +183,10 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewFinishProjects()));
+                              builder: (context) => ViewFinishProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.transparent.withOpacity(0.3),
                           borderRadius:
                               BorderRadius.all(Radius.circular(15.0))),
                       child: Row(
@@ -202,7 +201,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                                       child: Icon(
                                         GroovinMaterialIcons.check_all,
                                         size: 35,
-                                        color: Colors.deepPurpleAccent,
+                                        color: Colors.grey,
                                       ),
                                     ),
                                   ),
@@ -230,10 +229,11 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewDevelopmentProjects()));
+                              builder: (context) => ViewDevelopmentProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
+                        color: Colors.transparent.withOpacity(0.3),
                           borderRadius:
                               BorderRadius.all(Radius.circular(15.0))),
                       child: Row(
@@ -248,7 +248,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                                       child: Icon(
                                         GroovinMaterialIcons.worker,
                                         size: 35,
-                                        color: Colors.grey,
+                                        color: Colors.deepPurpleAccent,
                                       ),
                                     ),
                                   ),
@@ -507,7 +507,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
             backgroundColor: Colors.white,
             body: FutureBuilder(
               key: _keydos,
-              future: getFinishProjects(),
+              future: getDevelopmentsProjects(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   print("spuestamente la conexion se cerro clave");
@@ -550,7 +550,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                                       ),
                                     ),
                                     Text(
-                                      "   Realizados",
+                                      "   En desarrollo",
                                       style: TextStyle(
                                           fontSize: 30.0, color: Colors.white),
                                     ),
@@ -690,7 +690,7 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
                                           ),
                                         ),
                                         Text(
-                                          "   Realizados",
+                                          "   En desarrollo",
                                           style: TextStyle(
                                               fontSize: 30.0,
                                               color: Colors.white),
@@ -818,14 +818,13 @@ class _ViewFinishProjects extends State<ViewFinishProjects> {
     );
   }
 
-  Future getFinishProjects() async {
+  Future getDevelopmentsProjects() async {
     try {
       print("-------------------------------------");
 
       final response = await http.post(
           //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
-
-           "https://findprogrammerceti.000webhostapp.com/loadFinishProjects.php",
+          "https://findprogrammerceti.000webhostapp.com/loadDevelopmentProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),
           });

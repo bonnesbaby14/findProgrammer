@@ -1,5 +1,5 @@
 import 'package:findprogrammer/viewAvailableProjects.dart';
-import 'package:findprogrammer/viewFinishProjects.dart';
+import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'customIcons.dart';
@@ -7,7 +7,7 @@ import 'package:async/async.dart';
 import 'login.dart';
 import 'profileProgrammer.dart';
 import 'package:http/http.dart' as http;
-import 'viewDevelopmentProjects.dart';
+import 'viewDevelopmentProjectsProgrammer.dart';
 import 'package:flutter/cupertino.dart';
 import 'homeProgrammer.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -169,7 +169,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewFinishProjects()));
+                              builder: (context) => ViewFinishProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -215,7 +215,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewDevelopmentProjects()));
+                              builder: (context) => ViewDevelopmentProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(

@@ -1,3 +1,5 @@
+import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
+import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'customIcons.dart';
@@ -99,80 +101,103 @@ class _ProfileClient extends State<ProfileClient> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.check_all,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewFinishProjectsClient()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.check_all,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Proyectos Terminados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "Proyectos Terminados",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
                               ),
-                            ),
-                          ],
-                        )),
-                  ],
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
 //nuevo wighet
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.worker,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ViewDevelopmentProjectsClient()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.worker,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos en Desarrollo",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Proyectos en Desarrollo",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
-
 //nuevo wighet
               SizedBox(
                 height: 15,
               ),
-              Container(
+              GestureDetector(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Homeclient()));
+                },
+                child: Container(
                 decoration: BoxDecoration(
                     color: Colors.transparent.withOpacity(0.3),
                     borderRadius: BorderRadius.all(Radius.circular(15.0))),
@@ -205,7 +230,7 @@ class _ProfileClient extends State<ProfileClient> {
                   ],
                 ),
               ),
-
+              ),
 //nuevo wighet
               SizedBox(
                 height: 15,

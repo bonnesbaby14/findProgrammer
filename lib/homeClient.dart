@@ -1,4 +1,7 @@
 import 'package:findprogrammer/profileClient.dart';
+import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
+import 'package:findprogrammer/viewFinishProjectsClient.dart';
+import 'package:findprogrammer/claseAlertCreateProject.dart';
 import 'viewProjectClient.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -15,10 +18,13 @@ Helper helper = new Helper();
 List<Map<String, dynamic>> clientList = List();
 Map<String, dynamic> client = Map();
 var myProjects;
+var dataResponse;
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 class Homeclient extends StatefulWidget {
+
+  
   @override
   _Homeclient createState() => new _Homeclient();
 }
@@ -34,6 +40,7 @@ class _Homeclient extends State<Homeclient> {
 
   @override
   Widget build(BuildContext context) {
+    contextoS = context;
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
     var _keydos = new GlobalKey();
     return RefreshIndicator(
@@ -130,110 +137,135 @@ class _Homeclient extends State<Homeclient> {
                 SizedBox(
                   height: 15,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.check_all,
-                                    size: 35,
-                                    color: Colors.grey,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewFinishProjectsClient()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.check_all,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "Proyectos Terminados",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    "Proyectos Terminados",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )),
-                    ],
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
                 ),
 //nuevo wighet
                 SizedBox(
                   height: 15,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.worker,
-                                    size: 35,
-                                    color: Colors.grey,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ViewDevelopmentProjectsClient()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.worker,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos en Desarrollo",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Proyectos en Desarrollo",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
                 ),
-
 //nuevo wighet
                 SizedBox(
                   height: 15,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.transparent.withOpacity(0.3),
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.new_box,
-                                    size: 35,
-                                    color: Colors.deepPurpleAccent,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Homeclient()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.transparent.withOpacity(0.3),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.new_box,
+                                      size: 35,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos Publicados",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Proyectos Publicados",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
                 ),
 
@@ -242,85 +274,84 @@ class _Homeclient extends State<Homeclient> {
                   height: 15,
                 ),
                 GestureDetector(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => new CupertinoAlertDialog(
-                                title: Column(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.devices_other,
-                                      size: 80,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text("Cerrar Sesion",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 20)),
-                                  ],
-                                ),
-                                content:
-                                    Text("¿Seguro que quieres cerrar sesion?"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Login()));
-                                    },
-                                    child: Text("Cerrar Sesion",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                  ),
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Cancelar",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                  ),
-                                ],
-                              ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(15.0))),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(1),
-                              child: Row(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
                                 children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                    child: Container(
-                                      child: Icon(
-                                        GroovinMaterialIcons.exit_to_app,
-                                        size: 35,
-                                        color: Colors.grey,
-                                      ),
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("Cerrar Sesion",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("¿Seguro que quieres cerrar sesion?"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
+                                  },
+                                  child: Text("Cerrar Sesion",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancelar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.exit_to_app,
+                                      size: 35,
+                                      color: Colors.grey,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.all(9),
-                                    child: Text(
-                                      "Cerrar Sesion",
-                                      style: TextStyle(
-                                          fontSize: 17.0, color: Colors.white),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Cerrar Sesion",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
                     ),
-                  )
+                  ),
+                )
               ],
             ),
           ),
@@ -328,8 +359,73 @@ class _Homeclient extends State<Homeclient> {
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.white24,
             child: Icon(GroovinMaterialIcons.plus_circle_multiple_outline),
-            onPressed: () {
-//alertCreateProject(context);
+            onPressed: ()async {
+              await showDialog(
+                  context: context, builder: (_) => AlertCreatePorject()).whenComplete((){});
+                  if (dataResponse == "1") {
+      showDialog(
+          context: contextoS,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content: Text("El proyecto se registro correctamente"),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                     setState(() {
+                       
+                     });
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
+    } else {
+      showDialog(
+          context: contextoS,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content:
+                    Text("El proyecto no se registro, intentalo mas tarde. "),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
+    }
+
             },
           ),
           resizeToAvoidBottomPadding: false,
@@ -666,6 +762,43 @@ class _Homeclient extends State<Homeclient> {
 
       print(datauser);
       myProjects = datauser;
-    } catch (d) {}
+    } catch (d) {
+      print("error obteniendo proyecto");
+    }
+  }
+}
+
+//fin de clase normal
+Future registerProject() async {
+  try {
+    print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+    print("titulo: " + tdcTitulo.text.toString());
+    print("describcion: " + tdcDescripcion.text.toString());
+    print("Requerimeintos: " + tdcRequerimientos.text.toString());
+    print("presupuesto: " + tdcPresupuesto.text.toString());
+    print("tipo: " + intTipo.toString());
+    print("entregables: " + (flat ? "1" : "0"));
+    print("frecuencia: " + intFrecuencia.toString());
+    print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+    print("ID" + client['ID_USUARIO'].toString());
+    final response = await http.post(
+        "https://findprogrammerceti.000webhostapp.com/registerProject.php",
+        body: {
+          "ID_USUARIO": client['ID_USUARIO'].toString(),
+          "TITULO": tdcTitulo.text,
+          "DESCRIPCION": tdcDescripcion.text,
+          "REQUERIMIENTOS": tdcRequerimientos.text,
+          "PRESUPUESTO": tdcPresupuesto.text,
+          "TIPO": intTipo.toString(),
+          "TIEMPO": intFrecuencia.toString(),
+          "ENTREGABLES": flat ? "1" : "0",
+        });
+
+     dataResponse = response.body;
+    print(dataResponse);
+    
+  } catch (d) {
+    print("error registrando el proyecto");
+    print(d.toString());
   }
 }

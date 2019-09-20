@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
-import 'viewDevelopmentProjects.dart';
-import 'viewFinishProjects.dart';
+import 'viewDevelopmentProjectsProgrammer.dart';
+import 'viewFinishProjectsProgrammer.dart';
 import 'package:flutter/cupertino.dart';
 import 'customIcons.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -179,7 +179,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewFinishProjects()));
+                              builder: (context) => ViewFinishProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -225,7 +225,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ViewDevelopmentProjects()));
+                              builder: (context) => ViewDevelopmentProjectsProgrammer()));
                     },
                     child: Container(
                       decoration: BoxDecoration(
