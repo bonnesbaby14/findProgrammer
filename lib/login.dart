@@ -483,7 +483,7 @@ class _Login extends State<Login> {
           Map<String, dynamic> MapDesarrollador = Map();
 
           print(response.body);
-
+          helper.DeleteDesarrollador();
           MapDesarrollador['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
           MapDesarrollador['GOOGLE_ID'] = datauser[1]['GOOGLE_ID'];
           MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
@@ -595,8 +595,9 @@ class _Login extends State<Login> {
               context, MaterialPageRoute(builder: (context) => Homeclient()));
         }
       }
-    } catch (_) {
+    } catch (w) {
       print("Excepcion en funcion login");
+      print(w.toString());
     }
   }
 }

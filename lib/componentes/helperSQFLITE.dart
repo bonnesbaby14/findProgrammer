@@ -27,7 +27,7 @@ initDB()async{
 
   
 void _OnCreate(Database db, int version)async{
-      await db.execute("CREATE TABLE DESARROLLADOR(ID_USUARIO integer, NOMBRE text, APELLIDO_P text,APELLIDO_M text,CORREO text,FOTO text,CALIFICACION real,F_ESTADO_REGISTRO integer,PASSWORD text,TELEFONO text,F_BAJA_USUARIO integer,F_ESTADO_LOGIN integer,CURP text,F_USUARIO_APRUEBA integer,F_D_WEB integer,F_D_M_ANDROID integer,F_D_M_IOS integer,F_D_E_WINDOWS integer,F_D_E_MAC integer,F_D_REDES integer,PROYECTOS_TRABAJADOS text,PREPARACION text,F_SISTEMA_BLOQUEADO integer);");
+      await db.execute("CREATE TABLE DESARROLLADOR(ID_USUARIO integer, GOOGLE_ID text, NOMBRE text, APELLIDO_P text,APELLIDO_M text,CORREO text,FOTO text,CALIFICACION real,F_ESTADO_REGISTRO integer,PASSWORD text,TELEFONO text,F_BAJA_USUARIO integer,F_ESTADO_LOGIN integer,CURP text,F_USUARIO_APRUEBA integer,F_D_WEB integer,F_D_M_ANDROID integer,F_D_M_IOS integer,F_D_E_WINDOWS integer,F_D_E_MAC integer,F_D_REDES integer,PROYECTOS_TRABAJADOS text,PREPARACION text,F_SISTEMA_BLOQUEADO integer);");
         await db.execute("CREATE TABLE CLIENTE(ID_USUARIO integer, NOMBRE text, APELLIDO_P text,APELLIDO_M text,CORREO text,FOTO text,CALIFICACION real,F_ESTADO_REGISTRO integer,PASSWORD text,TELEFONO text,F_BAJA_USUARIO integer,F_ESTADO_LOGIN integer,CURP text,F_USUARIO_APRUEBA integer);");
     
 }
