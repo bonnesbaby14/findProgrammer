@@ -1105,18 +1105,15 @@ class _RegisterUser extends State<RegisterUser> {
             "TIPO": _groupvalue == 1 ? "1" : "0",
             "PROYECTOS": proyectos.text,
             "PREPARACION": preparacion.text,
-            "WEB":web?"1":"0",
-            "IOS":ios?"1":"0",
-            "ANDROID":android?"1":"0",
-            "REDES":redes?"1":"0",
-            "WINDOWS":windows?"1":"0",
-            "MAC":mac?"1":"0",
-            
+            "WEB": web ? "1" : "0",
+            "IOS": ios ? "1" : "0",
+            "ANDROID": android ? "1" : "0",
+            "REDES": redes ? "1" : "0",
+            "WINDOWS": windows ? "1" : "0",
+            "MAC": mac ? "1" : "0",
           });
       print(response.body);
       print("66666666666666666666666666");
-
-     
 
       switch (response.body) {
         case "1":

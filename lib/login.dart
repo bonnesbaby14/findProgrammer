@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:findprogrammer/firstScreen.dart';
 import 'package:findprogrammer/homeClient.dart';
 import 'package:findprogrammer/homeProgrammer.dart';
+import 'package:findprogrammer/registerUser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -187,11 +188,11 @@ class _Login extends State<Login> {
                                 ));
                         return;
                       }
-try{
-                      login();
-}catch(_){
-print("exepcionnnnnnnnnnnnnnnnnnnnnnn");
-}
+                      try {
+                        login();
+                      } catch (_) {
+                        print("exepcionnnnnnnnnnnnnnnnnnnnnnn");
+                      }
                       showDialog(
                           context: context,
                           builder: (context) => Center(
@@ -326,67 +327,71 @@ print("exepcionnnnnnnnnnnnnnnnnnnnnnn");
     print(mail.text.toLowerCase().trim());
     print(contrasena.text);
     try {
-      final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/login.php",
-          // "http://192.168.84.114/findprogrammerDB/login.php",
-           //       "http://192.168.0.5/findprogrammerDB/login.php",
-          body: {
-            "mail": mail.text.toLowerCase().trim(),
-            "password": contrasena.text,
-          }).timeout(Duration(seconds: 4)).whenComplete((){
-                        Navigator.pop(context);
-                        return null;
-                      }).catchError((eeee) {
-                        http.Client().close();
-        print("ERROR CON EL LOGIN");
-        showDialog(
-      context: context,
-      builder: (context)=>  CupertinoAlertDialog(
-        title: Column(
-          children: <Widget>[
-            Icon(
-              Icons.devices_other,
-              size: 80,
-              color: Colors.deepPurpleAccent,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text("LOGIN",
-                style: TextStyle(color: Colors.black, fontSize: 20)),
-          ],
-        ),
-        content: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 7,
-            ),
-            Container(
-              width: 240,
-              child: Text(
-                "Algo salió mal, intentalo mas tarde",
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          
-          FlatButton(
-            child: Text("Aceptar",
-                style: TextStyle(color: Colors.black, fontSize: 15)),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ));
-      });
-      if(response==null){
-return null;
+      final response = await http
+          .post("https://findprogrammerceti.000webhostapp.com/login.php",
+              // "http://192.168.84.114/findprogrammerDB/login.php",
+              //       "http://192.168.0.5/findprogrammerDB/login.php",
+              body: {
+                "mail": mail.text.toLowerCase().trim(),
+                "password": contrasena.text,
+              })
+          .timeout(Duration(seconds: 4))
+          .whenComplete(() {
+            Navigator.pop(context);
+            return null;
+          })
+          .catchError((eeee) {
+            http.Client().close();
+            print("ERROR CON EL LOGIN");
+            showDialog(
+                context: context,
+                builder: (context) => CupertinoAlertDialog(
+                      title: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.devices_other,
+                            size: 80,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text("LOGIN",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                        ],
+                      ),
+                      content: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 7,
+                          ),
+                          Container(
+                            width: 240,
+                            child: Text(
+                              "Algo salió mal, intentalo mas tarde",
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                        ],
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("Aceptar",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 15)),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ));
+          });
+      if (response == null) {
+        return null;
       }
       print(response.body);
       print("se accedio");
@@ -436,11 +441,51 @@ return null;
         setState(() {});
       } else {
         if (datauser[0] == 1) {
+          if (datauser[1]['F_ESTADO_REGISTRO'] == "0") {
+            showDialog(
+                context: context,
+                builder: (context) => new CupertinoAlertDialog(
+                      title: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.devices_other,
+                            size: 80,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text("FindProgrammer",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                        ],
+                      ),
+                      content: Text(
+                          "Debes completar tu registro para usar FindProgrammer"),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => RegisterUser(
+                                        datauser[1]['ID_USUARIO'])));
+                          },
+                          child: Text("Aceptar",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 15)),
+                        ),
+                      ],
+                    ));
+            return null;
+          }
           Map<String, dynamic> MapDesarrollador = Map();
 
           print(response.body);
 
           MapDesarrollador['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
+          MapDesarrollador['GOOGLE_ID'] = datauser[1]['GOOGLE_ID'];
           MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
           MapDesarrollador['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
           MapDesarrollador['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
@@ -478,6 +523,48 @@ return null;
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => HomeProgrammer()));
         } else if (datauser[0] == 2) {
+          print("¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿");
+          if (datauser[1]['F_ESTADO_REGISTRO'] == "0") {
+            print("@@@@@@@@@@@@@@@@@@@@@@@");
+            showDialog(
+                context: context,
+                builder: (context) => new CupertinoAlertDialog(
+                      title: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.devices_other,
+                            size: 80,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text("FindProgrammer",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                        ],
+                      ),
+                      content: Text(
+                          "Debes completar tu registro para usar FindProgrammer"),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => RegisterUser(
+                                        datauser[1]['ID_USUARIO'])));
+                          },
+                          child: Text("Aceptar",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 15)),
+                        ),
+                      ],
+                    ));
+            return null;
+          }
+
           Map<String, dynamic> MapCliente = Map();
 
           print(response.body);
@@ -508,9 +595,7 @@ return null;
               context, MaterialPageRoute(builder: (context) => Homeclient()));
         }
       }
-
-      
-    } catch(_){
+    } catch (_) {
       print("Excepcion en funcion login");
     }
   }
