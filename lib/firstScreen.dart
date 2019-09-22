@@ -1,6 +1,8 @@
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/registerUser.dart';
+import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class FirstScreen extends StatefulWidget {
   @override
@@ -80,7 +82,7 @@ class _FirstScreen extends State<FirstScreen> {
                         borderRadius: new BorderRadius.circular(30.0),
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterUser()));
+                        Navigator.push(context, CupertinoPageRoute(builder: (context)=>SingUp()));
                       },
                       child: new Container(
                         padding: const EdgeInsets.symmetric(

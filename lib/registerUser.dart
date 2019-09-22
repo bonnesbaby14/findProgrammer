@@ -1,5 +1,10 @@
+import 'package:findprogrammer/firstScreen.dart';
+import 'package:findprogrammer/login.dart';
+import 'package:findprogrammer/registerProgrammer.dart';
+import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -8,24 +13,37 @@ bool value = false;
 bool hiden1 = false;
 bool hiden2 = false;
 int _groupvalue = 0;
+int _groupvalue2 = 0;
+bool mac = false,
+    windows = false,
+    android = false,
+    ios = false,
+    redes = false,
+    web = false;
 
 class RegisterUser extends StatefulWidget {
+  var ID;
+  RegisterUser(this.ID);
   @override
-  _RegisterUser createState() => new _RegisterUser();
+  _RegisterUser createState() => new _RegisterUser(this.ID);
 }
 
 class _RegisterUser extends State<RegisterUser> {
+  var ID;
+  _RegisterUser(this.ID);
   File img;
   TextEditingController nombre = TextEditingController(),
+      apellidoP = TextEditingController(),
+      apellidoM = TextEditingController(),
       curp = TextEditingController(),
-      correo = TextEditingController(),
-      contrasena1 = TextEditingController(),
-      contrasena2 = TextEditingController();
-
+      telefono = TextEditingController(),
+      proyectos = TextEditingController(),
+      preparacion = TextEditingController();
   @override
   Widget build(BuildContext context) {
-      double mediaw=MediaQuery.of(context).size.width;
-  double mediah=MediaQuery.of(context).size.height;
+    print("el id obtenido es: " + ID);
+    double mediaw = MediaQuery.of(context).size.width;
+    double mediah = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
@@ -87,9 +105,12 @@ class _RegisterUser extends State<RegisterUser> {
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () async {
-                                    img = null;
-                                    img = await ImagePicker.pickImage(
-                                        source: ImageSource.camera);
+                                    try {
+                                      img = null;
+                                      img = await ImagePicker.pickImage(
+                                          source: ImageSource.camera);
+                                    } catch (e) {}
+
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
@@ -99,9 +120,12 @@ class _RegisterUser extends State<RegisterUser> {
                                 ),
                                 FlatButton(
                                   onPressed: () async {
-                                    img = null;
-                                    img = await ImagePicker.pickImage(
-                                        source: ImageSource.gallery);
+                                    try {
+                                      img = null;
+                                      img = await ImagePicker.pickImage(
+                                          source: ImageSource.gallery);
+                                    } catch (e) {}
+
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
@@ -166,6 +190,66 @@ class _RegisterUser extends State<RegisterUser> {
               ),
               Theme(
                 data: ThemeData(
+                    unselectedWidgetColor: Colors.white,
+                    hintColor: white,
+                    primaryColor: white,
+                    primaryColorDark: white),
+                child: TextFormField(
+                  controller: apellidoP,
+                  style: new TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      labelText: "Apellido Paterno",
+                      fillColor: Colors.white,
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      )),
+                  cursorColor: Colors.white,
+                ),
+              ),
+
+              SizedBox(
+                height: 30.0,
+              ),
+              Theme(
+                data: ThemeData(
+                    unselectedWidgetColor: Colors.white,
+                    hintColor: white,
+                    primaryColor: white,
+                    primaryColorDark: white),
+                child: TextFormField(
+                  controller: apellidoM,
+                  style: new TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      labelText: "Apellido Materno",
+                      fillColor: Colors.white,
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      )),
+                  cursorColor: Colors.white,
+                ),
+              ),
+
+              SizedBox(
+                height: 30.0,
+              ),
+              Theme(
+                data: ThemeData(
                     hintColor: white,
                     primaryColor: white,
                     primaryColorDark: white),
@@ -191,14 +275,13 @@ class _RegisterUser extends State<RegisterUser> {
               SizedBox(
                 height: 30.0,
               ),
-
               Theme(
                 data: ThemeData(
                     hintColor: white,
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
-                  controller: correo,
+                  controller: telefono,
                   style: new TextStyle(
                     color: Colors.white,
                   ),
@@ -209,7 +292,7 @@ class _RegisterUser extends State<RegisterUser> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    labelText: "Correo",
+                    labelText: "Telefono",
                     fillColor: Colors.white,
                   ),
                   cursorColor: Colors.white,
@@ -219,164 +302,399 @@ class _RegisterUser extends State<RegisterUser> {
                 height: 30.0,
               ),
 
-              Theme(
-                data: ThemeData(
-                    hintColor: white,
-                    primaryColor: white,
-                    primaryColorDark: white),
-                child: TextFormField(
-                  controller: contrasena1,
-                  style: new TextStyle(
-                    color: Colors.white,
-                  ),
-                  obscureText: hiden1 ? true : false,
-                  decoration: InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      labelText: "Contraseña",
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            hiden1 = !hiden1;
-                          });
-                        },
-                        icon: hiden1
-                            ? Icon(
-                                Icons.visibility_off,
-                                color: Colors.grey,
-                              )
-                            : Icon(
-                                Icons.visibility,
-                                color: Colors.white,
-                              ),
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-
-              Theme(
-                data: ThemeData(
-                    hintColor: white,
-                    primaryColor: white,
-                    primaryColorDark: white),
-                child: TextFormField(
-                  controller: contrasena2,
-                  style: new TextStyle(
-                    color: Colors.white,
-                  ),
-                  obscureText: hiden2 ? true : false,
-                  decoration: InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      labelText: "Repetir Contraseña",
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            hiden2 = !hiden2;
-                          });
-                        },
-                        icon: hiden2
-                            ? Icon(
-                                Icons.visibility_off,
-                                color: Colors.grey,
-                              )
-                            : Icon(
-                                Icons.visibility,
-                                color: Colors.white,
-                              ),
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-Container(
-  width: mediaw-10,
-  child:  Theme(
-                  data: ThemeData(
-                      hintColor: white,
-                      primaryColor: white,
-                      primaryColorDark: white),
-                  child: Column(
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Tipo de Cliente",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white, fontSize: 17),
+              Container(
+                width: mediaw - 10,
+                child: Theme(
+                    data: ThemeData(
+                        hintColor: white,
+                        primaryColor: white,
+                        primaryColorDark: white),
+                    child: Column(
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Tipo de Cliente",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(color: Colors.white, fontSize: 17),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 7.0,
-                      ),
-                      ButtonBar(
-                        children: <Widget>[
-                          Text(
-                            "Persona",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                          Theme(
-                            data: ThemeData(
-                                unselectedWidgetColor: Colors.white,
-                                hintColor: white,
-                                primaryColor: white,
-                                primaryColorDark: white),
-                            child: Radio(
-                              onChanged: (int e) {
-                                setState(() {
-                                  _groupvalue = e;
-                                });
-                              },
-                              activeColor: Colors.white,
-                              value: 0,
-                              groupValue: _groupvalue,
+                        SizedBox(
+                          height: 7.0,
+                        ),
+                        ButtonBar(
+                          children: <Widget>[
+                            Text(
+                              "Persona",
+                              textAlign: TextAlign.left,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
                             ),
-                          ),
-                          Text(
-                            "Empresa",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                          Theme(
-                            data: ThemeData(
-                                unselectedWidgetColor: Colors.white,
-                                hintColor: white,
-                                primaryColor: white,
-                                primaryColorDark: white),
-                            child: Radio(
-                              
-                              onChanged: (int e) {
-                                setState(() {
-                                  _groupvalue = e;
-                                });
-                              },
-                              activeColor: Colors.white,
-                              value: 1,
-                              groupValue: _groupvalue,
+                            Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white,
+                                  hintColor: white,
+                                  primaryColor: white,
+                                  primaryColorDark: white),
+                              child: Radio(
+                                activeColor: Colors.white,
+                                value: 0,
+                                groupValue: _groupvalue,
+                                onChanged: (int e) {
+                                  setState(() {
+                                    _groupvalue = e;
+                                  });
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),
-
-),
-             
-              SizedBox(
-                height:mediah * .03
+                            Text(
+                              "Empresa",
+                              textAlign: TextAlign.left,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                            Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white,
+                                  hintColor: white,
+                                  primaryColor: white,
+                                  primaryColorDark: white),
+                              child: Radio(
+                                activeColor: Colors.white,
+                                value: 1,
+                                groupValue: _groupvalue,
+                                onChanged: (int e) {
+                                  setState(() {
+                                    _groupvalue = e;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 7.0,
+                        ),
+                        ButtonBar(
+                          children: <Widget>[
+                            Text(
+                              "Cliente",
+                              textAlign: TextAlign.left,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                            Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white,
+                                  hintColor: white,
+                                  primaryColor: white,
+                                  primaryColorDark: white),
+                              child: Radio(
+                                activeColor: Colors.white,
+                                value: 0,
+                                groupValue: _groupvalue2,
+                                onChanged: (int e) {
+                                  setState(() {
+                                    _groupvalue2 = e;
+                                  });
+                                },
+                              ),
+                            ),
+                            Text(
+                              "Desarrollador",
+                              textAlign: TextAlign.left,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                            Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor: Colors.white,
+                                  hintColor: white,
+                                  primaryColor: white,
+                                  primaryColorDark: white),
+                              child: Radio(
+                                activeColor: Colors.white,
+                                value: 1,
+                                groupValue: _groupvalue2,
+                                onChanged: (int e) {
+                                  setState(() {
+                                    _groupvalue2 = e;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        _groupvalue2 == 1
+                            ? Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Theme(
+                                      data: ThemeData(
+                                          hintColor: white,
+                                          primaryColor: white,
+                                          primaryColorDark: white),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              "Especialidad",
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 17),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 7.0,
+                                          ),
+                                          Column(
+                                            children: <Widget>[
+                                              Row(
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                          "Desarrollo web      ",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          )),
+                                                      Theme(
+                                                          data: Theme.of(
+                                                                  context)
+                                                              .copyWith(
+                                                                  unselectedWidgetColor:
+                                                                      Colors
+                                                                          .white),
+                                                          child: Checkbox(
+                                                            checkColor:
+                                                                Colors.white,
+                                                            activeColor: Colors
+                                                                .deepPurpleAccent,
+                                                            value: web,
+                                                            onChanged:
+                                                                (bool _value) {
+                                                              setState(() {
+                                                                web = _value;
+                                                              });
+                                                            },
+                                                          )),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                          "Desarrollo \n movil (Android)",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          )),
+                                                      Theme(
+                                                          data: Theme.of(
+                                                                  context)
+                                                              .copyWith(
+                                                                  unselectedWidgetColor:
+                                                                      Colors
+                                                                          .white),
+                                                          child: Checkbox(
+                                                            checkColor:
+                                                                Colors.white,
+                                                            activeColor: Colors
+                                                                .deepPurpleAccent,
+                                                            value: android,
+                                                            onChanged:
+                                                                (bool _value) {
+                                                              setState(() {
+                                                                android =
+                                                                    _value;
+                                                              });
+                                                            },
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                          "Desarrollador \n movil (IOS)            ",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          )),
+                                                      Theme(
+                                                          data: Theme.of(
+                                                                  context)
+                                                              .copyWith(
+                                                                  unselectedWidgetColor:
+                                                                      Colors
+                                                                          .white),
+                                                          child: Checkbox(
+                                                            checkColor:
+                                                                Colors.white,
+                                                            activeColor: Colors
+                                                                .deepPurpleAccent,
+                                                            value: ios,
+                                                            onChanged:
+                                                                (bool _value) {
+                                                              setState(() {
+                                                                ios = _value;
+                                                              });
+                                                            },
+                                                          )),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                          "Desarrollador \n de RED               ",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          )),
+                                                      Theme(
+                                                          data: Theme.of(
+                                                                  context)
+                                                              .copyWith(
+                                                                  unselectedWidgetColor:
+                                                                      Colors
+                                                                          .white),
+                                                          child: Checkbox(
+                                                            checkColor:
+                                                                Colors.white,
+                                                            activeColor: Colors
+                                                                .deepPurpleAccent,
+                                                            value: redes,
+                                                            onChanged:
+                                                                (bool _value) {
+                                                              setState(() {
+                                                                redes = _value;
+                                                              });
+                                                            },
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                          "Desarrollador \n Windows               ",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          )),
+                                                      Theme(
+                                                          data: Theme.of(
+                                                                  context)
+                                                              .copyWith(
+                                                                  unselectedWidgetColor:
+                                                                      Colors
+                                                                          .white),
+                                                          child: Checkbox(
+                                                            checkColor:
+                                                                Colors.white,
+                                                            activeColor: Colors
+                                                                .deepPurpleAccent,
+                                                            value: windows,
+                                                            onChanged:
+                                                                (bool _value) {
+                                                              setState(() {
+                                                                windows =
+                                                                    _value;
+                                                              });
+                                                            },
+                                                          )),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                          "Desarrollo \n MAC OS             ",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          )),
+                                                      Theme(
+                                                          data: Theme.of(
+                                                                  context)
+                                                              .copyWith(
+                                                                  unselectedWidgetColor:
+                                                                      Colors
+                                                                          .white),
+                                                          child: Checkbox(
+                                                            checkColor:
+                                                                Colors.white,
+                                                            activeColor: Colors
+                                                                .deepPurpleAccent,
+                                                            value: mac,
+                                                            onChanged:
+                                                                (bool _value) {
+                                                              setState(() {
+                                                                mac = _value;
+                                                              });
+                                                            },
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )),
+                                  Theme(
+                                    data: ThemeData(
+                                        hintColor: white,
+                                        primaryColor: white,
+                                        primaryColorDark: white),
+                                    child: TextFormField(
+                                      controller: preparacion,
+                                      style: new TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      decoration: InputDecoration(
+                                        labelText:
+                                            "Preparación Academica (Mención)",
+                                        fillColor: Colors.white,
+                                      ),
+                                      cursorColor: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 30.0,
+                                  ),
+                                  Theme(
+                                    data: ThemeData(
+                                        hintColor: white,
+                                        primaryColor: white,
+                                        primaryColorDark: white),
+                                    child: TextFormField(
+                                      controller: proyectos,
+                                      style: new TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      decoration: InputDecoration(
+                                        labelText:
+                                            "Proyectos Realizados (Mención)",
+                                        fillColor: Colors.white,
+                                      ),
+                                      cursorColor: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 55.0,
+                                  ),
+                                ],
+                              )
+                            : Container(),
+                      ],
+                    )),
               ),
+
+              SizedBox(height: mediah * .03),
               Align(
                 child: SizedBox(
                   height: 50.0,
@@ -384,21 +702,93 @@ Container(
                   child: OutlineButton(
                     borderSide: BorderSide(color: Colors.white),
                     onPressed: () {
-                      print(nombre.text +
-                          " - " +
-                          curp.text +
-                          " - " +
-                          correo.text +
-                          " - " +
-                          contrasena1.text +
-                          " - " +
-                          contrasena2.text);
+                      if (_groupvalue2 == 1) {
+                        if (nombre.text == "" ||
+                            curp.text == "" ||
+                            apellidoM.text == "" ||
+                            apellidoP.text == "" ||
+                            telefono.text == "" ||
+                            proyectos.text == "" ||
+                            preparacion.text == "" ||
+                            (!mac &&
+                                !ios &&
+                                !windows &&
+                                !web &&
+                                !android &&
+                                !redes)) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("Registrar Usuario",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
 
-                      if (nombre.text == "" ||
-                          curp.text == "" ||
-                          correo.text == "" ||
-                          contrasena1.text == "" ||
-                          contrasena2.text == "") {
+                        if (img == null) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("Registrar Usuario",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        "Debes subir una fotografia para poder continuar"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
+
                         showDialog(
                             context: context,
                             builder: (context) => new CupertinoAlertDialog(
@@ -412,14 +802,14 @@ Container(
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text("Registrar Usuario",
+                                      Text("Politicas de uso",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20)),
                                     ],
                                   ),
                                   content: Text(
-                                      "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                      "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
                                   actions: <Widget>[
                                     FlatButton(
                                       child: Text("Aceptar",
@@ -428,14 +818,101 @@ Container(
                                               fontSize: 15)),
                                       onPressed: () {
                                         Navigator.pop(context);
+                                        print("clic");
+                                        ReRegisterUserDeveloper();
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text("Cancelar",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15)),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        return;
                                       },
                                     ),
                                   ],
                                 ));
-                        return;
-                      }
+                      } else {
+                        if (nombre.text == "" ||
+                            curp.text == "" ||
+                            apellidoM.text == "" ||
+                            apellidoP.text == "" ||
+                            telefono.text == "") {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("Registrar Usuario",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
 
-                      if (img == null) {
+                        if (img == null) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("Registrar Usuario",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        "Debes subir una fotografia para poder continuar"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
+
                         showDialog(
                             context: context,
                             builder: (context) => new CupertinoAlertDialog(
@@ -449,14 +926,14 @@ Container(
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text("Registrar Usuario",
+                                      Text("Politicas de uso",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20)),
                                     ],
                                   ),
                                   content: Text(
-                                      "Debes subir una fotografia para poder continuar"),
+                                      "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
                                   actions: <Widget>[
                                     FlatButton(
                                       child: Text("Aceptar",
@@ -465,51 +942,23 @@ Container(
                                               fontSize: 15)),
                                       onPressed: () {
                                         Navigator.pop(context);
+                                        print("clic");
+                                        ReRegisterUser();
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text("Cancelar",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15)),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        return;
                                       },
                                     ),
                                   ],
                                 ));
-                        return;
                       }
-
-                      showDialog(
-                          context: context,
-                          builder: (context) => new CupertinoAlertDialog(
-                                title: Column(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.devices_other,
-                                      size: 80,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text("Politicas de uso",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 20)),
-                                  ],
-                                ),
-                                content: Text(
-                                    "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: Text("Aceptar",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                    onPressed: () {},
-                                  ),
-                                  FlatButton(
-                                    child: Text("Cancelar",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      return;
-                                    },
-                                  ),
-                                ],
-                              ));
                     },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -529,5 +978,228 @@ Container(
             ],
           ),
         ));
+  }
+
+  Future ReRegisterUser() async {
+    try {
+      print("ññññññññññññññññññññññññññññ");
+
+      print("ññññññññññññññññññññññññññññ");
+
+      final response = await http.post(
+          "https://findprogrammerceti.000webhostapp.com/registerUser2.php",
+          body: {
+            "ID": ID.toString(),
+            "NOMBRE": nombre.text,
+            "CURP": curp.text,
+            "APELLIDOP": apellidoP.text,
+            "APELLIDOM": apellidoM.text,
+            "TELEFONO": telefono.text,
+            "TIPO": _groupvalue == 1 ? "1" : "0",
+          });
+      print(response.body);
+      print("66666666666666666666666666");
+
+      Navigator.pop(context);
+
+      switch (response.body) {
+        case "1":
+          //registro completo
+          if (_groupvalue2 == 0) {
+            showDialog(
+                context: context,
+                builder: (context) => new CupertinoAlertDialog(
+                      title: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.devices_other,
+                            size: 80,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text("FindProgrammer",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                        ],
+                      ),
+                      content: Text(
+                          "Usuario creado con exito, Bienvenido a FindProgrammer, incia sesión para comenzar"),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => Login()));
+                          },
+                          child: Text("Aceptar",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 15)),
+                        ),
+                      ],
+                    ));
+          }
+          break;
+        case "5":
+          //correo
+          showDialog(
+              context: context,
+              builder: (context) => new CupertinoAlertDialog(
+                    title: Column(
+                      children: <Widget>[
+                        Icon(
+                          Icons.devices_other,
+                          size: 80,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text("FindProgrammer",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20)),
+                      ],
+                    ),
+                    content: Text(
+                        "El correo ya fue registrado, intenta iniciar sesión"),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        child: Text("Aceptar",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 15)),
+                      ),
+                    ],
+                  ));
+
+          break;
+      }
+    } catch (d) {
+      print("error registrando el usuario ");
+      print(d.toString());
+      Navigator.pop(context);
+    }
+  }
+
+  Future ReRegisterUserDeveloper() async {
+    try {
+      print("ññññññññññññññññññññññññññññ");
+
+      print("ññññññññññññññññññññññññññññ");
+
+      final response = await http.post(
+          "https://findprogrammerceti.000webhostapp.com/registerUser2D.php",
+          body: {
+            "ID": ID.toString(),
+            "NOMBRE": nombre.text,
+            "CURP": curp.text,
+            "APELLIDOP": apellidoP.text,
+            "APELLIDOM": apellidoM.text,
+            "TELEFONO": telefono.text,
+            "TIPO": _groupvalue == 1 ? "1" : "0",
+            "PROYECTOS": proyectos.text,
+            "PREPARACION": preparacion.text,
+            "WEB":web?"1":"0",
+            "IOS":ios?"1":"0",
+            "ANDROID":android?"1":"0",
+            "REDES":redes?"1":"0",
+            "WINDOWS":windows?"1":"0",
+            "MAC":mac?"1":"0",
+            
+          });
+      print(response.body);
+      print("66666666666666666666666666");
+
+     
+
+      switch (response.body) {
+        case "1":
+          //registro completo
+          if (_groupvalue2 == 1) {
+            showDialog(
+                context: context,
+                builder: (context) => new CupertinoAlertDialog(
+                      title: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.devices_other,
+                            size: 80,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text("FindProgrammer",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                        ],
+                      ),
+                      content: Text(
+                          "Usuario creado con exito, Bienvenido a FindProgrammer, incia sesión para comenzar"),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => Login()));
+                          },
+                          child: Text("Aceptar",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 15)),
+                        ),
+                      ],
+                    ));
+          }
+          break;
+        case "5":
+          //correo
+          showDialog(
+              context: context,
+              builder: (context) => new CupertinoAlertDialog(
+                    title: Column(
+                      children: <Widget>[
+                        Icon(
+                          Icons.devices_other,
+                          size: 80,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text("FindProgrammer",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20)),
+                      ],
+                    ),
+                    content: Text(
+                        "La CURP ya fue registrada, intenta iniciar sesión"),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        child: Text("Aceptar",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 15)),
+                      ),
+                    ],
+                  ));
+
+          break;
+      }
+    } catch (d) {
+      print("error registrando el usuario ");
+      print(d.toString());
+      Navigator.pop(context);
+    }
   }
 }

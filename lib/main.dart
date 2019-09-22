@@ -1,4 +1,8 @@
+import 'package:findprogrammer/firstScreen.dart';
 import 'package:findprogrammer/homeClient.dart';
+import 'package:findprogrammer/registerProgrammer.dart';
+import 'package:findprogrammer/registerUser.dart';
+import 'package:sqflite/utils/utils.dart';
 
 import 'login.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +43,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:Login()
+      home:FirstScreen()
 
     );
   }
