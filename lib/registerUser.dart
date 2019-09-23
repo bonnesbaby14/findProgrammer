@@ -4,6 +4,7 @@ import 'package:findprogrammer/registerProgrammer.dart';
 import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,9 +40,18 @@ class _RegisterUser extends State<RegisterUser> {
       telefono = TextEditingController(),
       proyectos = TextEditingController(),
       preparacion = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    print("el id obtenido es: " + ID);
+
+          nombre.text = "dd";
+      apellidoP.text = "dd";
+      apellidoM.text = "dd";
+  
+      telefono.text = "dd";
+      proyectos.text = "dd";
+      preparacion.text = "dd";
+         print("el id obtenido es: " + ID);
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -999,6 +1009,22 @@ class _RegisterUser extends State<RegisterUser> {
           });
       print(response.body);
       print("66666666666666666666666666");
+      
+
+var strem=http.ByteStream(DelegatingStream.typed(img.openRead()));
+var length=await img.length();
+var uri=Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
+var request=http.MultipartRequest("POST",uri);
+var multipartFile=http.MultipartFile("image",strem,length,filename:"image_"+ID.toString()+".jpg");
+request.files.add(multipartFile);
+var response2=await request.send();
+if(response2.statusCode==200){
+  print("si se pudo");
+
+}else{
+  print("no se puedo");
+    print(response2.statusCode);
+}
 
       Navigator.pop(context);
 
@@ -1064,12 +1090,12 @@ class _RegisterUser extends State<RegisterUser> {
                       ],
                     ),
                     content: Text(
-                        "El correo ya fue registrado, intenta iniciar sesión"),
+                        "El CURP ya fue registrado, intenta iniciar sesión"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {
                           Navigator.pop(context);
-                          Navigator.pop(context);
+                          
                         },
                         child: Text("Aceptar",
                             style:
@@ -1114,6 +1140,23 @@ class _RegisterUser extends State<RegisterUser> {
           });
       print(response.body);
       print("66666666666666666666666666");
+
+var strem=http.ByteStream(DelegatingStream.typed(img.openRead()));
+var length=await img.length();
+var uri=Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
+var request=http.MultipartRequest("POST",uri);
+var multipartFile=http.MultipartFile("image",strem,length,filename:"image_"+ID.toString()+".jpg");
+request.files.add(multipartFile);
+var response2=await request.send();
+if(response2.statusCode==200){
+  print("si se pudo");
+
+}else{
+  print("no se puedo");
+    print(response2.statusCode);
+}
+
+
 
       switch (response.body) {
         case "1":
@@ -1182,7 +1225,7 @@ class _RegisterUser extends State<RegisterUser> {
                       FlatButton(
                         onPressed: () {
                           Navigator.pop(context);
-                          Navigator.pop(context);
+                        
                         },
                         child: Text("Aceptar",
                             style:
