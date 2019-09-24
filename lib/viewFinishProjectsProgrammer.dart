@@ -85,8 +85,7 @@ class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> 
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: AssetImage(
-                                              'assets/images/mountains.jpeg'),
+                                          image:NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+desarrollador['ID_USUARIO'].toString()+".jpg")
                                         )),
                                   ),
                                 ),

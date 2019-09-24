@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
@@ -20,6 +22,7 @@ var contextoS;
 Helper helper = new Helper();
 var projects;
 
+
 class HomeProgrammer extends StatefulWidget {
   @override
   _HomeProgrammer createState() => new _HomeProgrammer();
@@ -30,6 +33,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   void initState() {
     // TODO: implement initState
     getDesarrollador();
+    
   }
 
   @override
@@ -85,8 +89,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: AssetImage(
-                                              'assets/images/mountains.jpeg'),
+                                          image:NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+desarrollador['ID_USUARIO'].toString()+".jpg"),
                                         )),
                                   ),
                                 ),
@@ -841,6 +844,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
 
   Future getProjects() async {
     try {
+
       print("#######################################3");
       print(desarrollador['ID_USUARIO'].toString());
       print(desarrollador['F_D_WEB'].toString());
@@ -850,7 +854,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       print(desarrollador['F_D_REDES'].toString());
       print(desarrollador['NOMBRE'].toString());
       print("######################################333");
-
+      
       final response = await http.post(
           //"http://192.168.84.114/findProgrammerDB/loadProjects.php",
 

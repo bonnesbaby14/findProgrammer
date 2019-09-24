@@ -1,7 +1,4 @@
-import 'package:findprogrammer/firstScreen.dart';
 import 'package:findprogrammer/login.dart';
-import 'package:findprogrammer/registerProgrammer.dart';
-import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:async/async.dart';
@@ -43,15 +40,14 @@ class _RegisterUser extends State<RegisterUser> {
 
   @override
   Widget build(BuildContext context) {
+    nombre.text = "dd";
+    apellidoP.text = "dd";
+    apellidoM.text = "dd";
 
-          nombre.text = "dd";
-      apellidoP.text = "dd";
-      apellidoM.text = "dd";
-  
-      telefono.text = "dd";
-      proyectos.text = "dd";
-      preparacion.text = "dd";
-         print("el id obtenido es: " + ID);
+    telefono.text = "dd";
+    proyectos.text = "dd";
+    preparacion.text = "dd";
+    print("el id obtenido es: " + ID);
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -1009,22 +1005,22 @@ class _RegisterUser extends State<RegisterUser> {
           });
       print(response.body);
       print("66666666666666666666666666");
-      
 
-var strem=http.ByteStream(DelegatingStream.typed(img.openRead()));
-var length=await img.length();
-var uri=Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
-var request=http.MultipartRequest("POST",uri);
-var multipartFile=http.MultipartFile("image",strem,length,filename:"image_"+ID.toString()+".jpg");
-request.files.add(multipartFile);
-var response2=await request.send();
-if(response2.statusCode==200){
-  print("si se pudo");
-
-}else{
-  print("no se puedo");
-    print(response2.statusCode);
-}
+      var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
+      var length = await img.length();
+      var uri =
+          Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
+      var request = http.MultipartRequest("POST", uri);
+      var multipartFile = http.MultipartFile("image", strem, length,
+          filename: "image_" + ID.toString() + ".jpg");
+      request.files.add(multipartFile);
+      var response2 = await request.send();
+      if (response2.statusCode == 200) {
+        print("si se pudo");
+      } else {
+        print("no se puedo");
+        print(response2.statusCode);
+      }
 
       Navigator.pop(context);
 
@@ -1095,7 +1091,41 @@ if(response2.statusCode==200){
                       FlatButton(
                         onPressed: () {
                           Navigator.pop(context);
-                          
+                        },
+                        child: Text("Aceptar",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 15)),
+                      ),
+                    ],
+                  ));
+
+          break;
+        case "":
+//error del server
+          showDialog(
+              context: context,
+              builder: (context) => new CupertinoAlertDialog(
+                    title: Column(
+                      children: <Widget>[
+                        Icon(
+                          Icons.devices_other,
+                          size: 80,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text("FindProgrammer",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20)),
+                      ],
+                    ),
+                    content: Text(
+                        "Ocurrió un problema en el servidor o en la red, intentalo mas tarde"),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
                         },
                         child: Text("Aceptar",
                             style:
@@ -1141,22 +1171,21 @@ if(response2.statusCode==200){
       print(response.body);
       print("66666666666666666666666666");
 
-var strem=http.ByteStream(DelegatingStream.typed(img.openRead()));
-var length=await img.length();
-var uri=Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
-var request=http.MultipartRequest("POST",uri);
-var multipartFile=http.MultipartFile("image",strem,length,filename:"image_"+ID.toString()+".jpg");
-request.files.add(multipartFile);
-var response2=await request.send();
-if(response2.statusCode==200){
-  print("si se pudo");
-
-}else{
-  print("no se puedo");
-    print(response2.statusCode);
-}
-
-
+      var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
+      var length = await img.length();
+      var uri =
+          Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
+      var request = http.MultipartRequest("POST", uri);
+      var multipartFile = http.MultipartFile("image", strem, length,
+          filename: "image_" + ID.toString() + ".jpg");
+      request.files.add(multipartFile);
+      var response2 = await request.send();
+      if (response2.statusCode == 200) {
+        print("si se pudo");
+      } else {
+        print("no se puedo");
+        print(response2.statusCode);
+      }
 
       switch (response.body) {
         case "1":
@@ -1225,7 +1254,41 @@ if(response2.statusCode==200){
                       FlatButton(
                         onPressed: () {
                           Navigator.pop(context);
-                        
+                        },
+                        child: Text("Aceptar",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 15)),
+                      ),
+                    ],
+                  ));
+
+          break;
+        case "":
+//error del server
+          showDialog(
+              context: context,
+              builder: (context) => new CupertinoAlertDialog(
+                    title: Column(
+                      children: <Widget>[
+                        Icon(
+                          Icons.devices_other,
+                          size: 80,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text("FindProgrammer",
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20)),
+                      ],
+                    ),
+                    content: Text(
+                        "Ocurrió un problema en el servidor o en la red, intentalo mas tarde"),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
                         },
                         child: Text("Aceptar",
                             style:
