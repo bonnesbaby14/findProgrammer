@@ -180,14 +180,11 @@ class _ViewDevelopmentProjectsClient extends State<ViewDevelopmentProjectsClient
                 GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                ViewDevelopmentProjectsClient()));
+                  
                   },
                   child: Container(
                     decoration: BoxDecoration(
+                        color: Colors.transparent.withOpacity(0.3),
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     child: Row(
                       children: <Widget>[
@@ -201,7 +198,7 @@ class _ViewDevelopmentProjectsClient extends State<ViewDevelopmentProjectsClient
                                     child: Icon(
                                       GroovinMaterialIcons.worker,
                                       size: 35,
-                                      color: Colors.grey,
+                                      color: Colors.deepPurpleAccent,
                                     ),
                                   ),
                                 ),
@@ -230,7 +227,7 @@ class _ViewDevelopmentProjectsClient extends State<ViewDevelopmentProjectsClient
                 },
                 child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.transparent.withOpacity(0.3),
+                  
                     borderRadius: BorderRadius.all(Radius.circular(15.0))),
                 child: Row(
                   children: <Widget>[
@@ -244,7 +241,7 @@ class _ViewDevelopmentProjectsClient extends State<ViewDevelopmentProjectsClient
                                 child: Icon(
                                   GroovinMaterialIcons.new_box,
                                   size: 35,
-                                  color: Colors.deepPurpleAccent,
+                                  color: Colors.grey,
                                 ),
                               ),
                             ),

@@ -230,8 +230,7 @@ class _Homeclient extends State<Homeclient> {
                 GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Homeclient()));
+                  
                   },
                   child: Container(
                     decoration: BoxDecoration(

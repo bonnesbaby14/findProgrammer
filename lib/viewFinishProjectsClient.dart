@@ -133,13 +133,11 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                 GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewFinishProjectsClient()));
+                  
                   },
                   child: Container(
                     decoration: BoxDecoration(
+                         color: Colors.transparent.withOpacity(0.3),
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     child: Row(
                       children: <Widget>[
@@ -153,7 +151,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                                     child: Icon(
                                       GroovinMaterialIcons.check_all,
                                       size: 35,
-                                      color: Colors.grey,
+                                      color: Colors.deepPurpleAccent,
                                     ),
                                   ),
                                 ),
@@ -186,6 +184,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
+                   
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     child: Row(
                       children: <Widget>[
@@ -228,7 +227,7 @@ GestureDetector(
                 },
                 child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.transparent.withOpacity(0.3),
+                    
                     borderRadius: BorderRadius.all(Radius.circular(15.0))),
                 child: Row(
                   children: <Widget>[
@@ -242,7 +241,7 @@ GestureDetector(
                                 child: Icon(
                                   GroovinMaterialIcons.new_box,
                                   size: 35,
-                                  color: Colors.deepPurpleAccent,
+                                  color: Colors.grey,
                                 ),
                               ),
                             ),
