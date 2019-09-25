@@ -678,7 +678,8 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                     );
                   }
                 },
-              )),
+              )
+              ),
             ],
           ),
         ));

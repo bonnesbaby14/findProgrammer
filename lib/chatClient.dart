@@ -1,16 +1,10 @@
 import 'package:findprogrammer/profileClient.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
-import 'viewProjectClient.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'login.dart';
 import 'package:flutter/cupertino.dart';
 import 'componentes/helperSQFLITE.dart';
-import 'package:http/http.dart' as http;
-import 'customIcons.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
-
 
 var contextoS;
 bool bva = false;
@@ -19,7 +13,6 @@ List<Map<String, dynamic>> clientList = List();
 Map<String, dynamic> client = Map();
 var myProjects;
 FirebaseAuth _auth = FirebaseAuth.instance;
-
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
@@ -76,9 +69,12 @@ class _ChatClient extends State<ChatClient> {
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
-                                    )),
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(
+                                            "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                                client['ID_USUARIO']
+                                                    .toString() +
+                                                ".jpg"))),
                               ),
                             ),
                             Padding(
@@ -230,86 +226,85 @@ class _ChatClient extends State<ChatClient> {
               SizedBox(
                 height: 15,
               ),
-               GestureDetector(
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("Cerrar Sesion",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("¿Seguro que quieres cerrar sesion?"),
-                              actions: <Widget>[
-                                FlatButton(
-                                  onPressed: () {
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
-                                  },
-                                  child: Text("Cerrar Sesion",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Cancelar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.all(1),
-                            child: Row(
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => new CupertinoAlertDialog(
+                            title: Column(
                               children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                  child: Container(
-                                    child: Icon(
-                                      GroovinMaterialIcons.exit_to_app,
-                                      size: 35,
-                                      color: Colors.grey,
-                                    ),
+                                Icon(
+                                  Icons.devices_other,
+                                  size: 80,
+                                  color: Colors.deepPurpleAccent,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20)),
+                              ],
+                            ),
+                            content: Text("¿Seguro que quieres cerrar sesion?"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                },
+                                child: Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Cancelar",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                            ],
+                          ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.exit_to_app,
+                                    size: 35,
+                                    color: Colors.grey,
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.all(9),
-                                  child: Text(
-                                    "Cerrar Sesion",
-                                    style: TextStyle(
-                                        fontSize: 17.0, color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            )),
-                      ],
-                    ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Cerrar Sesion",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
                   ),
-                )
+                ),
+              )
             ],
           ),
         ),
@@ -496,7 +491,7 @@ class _ChatClient extends State<ChatClient> {
                     ),
                   ),
                   IconButton(
-                    onPressed: (){},
+                    onPressed: () {},
                     icon: Icon(
                       Icons.send,
                       color: Colors.deepPurpleAccent,
