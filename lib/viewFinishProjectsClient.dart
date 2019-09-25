@@ -86,8 +86,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/mountains.jpeg'),
+                                        image:NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
                                       )),
                                 ),
                               ),
@@ -290,6 +289,7 @@ GestureDetector(
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                      helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
                                         context,

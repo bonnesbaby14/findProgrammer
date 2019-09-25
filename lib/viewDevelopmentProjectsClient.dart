@@ -88,8 +88,7 @@ class _ViewDevelopmentProjectsClient extends State<ViewDevelopmentProjectsClient
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/mountains.jpeg'),
+                                        image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
                                       )),
                                 ),
                               ),
@@ -293,6 +292,7 @@ class _ViewDevelopmentProjectsClient extends State<ViewDevelopmentProjectsClient
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                      helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
                                         context,
@@ -576,6 +576,8 @@ class _ViewDevelopmentProjectsClient extends State<ViewDevelopmentProjectsClient
                                             size: 100,
                                             color: Colors.white,
                                           ),
+
+
                                           Column(
                                             children: <Widget>[
                                               SizedBox(

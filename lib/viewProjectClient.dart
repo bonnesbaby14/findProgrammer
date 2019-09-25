@@ -3,6 +3,7 @@ import 'package:async/async.dart';
 import 'package:findprogrammer/profileClient.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'componentes/helperSQFLITE.dart';
 import 'customIcons.dart';
 import 'login.dart';
 import 'homeClient.dart';
@@ -16,6 +17,7 @@ bool _ligths = false;
 var listReqF = List<Widget>();
 var listAvances = List<Widget>();
 var listReqNF = List<Widget>();
+Helper helper = new Helper();
 
 class ViewProjectClient extends StatefulWidget {
   String ID;
@@ -254,6 +256,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                 actions: <Widget>[
                                   FlatButton(
                                     onPressed: () {
+                                        helper.DeleteCliente();
+                                        
                                       Navigator.pop(context);
                                       Navigator.push(
                                           context,
@@ -886,7 +890,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                   image: DecorationImage(
                     colorFilter: new ColorFilter.mode(
                         Colors.black.withOpacity(0.5), BlendMode.dstATop),
-                    image: AssetImage('assets/images/mountains.jpg'),
+                    image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),

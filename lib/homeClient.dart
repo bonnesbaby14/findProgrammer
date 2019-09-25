@@ -92,8 +92,7 @@ class _Homeclient extends State<Homeclient> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/images/mountains.jpeg'),
+                                        image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
                                       )),
                                 ),
                               ),
@@ -298,6 +297,7 @@ class _Homeclient extends State<Homeclient> {
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                    helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
                                         context,

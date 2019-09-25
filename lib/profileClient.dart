@@ -2,14 +2,17 @@ import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'componentes/helperSQFLITE.dart';
 import 'customIcons.dart';
 import 'homeClient.dart';
+
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 import 'login.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 var contextoS;
+Helper helper = new Helper();
 
 class ProfileClient extends StatefulWidget {
   @override
@@ -57,8 +60,7 @@ class _ProfileClient extends State<ProfileClient> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          'assets/images/mountains.jpeg'),
+                                      image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
                                     )),
                               ),
                             ),
@@ -259,6 +261,7 @@ class _ProfileClient extends State<ProfileClient> {
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
+                                    helper.DeleteCliente();
                                   Navigator.pop(context);
                                   Navigator.push(
                                       context,
@@ -369,7 +372,7 @@ class _ProfileClient extends State<ProfileClient> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage('assets/images/mountains.jpeg'),
+                            image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
                           )),
                     ),
                     SizedBox(
