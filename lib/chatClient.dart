@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'viewProjectClient.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'login.dart';
 import 'package:flutter/cupertino.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'package:http/http.dart' as http;
@@ -76,8 +77,7 @@ class _ChatClient extends State<ChatClient> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          'assets/images/mountains.jpeg'),
+                                      image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
                                     )),
                               ),
                             ),
@@ -230,38 +230,86 @@ class _ChatClient extends State<ChatClient> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.exit_to_app,
-                                  size: 35,
-                                  color: Colors.grey,
+               GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("Cerrar Sesion",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("¿Seguro que quieres cerrar sesion?"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () {
+                                    helper.DeleteCliente();
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
+                                  },
+                                  child: Text("Cerrar Sesion",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Cerrar Sesion",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancelar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.exit_to_app,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Cerrar Sesion",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                )
             ],
           ),
         ),
