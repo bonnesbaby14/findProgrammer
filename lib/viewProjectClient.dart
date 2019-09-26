@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
-
+   final AsyncMemoizer _asyncMemoizer2 = AsyncMemoizer();
 var contextoS;
 bool _ligths = false;
 var listReqF = List<Widget>();
@@ -28,7 +28,7 @@ class ViewProjectClient extends StatefulWidget {
 
 class _ViewProjectClient extends State<ViewProjectClient> {
   String ID;
-   AsyncMemoizer _asyncMemoizer2 = AsyncMemoizer();
+
   _ViewProjectClient(this.ID);
   var dataProject, reqFuncionales, reqNoFuncionales, avances, desarrollador;
 
@@ -883,7 +883,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 ),
               );
             } else {
-              return Container(
+              return Stack(
+                children: <Widget>[
+                   Container(
                 height: mediah,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
@@ -1429,6 +1431,38 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                     ),
                   ],
                 ),
+              ),Center(
+                      child: SizedBox(
+                        width: 250,
+                        height: 250,
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            elevation: 100,
+                            color: Color.fromARGB(1000, 75, 74, 75),
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: SizedBox(
+                                    height: 120,
+                                    width: 120,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 10,
+                                      valueColor: new AlwaysStoppedAnimation(
+                                          Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                Text("Cargando",
+                                    style: TextStyle(
+                                        fontSize: 30.0, color: Colors.white))
+                              ],
+                            )),
+                      ),
+                    )
+                ],
               );
             }
           },

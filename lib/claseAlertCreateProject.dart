@@ -20,7 +20,8 @@ class AlertCreatePorject extends StatefulWidget {
 class _AlertCreatePorject extends State<AlertCreatePorject> {
   @override
   Widget build(BuildContext context) {
-    return new CupertinoAlertDialog(
+    return SingleChildScrollView(
+      child: CupertinoAlertDialog(
       title: Column(
         children: <Widget>[
           Icon(
@@ -352,9 +353,12 @@ class _AlertCreatePorject extends State<AlertCreatePorject> {
             height: 10,
           ),
           Container(
-            height: 100,
+          
+          
             child: CupertinoTextField(
-              placeholder: "Requerimientos...",
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              placeholder: "Requerimientos... ",
               controller: tdcRequerimientos,
               placeholderStyle: TextStyle(color: Colors.black38),
               decoration: BoxDecoration(
@@ -384,6 +388,7 @@ class _AlertCreatePorject extends State<AlertCreatePorject> {
               style: TextStyle(color: Colors.black, fontSize: 15)),
         ),
       ],
+    )
     );
   }
 }
