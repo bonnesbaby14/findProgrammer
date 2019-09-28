@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'package:async/async.dart';
 import 'package:findprogrammer/profileClient.dart';
+import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
+import 'package:findprogrammer/viewFinishProjectsClient.dart';
+import 'package:findprogrammer/viewHireProgrammer.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'claseAlertCreateProject.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'customIcons.dart';
 import 'login.dart';
@@ -11,7 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
-   final AsyncMemoizer _asyncMemoizer2 = AsyncMemoizer();
+
 var contextoS;
 bool _ligths = false;
 var listReqF = List<Widget>();
@@ -32,16 +36,16 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   _ViewProjectClient(this.ID);
   var dataProject, reqFuncionales, reqNoFuncionales, avances, desarrollador;
 
-
   @override
   Widget build(BuildContext context) {
-   var _scaffoldKey = new GlobalKey<ScaffoldState>();
-     double mediaw=MediaQuery.of(context).size.width;
-  double mediah=MediaQuery.of(context).size.height;
+    final AsyncMemoizer _asyncMemoizer3 = AsyncMemoizer();
+    var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
+    double mediaw = MediaQuery.of(context).size.width;
+    double mediah = MediaQuery.of(context).size.height;
     return Scaffold(
-        key: _scaffoldKey,
+        key: _scaffoldKey1,
         drawer: Container(
-          width:  mediaw*.8 ,
+          width: 260.0,
           decoration: BoxDecoration(
             color: Color(0xFF272D34),
           ),
@@ -54,7 +58,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileClient()));
+
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfileClient()));
                 },
                 child: Row(
                   children: <Widget>[
@@ -70,10 +76,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          'assets/images/mountains.jpeg'),
-                                    )),
+                                        fit: BoxFit.fill,
+                                        image: NetworkImage(
+                                            "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                                client['ID_USUARIO']
+                                                    .toString() +
+                                                ".jpg"))),
                               ),
                             ),
                             Padding(
@@ -115,116 +123,133 @@ class _ViewProjectClient extends State<ViewProjectClient> {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.check_all,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Proyectos Terminados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-//nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.worker,
-                                  size: 35,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos en Desarrollo",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-
-//nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Homeclient()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewFinishProjectsClient()));
                 },
                 child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.new_box,
-                                  size: 35,
-                                  color: Colors.grey,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.check_all,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos Publicados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "Proyectos Terminados",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
                               ),
-                            )
-                          ],
-                        )),
-                  ],
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
+//nuevo wighet
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ViewDevelopmentProjectsClient()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.worker,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Proyectos en Desarrollo",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+//nuevo wighet
+              SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.new_box,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Proyectos Publicados",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
               ),
 
 //nuevo wighet
@@ -232,87 +257,84 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 height: 15,
               ),
               GestureDetector(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => new CupertinoAlertDialog(
-                                title: Column(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.devices_other,
-                                      size: 80,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text("Cerrar Sesion",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 20)),
-                                  ],
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => new CupertinoAlertDialog(
+                            title: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.devices_other,
+                                  size: 80,
+                                  color: Colors.deepPurpleAccent,
                                 ),
-                                content:
-                                    Text("¿Seguro que quieres cerrar sesion?"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                        helper.DeleteCliente();
-                                        
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Login()));
-                                    },
-                                    child: Text("Cerrar Sesion",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20)),
+                              ],
+                            ),
+                            content: Text("¿Seguro que quieres cerrar sesion?"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                },
+                                child: Text("Cerrar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Cancelar",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                            ],
+                          ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.exit_to_app,
+                                    size: 35,
+                                    color: Colors.grey,
                                   ),
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Cancelar",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                  ),
-                                ],
-                              ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(15.0))),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(1),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                    child: Container(
-                                      child: Icon(
-                                        GroovinMaterialIcons.exit_to_app,
-                                        size: 35,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(9),
-                                    child: Text(
-                                      "Cerrar Sesion",
-                                      style: TextStyle(
-                                          fontSize: 17.0, color: Colors.white),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
-                    ),
-                  )
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Cerrar Sesion",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -320,7 +342,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
         body: FutureBuilder(
-          future: _asyncMemoizer2.runOnce(() async {
+          future: _asyncMemoizer3.runOnce(() async {
+            await print("se enteo a esta madre");
             await getInfooProject();
             await getReqFProject();
             await getReqNFProject();
@@ -329,64 +352,67 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           }),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-          
               listReqNF = new List<Widget>();
               listReqF = new List<Widget>();
               listAvances = new List<Widget>();
+              if (avances != null) {
+                for (int z = 0; z < avances.length; z++) {
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
 
-              for (int z = 0; z < avances.length; z++) {
-                listAvances.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text(
-                      "Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "Porcentaje del proyecto: " + avances[z]["PORCENTAJE"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
 
-                listAvances.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text(
-                      "Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
-                listAvances.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
-                listAvances.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text(
-                      "Porcentaje del proyecto: " + avances[z]["PORCENTAJE"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text("Observaciones: " + avances[z]["OBSERVACIONES"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
 
-                listAvances.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text("Observaciones: " + avances[z]["OBSERVACIONES"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
-
-                listAvances.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                }
               }
 
-              for (int y = 0; y < reqNoFuncionales.length; y++) {
-                listReqNF.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text(reqNoFuncionales[y]["REQUERIMIENTO"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
+              if (reqNoFuncionales != null) {
+                for (int y = 0; y < reqNoFuncionales.length; y++) {
+                  listReqNF.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(reqNoFuncionales[y]["REQUERIMIENTO"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                }
               }
-
-              for (int x = 0; x < reqFuncionales.length; x++) {
-                listReqF.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text(reqFuncionales[x]["REQUERIMIENTO"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
+              if (reqFuncionales != null) {
+                for (int x = 0; x < reqFuncionales.length; x++) {
+                  listReqF.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(reqFuncionales[x]["REQUERIMIENTO"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                }
               }
               return Container(
                 height: mediah,
@@ -422,7 +448,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 child: IconButton(
                                     onPressed: () {
-                                      _scaffoldKey.currentState.openDrawer();
+                                      _scaffoldKey1.currentState.openDrawer();
                                     },
                                     icon: Icon(
                                       CustomIcons.menu,
@@ -489,23 +515,114 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                     Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons.edit_outline,
-                                            color: Colors.white,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Text(
-                                            "Editar Proyecto",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          await showDialog(
+                                              context: context,
+                                              builder: (_) =>
+                                                  AlertCreatePorject());
+                                          if (dataResponse == "1") {
+                                            showDialog(
+                                                context: contextoS,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto se editó correctamente"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                            setState(() {});
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          } else {
+                                            showDialog(
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto no se editó, intentalo mas tarde. "),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ), context:context);
+                                          }
+                                        },
+                                        child: Column(
+                                          children: <Widget>[
+                                            Icon(
+                                              GroovinMaterialIcons.edit_outline,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              "Editar Proyecto",
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     Padding(
@@ -619,7 +736,10 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                     ),
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        Navigator.push(context,CupertinoPageRoute(builder: (context)=>ViewHireProgrammer(this.ID)));
+                                      },
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -885,583 +1005,623 @@ class _ViewProjectClient extends State<ViewProjectClient> {
             } else {
               return Stack(
                 children: <Widget>[
-                   Container(
-                height: mediah,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurpleAccent,
-                  image: DecorationImage(
-                    colorFilter: new ColorFilter.mode(
-                        Colors.black.withOpacity(0.5), BlendMode.dstATop),
-                    image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                padding: EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: mediaw,
-                      height: (mediah / 2) + 50,
-                      decoration: BoxDecoration(
-                          color: Colors.deepPurpleAccent,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30))),
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Container(
+                    height: mediah,
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurpleAccent,
+                      image: DecorationImage(
+                        colorFilter: new ColorFilter.mode(
+                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                        image: AssetImage('assets/images/mountains.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: mediaw,
+                          height: (mediah / 2) + 50,
+                          decoration: BoxDecoration(
+                              color: Colors.deepPurpleAccent,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30))),
+                          child: Column(
                             children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: IconButton(
-                                    onPressed: () {
-                                      _scaffoldKey.currentState.openDrawer();
-                                    },
-                                    icon: Icon(
-                                      CustomIcons.menu,
-                                      color: Colors.white,
-                                      size: 42,
-                                    )),
+                              SizedBox(
+                                height: 40,
                               ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
-                                child: Column(
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: IconButton(
+                                        onPressed: () {
+                                          _scaffoldKey1.currentState
+                                              .openDrawer();
+                                        },
+                                        icon: Icon(
+                                          CustomIcons.menu,
+                                          color: Colors.white,
+                                          size: 42,
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Text(
+                                          "Visible",
+                                          style: TextStyle(
+                                              fontSize: 10.0,
+                                              color: Colors.white),
+                                        ),
+                                        CupertinoSwitch(
+                                          value: _ligths,
+                                          onChanged: (bool value) {
+                                            setState(() {
+                                              _ligths = value;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: 300,
+                                child: Text(
+                                  "_______________________",
+                                  style: TextStyle(
+                                      fontSize: 25.0, color: Colors.white),
+                                ),
+                              ),
+                              Container(
+                                width: (mediaw / 4) * 3,
+                                height: 90,
+                                child: ListView(
                                   children: <Widget>[
                                     Text(
-                                      "Visible",
+                                      "__________________________________________________________________________________________________________",
+                                      textAlign: TextAlign.justify,
                                       style: TextStyle(
-                                          fontSize: 10.0, color: Colors.white),
+                                          fontSize: 14.0, color: Colors.white),
                                     ),
-                                    CupertinoSwitch(
-                                      value: _ligths,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          _ligths = value;
-                                        });
-                                      },
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 100,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .edit_outline,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Editar Proyecto",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.all(10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .message_bulleted,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "  Contactar\nProgramador",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons.worker,
+                                                color: Colors.grey,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Proyecto en \n  desarrollo",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .code_brackets,
+                                                color: Colors.grey,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Obtener  \n  Codigo",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons.cancel,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Cancelar \n proyecto ",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .heart_broken,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "  Reportar \nProgramador",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                20, 10, 20, 10),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Icon(
+                                                  GroovinMaterialIcons.loupe,
+                                                  color: Colors.white,
+                                                  size: 30,
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  "  Programadores \n    Interesados",
+                                                  style: TextStyle(
+                                                      fontSize: 14.0,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .check_circle,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "Proyecto \nTerminado",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            width: 300,
-                            child: Text(
-                              "_______________________",
-                              style: TextStyle(
-                                  fontSize: 25.0, color: Colors.white),
-                            ),
-                          ),
-                          Container(
-                            width: (mediaw / 4) * 3,
-                            height: 90,
-                            child: ListView(
-                              children: <Widget>[
-                                Text(
-                                  "__________________________________________________________________________________________________________",
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 14.0, color: Colors.white),
+                        ),
+                        Expanded(
+                          child: ListView(
+                            children: <Widget>[
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            height: 100,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
                                   children: <Widget>[
                                     Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons.edit_outline,
-                                            color: Colors.white,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "Editar Proyecto",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: Text(
+                                          "_______________________________________",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons
-                                                .message_bulleted,
-                                            color: Colors.white,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "  Contactar\nProgramador",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_______________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
                                     ),
                                     Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons.worker,
-                                            color: Colors.grey,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "Proyecto en \n  desarrollo",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_______________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
                                     ),
                                     Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons.code_brackets,
-                                            color: Colors.grey,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "Obtener  \n  Codigo",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_______________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
                                     ),
                                     Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons.cancel,
-                                            color: Colors.white,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "Cancelar \n proyecto ",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_______________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
                                     ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons.heart_broken,
-                                            color: Colors.white,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "  Reportar \nProgramador",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              GroovinMaterialIcons.loupe,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "  Programadores \n    Interesados",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Icon(
-                                            GroovinMaterialIcons.check_circle,
-                                            color: Colors.white,
-                                            size: 30,
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            "Proyecto \nTerminado",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
+                                    SizedBox(
+                                      height: 10,
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: ListView(
-                        children: <Widget>[
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text(
-                                      "_______________________________________",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_______________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_______________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_______________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_______________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 17, 0, 0),
-                                  child: Text(
-                                      "________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "__________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "__________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("_______________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 17, 0, 0),
-                                  child: Text("_______________-",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("__________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("_______________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("________________",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("___________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 17, 0, 0),
-                                  child: Text("______________",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_____________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "______________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_____________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "_____________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "___________________________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "__________________________________________________________________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text(
-                                      "____________________________________________________________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 17, 0, 0),
-                                  child: Text("____________________",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                  child: Text("______________",
-                                      style: TextStyle(
-                                          fontSize: 14.0, color: Colors.white)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),Center(
-                      child: SizedBox(
-                        width: 250,
-                        height: 250,
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 100,
-                            color: Color.fromARGB(1000, 75, 74, 75),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(20),
-                                  child: SizedBox(
-                                    height: 120,
-                                    width: 120,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 10,
-                                      valueColor: new AlwaysStoppedAnimation(
-                                          Colors.white),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 17, 0, 0),
+                                      child: Text(
+                                          "________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
                                     ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "__________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "__________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_______________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 17, 0, 0),
+                                      child: Text("_______________-",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text("__________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_______________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: Text("________________",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: Text("___________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 17, 0, 0),
+                                      child: Text("______________",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_____________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "______________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_____________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "_____________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "___________________________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "__________________________________________________________________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text(
+                                          "____________________________________________________________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Column(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 17, 0, 0),
+                                      child: Text("____________________",
+                                          style: TextStyle(
+                                              fontSize: 27.0,
+                                              color: Colors.white)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                      child: Text("______________",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 250,
+                      height: 250,
+                      child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 100,
+                          color: Color.fromARGB(1000, 75, 74, 75),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 10,
+                                    valueColor: new AlwaysStoppedAnimation(
+                                        Colors.white),
                                   ),
                                 ),
-                                Text("Cargando",
-                                    style: TextStyle(
-                                        fontSize: 30.0, color: Colors.white))
-                              ],
-                            )),
-                      ),
-                    )
+                              ),
+                              Text("Cargando",
+                                  style: TextStyle(
+                                      fontSize: 30.0, color: Colors.white))
+                            ],
+                          )),
+                    ),
+                  )
                 ],
               );
             }
@@ -1472,61 +1632,65 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future getInfooProject() async {
     try {
       final response = await http.post(
-         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-            //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        
+          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
+      // print(this.dataProject);
     } catch (f) {}
   }
 
   Future<List> getReqFProject() async {
+    print("entro");
     final response = await http.post(
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-       
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
     var dataProject = json.decode(response.body);
     this.reqFuncionales = dataProject;
+    // print(reqFuncionales);
   }
 
   Future<List> getReqNFProject() async {
+    print("entro");
     final response = await http.post(
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-       // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
-      
 
     var dataProject = json.decode(response.body);
     this.reqNoFuncionales = dataProject;
+    // print(reqNoFuncionales);
   }
 
   Future<List> getAvancesProject() async {
+    print("entro");
     final response = await http.post(
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        
+
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 
     var dataProject = json.decode(response.body);
     this.avances = dataProject;
-    
+    // print(avances);
   }
 
   Future<List> getDesarrolladorProject() async {
+    print("entro");
     final response = await http.post(
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        
-        body: {"ID_PROYECTO": this.ID, "TYPE": "5"}).catchError((error)async{
-          await print("error no se econctro el servidor");
-        });
+
+        body: {"ID_PROYECTO": this.ID, "TYPE": "5"}).catchError((error) async {
+      await print("error no se econctro el servidor");
+    });
 
     var dataProject = json.decode(response.body);
     this.desarrollador = dataProject;
-    
   }
 } //fin de la clase

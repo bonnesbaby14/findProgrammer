@@ -21,7 +21,8 @@ class _AlertCreatePorject extends State<AlertCreatePorject> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: CupertinoAlertDialog(
+        child: AlertDialog(
+      backgroundColor: Colors.grey,
       title: Column(
         children: <Widget>[
           Icon(
@@ -353,12 +354,11 @@ class _AlertCreatePorject extends State<AlertCreatePorject> {
             height: 10,
           ),
           Container(
-          
-          
             child: CupertinoTextField(
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              placeholder: "Requerimientos... ",
+              placeholder:
+                  "Requerimientos... \n(separados por salto de linea) ",
               controller: tdcRequerimientos,
               placeholderStyle: TextStyle(color: Colors.black38),
               decoration: BoxDecoration(
@@ -381,14 +381,11 @@ class _AlertCreatePorject extends State<AlertCreatePorject> {
           onPressed: () {
             registerProject();
             Navigator.pop(context);
-          
-
           },
           child: Text("Guardar",
               style: TextStyle(color: Colors.black, fontSize: 15)),
         ),
       ],
-    )
-    );
+    ));
   }
 }

@@ -1,35 +1,40 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
+import 'componentes/helperSQFLITE.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'componentes/helperSQFLITE.dart';
 import 'customIcons.dart';
-import 'homeClient.dart';
-
-import 'package:groovin_material_icons/groovin_material_icons.dart';
+import 'package:findprogrammer/homeClient.dart';
+import 'homeProgrammer.dart';
 import 'login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
-
-var contextoS;
 Helper helper = new Helper();
+var contextoS;
 
-class ProfileClient extends StatefulWidget {
+class ViewProfileProgrammer extends StatefulWidget {
+ var ID;
+ ViewProfileProgrammer(this.ID);
   @override
-  _ProfileClient createState() => new _ProfileClient();
+  _ViewProfileProgrammer createState() => new _ViewProfileProgrammer(this.ID);
 }
 
-class _ProfileClient extends State<ProfileClient> {
+class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
   var comments;
+  var ID;
+  var developer;
+  _ViewProfileProgrammer(this.ID);
   @override
   Widget build(BuildContext context) {
-    var _scaffoldKeyprofile = new GlobalKey<ScaffoldState>();
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
+    var _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
-        key: _scaffoldKeyprofile,
+        key: _scaffoldKey,
         drawer: Container(
           width: 260.0,
           decoration: BoxDecoration(
@@ -44,6 +49,9 @@ class _ProfileClient extends State<ProfileClient> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfileClient()));
                 },
                 child: Row(
                   children: <Widget>[
@@ -94,7 +102,7 @@ class _ProfileClient extends State<ProfileClient> {
                   ],
                 ),
               ),
-//linea de separacin
+              //linea de separacin
               Padding(
                 padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                 child: Container(
@@ -147,7 +155,7 @@ class _ProfileClient extends State<ProfileClient> {
                   ),
                 ),
               ),
-//nuevo wighet
+              //nuevo wighet
               SizedBox(
                 height: 15,
               ),
@@ -193,18 +201,17 @@ class _ProfileClient extends State<ProfileClient> {
                   ),
                 ),
               ),
-//nuevo wighet
+              //nuevo wighet
               SizedBox(
                 height: 15,
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Homeclient()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
+                      color: Colors.transparent.withOpacity(0.3),
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Row(
                     children: <Widget>[
@@ -218,7 +225,7 @@ class _ProfileClient extends State<ProfileClient> {
                                   child: Icon(
                                     GroovinMaterialIcons.new_box,
                                     size: 35,
-                                    color: Colors.grey,
+                                    color: Colors.deepPurpleAccent,
                                   ),
                                 ),
                               ),
@@ -236,7 +243,8 @@ class _ProfileClient extends State<ProfileClient> {
                   ),
                 ),
               ),
-//nuevo wighet
+
+              //nuevo wighet
               SizedBox(
                 height: 15,
               ),
@@ -328,7 +336,7 @@ class _ProfileClient extends State<ProfileClient> {
         body: new Container(
           height: mediah,
           decoration: BoxDecoration(
-            color: Colors.deepPurpleAccent, //aqui cambiar
+            color: Colors.deepPurpleAccent,
             image: DecorationImage(
               colorFilter: new ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.dstATop),
@@ -340,7 +348,7 @@ class _ProfileClient extends State<ProfileClient> {
           child: Column(
             children: <Widget>[
               Container(
-                width: mediaw,
+                width: MediaQuery.of(context).size.width,
                 height: (mediah / 2) + 60,
                 decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
@@ -358,7 +366,7 @@ class _ProfileClient extends State<ProfileClient> {
                           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                           child: IconButton(
                               onPressed: () {
-                                _scaffoldKeyprofile.currentState.openDrawer();
+                                _scaffoldKey.currentState.openDrawer();
                               },
                               icon: Icon(
                                 CustomIcons.menu,
@@ -374,21 +382,22 @@ class _ProfileClient extends State<ProfileClient> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  "https://findprogrammerceti.000webhostapp.com/images/image_" +
-                                      client['ID_USUARIO'].toString() +
-                                      ".jpg"))),
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                    developer.toString() +
+                                    ".jpg"),
+                          )),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      client['NOMBRE'].toString() +
+                      developer['NOMBRE'].toString() +
                           " " +
-                          client['APELLIDO_P'].toString() +
+                          developer['APELLIDO_P'].toString() +
                           " " +
-                          client['APELLIDO_M'].toString(),
+                          developer['APELLIDO_M'].toString(),
                       style: TextStyle(
                           fontSize: mediah * .04, color: Colors.white),
                     ),
@@ -396,7 +405,7 @@ class _ProfileClient extends State<ProfileClient> {
                       height: 10,
                     ),
                     Text(
-                      "Cliente",
+                      "Programador",
                       style: TextStyle(fontSize: 18.0, color: Colors.white),
                     ),
                     SizedBox(
@@ -420,7 +429,7 @@ class _ProfileClient extends State<ProfileClient> {
                                     fontSize: 14.0, color: Colors.white),
                               ),
                               Text(
-                                client['CALIFICACION'].toString() + "",
+                                developer['CALIFICACION'].toString() + "",
                                 style: TextStyle(
                                     fontSize: 12.0, color: Colors.white),
                               ),
@@ -451,7 +460,7 @@ class _ProfileClient extends State<ProfileClient> {
               ),
               Expanded(
                   child: FutureBuilder(
-                future: getComments(),
+                future: funciones(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     print("la conexion se cerro");
@@ -533,12 +542,12 @@ class _ProfileClient extends State<ProfileClient> {
     print(
         "=========================================================================");
     print("se esta obteiendo los comentarios");
-    print(client['ID_USUARIO']);
+    print(desarrollador['ID_USUARIO']);
     try {
       final response = await http
           .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-              body: {"ID_USUARIO": client['ID_USUARIO'].toString()});
+              body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
 
       var comments = json.decode(response.body);
       this.comments = comments;
@@ -548,4 +557,30 @@ class _ProfileClient extends State<ProfileClient> {
       print(f.toString());
     }
   }
+
+Future getDeveloper() async {
+
+    try {
+      final response = await http
+          .post("https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
+              // "http://192.168.0.5/findprogrammerDB/loadComments.php",
+              body: {"ID_USUARIO": this.ID});
+
+      var developer = json.decode(response.body);
+      this.developer = developer;
+      
+      print("se obtuvieron la info del desarrollador");
+      print("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+      print(developer);
+    } catch (f) {
+      print("hubo un error obteniendo la info del desarollador");
+      print(f.toString());
+    }
+  }
+Future funciones()async{
+await getDeveloper();
+await getComments();
+}
+
+
 }

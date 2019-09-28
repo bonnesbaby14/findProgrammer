@@ -334,7 +334,7 @@ class _Login extends State<Login> {
                 "mail": mail.text.toLowerCase().trim(),
                 "password": contrasena.text,
               })
-          .timeout(Duration(seconds: 4))
+          .timeout(Duration(seconds: 5))
           .whenComplete(() {
             Navigator.pop(context);
             return null;
@@ -342,6 +342,7 @@ class _Login extends State<Login> {
           .catchError((eeee) {
             http.Client().close();
             print("ERROR CON EL LOGIN");
+            print(eeee.toString());
             showDialog(
                 context: context,
                 builder: (context) => CupertinoAlertDialog(
