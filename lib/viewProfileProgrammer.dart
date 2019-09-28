@@ -17,8 +17,8 @@ Helper helper = new Helper();
 var contextoS;
 
 class ViewProfileProgrammer extends StatefulWidget {
- var ID;
- ViewProfileProgrammer(this.ID);
+  var ID;
+  ViewProfileProgrammer(this.ID);
   @override
   _ViewProfileProgrammer createState() => new _ViewProfileProgrammer(this.ID);
 }
@@ -28,514 +28,704 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
   var ID;
   var developer;
   _ViewProfileProgrammer(this.ID);
+
   @override
   Widget build(BuildContext context) {
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
-        key: _scaffoldKey,
-        drawer: Container(
-          width: 260.0,
-          decoration: BoxDecoration(
-            color: Color(0xFF272D34),
-          ),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 30,
+      key: _scaffoldKey,
+      drawer: Container(
+        width: 260.0,
+        decoration: BoxDecoration(
+          color: Color(0xFF272D34),
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 30,
+            ),
+
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfileClient()));
+              },
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Container(
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: NetworkImage(
+                                          "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                              client['ID_USUARIO'].toString() +
+                                              ".jpg"))),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: client == null
+                                ? Text(
+                                    "Cargando",
+                                    style: TextStyle(
+                                        fontSize: 15.0, color: Colors.white),
+                                  )
+                                : Container(
+                                    width: 150,
+                                    child: Text(
+                                      client['NOMBRE'].toString() +
+                                          " " +
+                                          client['APELLIDO_P'].toString() +
+                                          " " +
+                                          client['APELLIDO_M'].toString(),
+                                      style: TextStyle(
+                                          fontSize: 15.0, color: Colors.white),
+                                    ),
+                                  ),
+                          )
+                        ],
+                      )),
+                ],
               ),
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ProfileClient()));
-                },
+            ),
+            //linea de separacin
+            Padding(
+              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+              child: Container(
+                width: 450.0,
+                height: 0.5,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewFinishProjectsClient()));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
                 child: Row(
                   children: <Widget>[
                     Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(1),
                         child: Row(
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.all(15),
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
                               child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            "https://findprogrammerceti.000webhostapp.com/images/image_" +
-                                                client['ID_USUARIO']
-                                                    .toString() +
-                                                ".jpg"))),
+                                child: Icon(
+                                  GroovinMaterialIcons.check_all,
+                                  size: 35,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.all(10),
-                              child: client == null
-                                  ? Text(
-                                      "Cargando",
-                                      style: TextStyle(
-                                          fontSize: 15.0, color: Colors.white),
-                                    )
-                                  : Container(
-                                      width: 150,
-                                      child: Text(
-                                        client['NOMBRE'].toString() +
-                                            " " +
-                                            client['APELLIDO_P'].toString() +
-                                            " " +
-                                            client['APELLIDO_M'].toString(),
-                                        style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Colors.white),
-                                      ),
-                                    ),
+                              child: Text(
+                                "Proyectos Terminados",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+            ),
+            //nuevo wighet
+            SizedBox(
+              height: 15,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewDevelopmentProjectsClient()));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.worker,
+                                  size: 35,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Proyectos en Desarrollo",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
+                              ),
                             )
                           ],
                         )),
                   ],
                 ),
               ),
-              //linea de separacin
-              Padding(
-                padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                child: Container(
-                  width: 450.0,
-                  height: 0.5,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ViewFinishProjectsClient()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.check_all,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "Proyectos Terminados",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-              //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ViewDevelopmentProjectsClient()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.worker,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos en Desarrollo",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-              //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.transparent.withOpacity(0.3),
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.new_box,
-                                    size: 35,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Proyectos Publicados",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-
-              //nuevo wighet
-              SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => new CupertinoAlertDialog(
-                            title: Column(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.devices_other,
-                                  size: 80,
+            ),
+            //nuevo wighet
+            SizedBox(
+              height: 15,
+            ),
+            
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.transparent.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
+                                child: Icon(
+                                  GroovinMaterialIcons.new_box,
+                                  size: 35,
                                   color: Colors.deepPurpleAccent,
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text("Cerrar Sesion",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20)),
-                              ],
+                              ),
                             ),
-                            content: Text("¿Seguro que quieres cerrar sesion?"),
-                            actions: <Widget>[
-                              FlatButton(
-                                onPressed: () {
-                                  helper.DeleteCliente();
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()));
-                                },
-                                child: Text("Cerrar Sesion",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15)),
-                              ),
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text("Cancelar",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15)),
-                              ),
-                            ],
-                          ));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(1),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                child: Container(
-                                  child: Icon(
-                                    GroovinMaterialIcons.exit_to_app,
-                                    size: 35,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  "Cerrar Sesion",
-                                  style: TextStyle(
-                                      fontSize: 17.0, color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-        appBar: null,
-        resizeToAvoidBottomPadding: false,
-        backgroundColor: Colors.white,
-        body: new Container(
-          height: mediah,
-          decoration: BoxDecoration(
-            color: Colors.deepPurpleAccent,
-            image: DecorationImage(
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.5), BlendMode.dstATop),
-              image: AssetImage('assets/images/mountains.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          padding: EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: (mediah / 2) + 60,
-                decoration: BoxDecoration(
-                    color: Colors.deepPurpleAccent,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: IconButton(
-                              onPressed: () {
-                                _scaffoldKey.currentState.openDrawer();
-                              },
-                              icon: Icon(
-                                CustomIcons.menu,
-                                color: Colors.white,
-                                size: 42,
-                              )),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      width: mediah * .15,
-                      height: mediah * .15,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(
-                                "https://findprogrammerceti.000webhostapp.com/images/image_" +
-                                    developer.toString() +
-                                    ".jpg"),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      developer['NOMBRE'].toString() +
-                          " " +
-                          developer['APELLIDO_P'].toString() +
-                          " " +
-                          developer['APELLIDO_M'].toString(),
-                      style: TextStyle(
-                          fontSize: mediah * .04, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Programador",
-                      style: TextStyle(fontSize: 18.0, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: <Widget>[
-                              Icon(
-                                Icons.star_half,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                              Text(
-                                "Califiación",
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Proyectos Publicados",
                                 style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white),
+                                    fontSize: 17.0, color: Colors.white),
                               ),
-                              Text(
-                                developer['CALIFICACION'].toString() + "",
-                                style: TextStyle(
-                                    fontSize: 12.0, color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: <Widget>[
-                              Icon(
-                                GroovinMaterialIcons.edit_outline,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                              Text(
-                                "Editar Perfil",
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                            )
+                          ],
+                        )),
                   ],
                 ),
               ),
-              Expanded(
-                  child: FutureBuilder(
-                future: funciones(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    print("la conexion se cerro");
-                    print(comments);
-                    return ListView.builder(
-                      itemCount: comments == null ? 0 : comments.length,
-                      itemBuilder: (BuildContext context, int position) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          elevation: 10,
-                          color: Color.fromARGB(450, 41, 39, 42),
-                          child: Row(
+            ),
+
+            //nuevo wighet
+            SizedBox(
+              height: 15,
+            ),
+            InkWell(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => new CupertinoAlertDialog(
+                          title: Column(
                             children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(20),
+                              Icon(
+                                Icons.devices_other,
+                                size: 80,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text("Cerrar Sesion",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20)),
+                            ],
+                          ),
+                          content: Text("¿Seguro que quieres cerrar sesion?"),
+                          actions: <Widget>[
+                            FlatButton(
+                              onPressed: () {
+                                helper.DeleteCliente();
+                                Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Login()));
+                              },
+                              child: Text("Cerrar Sesion",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15)),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Cancelar",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15)),
+                            ),
+                          ],
+                        ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                              child: Container(
                                 child: Icon(
-                                  Icons.star_half,
-                                  size: 50,
-                                  color: Colors.white,
+                                  GroovinMaterialIcons.exit_to_app,
+                                  size: 35,
+                                  color: Colors.grey,
                                 ),
                               ),
-                              Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  Text(
-                                      comments[position]['nombre'].toString() +
-                                          " " +
-                                          comments[position]['apellido_P']
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(9),
+                              child: Text(
+                                "Cerrar Sesion",
+                                style: TextStyle(
+                                    fontSize: 17.0, color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+      appBar: null,
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: Colors.white,
+      body: WillPopScope(
+        onWillPop: () {
+          Navigator.pop(context);
+        },
+        child: FutureBuilder(
+          future: funciones(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              print("se cetto la conexion ");
+              return Container(
+                height: mediah,
+                decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  image: DecorationImage(
+                    colorFilter: new ColorFilter.mode(
+                        Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                    image: AssetImage('assets/images/mountains.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                padding: EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: (mediah / 2) + 60,
+                      decoration: BoxDecoration(
+                          color: Colors.deepPurpleAccent,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30))),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: IconButton(
+                                    onPressed: () {
+                                      _scaffoldKey.currentState.openDrawer();
+                                    },
+                                    icon: Icon(
+                                      CustomIcons.menu,
+                                      color: Colors.white,
+                                      size: 42,
+                                    )),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            width: mediah * .15,
+                            height: mediah * .15,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage(
+                                      "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                          developer[0]['ID_USUARIO']
                                               .toString() +
-                                          " " +
-                                          comments[position]['apellido_M']
-                                              .toString(),
-                                      textAlign: TextAlign.justify,
+                                          ".jpg"),
+                                )),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            developer[0]['NOMBRE'].toString() +
+                                " " +
+                                developer[0]['APELLIDO_P'].toString() +
+                                " " +
+                                developer[0]['APELLIDO_M'].toString(),
+                            style: TextStyle(
+                                fontSize: mediah * .04, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Programador",
+                            style:
+                                TextStyle(fontSize: 18.0, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.star_half,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                    Text(
+                                      "Califiación",
                                       style: TextStyle(
-                                          fontSize: 20.0, color: Colors.white)),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(
-                                    width: 220,
-                                    child: Text(
-                                        comments[position]['COMENTARIO']
-                                            .toString(),
-                                        textAlign: TextAlign.justify,
+                                          fontSize: 14.0, color: Colors.white),
+                                    ),
+                                    Text(
+                                      developer[0]['CALIFICACION'].toString() +
+                                          "",
+                                      style: TextStyle(
+                                          fontSize: 12.0, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Icon(
+                                        GroovinMaterialIcons.wallet_travel,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                      Text(
+                                        "Contratar",
                                         style: TextStyle(
-                                          fontSize: 10.0,
+                                            fontSize: 14.0,
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        child: FutureBuilder(
+                      future: funciones(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          print("la conexion se cerro");
+                          print(comments);
+                          return ListView.builder(
+                            itemCount: comments == null ? 0 : comments.length,
+                            itemBuilder: (BuildContext context, int position) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                elevation: 10,
+                                color: Color.fromARGB(450, 41, 39, 42),
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.all(20),
+                                      child: Icon(
+                                        Icons.star_half,
+                                        size: 50,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 25,
+                                        ),
+                                        Text(
+                                            comments[position]['nombre']
+                                                    .toString() +
+                                                " " +
+                                                comments[position]['apellido_P']
+                                                    .toString() +
+                                                " " +
+                                                comments[position]['apellido_M']
+                                                    .toString(),
+                                            textAlign: TextAlign.justify,
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                color: Colors.white)),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                          width: 220,
+                                          child: Text(
+                                              comments[position]['COMENTARIO']
+                                                  .toString(),
+                                              textAlign: TextAlign.justify,
+                                              style: TextStyle(
+                                                fontSize: 10.0,
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          height: 25,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          print("la conexion no se ha cerrado");
+
+                          return CircularProgressIndicator(
+                            strokeWidth: 10,
+                          );
+                        }
+                      },
+                    )),
+                  ],
+                ),
+              );
+            } else {
+              print("no se ha cerrado la conexion");
+              return Stack(
+                children: <Widget>[
+                  Container(),
+                  Container(
+                    height: mediah,
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurpleAccent,
+                      image: DecorationImage(
+                        colorFilter: new ColorFilter.mode(
+                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                        image: AssetImage('assets/images/mountains.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    padding: EdgeInsets.fromLTRB(2.0, 0, 2.0, 0),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: (mediah / 2) + 60,
+                          decoration: BoxDecoration(
+                              color: Colors.deepPurpleAccent,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30))),
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: IconButton(
+                                        onPressed: () {
+                                          _scaffoldKey.currentState
+                                              .openDrawer();
+                                        },
+                                        icon: Icon(
+                                          CustomIcons.menu,
                                           color: Colors.white,
+                                          size: 42,
                                         )),
                                   ),
-                                  SizedBox(
-                                    height: 25,
+                                ],
+                              ),
+                              Container(
+                                width: mediah * .15,
+                                height: mediah * .15,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(
+                                            'assets/images/mountains.jpg'))),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Nombre porgramador",
+                                style: TextStyle(
+                                    fontSize: mediah * .04,
+                                    color: Colors.white),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Programador",
+                                style: TextStyle(
+                                    fontSize: 18.0, color: Colors.white),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.star_half,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ),
+                                        Text(
+                                          "Califiación",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          "10",
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(
+                                            GroovinMaterialIcons.wallet_travel,
+                                            color: Colors.white,
+                                            size: 30,
+                                          ),
+                                          Text(
+                                            "Contratar",
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                        );
-                      },
-                    );
-                  } else {
-                    print("la conexion no se ha cerrado");
-
-                    return CircularProgressIndicator(
-                      strokeWidth: 10,
-                    );
-                  }
-                },
-              )),
-            ],
-          ),
-        ));
+                        ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: 250,
+                      height: 250,
+                      child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 100,
+                          color: Color.fromARGB(1000, 75, 74, 75),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(20),
+                                child: SizedBox(
+                                  height: 120,
+                                  width: 120,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 10,
+                                    valueColor: new AlwaysStoppedAnimation(
+                                        Colors.white),
+                                  ),
+                                ),
+                              ),
+                              Text("Cargando",
+                                  style: TextStyle(
+                                      fontSize: 30.0, color: Colors.white))
+                            ],
+                          )),
+                    ),
+                  )
+                ],
+              );
+            }
+          },
+        ),
+      ),
+    );
   }
 
   Future getComments() async {
@@ -547,7 +737,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
       final response = await http
           .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-              body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
+              body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()});
 
       var comments = json.decode(response.body);
       this.comments = comments;
@@ -558,29 +748,29 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     }
   }
 
-Future getDeveloper() async {
-
+  Future getDeveloper() async {
+    print("el id es: ");
+    print(this.ID.toString());
     try {
-      final response = await http
-          .post("https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
-              // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-              body: {"ID_USUARIO": this.ID});
+      final response = await http.post(
+          "https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
+          // "http://192.168.0.5/findprogrammerDB/loadComments.php",
+          body: {"ID_USUARIO": this.ID.toString()});
 
       var developer = json.decode(response.body);
       this.developer = developer;
-      
+
       print("se obtuvieron la info del desarrollador");
       print("wwwwwwwwwwwwwwwwwwwwwwwwwww");
-      print(developer);
+      print(this.developer);
     } catch (f) {
       print("hubo un error obteniendo la info del desarollador");
       print(f.toString());
     }
   }
-Future funciones()async{
-await getDeveloper();
-await getComments();
-}
 
-
+  Future funciones() async {
+    await getDeveloper();
+    await getComments();
+  }
 }

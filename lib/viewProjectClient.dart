@@ -217,6 +217,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(context, CupertinoPageRoute(builder: (contex)=>Homeclient()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -737,7 +738,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        Navigator.pop(context);
+                                       
                                         Navigator.push(context,CupertinoPageRoute(builder: (context)=>ViewHireProgrammer(this.ID)));
                                       },
                                       child: Padding(

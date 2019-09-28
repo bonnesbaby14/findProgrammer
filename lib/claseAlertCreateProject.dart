@@ -17,12 +17,12 @@ class AlertCreatePorject extends StatefulWidget {
   _AlertCreatePorject createState() => new _AlertCreatePorject();
 }
 
-class _AlertCreatePorject extends State<AlertCreatePorject> {
+class _AlertCreatePorject extends State<AlertCreatePorject>{
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: AlertDialog(
-      backgroundColor: Colors.grey,
+        child: CupertinoAlertDialog(
+
       title: Column(
         children: <Widget>[
           Icon(
@@ -55,7 +55,7 @@ class _AlertCreatePorject extends State<AlertCreatePorject> {
           Container(
             height: 60,
             child: CupertinoTextField(
-              placeholder: "Descripcion...",
+              placeholder: "Descripción...",
               controller: tdcDescripcion,
               placeholderStyle: TextStyle(color: Colors.black38),
               decoration: BoxDecoration(
@@ -350,23 +350,7 @@ class _AlertCreatePorject extends State<AlertCreatePorject> {
                   )),
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            child: CupertinoTextField(
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              placeholder:
-                  "Requerimientos... \n(separados por salto de linea) ",
-              controller: tdcRequerimientos,
-              placeholderStyle: TextStyle(color: Colors.black38),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border:
-                      Border.all(width: 0.5, color: Colors.deepPurpleAccent)),
-            ),
-          ),
+          
         ],
       ),
       actions: <Widget>[

@@ -407,7 +407,7 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
                           return InkWell(
                             onTap: () {
 
-                                Navigator.pop(context);
+                         
                                   Navigator.push(context, CupertinoPageRoute(builder: (context)=>ViewProfileProgrammer(request[index]['ID_USUARIO'])));
                                 
 
