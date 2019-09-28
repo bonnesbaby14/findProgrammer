@@ -217,7 +217,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, CupertinoPageRoute(builder: (contex)=>Homeclient()));
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (contex) => Homeclient()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -468,7 +469,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                     ),
                                     CupertinoSwitch(
                                       value: _ligths,
-                                      onChanged: (bool value) {
+                                      onChanged: (bool value) async {
+                                        await updateState();
+
                                         setState(() {
                                           _ligths = value;
                                         });
@@ -603,7 +606,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                                       15)),
                                                         ),
                                                       ],
-                                                    ), context:context);
+                                                    ),
+                                                context: context);
                                           }
                                         },
                                         child: Column(
@@ -655,7 +659,11 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                         children: <Widget>[
                                           Icon(
                                             GroovinMaterialIcons.worker,
-                                            color: Colors.grey,
+                                            color: dataProject[0]
+                                                        ['F_EN_DESARROLLO'] ==
+                                                    '1'
+                                                ? Colors.green
+                                                : Colors.grey,
                                             size: 30,
                                           ),
                                           SizedBox(
@@ -738,8 +746,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                       
-                                        Navigator.push(context,CupertinoPageRoute(builder: (context)=>ViewHireProgrammer(this.ID)));
+                                        Navigator.push(
+                                            context,
+                                            CupertinoPageRoute(
+                                                builder: (context) =>
+                                                    ViewHireProgrammer(
+                                                        this.ID)));
                                       },
                                       child: Padding(
                                         padding:
@@ -1640,6 +1652,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
+      dataProject[0]["F_VISIBILIDAD"] == "1" ? _ligths = true : _ligths = false;
+
       // print(this.dataProject);
     } catch (f) {}
   }
@@ -1693,5 +1707,30 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
     var dataProject = json.decode(response.body);
     this.desarrollador = dataProject;
+  }
+
+  Future updateState() async {
+    print("entro a updatestate");
+    final response = await http.post(
+        "https://findprogrammerceti.000webhostapp.com/updateStateProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+
+        body: {
+          "ID_PROYECTO": this.ID,
+          "ESTADO": _ligths ? "0" : "1",
+        }).catchError((error) async {
+      await print("error no se econctro el servidor updatestate");
+    });
+
+    var dataProject = json.decode(response.body);
+    print("object");
+
+    print(dataProject);
+
+    if (dataProject == '1') {
+      print("se actualizo");
+    } else {
+      print("no se actualizo");
+    }
   }
 } //fin de la clase
