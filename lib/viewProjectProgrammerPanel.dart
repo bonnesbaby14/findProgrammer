@@ -610,7 +610,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                       height: 10,
                                     ),
                                     Text(
-                                      "Requerimientos \n     Formales ",
+                                      "Requerimientos",
                                       style: TextStyle(
                                           fontSize: 14.0, color: Colors.white),
                                     ),
@@ -708,53 +708,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
               Expanded(
                 child: ListView(
                   children: <Widget>[
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 10,
-                      color: Color.fromARGB(450, 41, 39, 42),
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: Text("Requerimientos Cliente",
-                                style: TextStyle(
-                                    fontSize: 27.0, color: Colors.white)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                            child: Text("-La aplicacion sera de android",
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                            child: Text(
-                                "-La aplicacion debe cargas fotos del telefono.",
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                            child: Text(
-                                "-La aplicacion debe conectarse con facebook.",
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white)),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                            child: Text(
-                                "-La aplicacion debe subir fotos a instagram.",
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white)),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                        ],
-                      ),
-                    ),
+                   
                     Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -765,7 +719,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.fromLTRB(10, 17, 0, 0),
-                            child: Text("Requerimientos Formales",
+                            child: Text("Requerimientos",
                                 style: TextStyle(
                                     fontSize: 27.0, color: Colors.white)),
                           ),

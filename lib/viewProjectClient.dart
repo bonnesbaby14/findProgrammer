@@ -20,7 +20,7 @@ var contextoS;
 bool _ligths = false;
 var listReqF = List<Widget>();
 var listAvances = List<Widget>();
-var listReqNF = List<Widget>();
+
 Helper helper = new Helper();
 
 class ViewProjectClient extends StatefulWidget {
@@ -34,7 +34,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   String ID;
 
   _ViewProjectClient(this.ID);
-  var dataProject, reqFuncionales, reqNoFuncionales, avances, desarrollador;
+  var dataProject, reqFuncionales,  avances, desarrollador;
 
   @override
   Widget build(BuildContext context) {
@@ -348,13 +348,13 @@ class _ViewProjectClient extends State<ViewProjectClient> {
             await print("se enteo a esta madre");
             await getInfooProject();
             await getReqFProject();
-            await getReqNFProject();
+
             await getAvancesProject();
             await getDesarrolladorProject();
           }),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              listReqNF = new List<Widget>();
+
               listReqF = new List<Widget>();
               listAvances = new List<Widget>();
               if (avances != null) {
@@ -398,15 +398,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 }
               }
 
-              if (reqNoFuncionales != null) {
-                for (int y = 0; y < reqNoFuncionales.length; y++) {
-                  listReqNF.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text(reqNoFuncionales[y]["REQUERIMIENTO"],
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-                }
-              }
+              
               if (reqFuncionales != null) {
                 for (int x = 0; x < reqFuncionales.length; x++) {
                   listReqF.add(Padding(
@@ -809,32 +801,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                     Expanded(
                       child: ListView(
                         children: <Widget>[
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("Requerimientos",
-                                      style: TextStyle(
-                                          fontSize: 27.0, color: Colors.white)),
-                                ),
-                                Column(
-                                  children: listReqNF,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
+                         
                           Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),
@@ -845,7 +812,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                               children: <Widget>[
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(10, 17, 0, 0),
-                                  child: Text("Requerimientos Formales",
+                                  child: Text("Requerimientos",
                                       style: TextStyle(
                                           fontSize: 27.0, color: Colors.white)),
                                 ),
@@ -1670,17 +1637,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     // print(reqFuncionales);
   }
 
-  Future<List> getReqNFProject() async {
-    print("entro");
-    final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
-
-    var dataProject = json.decode(response.body);
-    this.reqNoFuncionales = dataProject;
-    // print(reqNoFuncionales);
-  }
+ 
 
   Future<List> getAvancesProject() async {
     print("entro");

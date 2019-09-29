@@ -487,23 +487,15 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
         body: FutureBuilder(
           future: _asyncMemorizer.runOnce(() async {
             await getInfooProject();
-            await getReqNFProject();
+     
           }),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               print("se entro una vez y se recopilaron los datos ");
               print("+++++++++++++++++++++++++++++++++++++++++++");
-              print(reqNoFuncionales);
-              print("+++++++++++++++++++++++++++++++++++++++++++");
-              listReqNF = new List<Widget>();
 
-              for (int y = 0; y < reqNoFuncionales.length; y++) {
-                listReqNF.add(Padding(
-                  padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                  child: Text(reqNoFuncionales[y]["REQUERIMIENTO"],
-                      style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                ));
-              }
+
+             
 
               return Container(
                 height: MediaQuery.of(context).size.height,
@@ -620,29 +612,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                     Expanded(
                       child: ListView(
                         children: <Widget>[
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 10,
-                            color: Color.fromARGB(450, 41, 39, 42),
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text("Requerimientos de Proyecto",
-                                      style: TextStyle(
-                                          fontSize: 26.0, color: Colors.white)),
-                                ),
-                                Column(
-                                  children: listReqNF,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
+                          
                           Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),
@@ -1042,16 +1012,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
     this.reqFuncionales = dataProject;
   }
 
-  Future<List> getReqNFProject() async {
-    final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "3"});
 
-    var dataProject = json.decode(response.body);
-    this.reqNoFuncionales = dataProject;
-  }
 
   Future<List> getAvancesProject() async {
     final response = await http.post(
