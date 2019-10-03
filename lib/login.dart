@@ -301,8 +301,135 @@ class _Login extends State<Login> {
           accessToken: googleaut.accessToken, idToken: googleaut.idToken);
       final FirebaseUser user =
           (await _auth.signInWithCredential(credential)).user;
-      print(user.providerId);
-      print(user.email);
+
+      if (user != null) {
+        final response = await http.post(
+            "https://findprogrammerceti.000webhostapp.com/google.php",
+            body: {
+              "google": user.providerId.toString(),
+              "mail": user.email.toString(),
+            });
+        print(user.uid);
+        print(response.body);
+       
+        var respuesta = json.decode(response.body);
+        if(respuesta[0]=="3"&&respuesta[1]==true){
+            Navigator.push(context, CupertinoPageRoute(builder: (_)=>RegisterUser(respuesta[2]['ID_USUARIO'])));
+
+        }else if(respuesta[0]=="4"){
+          showDialog(
+                context: context,
+                builder: (context) => new CupertinoAlertDialog(
+                      title: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.devices_other,
+                            size: 80,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text("FindProgrammer",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                        ],
+                      ),
+                      content: Text(
+                          "Debes completar tu registro para usar FindProgrammer"),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                           Navigator.push(context, CupertinoPageRoute(builder: (_)=>RegisterUser(respuesta[1]['ID_USUARIO'])));
+                          },
+                          child: Text("Aceptar",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 15)),
+                        ),
+                      ],
+                    ));
+ 
+        }else if(respuesta[0]==1){
+Map<String, dynamic> MapDesarrollador = Map();
+
+          print(response.body);
+          helper.DeleteDesarrollador();
+          MapDesarrollador['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
+          MapDesarrollador['ID_DESARROLLADOR'] =
+              respuesta[1]['ID_DESARROLLADOR'];
+
+          MapDesarrollador['GOOGLE_ID'] = respuesta[1]['GOOGLE_ID'];
+          MapDesarrollador['NOMBRE'] = respuesta[1]['NOMBRE'];
+          MapDesarrollador['APELLIDO_P'] = respuesta[1]['APELLIDO_P'];
+          MapDesarrollador['APELLIDO_M'] = respuesta[1]['APELLIDO_M'];
+          MapDesarrollador['CORREO'] = respuesta[1]['CORREO'];
+          MapDesarrollador['FOTO'] = respuesta[1]['FOTO'];
+          MapDesarrollador['CALIFICACION'] = respuesta[1]['CALIFICACION'];
+          MapDesarrollador['F_ESTADO_REGISTRO'] =
+              respuesta[1]['F_ESTADO_REGISTRO'];
+          MapDesarrollador['PASSWORD'] = respuesta[1]['PASSWORD'];
+          MapDesarrollador['TELEFONO'] = respuesta[1]['TELEFONO'];
+          MapDesarrollador['F_BAJA_USUARIO'] = respuesta[1]['F_BAJA_USUARIO'];
+          MapDesarrollador['F_ESTADO_LOGIN'] = respuesta[1]['F_ESTADO_LOGIN'];
+          MapDesarrollador['CURP'] = respuesta[1]['CURP'];
+          MapDesarrollador['F_USUARIO_APRUEBA'] =
+              respuesta[1]['F_USUARIO_APRUEBA'];
+          MapDesarrollador['F_D_WEB'] = respuesta[1]['F_D_WEB'];
+          MapDesarrollador['F_D_M_ANDROID'] = respuesta[1]['F_D_M_ANDROID'];
+          MapDesarrollador['F_D_M_IOS'] = respuesta[1]['F_D_M_IOS'];
+          MapDesarrollador['F_D_E_WINDOWS'] = respuesta[1]['F_D_E_WINDOWS'];
+          MapDesarrollador['F_D_E_MAC'] = respuesta[1]['F_D_E_MAC'];
+          MapDesarrollador['F_D_REDES'] = respuesta[1]['F_D_REDES'];
+          MapDesarrollador['PREPARACION'] = respuesta[1]['PREPARACION'];
+          MapDesarrollador['PROYECTOS_TRABAJADOS'] =
+              respuesta[1]['PROYECTOS_TRABAJADOS'];
+          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =
+              respuesta[1]['F_SISTEMA_BLOQUEADO'];
+          print(MapDesarrollador.toString());
+
+//insertar datos del programador logueado.
+          var insertDesarrollador =
+              await helper.InsertDesarrollador(MapDesarrollador);
+          print("//$insertDesarrollador//");
+
+          Navigator.pop(context);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HomeProgrammer()));
+
+        }else if(respuesta[0]==2){
+
+          Map<String, dynamic> MapCliente = Map();
+
+          print(response.body);
+
+          MapCliente['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
+          MapCliente['NOMBRE'] = respuesta[1]['NOMBRE'];
+          MapCliente['APELLIDO_P'] = respuesta[1]['APELLIDO_P'];
+          MapCliente['APELLIDO_M'] = respuesta[1]['APELLIDO_M'];
+          MapCliente['CORREO'] = respuesta[1]['CORREO'];
+          MapCliente['FOTO'] = respuesta[1]['FOTO'];
+          MapCliente['CALIFICACION'] = respuesta[1]['CALIFICACION'];
+          MapCliente['F_ESTADO_REGISTRO'] = respuesta[1]['F_ESTADO_REGISTRO'];
+          MapCliente['PASSWORD'] = respuesta[1]['PASSWORD'];
+          MapCliente['TELEFONO'] = respuesta[1]['TELEFONO'];
+          MapCliente['F_BAJA_USUARIO'] = respuesta[1]['F_BAJA_USUARIO'];
+          MapCliente['F_ESTADO_LOGIN'] = respuesta[1]['F_ESTADO_LOGIN'];
+          MapCliente['CURP'] = respuesta[1]['CURP'];
+          MapCliente['F_USUARIO_APRUEBA'] = respuesta[1]['F_USUARIO_APRUEBA'];
+
+          print(MapCliente.toString());
+
+//insertar datos del programador logueado.
+          var insertCliente = await helper.InsertCliente(MapCliente);
+          print("//$insertCliente//");
+
+          Navigator.pop(context);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Homeclient()));
+        }
+
+      }
     } catch (e) {
       print("error firabase auth");
       print(e.toString());

@@ -775,6 +775,7 @@ class _Homeclient extends State<Homeclient> {
 Future registerProject() async {
   try {
     print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+    print("id: " +client['ID_USUARIO'].toString());
     print("titulo: " + tdcTitulo.text.toString());
     print("describcion: " + tdcDescripcion.text.toString());
     print("presupuesto: " + tdcPresupuesto.text.toString());
@@ -785,11 +786,11 @@ Future registerProject() async {
 
     final response = await http.post(
         "https://findprogrammerceti.000webhostapp.com/registerProject.php",
-        body: {
+        body:{
           "ID_USUARIO": client['ID_USUARIO'].toString(),
-          "TITULO": tdcTitulo.text,
-          "DESCRIPCION": tdcDescripcion.text,
-          "PRESUPUESTO": tdcPresupuesto.text,
+          "TITULO": tdcTitulo.text.toString(),
+          "DESCRIPCION": tdcDescripcion.text.toString(),
+          "PRESUPUESTO": tdcPresupuesto.text.toString(),                                                                       
           "TIPO": intTipo.toString(),
           "TIEMPO": intFrecuencia.toString(),
           "ENTREGABLES": flat ? "1" : "0",
