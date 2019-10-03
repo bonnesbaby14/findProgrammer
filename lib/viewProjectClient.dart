@@ -6,7 +6,8 @@ import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:findprogrammer/viewHireProgrammer.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'claseAlertCreateProject.dart';
+
+import 'claseAlertEditProject.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'customIcons.dart';
 import 'login.dart';
@@ -34,10 +35,11 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   String ID;
 
   _ViewProjectClient(this.ID);
-  var dataProject, reqFuncionales,  avances, desarrollador;
+  var dataProject, reqFuncionales, avances, desarrollador;
 
   @override
   Widget build(BuildContext context) {
+    contextoS = context;
     final AsyncMemoizer _asyncMemoizer3 = AsyncMemoizer();
     var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
     double mediaw = MediaQuery.of(context).size.width;
@@ -354,7 +356,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           }),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-
               listReqF = new List<Widget>();
               listAvances = new List<Widget>();
               if (avances != null) {
@@ -398,7 +399,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 }
               }
 
-              
               if (reqFuncionales != null) {
                 for (int x = 0; x < reqFuncionales.length; x++) {
                   listReqF.add(Padding(
@@ -514,9 +514,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       child: GestureDetector(
                                         onTap: () async {
                                           await showDialog(
-                                              context: context,
-                                              builder: (_) =>
-                                                  AlertCreatePorject());
+                                              context: contextoS,
+                                              builder: (context) =>
+                                                  AlertEditPorject(ID));
                                           if (dataResponse == "1") {
                                             showDialog(
                                                 context: contextoS,
@@ -599,7 +599,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                         ),
                                                       ],
                                                     ),
-                                                context: context);
+                                                context: contextoS);
                                           }
                                         },
                                         child: Column(
@@ -801,7 +801,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                     Expanded(
                       child: ListView(
                         children: <Widget>[
-                         
                           Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),
@@ -1637,8 +1636,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     // print(reqFuncionales);
   }
 
- 
-
   Future<List> getAvancesProject() async {
     print("entro");
     final response = await http.post(
@@ -1691,3 +1688,28 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     }
   }
 } //fin de la clase
+
+Future editProject(ID) async {
+  try {
+ 
+    final response = await http.post(
+        "https://findprogrammerceti.000webhostapp.com/editProject.php",
+        body: {
+          "ID": ID.toString(),
+          "TITULO": tdcTitulo.text,
+          "DESCRIPCION": tdcDescripcion.text,
+          "PRESUPUESTO": tdcPresupuesto.text,
+          "TIPO": intTipo.toString(),
+          "TIEMPO": intFrecuencia.toString(),
+          "ENTREGABLES": flat ? "1" : "0",
+        });
+
+    dataResponse = response.body;
+    print("menaje");
+    print(dataResponse);
+    print("-------------------------");
+  } catch (d) {
+    print("error editando el proyecto");
+    print(d.toString());
+  }
+}

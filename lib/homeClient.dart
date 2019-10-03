@@ -777,20 +777,18 @@ Future registerProject() async {
     print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
     print("titulo: " + tdcTitulo.text.toString());
     print("describcion: " + tdcDescripcion.text.toString());
-    print("Requerimeintos: " + tdcRequerimientos.text.toString());
     print("presupuesto: " + tdcPresupuesto.text.toString());
     print("tipo: " + intTipo.toString());
     print("entregables: " + (flat ? "1" : "0"));
     print("frecuencia: " + intFrecuencia.toString());
     print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-    print("ID" + client['ID_USUARIO'].toString());
+
     final response = await http.post(
         "https://findprogrammerceti.000webhostapp.com/registerProject.php",
         body: {
           "ID_USUARIO": client['ID_USUARIO'].toString(),
           "TITULO": tdcTitulo.text,
           "DESCRIPCION": tdcDescripcion.text,
-          "REQUERIMIENTOS": tdcRequerimientos.text,
           "PRESUPUESTO": tdcPresupuesto.text,
           "TIPO": intTipo.toString(),
           "TIEMPO": intFrecuencia.toString(),
