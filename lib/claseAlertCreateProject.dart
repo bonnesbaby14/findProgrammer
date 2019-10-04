@@ -362,8 +362,8 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               style: TextStyle(color: Colors.black, fontSize: 15)),
         ),
         FlatButton(
-          onPressed: () {
-            registerProject();
+          onPressed: () async{
+            await registerProject();
             Navigator.pop(context);
           },
           child: Text("Guardar",

@@ -834,6 +834,7 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
           });
 
       request = jsonDecode(response.body);
+      print(request);
     } catch (d) {
       print("error obteniendo solicitudes el proyecto");
       print(d.toString());

@@ -436,20 +436,13 @@ Map<String, dynamic> MapDesarrollador = Map();
     }
   }
 
-  // Future  _testSing()async{
-  //   await googleSignIn.signIn();
-  //   print("innicios de sesion");
-  //   print(googleSignIn.currentUser.displayName);
-  //   await print(googleSignIn.currentUser.id);
-  // }
 
-/*
-   _testSing(){
+   signOut(){
   googleSignIn.signOut();
   }
-*/
 
   Future login() async {
+    //agrgada al documento
     print(mail.text.toLowerCase().trim());
     print(contrasena.text);
     try {
@@ -464,7 +457,9 @@ Map<String, dynamic> MapDesarrollador = Map();
           .timeout(Duration(seconds: 5))
           .whenComplete(() {
             Navigator.pop(context);
+            
             return null;
+
           })
           .catchError((eeee) {
             http.Client().close();

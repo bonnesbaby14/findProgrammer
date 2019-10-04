@@ -692,7 +692,11 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                         ],
                                       ),
                                     ),
-                                    Padding(
+                                    InkWell(
+                                      onTap: (){
+                                        
+                                      },
+                                      child: Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(20, 10, 20, 10),
                                       child: Column(
@@ -713,6 +717,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           ),
                                         ],
                                       ),
+                                    ),
                                     ),
                                     Padding(
                                       padding:
@@ -1713,3 +1718,23 @@ Future editProject(ID) async {
     print(d.toString());
   }
 }
+Future eraseProject(ID) async {
+  try {
+ 
+    final response = await http.post(
+        "https://findprogrammerceti.000webhostapp.com/eraseProject.php",
+        body: {
+          "ID": ID.toString(),
+          
+        });
+
+    dataResponse = response.body;
+    print("menaje");
+    print(dataResponse);
+    print("-------------------------");
+  } catch (d) {
+    print("error editando el proyecto");
+    print(d.toString());
+  }
+}
+
