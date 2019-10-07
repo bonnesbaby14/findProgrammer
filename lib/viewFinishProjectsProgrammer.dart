@@ -575,7 +575,7 @@ class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> 
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ViewProjectProgrammerPanel()));
+                                              ViewProjectProgrammerPanel(projects[position]['ID_PROYECTO'])));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(

@@ -23,8 +23,6 @@ var dataResponse;
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 class Homeclient extends StatefulWidget {
-
-  
   @override
   _Homeclient createState() => new _Homeclient();
 }
@@ -57,374 +55,379 @@ class _Homeclient extends State<Homeclient> {
         },
         child: Scaffold(
           key: _scaffoldKeyhome,
-            drawer: Container(
-              width: 260.0,
-              decoration: BoxDecoration(
-                color: Color(0xFF272D34),
-              ),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 30,
+          drawer: Container(
+            width: 260.0,
+            decoration: BoxDecoration(
+              color: Color(0xFF272D34),
+            ),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 30,
+                ),
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileClient()));
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(15),
+                                child: Container(
+                                  width: 35,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: NetworkImage(
+                                              "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                                  client['ID_USUARIO']
+                                                      .toString() +
+                                                  ".jpg"))),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: client == null
+                                    ? Text(
+                                        "Cargando",
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.white),
+                                      )
+                                    : Container(
+                                        width: 150,
+                                        child: Text(
+                                          client['NOMBRE'].toString() +
+                                              " " +
+                                              client['APELLIDO_P'].toString() +
+                                              " " +
+                                              client['APELLIDO_M'].toString(),
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                              )
+                            ],
+                          )),
+                    ],
                   ),
-
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfileClient()));
-                    },
+                ),
+                //linea de separacin
+                Padding(
+                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                  child: Container(
+                    width: 450.0,
+                    height: 0.5,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ViewFinishProjectsClient()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     child: Row(
                       children: <Widget>[
                         Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(1),
                             child: Row(
                               children: <Widget>[
                                 Padding(
-                                  padding: EdgeInsets.all(15),
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
                                   child: Container(
-                                    width: 35,
-                                    height: 35,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
-                                        )),
+                                    child: Icon(
+                                      GroovinMaterialIcons.check_all,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(10),
-                                  child: client == null
-                                      ? Text(
-                                          "Cargando",
-                                          style: TextStyle(
-                                              fontSize: 15.0,
-                                              color: Colors.white),
-                                        )
-                                      : Container(
-                                          width: 150,
-                                          child: Text(
-                                            client['NOMBRE'].toString() +
-                                                " " +
-                                                client['APELLIDO_P'].toString() +
-                                                " " +
-                                                client['APELLIDO_M'].toString(),
-                                            style: TextStyle(
-                                                fontSize: 15.0,
-                                                color: Colors.white),
-                                          ),
-                                        ),
+                                  child: Text(
+                                    "Proyectos Terminados",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+                //nuevo wighet
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ViewDevelopmentProjectsClient()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.worker,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Proyectos en Desarrollo",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
                                 )
                               ],
                             )),
                       ],
                     ),
                   ),
-  //linea de separacin
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                    child: Container(
-                      width: 450.0,
-                      height: 0.5,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewFinishProjectsClient()));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(1),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                    child: Container(
-                                      child: Icon(
-                                        GroovinMaterialIcons.check_all,
-                                        size: 35,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      "Proyectos Terminados",
-                                      style: TextStyle(
-                                          fontSize: 17.0, color: Colors.white),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-  //nuevo wighet
-                  SizedBox(
-                    height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ViewDevelopmentProjectsClient()));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(1),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                    child: Container(
-                                      child: Icon(
-                                        GroovinMaterialIcons.worker,
-                                        size: 35,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(9),
-                                    child: Text(
-                                      "Proyectos en Desarrollo",
-                                      style: TextStyle(
-                                          fontSize: 17.0, color: Colors.white),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-  //nuevo wighet
-                  SizedBox(
-                    height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.transparent.withOpacity(0.3),
-                          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(1),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                    child: Container(
-                                      child: Icon(
-                                        GroovinMaterialIcons.new_box,
-                                        size: 35,
-                                        color: Colors.deepPurpleAccent,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(9),
-                                    child: Text(
-                                      "Proyectos Publicados",
-                                      style: TextStyle(
-                                          fontSize: 17.0, color: Colors.white),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-
-  //nuevo wighet
-                  SizedBox(
-                    height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => new CupertinoAlertDialog(
-                                title: Column(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.devices_other,
-                                      size: 80,
+                ),
+                //nuevo wighet
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.transparent.withOpacity(0.3),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.new_box,
+                                      size: 35,
                                       color: Colors.deepPurpleAccent,
                                     ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text("Cerrar Sesion",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 20)),
-                                  ],
+                                  ),
                                 ),
-                                content:
-                                    Text("¿Seguro que quieres cerrar sesion?"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    onPressed: () {
-                                      helper.DeleteCliente();
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Login()));
-                                    },
-                                    child: Text("Cerrar Sesion",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Proyectos Publicados",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
                                   ),
-                                  FlatButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Cancelar",
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15)),
-                                  ),
-                                ],
-                              ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                      child: Row(
-                        children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.all(1),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                    child: Container(
-                                      child: Icon(
-                                        GroovinMaterialIcons.exit_to_app,
-                                        size: 35,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(9),
-                                    child: Text(
-                                      "Cerrar Sesion",
-                                      style: TextStyle(
-                                          fontSize: 17.0, color: Colors.white),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
+                                )
+                              ],
+                            )),
+                      ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+
+                //nuevo wighet
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("Cerrar Sesion",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("¿Seguro que quieres cerrar sesion?"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () {
+                                    helper.DeleteCliente();
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
+                                  },
+                                  child: Text("Cerrar Sesion",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Cancelar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.exit_to_app,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Cerrar Sesion",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
+          ),
           appBar: null,
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.white24,
             child: Icon(GroovinMaterialIcons.plus_circle_multiple_outline),
-            onPressed: ()async {
+            onPressed: () async {
               await showDialog(
-                  context: context, builder: (_) => AlertCreatePorject()).whenComplete((){});
-                  if (dataResponse == "1") {
-      showDialog(
-          context: contextoS,
-          builder: (context) => new CupertinoAlertDialog(
-                title: Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.devices_other,
-                      size: 80,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text("FindProgrammer",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ],
-                ),
-                content: Text("El proyecto se registro correctamente"),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                     setState(() {
-                       
-                     });
-                    },
-                    child: Text("Aceptar",
-                        style: TextStyle(color: Colors.black, fontSize: 15)),
-                  ),
-                ],
-              ));
-    } else {
-      showDialog(
-          context: contextoS,
-          builder: (context) => new CupertinoAlertDialog(
-                title: Column(
-                  children: <Widget>[
-                    Icon(
-                      Icons.devices_other,
-                      size: 80,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text("FindProgrammer",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ],
-                ),
-                content:
-                    Text("El proyecto no se registro, intentalo mas tarde. "),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("Aceptar",
-                        style: TextStyle(color: Colors.black, fontSize: 15)),
-                  ),
-                ],
-              ));
-    }
-
+                  context: context,
+                  builder: (_) => AlertCreatePorject()).whenComplete(() {});
+              if (dataResponse == "1") {
+                showDialog(
+                    context: contextoS,
+                    builder: (context) => new CupertinoAlertDialog(
+                          title: Column(
+                            children: <Widget>[
+                              Icon(
+                                Icons.devices_other,
+                                size: 80,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text("FindProgrammer",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20)),
+                            ],
+                          ),
+                          content:
+                              Text("El proyecto se registro correctamente"),
+                          actions: <Widget>[
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: Text("Aceptar",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15)),
+                            ),
+                          ],
+                        ));
+              } else {
+                showDialog(
+                    context: contextoS,
+                    builder: (context) => new CupertinoAlertDialog(
+                          title: Column(
+                            children: <Widget>[
+                              Icon(
+                                Icons.devices_other,
+                                size: 80,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text("FindProgrammer",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20)),
+                            ],
+                          ),
+                          content: Text(
+                              "El proyecto no se registro, intentalo mas tarde. "),
+                          actions: <Widget>[
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("Aceptar",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15)),
+                            ),
+                          ],
+                        ));
+              }
             },
           ),
           resizeToAvoidBottomPadding: false,
@@ -492,9 +495,8 @@ class _Homeclient extends State<Homeclient> {
                           itemBuilder: (BuildContext context, int position) {
                             return GestureDetector(
                               onTap: () {
-                                print(myProjects[position]
-                                                ['ID_PROYECTO']);
-                                
+                                print(myProjects[position]['ID_PROYECTO']);
+
                                 print("ya se va entrar ");
                                 Navigator.push(
                                     context,
@@ -756,7 +758,8 @@ class _Homeclient extends State<Homeclient> {
     try {
       print("ID" + client['ID_USUARIO'].toString());
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
+//          "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
+          "http://192.168.0.5/findprogrammerDB/loadMyProjects.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
           });
@@ -775,7 +778,7 @@ class _Homeclient extends State<Homeclient> {
 Future registerProject() async {
   try {
     print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-    print("id: " +client['ID_USUARIO'].toString());
+    print("id: " + client['ID_USUARIO'].toString());
     print("titulo: " + tdcTitulo.text.toString());
     print("describcion: " + tdcDescripcion.text.toString());
     print("presupuesto: " + tdcPresupuesto.text.toString());
@@ -784,21 +787,21 @@ Future registerProject() async {
     print("frecuencia: " + intFrecuencia.toString());
     print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 
-    final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/registerProject.php",
-        body:{
+    final response = await http
+        .post("http://192.168.0.5/findprogrammerDB/registerProject.php",
+//                "https://findprogrammerceti.000webhostapp.com/registerProject.php",
+            body: {
           "ID_USUARIO": client['ID_USUARIO'].toString(),
           "TITULO": tdcTitulo.text.toString(),
           "DESCRIPCION": tdcDescripcion.text.toString(),
-          "PRESUPUESTO": tdcPresupuesto.text.toString(),                                                                       
+          "PRESUPUESTO": tdcPresupuesto.text.toString(),
           "TIPO": intTipo.toString(),
           "TIEMPO": intFrecuencia.toString(),
           "ENTREGABLES": flat ? "1" : "0",
         });
 
-     dataResponse = response.body;
+    dataResponse = response.body;
     print(dataResponse);
-    
   } catch (d) {
     print("error registrando el proyecto");
     print(d.toString());

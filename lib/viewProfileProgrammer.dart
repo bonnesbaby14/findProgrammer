@@ -18,24 +18,29 @@ var contextoS;
 
 class ViewProfileProgrammer extends StatefulWidget {
   var ID;
-  ViewProfileProgrammer(this.ID);
+  var IDProject;
+  ViewProfileProgrammer(this.ID, this.IDProject);
   @override
-  _ViewProfileProgrammer createState() => new _ViewProfileProgrammer(this.ID);
+  _ViewProfileProgrammer createState() =>
+      new _ViewProfileProgrammer(this.ID, this.IDProject);
 }
 
 class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
   var comments;
   var ID;
+  var IDProject;
   var developer;
-  _ViewProfileProgrammer(this.ID);
+  var contextoS;
+  _ViewProfileProgrammer(this.ID, this.IDProject);
 
   @override
   Widget build(BuildContext context) {
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
-    var _scaffoldKey = new GlobalKey<ScaffoldState>();
+    var _scaffoldKey2 = new GlobalKey<ScaffoldState>();
+    contextoS=context;
     return Scaffold(
-      key: _scaffoldKey,
+      key: _scaffoldKey2,
       drawer: Container(
         width: 260.0,
         decoration: BoxDecoration(
@@ -203,14 +208,15 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
             SizedBox(
               height: 15,
             ),
-            
+
             InkWell(
               onTap: () {
                 Navigator.pop(context);
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (contex) => Homeclient()));
               },
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.transparent.withOpacity(0.3),
                     borderRadius: BorderRadius.all(Radius.circular(15.0))),
                 child: Row(
                   children: <Widget>[
@@ -224,7 +230,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                 child: Icon(
                                   GroovinMaterialIcons.new_box,
                                   size: 35,
-                                  color: Colors.deepPurpleAccent,
+                                  color: Colors.grey,
                                 ),
                               ),
                             ),
@@ -337,10 +343,11 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
           Navigator.pop(context);
         },
         child: FutureBuilder(
-          future: funciones(),
+          future: getDeveloper(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              print("se cetto la conexion ");
+              print("se ceero la conexion del get developer");
+              print(developer);
               return Container(
                 height: mediah,
                 decoration: BoxDecoration(
@@ -374,7 +381,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 child: IconButton(
                                     onPressed: () {
-                                      _scaffoldKey.currentState.openDrawer();
+                                      _scaffoldKey2.currentState.openDrawer();
                                     },
                                     icon: Icon(
                                       CustomIcons.menu,
@@ -448,7 +455,149 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          new CupertinoAlertDialog(
+                                            title: Column(
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.devices_other,
+                                                  size: 80,
+                                                  color:
+                                                      Colors.deepPurpleAccent,
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Text("FindProgrammer",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 20)),
+                                              ],
+                                            ),
+                                            content: Text(
+                                                "¿Seguro que quieres contratar a este desarrollador?"),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text("Cancelar",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 15)),
+                                              ),
+                                              FlatButton(
+                                                onPressed: () async {
+                                                  var d = await createPanel();
+                                                  if (d == "1") {
+                                                         Navigator.pop(context);
+                                                    showDialog(
+                                                        context: contextoS,
+                                                        builder: (context) =>
+                                                            new CupertinoAlertDialog(
+                                                              title: Column(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Icon(
+                                                                    Icons
+                                                                        .devices_other,
+                                                                    size: 80,
+                                                                    color: Colors
+                                                                        .deepPurpleAccent,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 20,
+                                                                  ),
+                                                                  Text(
+                                                                      "FindProgrammer",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontSize:
+                                                                              20)),
+                                                                ],
+                                                              ),
+                                                              content: Text(
+                                                                  "El proyecto ha comenzado, ahora puedes comunicarte con tu desarrollador"),
+                                                              actions: <Widget>[
+                                                                FlatButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                    //rederigir al panel
+                                                                  },
+                                                                  child: Text(
+                                                                      "Aceptar",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontSize:
+                                                                              15)),
+                                                                ),
+                                                              ],
+                                                            ));
+                                                  } else if (d == "2") {
+                                                    Navigator.pop(context);
+                                                    showDialog(
+                                                        context: contextoS,
+                                                        builder: (context) =>
+                                                            new CupertinoAlertDialog(
+                                                              title: Column(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Icon(
+                                                                    Icons
+                                                                        .devices_other,
+                                                                    size: 80,
+                                                                    color: Colors
+                                                                        .deepPurpleAccent,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 20,
+                                                                  ),
+                                                                  Text(
+                                                                      "FindProgrammer",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontSize:
+                                                                              20)),
+                                                                ],
+                                                              ),
+                                                              content: Text(
+                                                                  "El proyecto ya esta siendo desarrollado"),
+                                                              actions: <Widget>[
+                                                                FlatButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: Text(
+                                                                      "Aceptar",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontSize:
+                                                                              15)),
+                                                                ),
+                                                              ],
+                                                            ));
+                                                  }
+//codigo para contratar
+                                                },
+                                                child: Text("Aceptar",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 15)),
+                                              ),
+                                            ],
+                                          ));
+                                },
                                 child: Padding(
                                   padding: EdgeInsets.all(10),
                                   child: Column(
@@ -475,10 +624,11 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                     ),
                     Expanded(
                         child: FutureBuilder(
-                      future: funciones(),
+                      future: getComments(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          print("la conexion se cerro");
+                          print(
+                              "la conexion se cerro la conexion de los comentario ");
                           print(comments);
                           return ListView.builder(
                             itemCount: comments == null ? 0 : comments.length,
@@ -557,7 +707,6 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
               print("no se ha cerrado la conexion");
               return Stack(
                 children: <Widget>[
-                  Container(),
                   Container(
                     height: mediah,
                     decoration: BoxDecoration(
@@ -591,7 +740,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                     child: IconButton(
                                         onPressed: () {
-                                          _scaffoldKey.currentState
+                                          _scaffoldKey2.currentState
                                               .openDrawer();
                                         },
                                         icon: Icon(
@@ -729,42 +878,65 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
   }
 
   Future getComments() async {
-    print(
-        "=========================================================================");
-    print("se esta obteiendo los comentarios");
-    print(desarrollador['ID_USUARIO']);
+    //print("se esta obteiendo los comentarios");
+    // print(desarrollador['ID_USUARIO']);
     try {
-      final response = await http
-          .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
-              // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-              body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()});
+      final response = await http.post(
+          //"https://findprogrammerceti.000webhostapp.com/loadComments.php",
+          "http://192.168.0.5/findprogrammerDB/loadComments.php",
+          body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()});
 
       var comments = json.decode(response.body);
       this.comments = comments;
-      print("se obtuvieron los comentarios");
+      //   print("se obtuvieron los comentarios");
     } catch (f) {
-      print("hubo un error obteniendo los comentarios");
-      print(f.toString());
+      // print("hubo un error obteniendo los comentarios");
+      //print(f.toString());
     }
   }
 
   Future getDeveloper() async {
-    print("el id es: ");
-    print(this.ID.toString());
+    //print("el id es: ");
+    //print(this.ID.toString());
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
-          // "http://192.168.0.5/findprogrammerDB/loadComments.php",
+          //"https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
+          "http://192.168.0.5/findprogrammerDB/loadDeveloper.php",
           body: {"ID_USUARIO": this.ID.toString()});
 
       var developer = json.decode(response.body);
       this.developer = developer;
 
-      print("se obtuvieron la info del desarrollador");
-      print("wwwwwwwwwwwwwwwwwwwwwwwwwww");
-      print(this.developer);
+      // print("se obtuvieron la info del desarrollador");
+      //print("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+      //print(this.developer);
     } catch (f) {
-      print("hubo un error obteniendo la info del desarollador");
+      //print("hubo un error obteniendo la info del desarollador");
+      //print(f.toString());
+    }
+  }
+
+  Future<String> createPanel() async {
+    print("el id es: ");
+    print(this.ID.toString());
+    try {
+      final response = await http.post(
+          //"https://findprogrammerceti.000webhostapp.com/createPanel.php",
+          "http://192.168.0.5/findprogrammerDB/createPanel.php",
+          body: {
+            "ID_USUARIO": this.ID.toString(),
+            "ID_PROYECTO": this.IDProject.toString(),
+          });
+      print("respuesta del server:");
+      print(response.body);
+      if (response.body == "1") {
+        print("si se registrooooooooooooooooooo");
+      } else if (response.body == "2") {
+        print("este proyecto ya tiene desarrolador");
+      }
+
+      return response.body;
+    } catch (f) {
       print(f.toString());
     }
   }

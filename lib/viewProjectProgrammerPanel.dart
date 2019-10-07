@@ -15,14 +15,22 @@ var _scaffoldKey = new GlobalKey<ScaffoldState>();
 var contextoS;
 
 class ViewProjectProgrammerPanel extends StatefulWidget {
+  var ID;
+  ViewProjectProgrammerPanel(this.ID);
   @override
   _ViewProjectProgrammerPanel createState() =>
-      new _ViewProjectProgrammerPanel();
+      new _ViewProjectProgrammerPanel(ID);
 }
 
 class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
+  var ID;
+  _ViewProjectProgrammerPanel(this.ID);
   @override
   Widget build(BuildContext context) {
+    print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+print(ID);
+    print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+    
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(

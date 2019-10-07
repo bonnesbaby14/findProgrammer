@@ -419,11 +419,7 @@ GestureDetector(
                             itemBuilder: (BuildContext context, int position) {
                               return GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ViewProjectProgrammerPanel()));
+                                 
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(

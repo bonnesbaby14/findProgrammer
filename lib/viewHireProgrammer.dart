@@ -14,8 +14,7 @@ import 'customIcons.dart';
 import 'login.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
-var _keyH = new GlobalKey<ScaffoldState>();
-var _keyH2 = new GlobalKey();
+
 var contextoS;
 var request;
 Helper helper = new Helper();
@@ -32,6 +31,8 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
   _ViewHireProgrammer(this.ID);
   @override
   Widget build(BuildContext context) {
+    var _keyH = new GlobalKey<ScaffoldState>();
+var _keyH23 = new GlobalKey();
     print("siempre entra aqui");
     print(this.ID);
     return Scaffold(
@@ -50,6 +51,7 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+
 
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ProfileClient()));
@@ -209,6 +211,8 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (contex) => Homeclient()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -333,7 +337,7 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
         appBar: null,
         resizeToAvoidBottomPadding: false,
         body: FutureBuilder(
-          key: _keyH2,
+          key: _keyH23,
           future: getDevelopers(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
@@ -406,12 +410,15 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: () {
-
-                         
-                                  Navigator.push(context, CupertinoPageRoute(builder: (context)=>ViewProfileProgrammer(request[index]['ID_USUARIO'])));
-                                
-
-                              },
+                        
+                              Navigator.pushReplacement(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) =>
+                                          ViewProfileProgrammer(
+                                              request[index]['ID_USUARIO'],
+                                              this.ID)));
+                            },
                             child: Card(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -442,7 +449,12 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
                                       Container(
                                         width: 160,
                                         child: Text(
-                                            request[index]['NOMBRE'].toString()+request[index]['APELLIDO_P'].toString()+request[index]['APELLIDO_M'].toString(),
+                                            request[index]['NOMBRE']
+                                                    .toString() +
+                                                request[index]['APELLIDO_P']
+                                                    .toString() +
+                                                request[index]['APELLIDO_M']
+                                                    .toString(),
                                             textAlign: TextAlign.justify,
                                             style: TextStyle(
                                               fontSize: 14.0,
@@ -551,49 +563,7 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
                             children: <Widget>[
                               InkWell(
                                 onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) =>
-                                          new CupertinoAlertDialog(
-                                            title: Column(
-                                              children: <Widget>[
-                                                Icon(
-                                                  Icons.devices_other,
-                                                  size: 80,
-                                                  color:
-                                                      Colors.deepPurpleAccent,
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Text("FindProgrammer",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 20)),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                              ],
-                                            ),
-                                            content: Text(
-                                                "¿Quieres contratar a este programador?"),
-                                            actions: <Widget>[
-                                              FlatButton(
-                                                onPressed: () {},
-                                                child: Text("Contratar",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 15)),
-                                              ),
-                                              FlatButton(
-                                                onPressed: () {},
-                                                child: Text("Cancelar",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 15)),
-                                              ),
-                                            ],
-                                          ));
+                                
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -656,8 +626,7 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {
-                                },
+                                onTap: () {},
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.0),
@@ -828,7 +797,8 @@ class _ViewHireProgrammer extends State<ViewHireProgrammer> {
     try {
       print("entro a getdevelopes");
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadDevelopers.php",
+          "http://192.168.0.5/findprogrammerDB/loadDevelopers.php",
+          //"https://findprogrammerceti.000webhostapp.com/loadDevelopers.php",
           body: {
             "ID": this.ID.toString(),
           });

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:findprogrammer/profileClient.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'package:flutter/cupertino.dart';
+import 'homeClient.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
@@ -10,23 +13,26 @@ var contextoS;
 bool bva = false;
 Helper helper = new Helper();
 List<Map<String, dynamic>> clientList = List();
-Map<String, dynamic> client = Map();
+
+var destinatario;
 var myProjects;
-FirebaseAuth _auth = FirebaseAuth.instance;
+TextEditingController _textEditingController=new TextEditingController();
+ScrollController _scrollController=new ScrollController();
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 class ChatClient extends StatefulWidget {
+  var idProyecto, idCliente;
+  ChatClient(this.idProyecto, this.idCliente);
+
   @override
-  _ChatClient createState() => new _ChatClient();
+  _ChatClient createState() => new _ChatClient(idProyecto, idCliente);
 }
 
 class _ChatClient extends State<ChatClient> {
-  @override
-  void initState() {
-    // TODO: implement initState
-  }
-
+  var mensajes;
+  var idProyecto, idCliente;
+  _ChatClient(this.idProyecto, this.idCliente);
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -325,17 +331,23 @@ class _ChatClient extends State<ChatClient> {
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return ListView.builder(
-                          itemCount: 15,
+                        controller: _scrollController,
+                          itemCount: mensajes != null ? mensajes.length-1 : 0,
                           itemBuilder: (context, int item) {
-                            return false
+                            item+=1;
+                            return mensajes[item]['FK_REMITENTE'] != idCliente
                                 ? Column(
+                                  
                                     children: <Widget>[
                                       Row(
                                         children: <Widget>[
                                           Padding(
                                             padding: EdgeInsets.only(left: 20),
-                                            child:
-                                                Text("01:58 a.m   11/08/2019"),
+                                            child: Text("" +
+                                                mensajes[item]['HORA'] +
+                                                "   " +
+                                                mensajes[item]['FECHA'] +
+                                                ""),
                                           ),
                                           Expanded(
                                             child: Text(""),
@@ -381,7 +393,8 @@ class _ChatClient extends State<ChatClient> {
                                                                   .width *
                                                               .60,
                                                       child: Text(
-                                                        "ww dddddd",
+                                                        mensajes[item]
+                                                            ['MENSAJE'],
                                                         style: TextStyle(
                                                             color:
                                                                 Colors.white),
@@ -407,8 +420,11 @@ class _ChatClient extends State<ChatClient> {
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(right: 20),
-                                            child:
-                                                Text("01:58 a.m   11/08/2019"),
+                                            child: Text("" +
+                                                mensajes[item]['HORA'] +
+                                                "   " +
+                                                mensajes[item]['FECHA'] +
+                                                ""),
                                           ),
                                         ],
                                       ),
@@ -451,7 +467,8 @@ class _ChatClient extends State<ChatClient> {
                                                                   .width *
                                                               .65,
                                                       child: Text(
-                                                        "loremdddd",
+                                                        mensajes[item]
+                                                            ['MENSAJE'],
                                                         style: TextStyle(
                                                             color:
                                                                 Colors.white),
@@ -470,7 +487,9 @@ class _ChatClient extends State<ChatClient> {
                                   );
                           });
                     } else {
-                      return ListView();
+                      return CircularProgressIndicator(
+                        strokeWidth: 10,
+                      );
                     }
                   },
                 ),
@@ -485,13 +504,19 @@ class _ChatClient extends State<ChatClient> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: TextField(
+                        controller: _textEditingController,
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         decoration:
                             InputDecoration.collapsed(hintText: "Mensaje"),
                       ),
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if(_textEditingController.text!=""){
+                     sendMessage();
+                    }},
                     icon: Icon(
                       Icons.send,
                       color: Colors.deepPurpleAccent,
@@ -509,5 +534,61 @@ class _ChatClient extends State<ChatClient> {
     );
   }
 
-  Future loadMessage() async {}
+  Future loadMessage() async {
+    try {
+      final response =
+          await http.post("http://192.168.0.5/findprogrammerDB/openRoom.php",
+//        "https://findprogrammerceti.000webhostapp.com/openRoom.php",
+              body: {
+            "idProyecto": idProyecto.toString(),
+            "idCliente": idCliente.toString(),
+          });
+
+      dataResponse = response.body;
+      print("openroomPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+      print(dataResponse);
+
+ mensajes = json.decode(response.body);
+
+
+
+     
+
+
+print(mensajes);
+      print("-------------------------");
+    } catch (d) {
+      print("error editando el proyecto");
+      print(d.toString());
+    }
+  }
+
+   Future sendMessage()async {
+     try {
+       final response =
+           await http.post("http://192.168.0.5/findprogrammerDB/sendMessage.php",
+       //"https://findprogrammerceti.000webhostapp.com/sendMessage.php",
+               body: {
+             "idRemitente":idCliente.toString(),
+             "idDestinatario":destinatario.toString(),
+             "mensaje":_textEditingController.text,
+           });
+
+       dataResponse = response.body;
+       print("openrzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+       print(dataResponse);
+       if(dataResponse== "1"){
+         print("si esntro");
+setState(() {
+  
+});
+_scrollController.animateTo(_scrollController.position.maxScrollExtent,duration: Duration(microseconds: 500),curve: Curves.linear);
+       }
+       
+       print("-------------------------");
+     } catch (d) {
+       print("error mandando el proyecto");
+       print(d.toString());
+     }
+   }
 }
