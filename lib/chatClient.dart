@@ -334,6 +334,7 @@ class _ChatClient extends State<ChatClient> {
                         controller: _scrollController,
                           itemCount: mensajes != null ? mensajes.length-1 : 0,
                           itemBuilder: (context, int item) {
+                            destinatario=mensajes[0];
                             item+=1;
                             return mensajes[item]['FK_REMITENTE'] != idCliente
                                 ? Column(
@@ -537,8 +538,9 @@ class _ChatClient extends State<ChatClient> {
   Future loadMessage() async {
     try {
       final response =
-          await http.post("http://192.168.0.5/findprogrammerDB/openRoom.php",
-//        "https://findprogrammerceti.000webhostapp.com/openRoom.php",
+          await http.post(
+            //"http://192.168.0.5/findprogrammerDB/openRoom.php",
+        "https://findprogrammerceti.000webhostapp.com/openRoom.php",
               body: {
             "idProyecto": idProyecto.toString(),
             "idCliente": idCliente.toString(),
@@ -566,13 +568,17 @@ print(mensajes);
    Future sendMessage()async {
      try {
        final response =
-           await http.post("http://192.168.0.5/findprogrammerDB/sendMessage.php",
-       //"https://findprogrammerceti.000webhostapp.com/sendMessage.php",
+           await http.post(
+             //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
+       "https://findprogrammerceti.000webhostapp.com/sendMessage.php",
                body: {
              "idRemitente":idCliente.toString(),
              "idDestinatario":destinatario.toString(),
              "mensaje":_textEditingController.text,
            });
+print(idCliente.toString());
+print(destinatario.toString());
+print(_textEditingController.text);
 
        dataResponse = response.body;
        print("openrzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");

@@ -40,6 +40,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   @override
   Widget build(BuildContext context) {
+    
     contextoS = context;
     final AsyncMemoizer _asyncMemoizer3 = AsyncMemoizer();
     var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
@@ -358,7 +359,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           backgroundColor: Colors.white,
           body: FutureBuilder(
             future: _asyncMemoizer3.runOnce(() async {
-              await print("se enteo a esta madre");
+
               await getInfooProject();
               await getReqFProject();
               await getAvancesProject();
@@ -1685,8 +1686,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future getInfooProject() async {
     try {
       final response = await http.post(
-          //"https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-          "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
@@ -1701,8 +1702,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future<List> getReqFProject() async {
     print("entro");
     final response = await http.post(
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        //"https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
 
     var dataProject = json.decode(response.body);
@@ -1713,11 +1714,11 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future<List> getAvancesProject() async {
     print("entro");
     final response = await http.post(
-        //"https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
         body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
-    print("aqui hubo una excepcion de res creo");
+    print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
     print(response.body);
     var dataProject = json.decode(response.body);
     this.avances = dataProject;
@@ -1727,8 +1728,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future<List> getDesarrolladorProject() async {
     print("entro");
     final response = await http.post(
-       // "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
         body: {"ID_PROYECTO": this.ID, "TYPE": "5"}).catchError((error) async {
       await print("error no se econctro el servidor");
@@ -1741,8 +1742,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future updateState() async {
     print("entro a updatestate");
     final response = await http.post(
-      //  "https://findprogrammerceti.000webhostapp.com/updateStateProject.php",
-        "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+        "https://findprogrammerceti.000webhostapp.com/updateStateProject.php",
+        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
         body: {
           "ID_PROYECTO": this.ID,
@@ -1767,8 +1768,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 Future editProject(ID) async {
   try {
     final response = await http.post(
-        "http://192.168.0.5/findprogrammerDB/editProject.php",
-//                "https://findprogrammerceti.000webhostapp.com/editProject.php",
+       // "http://192.168.0.5/findprogrammerDB/editProject.php",
+               "https://findprogrammerceti.000webhostapp.com/editProject.php",
         body: {
           "ID": ID.toString(),
           "TITULO": tdcTitulo.text,
@@ -1792,8 +1793,8 @@ Future editProject(ID) async {
 Future eraseProject(ID) async {
   try {
     final response = await http.post(
-        "http://192.168.0.5/findprogrammerDB/eraseProject.php",
-//        "https://findprogrammerceti.000webhostapp.com/eraseProject.php",
+       // "http://192.168.0.5/findprogrammerDB/eraseProject.php",
+        "https://findprogrammerceti.000webhostapp.com/eraseProject.php",
         body: {
           "ID": ID.toString(),
         });

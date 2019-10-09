@@ -38,6 +38,7 @@ class _Homeclient extends State<Homeclient> {
 
   @override
   Widget build(BuildContext context) {
+  
     contextoS = context;
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
     var _keydos = new GlobalKey();
@@ -51,6 +52,7 @@ class _Homeclient extends State<Homeclient> {
         onWillPop: () {
           //esto es provicional para pruebas
           helper.DeleteCliente();
+            this.dispose();
           Navigator.pop(context);
         },
         child: Scaffold(
@@ -758,8 +760,8 @@ class _Homeclient extends State<Homeclient> {
     try {
       print("ID" + client['ID_USUARIO'].toString());
       final response = await http.post(
-//          "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
-          "http://192.168.0.5/findprogrammerDB/loadMyProjects.php",
+          "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
+         // "http://192.168.0.5/findprogrammerDB/loadMyProjects.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
           });
@@ -769,7 +771,7 @@ class _Homeclient extends State<Homeclient> {
       print(datauser);
       myProjects = datauser;
     } catch (d) {
-      print("error obteniendo proyecto");
+      print("error obteniendo proyecto funcion get proyecto en homeclient"+d.toString() );
     }
   }
 }
@@ -788,8 +790,9 @@ Future registerProject() async {
     print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 
     final response = await http
-        .post("http://192.168.0.5/findprogrammerDB/registerProject.php",
-//                "https://findprogrammerceti.000webhostapp.com/registerProject.php",
+        .post(
+          //"http://192.168.0.5/findprogrammerDB/registerProject.php",
+               "https://findprogrammerceti.000webhostapp.com/registerProject.php",
             body: {
           "ID_USUARIO": client['ID_USUARIO'].toString(),
           "TITULO": tdcTitulo.text.toString(),
@@ -798,7 +801,7 @@ Future registerProject() async {
           "TIPO": intTipo.toString(),
           "TIEMPO": intFrecuencia.toString(),
           "ENTREGABLES": flat ? "1" : "0",
-        });
+        }).whenComplete((){print("termino");});
 
     dataResponse = response.body;
     print(dataResponse);

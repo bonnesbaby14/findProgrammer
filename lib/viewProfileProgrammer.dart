@@ -882,8 +882,8 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     // print(desarrollador['ID_USUARIO']);
     try {
       final response = await http.post(
-          //"https://findprogrammerceti.000webhostapp.com/loadComments.php",
-          "http://192.168.0.5/findprogrammerDB/loadComments.php",
+          "https://findprogrammerceti.000webhostapp.com/loadComments.php",
+          //"http://192.168.0.5/findprogrammerDB/loadComments.php",
           body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()});
 
       var comments = json.decode(response.body);
@@ -900,8 +900,8 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     //print(this.ID.toString());
     try {
       final response = await http.post(
-          //"https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
-          "http://192.168.0.5/findprogrammerDB/loadDeveloper.php",
+          "https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
+          //"http://192.168.0.5/findprogrammerDB/loadDeveloper.php",
           body: {"ID_USUARIO": this.ID.toString()});
 
       var developer = json.decode(response.body);
@@ -921,8 +921,8 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     print(this.ID.toString());
     try {
       final response = await http.post(
-          //"https://findprogrammerceti.000webhostapp.com/createPanel.php",
-          "http://192.168.0.5/findprogrammerDB/createPanel.php",
+          "https://findprogrammerceti.000webhostapp.com/createPanel.php",
+          //"http://192.168.0.5/findprogrammerDB/createPanel.php",
           body: {
             "ID_USUARIO": this.ID.toString(),
             "ID_PROYECTO": this.IDProject.toString(),
