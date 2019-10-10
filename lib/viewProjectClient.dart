@@ -40,7 +40,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   @override
   Widget build(BuildContext context) {
-    
     contextoS = context;
     final AsyncMemoizer _asyncMemoizer3 = AsyncMemoizer();
     var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
@@ -359,7 +358,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           backgroundColor: Colors.white,
           body: FutureBuilder(
             future: _asyncMemoizer3.runOnce(() async {
-
               await getInfooProject();
               await getReqFProject();
               await getAvancesProject();
@@ -650,36 +648,42 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           ),
                                         ),
                                       ),
-                                       InkWell(
-                                            onTap: (){
-                                              print(dataProject);
-                                              Navigator.push(context, CupertinoPageRoute(
+                                      InkWell(
+                                        onTap: () {
+                                          print(dataProject);
+                                          Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
                                                   builder: (context) =>
-                                                      ChatClient(dataProject[0]['ID_PROYECTO'],dataProject[0]['FK_CLIENTE'])));
-                                            },
-                                            child: Padding(
-                                            padding: EdgeInsets.all(10),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Icon(
-                                                  GroovinMaterialIcons
-                                                      .message_bulleted,
-                                                  color: Colors.white,
-                                                  size: 30,
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "  Contactar\nProgramador",
-                                                  style: TextStyle(
-                                                      fontSize: 14.0,
-                                                      color: Colors.white),
-                                                ),
-                                              ],
-                                            ),
+                                                      ChatClient(
+                                                          dataProject[0]
+                                                              ['ID_PROYECTO'],
+                                                          dataProject[0]
+                                                              ['FK_CLIENTE'])));
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.all(10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .message_bulleted,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "  Contactar\nProgramador",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
                                           ),
-                                          ),
+                                        ),
+                                      ),
                                       Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -778,11 +782,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Navigator.pushReplacement(context, CupertinoPageRoute(
+                                          Navigator.pushReplacement(
+                                              context,
+                                              CupertinoPageRoute(
                                                   builder: (context) =>
                                                       ViewHireProgrammer(
                                                           this.ID)));
-                                        
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.fromLTRB(
@@ -1157,31 +1162,34 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             ),
                                           ),
                                           InkWell(
-                                            onTap: (){
+                                            onTap: () {
                                               print(dataProject);
+                                            Navigator.push(context, CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      ChatClient(dataProject[0]['ID_PROYECTO'],dataProject[0]['FK_CLIENTE'])));
                                             },
                                             child: Padding(
-                                            padding: EdgeInsets.all(10),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Icon(
-                                                  GroovinMaterialIcons
-                                                      .message_bulleted,
-                                                  color: Colors.white,
-                                                  size: 30,
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "  Contactar\nProgramador",
-                                                  style: TextStyle(
-                                                      fontSize: 14.0,
-                                                      color: Colors.white),
-                                                ),
-                                              ],
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                children: <Widget>[
+                                                  Icon(
+                                                    GroovinMaterialIcons
+                                                        .message_bulleted,
+                                                    color: Colors.white,
+                                                    size: 30,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Text(
+                                                    "  Contactar\nProgramador",
+                                                    style: TextStyle(
+                                                        fontSize: 14.0,
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
                                           ),
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
@@ -1713,63 +1721,80 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   Future<List> getAvancesProject() async {
     print("entro");
-    final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+    try {
+      final response = await http.post(
+          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-        body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
-    print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
-    print(response.body);
-    var dataProject = json.decode(response.body);
-    this.avances = dataProject;
+          body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
+
+      print(response.body);
+      var dataProject = json.decode(response.body);
+      this.avances = dataProject;
+    } catch (error) {
+      print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
+      print(error.toString());
+    }
     // print(avances);
   }
 
   Future<List> getDesarrolladorProject() async {
-    print("entro");
-    final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+    try {
+      final response = await http.post(
+          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-        body: {"ID_PROYECTO": this.ID, "TYPE": "5"}).catchError((error) async {
-      await print("error no se econctro el servidor");
-    });
+          body: {
+            "ID_PROYECTO": this.ID,
+            "TYPE": "5"
+          }).catchError((error) async {
+        await print("error no se econctro el servidor");
+      });
 
-    var dataProject = json.decode(response.body);
-    this.desarrollador = dataProject;
+      var dataProject = json.decode(response.body);
+      this.desarrollador = dataProject;
+    } catch (error) {
+      print("aqui hubo una excepcion getDesarrollador en viewProjectClient");
+      print(error.toString());
+    }
   }
 
   Future updateState() async {
     print("entro a updatestate");
-    final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/updateStateProject.php",
-        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+    try {
+      final response = await http.post(
+          "https://findprogrammerceti.000webhostapp.com/updateStateProject.php",
+          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-        body: {
-          "ID_PROYECTO": this.ID,
-          "ESTADO": _ligths ? "0" : "1",
-        }).catchError((error) async {
-      await print("error no se econctro el servidor updatestate");
-    });
+          body: {
+            "ID_PROYECTO": this.ID,
+            "ESTADO": _ligths ? "0" : "1",
+          }).catchError((error) async {
+        await print("error no se econctro el servidor updatestate");
+      });
 
-    var dataProject = json.decode(response.body);
-    print("object");
+      var dataProject = json.decode(response.body);
+      print("object");
 
-    print(dataProject);
+      print(dataProject);
 
-    if (dataProject == '1') {
-      print("se actualizo");
-    } else {
-      print("no se actualizo");
+      if (dataProject == '1') {
+        print("se actualizo");
+      } else {
+        print("no se actualizo");
+      }
+    } catch (error) {
+      print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
+      print(error.toString());
     }
-  }
-} //fin de la clase
+  } //fin de la clase
+}
 
 Future editProject(ID) async {
   try {
     final response = await http.post(
-       // "http://192.168.0.5/findprogrammerDB/editProject.php",
-               "https://findprogrammerceti.000webhostapp.com/editProject.php",
+        // "http://192.168.0.5/findprogrammerDB/editProject.php",
+        "https://findprogrammerceti.000webhostapp.com/editProject.php",
         body: {
           "ID": ID.toString(),
           "TITULO": tdcTitulo.text,
@@ -1793,7 +1818,7 @@ Future editProject(ID) async {
 Future eraseProject(ID) async {
   try {
     final response = await http.post(
-       // "http://192.168.0.5/findprogrammerDB/eraseProject.php",
+        // "http://192.168.0.5/findprogrammerDB/eraseProject.php",
         "https://findprogrammerceti.000webhostapp.com/eraseProject.php",
         body: {
           "ID": ID.toString(),

@@ -571,11 +571,13 @@ class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsPr
                             itemBuilder: (BuildContext context, int position) {
                               return GestureDetector(
                                 onTap: () {
+                                 
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               ViewProjectProgrammerPanel(projects[position]['ID_PROYECTO'])));
+                                              
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(

@@ -15,9 +15,9 @@ Helper helper = new Helper();
 List<Map<String, dynamic>> clientList = List();
 
 var destinatario;
-var myProjects;
-TextEditingController _textEditingController=new TextEditingController();
-ScrollController _scrollController=new ScrollController();
+
+TextEditingController _textEditingController = new TextEditingController();
+ScrollController _scrollController = new ScrollController();
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
@@ -320,6 +320,7 @@ class _ChatClient extends State<ChatClient> {
         ),
         resizeToAvoidBottomPadding: true,
         backgroundColor: Colors.white,
+        ////////////////////////////////////////////////////////////////////////////////////
         body: Container(
           color: Colors.white,
           child: Column(
@@ -331,14 +332,13 @@ class _ChatClient extends State<ChatClient> {
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return ListView.builder(
-                        controller: _scrollController,
-                          itemCount: mensajes != null ? mensajes.length-1 : 0,
+                          controller: _scrollController,
+                          itemCount: mensajes != null ? mensajes.length - 1 : 0,
                           itemBuilder: (context, int item) {
-                            destinatario=mensajes[0];
-                            item+=1;
-                            return mensajes[item]['FK_REMITENTE'] != idCliente
+                            destinatario = mensajes[0];
+                            item += 1;
+                            return mensajes[item]['FK_REMITENTE'] != idCliente.toString()
                                 ? Column(
-                                  
                                     children: <Widget>[
                                       Row(
                                         children: <Widget>[
@@ -515,9 +515,10 @@ class _ChatClient extends State<ChatClient> {
                   ),
                   IconButton(
                     onPressed: () {
-                      if(_textEditingController.text!=""){
-                     sendMessage();
-                    }},
+                      if (_textEditingController.text != "") {
+                        sendMessage();
+                      }
+                    },
                     icon: Icon(
                       Icons.send,
                       color: Colors.deepPurpleAccent,
@@ -537,11 +538,10 @@ class _ChatClient extends State<ChatClient> {
 
   Future loadMessage() async {
     try {
-      final response =
-          await http.post(
-            //"http://192.168.0.5/findprogrammerDB/openRoom.php",
-        "https://findprogrammerceti.000webhostapp.com/openRoom.php",
-              body: {
+      final response = await http.post(
+          //"http://192.168.0.5/findprogrammerDB/openRoom.php",
+          "https://findprogrammerceti.000webhostapp.com/openRoom.php",
+          body: {
             "idProyecto": idProyecto.toString(),
             "idCliente": idCliente.toString(),
           });
@@ -550,14 +550,9 @@ class _ChatClient extends State<ChatClient> {
       print("openroomPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
       print(dataResponse);
 
- mensajes = json.decode(response.body);
+      mensajes = json.decode(response.body);
 
-
-
-     
-
-
-print(mensajes);
+      print(mensajes);
       print("-------------------------");
     } catch (d) {
       print("error editando el proyecto");
@@ -565,36 +560,34 @@ print(mensajes);
     }
   }
 
-   Future sendMessage()async {
-     try {
-       final response =
-           await http.post(
-             //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
-       "https://findprogrammerceti.000webhostapp.com/sendMessage.php",
-               body: {
-             "idRemitente":idCliente.toString(),
-             "idDestinatario":destinatario.toString(),
-             "mensaje":_textEditingController.text,
-           });
-print(idCliente.toString());
-print(destinatario.toString());
-print(_textEditingController.text);
+  Future sendMessage() async {
+    try {
+      final response = await http.post(
+          //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
+          "https://findprogrammerceti.000webhostapp.com/sendMessage.php",
+          body: {
+            "idRemitente": idCliente.toString(),
+            "idDestinatario": destinatario.toString(),
+            "mensaje": _textEditingController.text,
+          });
+      print(idCliente.toString());
+      print(destinatario.toString());
+      print(_textEditingController.text);
 
-       dataResponse = response.body;
-       print("openrzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-       print(dataResponse);
-       if(dataResponse== "1"){
-         print("si esntro");
-setState(() {
-  
-});
-_scrollController.animateTo(_scrollController.position.maxScrollExtent,duration: Duration(microseconds: 500),curve: Curves.linear);
-       }
-       
-       print("-------------------------");
-     } catch (d) {
-       print("error mandando el proyecto");
-       print(d.toString());
-     }
-   }
+      dataResponse = response.body;
+      print("openrzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+      print(dataResponse);
+      if (dataResponse == "1") {
+        print("si esntro");
+        setState(() {});
+        _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: Duration(microseconds: 500), curve: Curves.linear);
+      }
+
+      print("-------------------------");
+    } catch (d) {
+      print("error mandando el proyecto");
+      print(d.toString());
+    }
+  }
 }
