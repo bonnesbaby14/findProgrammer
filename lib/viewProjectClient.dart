@@ -1712,11 +1712,16 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     final response = await http.post(
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
+        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).catchError((error){
 
+        });
+try{
     var dataProject = json.decode(response.body);
     this.reqFuncionales = dataProject;
     // print(reqFuncionales);
+}catch(error){
+
+}
   }
 
   Future<List> getAvancesProject() async {

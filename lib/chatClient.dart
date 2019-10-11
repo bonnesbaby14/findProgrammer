@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:findprogrammer/profileClient.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'login.dart';
@@ -33,8 +34,16 @@ class _ChatClient extends State<ChatClient> {
   var mensajes;
   var idProyecto, idCliente;
   _ChatClient(this.idProyecto, this.idCliente);
+
+ 
   @override
   Widget build(BuildContext context) {
+    void down()async{
+await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: Duration(microseconds: 100), curve: Curves.linear);
+
+    }
+ down();
     return WillPopScope(
       onWillPop: () {
         //esto es provicional para pruebas
@@ -331,7 +340,9 @@ class _ChatClient extends State<ChatClient> {
                   future: loadMessage(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
+                     
                       return ListView.builder(
+                        
                           controller: _scrollController,
                           itemCount: mensajes != null ? mensajes.length - 1 : 0,
                           itemBuilder: (context, int item) {
@@ -487,6 +498,7 @@ class _ChatClient extends State<ChatClient> {
                                     ],
                                   );
                           });
+                          
                     } else {
                       return CircularProgressIndicator(
                         strokeWidth: 10,
@@ -554,6 +566,8 @@ class _ChatClient extends State<ChatClient> {
 
       print(mensajes);
       print("-------------------------");
+        
+              
     } catch (d) {
       print("error editando el proyecto");
       print(d.toString());
@@ -579,9 +593,8 @@ class _ChatClient extends State<ChatClient> {
       print(dataResponse);
       if (dataResponse == "1") {
         print("si esntro");
-        setState(() {});
-        _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-            duration: Duration(microseconds: 500), curve: Curves.linear);
+         setState(() {});
+        
       }
 
       print("-------------------------");

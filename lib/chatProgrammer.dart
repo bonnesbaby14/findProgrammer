@@ -8,9 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'homeProgrammer.dart';
 import 'login.dart';
-import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
-import 'customIcons.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
@@ -36,8 +34,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
 
   @override
   Widget build(BuildContext context) {
-    var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
-    var _keydos = new GlobalKey();
+
 
     return WillPopScope(
         onWillPop: () {
@@ -46,7 +43,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
           Navigator.pop(context);
         },
         child: Scaffold(
-          key: _scaffoldKeyhome,
+         
           drawer: Container(
             width: 260.0,
             decoration: BoxDecoration(

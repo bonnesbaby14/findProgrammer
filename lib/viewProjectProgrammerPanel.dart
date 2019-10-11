@@ -1488,9 +1488,12 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
-
+try{
     var dataProject = json.decode(response.body);
-    this.reqFuncionales = dataProject;
+}catch(error){
+
+}
+this.reqFuncionales = dataProject;
     // print(reqFuncionales);
   }
 
