@@ -492,9 +492,18 @@ class _ChatProgrammer extends State<ChatProgrammer> {
             ),
           ),
           appBar: AppBar(
-            title: Text("Mensajes"),
-            backgroundColor: Color(0xFF272D34),
-          ),
+          title:Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+             Text("Mensajes"),InkWell(onTap: (){
+               setState(() {
+                 _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: Duration(microseconds: 100), curve: Curves.linear);
+               });
+             }, child: Icon(Icons.replay),)
+          ],),
+          backgroundColor: Color(0xFF272D34),
+        ),
           resizeToAvoidBottomPadding: true,
           backgroundColor: Colors.white,
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////7

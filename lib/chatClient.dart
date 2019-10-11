@@ -38,11 +38,13 @@ class _ChatClient extends State<ChatClient> {
  
   @override
   Widget build(BuildContext context) {
-    void down()async{
+    Future<void> down()async{
+        await Future.delayed(Duration(milliseconds: 50));
 await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
             duration: Duration(microseconds: 100), curve: Curves.linear);
 
     }
+
  down();
     return WillPopScope(
       onWillPop: () {
@@ -324,7 +326,16 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
           ),
         ),
         appBar: AppBar(
-          title: Text("Mensajes"),
+          title:Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+             Text("Mensajes"),InkWell(onTap: (){
+               setState(() {
+                 _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: Duration(microseconds: 100), curve: Curves.linear);
+               });
+             }, child: Icon(Icons.replay),)
+          ],),
           backgroundColor: Color(0xFF272D34),
         ),
         resizeToAvoidBottomPadding: true,
