@@ -38,10 +38,9 @@ class _Homeclient extends State<Homeclient> {
 
   @override
   Widget build(BuildContext context) {
-  
     contextoS = context;
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
-    var _keydos = new GlobalKey();
+
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
@@ -52,7 +51,7 @@ class _Homeclient extends State<Homeclient> {
         onWillPop: () {
           //esto es provicional para pruebas
           helper.DeleteCliente();
-            this.dispose();
+          this.dispose();
           Navigator.pop(context);
         },
         child: Scaffold(
@@ -93,7 +92,7 @@ class _Homeclient extends State<Homeclient> {
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
-                                              "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                              "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                                   client['ID_USUARIO']
                                                       .toString() +
                                                   ".jpg"))),
@@ -435,7 +434,7 @@ class _Homeclient extends State<Homeclient> {
           resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.white,
           body: FutureBuilder(
-            key: _keydos,
+           
             future: getProject(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
@@ -747,53 +746,45 @@ class _Homeclient extends State<Homeclient> {
     try {
       clientList = await helper.SelectCliente();
       client = clientList.first;
-      print("se obtuvo el cliente");
-      print(client);
-      print("ID" + client['ID_USUARIO'].toString() + "sssss");
+      print("se obtuvo el cliente en getcliente en homecliente");
     } catch (e) {
-      print("aqui hay un error de no se que, funcion getClient" + e.toString());
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
     }
     setState(() {});
   }
 
   Future getProject() async {
+       var cliente=http.Client();
     try {
       print("ID" + client['ID_USUARIO'].toString());
-      final response = await http.post(
+      final response = await cliente.post(
           "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
-         // "http://192.168.0.5/findprogrammerDB/loadMyProjects.php",
+          // "http://192.168.0.5/findprogrammerDB/loadMyProjects.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
           });
 
       var datauser = json.decode(response.body);
 
-      print(datauser);
       myProjects = datauser;
     } catch (d) {
-      print("error obteniendo proyecto funcion get proyecto en homeclient"+d.toString() );
+      print("error obteniendo proyecto funcion get proyecto en homeclient" +
+          d.toString());
+    }finally{
+      cliente.close();
     }
   }
 }
 
 //fin de clase normal
 Future registerProject() async {
+     var cliente=http.Client();
   try {
-    print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-    print("id: " + client['ID_USUARIO'].toString());
-    print("titulo: " + tdcTitulo.text.toString());
-    print("describcion: " + tdcDescripcion.text.toString());
-    print("presupuesto: " + tdcPresupuesto.text.toString());
-    print("tipo: " + intTipo.toString());
-    print("entregables: " + (flat ? "1" : "0"));
-    print("frecuencia: " + intFrecuencia.toString());
-    print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-
-    final response = await http
-        .post(
-          //"http://192.168.0.5/findprogrammerDB/registerProject.php",
-               "https://findprogrammerceti.000webhostapp.com/registerProject.php",
-            body: {
+    final response = await cliente.post(
+        //"http://192.168.0.5/findprogrammerDB/registerProject.php",
+        "https://findprogrammerceti.000webhostapp.com/registerProject.php",
+        body: {
           "ID_USUARIO": client['ID_USUARIO'].toString(),
           "TITULO": tdcTitulo.text.toString(),
           "DESCRIPCION": tdcDescripcion.text.toString(),
@@ -801,12 +792,16 @@ Future registerProject() async {
           "TIPO": intTipo.toString(),
           "TIEMPO": intFrecuencia.toString(),
           "ENTREGABLES": flat ? "1" : "0",
-        }).whenComplete((){print("termino");});
+        }).whenComplete(() {
+      print("Se termino la funcion de register de proyecto en home cliente");
+    });
 
     dataResponse = response.body;
-    print(dataResponse);
+    print("se creo el proyecto posiblemente en homecliente");
   } catch (d) {
-    print("error registrando el proyecto");
+    print("error registrando el proyecto en homcliente");
     print(d.toString());
+  }finally{
+    cliente.close();
   }
 }

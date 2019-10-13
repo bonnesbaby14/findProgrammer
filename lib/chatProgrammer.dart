@@ -16,8 +16,6 @@ const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 var contextoS;
 Helper helper = new Helper();
 var destinatario;
-TextEditingController _textEditingController = new TextEditingController();
-ScrollController _scrollController = new ScrollController();
 
 @override
 class ChatProgrammer extends StatefulWidget {
@@ -31,11 +29,12 @@ class _ChatProgrammer extends State<ChatProgrammer> {
   var mensajes;
   var idProyecto, idDesarrollador;
   _ChatProgrammer(this.idProyecto, this.idDesarrollador);
-
+  TextEditingController _textEditingController;
+  ScrollController _scrollController;
   @override
   Widget build(BuildContext context) {
-
-
+    _textEditingController = new TextEditingController();
+    _scrollController = new ScrollController();
     return WillPopScope(
         onWillPop: () {
           //esto es provicional para pruebas
@@ -43,7 +42,6 @@ class _ChatProgrammer extends State<ChatProgrammer> {
           Navigator.pop(context);
         },
         child: Scaffold(
-         
           drawer: Container(
             width: 260.0,
             decoration: BoxDecoration(
@@ -79,7 +77,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
-                                              "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                              "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                                   desarrollador['ID_USUARIO']
                                                       .toString() +
                                                   ".jpg"))),
@@ -492,18 +490,25 @@ class _ChatProgrammer extends State<ChatProgrammer> {
             ),
           ),
           appBar: AppBar(
-          title:Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-             Text("Mensajes"),InkWell(onTap: (){
-               setState(() {
-                 _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-            duration: Duration(microseconds: 100), curve: Curves.linear);
-               });
-             }, child: Icon(Icons.replay),)
-          ],),
-          backgroundColor: Color(0xFF272D34),
-        ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Mensajes"),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _scrollController.animateTo(
+                          _scrollController.position.maxScrollExtent,
+                          duration: Duration(microseconds: 100),
+                          curve: Curves.linear);
+                    });
+                  },
+                  child: Icon(Icons.replay),
+                )
+              ],
+            ),
+            backgroundColor: Color(0xFF272D34),
+          ),
           resizeToAvoidBottomPadding: true,
           backgroundColor: Colors.white,
           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
@@ -524,12 +529,16 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                             itemBuilder: (context, int item) {
                               destinatario = mensajes[0];
                               item += 1;
-                              print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+                              print(
+                                  "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
                               print(mensajes[item]['FK_REMITENTE']);
                               print(idDesarrollador);
-                              print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-                              
-                              return mensajes[item]['FK_REMITENTE'] != idDesarrollador.toString() ? Column(
+                              print(
+                                  "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+
+                              return mensajes[item]['FK_REMITENTE'] !=
+                                      idDesarrollador.toString()
+                                  ? Column(
                                       children: <Widget>[
                                         Row(
                                           children: <Widget>[
@@ -741,7 +750,8 @@ class _ChatProgrammer extends State<ChatProgrammer> {
           });
 
       var dataResponse = response.body;
-      print("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+      print(
+          "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
       print(dataResponse);
 
       mensajes = json.decode(response.body);

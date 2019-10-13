@@ -85,7 +85,7 @@ class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsPr
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image:NetworkImage("https://findprogrammerceti.000webhostapp.com/images/image_"+desarrollador['ID_USUARIO'].toString()+".jpg")
+                                          image:NetworkImage("http://findprogrammerceti.000webhostapp.com/images/image_"+desarrollador['ID_USUARIO'].toString()+".jpg")
                                         )),
                                   ),
                                 ),

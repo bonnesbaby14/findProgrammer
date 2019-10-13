@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:findprogrammer/profileClient.dart';
+import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
+import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -17,9 +19,6 @@ List<Map<String, dynamic>> clientList = List();
 
 var destinatario;
 
-TextEditingController _textEditingController = new TextEditingController();
-ScrollController _scrollController = new ScrollController();
-
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 class ChatClient extends StatefulWidget {
@@ -34,18 +33,23 @@ class _ChatClient extends State<ChatClient> {
   var mensajes;
   var idProyecto, idCliente;
   _ChatClient(this.idProyecto, this.idCliente);
-
- 
+  TextEditingController _textEditingController;
+  ScrollController _scrollController;
   @override
   Widget build(BuildContext context) {
-    Future<void> down()async{
-        await Future.delayed(Duration(milliseconds: 50));
-await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-            duration: Duration(microseconds: 100), curve: Curves.linear);
-
+    _textEditingController = new TextEditingController();
+    _scrollController = new ScrollController();
+    Future<void> down() async {
+      await Future.delayed(Duration(milliseconds: 50));
+      try {
+        await _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: Duration(microseconds: 100),
+            curve: Curves.linear);
+      } catch (error) {}
     }
 
- down();
+    down();
     return WillPopScope(
       onWillPop: () {
         //esto es provicional para pruebas
@@ -88,7 +92,7 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
                                         image: NetworkImage(
-                                            "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                            "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                                 client['ID_USUARIO']
                                                     .toString() +
                                                 ".jpg"))),
@@ -121,7 +125,7 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
                   ],
                 ),
               ),
-//linea de separacin
+              //linea de separacin
               Padding(
                 padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                 child: Container(
@@ -133,113 +137,138 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.check_all,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewFinishProjectsClient()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.check_all,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Proyectos Terminados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "Proyectos Terminados",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
                               ),
-                            ),
-                          ],
-                        )),
-                  ],
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
-//nuevo wighet
+              //nuevo wighet
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.worker,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ViewDevelopmentProjectsClient()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.worker,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos en Desarrollo",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Proyectos en Desarrollo",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
-
-//nuevo wighet
+              //nuevo wighet
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.all(1),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                              child: Container(
-                                child: Icon(
-                                  GroovinMaterialIcons.new_box,
-                                  size: 35,
-                                  color: Colors.grey,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (context) => Homeclient()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.all(1),
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                child: Container(
+                                  child: Icon(
+                                    GroovinMaterialIcons.new_box,
+                                    size: 35,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(9),
-                              child: Text(
-                                "Proyectos Publicados",
-                                style: TextStyle(
-                                    fontSize: 17.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )),
-                  ],
+                              Padding(
+                                padding: EdgeInsets.all(9),
+                                child: Text(
+                                  "Proyectos Publicados",
+                                  style: TextStyle(
+                                      fontSize: 17.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
 
-//nuevo wighet
+              //nuevo wighet
               SizedBox(
                 height: 15,
               ),
@@ -326,16 +355,23 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
           ),
         ),
         appBar: AppBar(
-          title:Row(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-             Text("Mensajes"),InkWell(onTap: (){
-               setState(() {
-                 _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-            duration: Duration(microseconds: 100), curve: Curves.linear);
-               });
-             }, child: Icon(Icons.replay),)
-          ],),
+              Text("Mensajes"),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent,
+                        duration: Duration(microseconds: 100),
+                        curve: Curves.linear);
+                  });
+                },
+                child: Icon(Icons.replay),
+              )
+            ],
+          ),
           backgroundColor: Color(0xFF272D34),
         ),
         resizeToAvoidBottomPadding: true,
@@ -351,15 +387,14 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
                   future: loadMessage(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                     
                       return ListView.builder(
-                        
                           controller: _scrollController,
                           itemCount: mensajes != null ? mensajes.length - 1 : 0,
                           itemBuilder: (context, int item) {
                             destinatario = mensajes[0];
                             item += 1;
-                            return mensajes[item]['FK_REMITENTE'] != idCliente.toString()
+                            return mensajes[item]['FK_REMITENTE'] !=
+                                    idCliente.toString()
                                 ? Column(
                                     children: <Widget>[
                                       Row(
@@ -509,7 +544,6 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
                                     ],
                                   );
                           });
-                          
                     } else {
                       return CircularProgressIndicator(
                         strokeWidth: 10,
@@ -560,8 +594,9 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
   }
 
   Future loadMessage() async {
+       var cliente=http.Client();
     try {
-      final response = await http.post(
+      final response = await cliente.post(
           //"http://192.168.0.5/findprogrammerDB/openRoom.php",
           "https://findprogrammerceti.000webhostapp.com/openRoom.php",
           body: {
@@ -570,24 +605,21 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
           });
 
       dataResponse = response.body;
-      print("openroomPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
-      print(dataResponse);
 
       mensajes = json.decode(response.body);
-
-      print(mensajes);
-      print("-------------------------");
-        
-              
+      print("Se obtuvieron los mensajes del servidor desde chatcliente");
     } catch (d) {
-      print("error editando el proyecto");
+      print("error caragando mensaje del servidor");
       print(d.toString());
+    }finally{
+      cliente.close();
     }
   }
 
   Future sendMessage() async {
+       var cliente=http.Client();
     try {
-      final response = await http.post(
+      final response = await cliente.post(
           //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
           "https://findprogrammerceti.000webhostapp.com/sendMessage.php",
           body: {
@@ -595,23 +627,26 @@ await _scrollController.animateTo(_scrollController.position.maxScrollExtent,
             "idDestinatario": destinatario.toString(),
             "mensaje": _textEditingController.text,
           });
-      print(idCliente.toString());
-      print(destinatario.toString());
-      print(_textEditingController.text);
+      // print(idCliente.toString());
+      // print(destinatario.toString());
+      // print(_textEditingController.text);
 
       dataResponse = response.body;
-      print("openrzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-      print(dataResponse);
-      if (dataResponse == "1") {
-        print("si esntro");
-         setState(() {});
-        
-      }
 
-      print("-------------------------");
+      if (dataResponse == "1") {
+        print(
+            "Se obtuvo respuesta del servidor desde sendMessage en chatcliente");
+        setState(() {});
+      } else {
+        print(
+            "No se obtuvo respuesta del servidor desde sendMessage en chatcliente");
+      }
     } catch (d) {
       print("error mandando el proyecto");
       print(d.toString());
+    }
+    finally{
+      cliente.close();
     }
   }
 }

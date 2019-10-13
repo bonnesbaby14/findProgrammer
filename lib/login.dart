@@ -445,8 +445,9 @@ Map<String, dynamic> MapDesarrollador = Map();
     //agrgada al documento
     print(mail.text.toLowerCase().trim());
     print(contrasena.text);
+        var cliente=http.Client();
     try {
-      final response = await http
+      final response = await cliente
           .post("https://findprogrammerceti.000webhostapp.com/login.php",
               // "http://192.168.84.114/findprogrammerDB/login.php",
                 //     "http://192.168.0.5/findprogrammerDB/login.php",
@@ -524,7 +525,10 @@ Map<String, dynamic> MapDesarrollador = Map();
         Navigator.pop(context);
 
         print("hubo un error con el servidor");
+        print(e.toString());
         return null;
+      }finally{
+        cliente.close();
       }
 
       print(datauser.toString());

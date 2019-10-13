@@ -89,7 +89,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
-                                              "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                              "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                                   client['ID_USUARIO']
                                                       .toString() +
                                                   ".jpg"))),
@@ -1164,9 +1164,15 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           InkWell(
                                             onTap: () {
                                               print(dataProject);
-                                            Navigator.push(context, CupertinoPageRoute(
-                                                  builder: (context) =>
-                                                      ChatClient(dataProject[0]['ID_PROYECTO'],dataProject[0]['FK_CLIENTE'])));
+                                              Navigator.push(
+                                                  context,
+                                                  CupertinoPageRoute(
+                                                      builder: (context) =>
+                                                          ChatClient(
+                                                              dataProject[0][
+                                                                  'ID_PROYECTO'],
+                                                              dataProject[0][
+                                                                  'FK_CLIENTE'])));
                                             },
                                             child: Padding(
                                               padding: EdgeInsets.all(10),
@@ -1712,16 +1718,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     final response = await http.post(
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).catchError((error){
-
-        });
-try{
-    var dataProject = json.decode(response.body);
-    this.reqFuncionales = dataProject;
-    // print(reqFuncionales);
-}catch(error){
-
-}
+        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).catchError((error) {});
+    try {
+      var dataProject = json.decode(response.body);
+      this.reqFuncionales = dataProject;
+      // print(reqFuncionales);
+    } catch (error) {}
   }
 
   Future<List> getAvancesProject() async {
@@ -1758,6 +1760,7 @@ try{
 
       var dataProject = json.decode(response.body);
       this.desarrollador = dataProject;
+      print("se obtuvo el desarrollodor en getdesarrolladorproyect en viewproject cliente");
     } catch (error) {
       print("aqui hubo una excepcion getDesarrollador en viewProjectClient");
       print(error.toString());
@@ -1775,18 +1778,15 @@ try{
             "ID_PROYECTO": this.ID,
             "ESTADO": _ligths ? "0" : "1",
           }).catchError((error) async {
-        await print("error no se econctro el servidor updatestate");
+        await print("error no se econcontro el servidor updatestate");
       });
 
       var dataProject = json.decode(response.body);
-      print("object");
-
-      print(dataProject);
 
       if (dataProject == '1') {
-        print("se actualizo");
+        print("se actualizo el estado de visibilidad");
       } else {
-        print("no se actualizo");
+        print("no se actualizo el estado de visiblidad");
       }
     } catch (error) {
       print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
@@ -1811,11 +1811,10 @@ Future editProject(ID) async {
         });
 
     dataResponse = response.body;
-    print("menaje");
+    print("Se edito el proyecto con respuesta: ");
     print(dataResponse);
-    print("-------------------------");
   } catch (d) {
-    print("error editando el proyecto");
+    print("error editando el proyecto:");
     print(d.toString());
   }
 }

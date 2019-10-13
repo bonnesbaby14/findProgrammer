@@ -61,7 +61,7 @@ class _ProfileClient extends State<ProfileClient> {
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
                                         image: NetworkImage(
-                                            "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                            "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                                 client['ID_USUARIO']
                                                     .toString() +
                                                 ".jpg"))),
@@ -376,7 +376,7 @@ class _ProfileClient extends State<ProfileClient> {
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               image: NetworkImage(
-                                  "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                  "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                       client['ID_USUARIO'].toString() +
                                       ".jpg"))),
                     ),

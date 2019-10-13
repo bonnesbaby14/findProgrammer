@@ -547,7 +547,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                 for (int x = 0; x < reqFuncionales.length; x++) {
                   listReqF.add(Padding(
                     padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text(reqFuncionales[x]["REQUERIMIENTO"],
+                    child: Text(reqFuncionales[x]["REQUERIMIENTO"].toString(),
                         style: TextStyle(fontSize: 14.0, color: Colors.white)),
                   ));
                 }
@@ -674,7 +674,8 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                                     ChatProgrammer(
                                                         dataProject[0]
                                                             ['ID_PROYECTO'],
-                                                        desarrollador['ID_USUARIO'])));
+                                                        desarrollador[
+                                                            'ID_USUARIO'])));
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.all(10),
@@ -1466,8 +1467,6 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
   }
 
   Future getInfooProject() async {
-    print(
-        "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     try {
       final response = await http.post(
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
@@ -1477,53 +1476,65 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
-
+      print(
+          "Se obtuvo info de proyecto en getInfoPryect en viewproyectProgrammerPanel ");
       // print(this.dataProject);
-    } catch (f) {}
+    } catch (f) {
+      print(
+          "error obteniendo info de proyecto en getInfoPryect en viewproyectProgrammerPanel ");
+    }
   }
 
   Future<List> getReqFProject() async {
     print("entro");
-    final response = await http.post(
+    var cliente=http.Client();
+    try {
+    var response = await cliente.post(
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
-try{
-    var dataProject = json.decode(response.body);
-}catch(error){
+    
+      var dataProject = json.decode(response.body);
+      this.reqFuncionales = dataProject;
+      
+      print(
+          "se obtuvieron los requerimientos en getReqFPryect en viewproyectProgrammerPanel");
+    }catch (error) {
+      print(
+          "error obteniendo reqf  en getReqFPryect en viewproyectProgrammerPanel ");
+    } finally{
+    cliente.close();
+    
+    }
 
-}
-this.reqFuncionales = dataProject;
-    // print(reqFuncionales);
   }
 
   Future<List> getAvancesProject() async {
-    print(
-        "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+        var cliente=http.Client();
     try {
-      final response = await http.post(
+      final response = await cliente.post(
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 
-      print(response.body);
       var dataProject = json.decode(response.body);
       this.avances = dataProject;
+      print(
+          "Se obtuvieron los avances en getAvancesProject en viewProjectProgrammerPanel");
     } catch (error) {
       print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
       print(error.toString());
     }
-    // print(avances);
-    print(
-        "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+    finally{
+      cliente.close();
+    }
   }
 
   Future<List> getClientProject() async {
-    print(
-        "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+        var cliente=http.Client();
     try {
-      final response = await http.post(
+      final response = await cliente.post(
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
@@ -1531,18 +1542,18 @@ this.reqFuncionales = dataProject;
             "ID_PROYECTO": this.ID,
             "TYPE": "6"
           }).catchError((error) async {
-        await print("error no se econctro el servidor");
+        print("error en getclientePRoject en viewProjectPRogrammerpanel");
       });
 
       var dataProject = json.decode(response.body);
       this.cliente = dataProject;
-      print(cliente);
-      //     this.desarrollador = dataProject;
+      print("Se obtuvo el cliente del proyecto");
     } catch (error) {
-      print("aqui hubo una excepcion gecliente en viewProjectProgramme rpanel");
+      print("aqui hubo una excepcion gecliente en viewProjectProgrammerpanel");
       print(error.toString());
     }
-    print(
-        "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+    finally{
+      cliente.close();
+    }
   }
 }

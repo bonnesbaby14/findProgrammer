@@ -65,7 +65,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
                                         image: NetworkImage(
-                                            "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                            "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                                 desarrollador['ID_USUARIO']
                                                     .toString() +
                                                 ".jpg"))),
@@ -527,7 +527,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                           image: DecorationImage(
                             fit: BoxFit.fill,
                             image: NetworkImage(
-                                "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                "http://findprogrammerceti.000webhostapp.com/images/image_" +
                                     desarrollador['ID_USUARIO'].toString() +
                                     ".jpg"),
                           )),
