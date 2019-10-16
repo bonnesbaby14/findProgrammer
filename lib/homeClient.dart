@@ -30,10 +30,12 @@ class Homeclient extends StatefulWidget {
 class _Homeclient extends State<Homeclient> {
   @override
   void initState() {
-    // TODO: implement initState
-    getClient();
 
-    getProject();
+     getProject();
+     getClient();
+    
+
+    
   }
 
   @override
@@ -44,6 +46,7 @@ class _Homeclient extends State<Homeclient> {
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
+        await getProject();
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -433,13 +436,7 @@ class _Homeclient extends State<Homeclient> {
           ),
           resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.white,
-          body: FutureBuilder(
-           
-            future: getProject(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                print("spuestamente la conexion se cerro");
-                return new Container(
+          body:myProjects!=null?Container(
                   height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     color: Colors.black,
@@ -573,11 +570,7 @@ class _Homeclient extends State<Homeclient> {
                       ),
                     ],
                   ),
-                );
-              } else {
-                print("spuestamente la conexion no ha terminado");
-
-                return Stack(
+                ): Stack(
                   children: <Widget>[
                     Container(
                       height: MediaQuery.of(context).size.height,
@@ -733,10 +726,9 @@ class _Homeclient extends State<Homeclient> {
                       ),
                     )
                   ],
-                );
-              }
-            },
-          ),
+                )
+          
+         
         ),
       ),
     );
@@ -772,6 +764,9 @@ class _Homeclient extends State<Homeclient> {
       print("error obteniendo proyecto funcion get proyecto en homeclient" +
           d.toString());
     }finally{
+      setState(() {
+        
+      });
       cliente.close();
     }
   }
@@ -798,6 +793,7 @@ Future registerProject() async {
 
     dataResponse = response.body;
     print("se creo el proyecto posiblemente en homecliente");
+    print(dataResponse);
   } catch (d) {
     print("error registrando el proyecto en homcliente");
     print(d.toString());

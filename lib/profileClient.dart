@@ -22,6 +22,14 @@ class ProfileClient extends StatefulWidget {
 }
 
 class _ProfileClient extends State<ProfileClient> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+getComments();
+    super.initState();
+  }
   var comments;
   @override
   Widget build(BuildContext context) {
@@ -450,13 +458,7 @@ class _ProfileClient extends State<ProfileClient> {
                 ),
               ),
               Expanded(
-                  child: FutureBuilder(
-                future: getComments(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    print("la conexion se cerro");
-                    print(comments);
-                    return ListView.builder(
+                  child:comments!=null?ListView.builder(
                       itemCount: comments == null ? 0 : comments.length,
                       itemBuilder: (BuildContext context, int position) {
                         return Card(
@@ -514,28 +516,24 @@ class _ProfileClient extends State<ProfileClient> {
                           ),
                         );
                       },
-                    );
-                  } else {
-                    print("la conexion no se ha cerrado");
-
-                    return CircularProgressIndicator(
+                    ): CircularProgressIndicator(
                       strokeWidth: 10,
-                    );
-                  }
-                },
-              )),
+                    )
+                  
+                  ),
             ],
           ),
         ));
   }
 
   Future getComments() async {
+    var cliente1=new http.Client();
     print(
         "=========================================================================");
     print("se esta obteiendo los comentarios");
     print(client['ID_USUARIO']);
     try {
-      final response = await http
+      final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
               body: {"ID_USUARIO": client['ID_USUARIO'].toString()});
@@ -546,6 +544,12 @@ class _ProfileClient extends State<ProfileClient> {
     } catch (f) {
       print("hubo un error obteniendo los comentarios");
       print(f.toString());
+    }finally{
+
+      cliente1.close();
+    setState(() {
+      
+    });
     }
   }
 }

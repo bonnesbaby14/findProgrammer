@@ -3,6 +3,7 @@ import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsProgrammer.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
+import 'package:findprogrammer/claseAlertCreateAdvance.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -20,6 +21,9 @@ var contextoS;
 
 var listReqF = List<Widget>();
 var listAvances = List<Widget>();
+var serverResponse;
+var dataProjectw, reqFuncionales, avances, cliente;
+var IDout;
 
 class ViewProjectProgrammerPanel extends StatefulWidget {
   var ID;
@@ -31,16 +35,15 @@ class ViewProjectProgrammerPanel extends StatefulWidget {
 
 class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
   var ID;
-  var dataProject, reqFuncionales, avances, cliente;
+
   _ViewProjectProgrammerPanel(this.ID);
+
   @override
   Widget build(BuildContext context) {
+    IDout = ID;
+    contextoS = context;
     final AsyncMemoizer _asyncMemoizer4 = AsyncMemoizer();
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
-    print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-    print(ID);
-    print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
@@ -56,9 +59,9 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
 
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pop(contextoS);
                   Navigator.push(
-                      context,
+                      contextoS,
                       MaterialPageRoute(
                           builder: (context) => ProfileProgrammer()));
                 },
@@ -504,6 +507,12 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
               listAvances = new List<Widget>();
               if (avances != null) {
                 for (int z = 0; z < avances.length; z++) {
+                   listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "_______________________________________",
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
                   listAvances.add(Padding(
                     padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
                     child: Text(
@@ -600,7 +609,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                             height: 10,
                           ),
                           Text(
-                            dataProject[0]['TITULO'],
+                            dataProjectw[0]['TITULO'],
                             style:
                                 TextStyle(fontSize: 25.0, color: Colors.white),
                           ),
@@ -624,7 +633,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                             child: ListView(
                               children: <Widget>[
                                 Text(
-                                  dataProject[0]['DESCRIPCION'],
+                                  dataProjectw[0]['DESCRIPCION'],
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                       fontSize: 14.0, color: Colors.white),
@@ -641,7 +650,102 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () async {
+                                        
+                                        await showDialog(
+                                                context: contextoS,
+                                                builder: (context) =>
+                                                    AlertCreateAdvance())
+                                            .whenComplete(() {
+                                           
+                                          if (serverResponse == "1") {
+                                            
+                                            showDialog(
+                                                context: contextoS,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El avance se creo correctamente"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                            setState(() {});
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          } else {
+                                            
+                                            showDialog(
+                                                context: contextoS,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El avance no se registro, intentalo mas tarde. "),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          }
+                                        });
+                                      },
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -672,7 +776,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                             CupertinoPageRoute(
                                                 builder: (context) =>
                                                     ChatProgrammer(
-                                                        dataProject[0]
+                                                        dataProjectw[0]
                                                             ['ID_PROYECTO'],
                                                         desarrollador[
                                                             'ID_USUARIO'])));
@@ -726,31 +830,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                         ),
                                       ),
                                     ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              GroovinMaterialIcons.cancel,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Crear \n proyecto ",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    
                                     InkWell(
                                       onTap: () {},
                                       child: Padding(
@@ -873,7 +953,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                       style: TextStyle(
                                           fontSize: 27.0, color: Colors.white)),
                                 ),
-                                dataProject[0]['INTERVALO_DE_AVANCES'] == "0"
+                                dataProjectw[0]['INTERVALO_DE_AVANCES'] == "0"
                                     ? Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(15, 5, 0, 0),
@@ -883,7 +963,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                                 fontSize: 14.0,
                                                 color: Colors.white)),
                                       )
-                                    : dataProject[0]['INTERVALO_DE_AVANCES'] ==
+                                    : dataProjectw[0]['INTERVALO_DE_AVANCES'] ==
                                             "1"
                                         ? Padding(
                                             padding: EdgeInsets.fromLTRB(
@@ -903,7 +983,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                                     fontSize: 14.0,
                                                     color: Colors.white)),
                                           ),
-                                dataProject[0]['F_S_ENTREGABLES'] == "1"
+                                dataProjectw[0]['F_S_ENTREGABLES'] == "1"
                                     ? Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(15, 5, 0, 0),
@@ -939,31 +1019,32 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                 ),
                                 Padding(
                                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                    child: dataProject[0]["F_TIPO_DE_PROYECTO"] == "0"
+                                    child: dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "0"
                                         ? Text("Aplicación Web",
                                             style: TextStyle(
                                                 fontSize: 14.0,
                                                 color: Colors.white))
-                                        : dataProject[0]["F_TIPO_DE_PROYECTO"] == "1"
+                                        : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "1"
                                             ? Text("Aplicación Movil Android",
                                                 style: TextStyle(
                                                     fontSize: 14.0,
                                                     color: Colors.white))
-                                            : dataProject[0]["F_TIPO_DE_PROYECTO"] == "2"
+                                            : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "2"
                                                 ? Text("Aplicación Movil IOS",
                                                     style: TextStyle(
                                                         fontSize: 14.0,
                                                         color: Colors.white))
-                                                : dataProject[0]["F_TIPO_DE_PROYECTO"] == "3"
+                                                : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "3"
                                                     ? Text("Aplicación Escritorio Windows",
                                                         style: TextStyle(
                                                             fontSize: 14.0,
                                                             color:
                                                                 Colors.white))
-                                                    : dataProject[0]["F_TIPO_DE_PROYECTO"] == "4"
-                                                        ? Text("Aplicación Escritorio MAC",
+                                                    : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "4"
+                                                        ? Text(
+                                                            "Aplicación Escritorio MAC",
                                                             style: TextStyle(fontSize: 14.0, color: Colors.white))
-                                                        : dataProject[0]["F_TIPO_DE_PROYECTO"] == "5" ? Text("Proyecto de Redes", style: TextStyle(fontSize: 14.0, color: Colors.white)) : Text("ERROR", style: TextStyle(fontSize: 14.0, color: Colors.white))),
+                                                        : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "5" ? Text("Proyecto de Redes", style: TextStyle(fontSize: 14.0, color: Colors.white)) : Text("ERROR", style: TextStyle(fontSize: 14.0, color: Colors.white))),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -1467,74 +1548,78 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
   }
 
   Future getInfooProject() async {
+    var cliente1 = http.Client();
     try {
-      final response = await http.post(
+      final response = await cliente1.post(
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
-
-      var dataProject = json.decode(response.body);
-      this.dataProject = dataProject;
+      print("si hizo ");
+      var dataProject1 = json.decode(response.body);
+      dataProjectw = dataProject1;
       print(
           "Se obtuvo info de proyecto en getInfoPryect en viewproyectProgrammerPanel ");
+      print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+      print(dataProjectw);
       // print(this.dataProject);
     } catch (f) {
+      print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
       print(
           "error obteniendo info de proyecto en getInfoPryect en viewproyectProgrammerPanel ");
+      print(f.toString());
+    } finally {
+      cliente1.close();
     }
   }
 
   Future<List> getReqFProject() async {
     print("entro");
-    var cliente=http.Client();
+    var cliente1 = http.Client();
     try {
-    var response = await cliente.post(
-        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
-    
+      var response = await cliente1.post(
+          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
+
       var dataProject = json.decode(response.body);
-      this.reqFuncionales = dataProject;
-      
+      reqFuncionales = dataProject;
+
       print(
           "se obtuvieron los requerimientos en getReqFPryect en viewproyectProgrammerPanel");
-    }catch (error) {
+    } catch (error) {
       print(
           "error obteniendo reqf  en getReqFPryect en viewproyectProgrammerPanel ");
-    } finally{
-    cliente.close();
-    
+    } finally {
+      cliente1.close();
     }
-
   }
 
   Future<List> getAvancesProject() async {
-        var cliente=http.Client();
+    var cliente1 = http.Client();
     try {
-      final response = await cliente.post(
+      final response = await cliente1.post(
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
 
       var dataProject = json.decode(response.body);
-      this.avances = dataProject;
+      avances = dataProject;
       print(
           "Se obtuvieron los avances en getAvancesProject en viewProjectProgrammerPanel");
     } catch (error) {
       print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
       print(error.toString());
-    }
-    finally{
-      cliente.close();
+    } finally {
+      cliente1.close();
     }
   }
 
   Future<List> getClientProject() async {
-        var cliente=http.Client();
+    var cliente1 = http.Client();
     try {
-      final response = await cliente.post(
+      final response = await cliente1.post(
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
@@ -1546,14 +1631,55 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       });
 
       var dataProject = json.decode(response.body);
-      this.cliente = dataProject;
+      cliente = dataProject;
       print("Se obtuvo el cliente del proyecto");
     } catch (error) {
       print("aqui hubo una excepcion gecliente en viewProjectProgrammerpanel");
       print(error.toString());
+    } finally {
+      cliente1.close();
     }
-    finally{
-      cliente.close();
-    }
+  }
+}
+
+//fin de clase normal
+Future createAdvance() async {
+  var cliente1 = http.Client();
+  print(tdcTimepo.text.toString());
+  print(tdcNumeroCambio.text.toString());
+  print(tdcCambios.text.toString());
+  print(tdcObservaciones.text.toString());
+  print(intPorcentaje.toString());
+  print(tdcDescripcion.text.toString());
+  print(sReq);
+  print(IDout.toString());
+  print(tdcEnlaces.text.toString());
+
+  try {
+    final response = await cliente1.post(
+        //"http://192.168.0.5/findprogrammerDB/registerAdvance.php",
+        "https://findprogrammerceti.000webhostapp.com/registerAdvance.php",
+        body: {
+          "TIEMPO": tdcTimepo.text.toString(),
+          "NOCAMBIOS": tdcNumeroCambio.text.toString(),
+          "CAMBIOS": tdcCambios.text.toString(),
+          "OBSERVACIONES": tdcObservaciones.text.toString(),
+          "PORCENTAJE": intPorcentaje.toStringAsFixed(2).toString(),
+          "DESCRIPCION": tdcDescripcion.text.toString(),
+          "REQ": sReq,
+          "ID": IDout.toString(),
+          "ENLACES": tdcEnlaces.text.toString(),
+        }).whenComplete(() {
+      print("Se termino la funcion de register de proyecto en home cliente");
+    });
+
+    serverResponse = response.body;
+    print("se creo el avance en viewProjectProgrammerpaenel");
+    print(serverResponse);
+  } catch (d) {
+    print("no se creo el avance en viewProjectProgrammerpaenel");
+    print(d.toString());
+  } finally {
+    cliente1.close();
   }
 }
