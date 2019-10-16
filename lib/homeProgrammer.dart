@@ -32,6 +32,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   @override
   void initState() {
     // TODO: implement initState
+    getProjects();
     getDesarrollador();
     
   }
@@ -39,11 +40,12 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
-    var _keydos = new GlobalKey();
+   
 
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
+        await getProjects();
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -503,18 +505,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
             appBar: null,
             resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.white,
-            body: FutureBuilder(
-              key: _keydos,
-              future: getProjects(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    projects != null) {
-                  print("spuestamente la conexion se cerro clave");
-                  print(
-                      "esta es la respuesta del servidor-----------------------------------");
-                  print(projects);
-
-                  return new Container(
+            body: projects!=null? Container(
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                       color: Colors.black,
@@ -661,11 +652,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                         ),
                       ],
                     ),
-                  );
-                } else {
-                  print("spuestamente la conexion no ha terminado clave ");
-
-                  return Stack(
+                  ):Stack(
                     children: <Widget>[
                       Container(
                         height: MediaQuery.of(context).size.height,
@@ -823,10 +810,8 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                         ),
                       )
                     ],
-                  );
-                }
-              },
-            ),
+                  )
+          
           )),
     );
   }
@@ -843,6 +828,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   }
 
   Future getProjects() async {
+    var cliente1=new http.Client();
     try {
 
       print("#######################################3");
@@ -855,7 +841,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       print(desarrollador['NOMBRE'].toString());
       print("######################################333");
       
-      final response = await http.post(
+      final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadProjects.php",
   //"http://192.168.0.5/findProgrammerDB/loadProjects.php",
           "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
@@ -877,6 +863,11 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     } catch (d) {
       print("hubo un error obteniendo los proyectoss");
       print(d.toString());
+    }finally{
+      cliente1.close();
+      setState(() {
+        
+      });
     }
   }
 }

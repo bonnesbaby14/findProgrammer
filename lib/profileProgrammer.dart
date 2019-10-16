@@ -23,6 +23,12 @@ class ProfileProgrammer extends StatefulWidget {
 
 class _ProfileProgrammer extends State<ProfileProgrammer> {
   var comments;
+@override
+  void initState() {
+    // TODO: implement initState
+  getComments();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double mediaw = MediaQuery.of(context).size.width;
@@ -602,13 +608,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                 ),
               ),
               Expanded(
-                  child: FutureBuilder(
-                future: getComments(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    print("la conexion se cerro");
-                    print(comments);
-                    return ListView.builder(
+                  child:comments!=null? ListView.builder(
                       itemCount: comments == null ? 0 : comments.length,
                       itemBuilder: (BuildContext context, int position) {
                         return Card(
@@ -666,28 +666,20 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                           ),
                         );
                       },
-                    );
-                  } else {
-                    print("la conexion no se ha cerrado");
-
-                    return CircularProgressIndicator(
+                    ):CircularProgressIndicator(
                       strokeWidth: 10,
-                    );
-                  }
-                },
-              )),
+                    )
+                  
+                  ),
             ],
           ),
         ));
   }
 
   Future getComments() async {
-    print(
-        "=========================================================================");
-    print("se esta obteiendo los comentarios");
-    print(desarrollador['ID_USUARIO']);
+var cliente1=new http.Client();
     try {
-      final response = await http
+      final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
               body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()});
@@ -698,6 +690,12 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
     } catch (f) {
       print("hubo un error obteniendo los comentarios");
       print(f.toString());
+    }
+    finally{
+      setState(() {
+        
+      });
+      cliente1.close();
     }
   }
 }

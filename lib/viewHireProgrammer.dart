@@ -28,7 +28,13 @@ class ViewHireProgrammer extends StatefulWidget {
 
 class _ViewHireProgrammer extends State<ViewHireProgrammer> {
   var ID;
+  
   _ViewHireProgrammer(this.ID);
+  @override
+  void initState() {
+ getDevelopers();   // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var _keyH = new GlobalKey<ScaffoldState>();
@@ -336,13 +342,7 @@ var _keyH23 = new GlobalKey();
         ),
         appBar: null,
         resizeToAvoidBottomPadding: false,
-        body: FutureBuilder(
-          key: _keyH23,
-          future: getDevelopers(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              print("spuestamente la conexion se cerro de programadores");
-              return new Container(
+        body: request!=null?Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
@@ -489,12 +489,7 @@ var _keyH23 = new GlobalKey();
                     ),
                   ],
                 ),
-              );
-            } else {
-              print(
-                  "spuestamente la conexion no ha terminado de los programadores");
-
-              return Stack(
+              ):Stack(
                 children: <Widget>[
                   new Container(
                     height: MediaQuery.of(context).size.height,
@@ -787,16 +782,16 @@ var _keyH23 = new GlobalKey();
                     ),
                   )
                 ],
-              );
-            }
-          },
-        ));
+              )
+        
+      );
   }
 
   Future getDevelopers() async {
+    var cliente1=new http.Client();
     try {
       print("entro a getdevelopes");
-      final response = await http.post(
+      final response = await cliente1.post(
          // "http://192.168.0.5/findprogrammerDB/loadDevelopers.php",
           "https://findprogrammerceti.000webhostapp.com/loadDevelopers.php",
           body: {
@@ -808,6 +803,11 @@ var _keyH23 = new GlobalKey();
     } catch (d) {
       print("error obteniendo solicitudes el proyecto");
       print(d.toString());
+    }finally{
+      cliente1.close();
+      setState(() {
+        
+      });
     }
   }
 }

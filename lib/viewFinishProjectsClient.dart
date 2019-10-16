@@ -29,6 +29,7 @@ class ViewFinishProjectsClient extends StatefulWidget {
 class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
   @override
   void initState() {
+    getFinishProjects();
     // TODO: implement initState
   }
 
@@ -40,6 +41,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
+        await getFinishProjects();
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -349,17 +351,7 @@ GestureDetector(
             appBar: null,
             resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.white,
-            body: FutureBuilder(
-              key: _keydos,
-              future: getFinishProjects(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  print("spuestamente la conexion se cerro clave");
-                  print(
-                      "esta es la respuesta del servidor-----------------------------------");
-                  print(projects);
-
-                  return new Container(
+            body: projects!=null? Container(
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                       color: Colors.black,
@@ -488,11 +480,7 @@ GestureDetector(
                         ),
                       ],
                     ),
-                  );
-                } else {
-                  print("spuestamente la conexion no ha terminado clave ");
-
-                  return Stack(
+                  ): Stack(
                     children: <Widget>[
                       Container(
                         height: MediaQuery.of(context).size.height,
@@ -650,19 +638,19 @@ GestureDetector(
                         ),
                       )
                     ],
-                  );
-                }
-              },
-            ),
+                  )
+            
+           
           )),
     );
   }
 
   Future getFinishProjects() async {
+    var cliente1=new http.Client();
     try {
       print("-------------------------------------");
 
-      final response = await http.post(
+      final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
 
            "https://findprogrammerceti.000webhostapp.com/loadFinishProjects.php",
@@ -679,6 +667,12 @@ GestureDetector(
     } catch (d) {
       print("hubo un error obteniendo los proyectos en desarrollo");
       print(d.toString());
+    }
+    finally{
+      cliente1.close();
+      setState(() {
+        
+      });
     }
   }
 }

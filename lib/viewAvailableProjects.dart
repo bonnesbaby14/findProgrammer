@@ -1,5 +1,6 @@
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
+import 'package:findprogrammer/viewProjectProgrammerPanel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,6 +23,14 @@ class ViewAvailableProjects extends StatefulWidget {
 }
 
 class _ViewAvailableProjects extends State<ViewAvailableProjects> {
+
+  @override
+  void initState() {
+    getProjects();
+    // TODO: implement initState
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
@@ -259,10 +268,7 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewAvailableProjects()));
+        
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -491,18 +497,7 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
             appBar: null,
             resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.white,
-            body: FutureBuilder(
-              key: _keydos,
-              future: getProjects(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    projects != null) {
-                  print("spuestamente la conexion se cerro clave");
-                  print(
-                      "esta es la respuesta del servidor-----------------------------------");
-                  print(projects);
-
-                  return new Container(
+            body: projects!=null?Container(
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                       color: Colors.black,
@@ -649,11 +644,7 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
                         ),
                       ],
                     ),
-                  );
-                } else {
-                  print("spuestamente la conexion no ha terminado clave ");
-
-                  return Stack(
+                  ):Stack(
                     children: <Widget>[
                       Container(
                         height: MediaQuery.of(context).size.height,
@@ -811,27 +802,18 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
                         ),
                       )
                     ],
-                  );
-                }
-              },
-            ),
+                  )
+            
+         
           )),
     );
   }
 
   Future getProjects() async {
+    var cliente1=new http.Client();
     try {
-      print("#######################################3");
-      print(desarrollador['ID_USUARIO'].toString());
-      print(desarrollador['F_D_WEB'].toString());
-      print(desarrollador['F_D_M_ANDROID'].toString());
-      print(desarrollador['F_D_M_IOS'].toString());
-      print(desarrollador['F_D_E_MAC'].toString());
-      print(desarrollador['F_D_REDES'].toString());
-      print(desarrollador['NOMBRE'].toString());
-      print("######################################333");
-
-      final response = await http.post(
+    
+      final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadProjects.php",
 
           "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
@@ -853,6 +835,11 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
     } catch (d) {
       print("hubo un error obteniendo los proyectoss");
       print(d.toString());
+    }finally{
+      cliente1.close();
+      setState(() {
+        
+      });
     }
   }
 }

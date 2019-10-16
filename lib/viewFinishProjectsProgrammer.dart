@@ -29,6 +29,7 @@ class ViewFinishProjectsProgrammer extends StatefulWidget {
 class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> {
   @override
   void initState() {
+    getFinishProjects();
     // TODO: implement initState
   }
 
@@ -501,17 +502,7 @@ class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> 
             appBar: null,
             resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.white,
-            body: FutureBuilder(
-              key: _keydos,
-              future: getFinishProjects(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  print("spuestamente la conexion se cerro clave");
-                  print(
-                      "esta es la respuesta del servidor-----------------------------------");
-                  print(projects);
-
-                  return new Container(
+            body:projects!=null?Container(
                     height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
                       color: Colors.black,
@@ -644,11 +635,7 @@ class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> 
                         ),
                       ],
                     ),
-                  );
-                } else {
-                  print("spuestamente la conexion no ha terminado clave ");
-
-                  return Stack(
+                  ): Stack(
                     children: <Widget>[
                       Container(
                         height: MediaQuery.of(context).size.height,
@@ -806,19 +793,20 @@ class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> 
                         ),
                       )
                     ],
-                  );
-                }
-              },
-            ),
+                  )
+            
+           
           )),
     );
   }
 
   Future getFinishProjects() async {
-    try {
-      print("-------------------------------------");
+    var cliente1=new http.Client();
 
-      final response = await http.post(
+    try {
+
+
+      final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
 
            "https://findprogrammerceti.000webhostapp.com/loadFinishProjects.php",
@@ -835,6 +823,11 @@ class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> 
     } catch (d) {
       print("hubo un error obteniendo los proyectos en desarrollo");
       print(d.toString());
+    }finally{
+      cliente1.close();
+      setState(() {
+        
+      });
     }
   }
 }
