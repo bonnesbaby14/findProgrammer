@@ -8,15 +8,21 @@ import 'package:groovin_material_icons/groovin_material_icons.dart';
  var contextoS;
 
 class ViewReqFormal extends StatefulWidget {
+  var ID;
+  ViewReqFormal(this.ID);
   @override
-  _ViewReqFormal createState() => new _ViewReqFormal();
+  _ViewReqFormal createState() => new _ViewReqFormal(ID);
 }
 
 class _ViewReqFormal extends State<ViewReqFormal> {
-  
+  var ID;
+  _ViewReqFormal(this.ID);
 
   @override
   Widget build(BuildContext context) {
+    print("el id para req es");
+print(ID);
+
     return Scaffold(
       
       key: _scaffoldKey,

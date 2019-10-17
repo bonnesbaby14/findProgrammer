@@ -5,6 +5,7 @@ import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:findprogrammer/viewHireProgrammer.dart';
+import 'package:findprogrammer/viewReqFormal.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,11 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   _ViewProjectClient(this.ID);
   var dataProject, reqFuncionales, avances, desarrollador;
 
+@override
+  void initState() {
+    // TODO: implement initState
+
+  }
   @override
   Widget build(BuildContext context) {
     contextoS = context;
@@ -45,10 +51,79 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
+
+listReqF = new List<Widget>();
+                listAvances = new List<Widget>();
+                if (avances != null) {
+                  for (int z = 0; z < avances.length; z++) {
+                    listAvances.add(Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                      child: Text(
+                          "Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
+                          style:
+                              TextStyle(fontSize: 14.0, color: Colors.white)),
+                    ));
+
+                    listAvances.add(Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                      child: Text(
+                          "Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
+                          style:
+                              TextStyle(fontSize: 14.0, color: Colors.white)),
+                    ));
+                    listAvances.add(Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                      child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
+                          style:
+                              TextStyle(fontSize: 14.0, color: Colors.white)),
+                    ));
+                    listAvances.add(Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                      child: Text(
+                          "Porcentaje del proyecto: " +
+                              avances[z]["PORCENTAJE"],
+                          style:
+                              TextStyle(fontSize: 14.0, color: Colors.white)),
+                    ));
+
+                    listAvances.add(Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                      child: Text(
+                          "Observaciones: " + avances[z]["OBSERVACIONES"],
+                          style:
+                              TextStyle(fontSize: 14.0, color: Colors.white)),
+                    ));
+
+                    listAvances.add(Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                      child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
+                          style:
+                              TextStyle(fontSize: 14.0, color: Colors.white)),
+                    ));
+                  }
+                }
+
+                if (reqFuncionales != null) {
+                  for (int x = 0; x < reqFuncionales.length; x++) {
+                    listReqF.add(Padding(
+                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                      child: Text(reqFuncionales[x]["REQUERIMIENTO"],
+                          style:
+                              TextStyle(fontSize: 14.0, color: Colors.white)),
+                    ));
+                  }
+                }
+
+
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
+        await  getInfooProject();
+ await getReqFProject();
+ await getAvancesProject();
+ await getDesarrolladorProject();
         await Future.delayed(Duration(milliseconds: 500));
+
         setState(() {});
       },
       child: Scaffold(
@@ -356,77 +431,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           appBar: null,
           resizeToAvoidBottomPadding: false,
           backgroundColor: Colors.white,
-          body: FutureBuilder(
-            future: _asyncMemoizer3.runOnce(() async {
-              await getInfooProject();
-              await getReqFProject();
-              await getAvancesProject();
-              await getDesarrolladorProject();
-            }),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                listReqF = new List<Widget>();
-                listAvances = new List<Widget>();
-                if (avances != null) {
-                  for (int z = 0; z < avances.length; z++) {
-                    listAvances.add(Padding(
-                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text(
-                          "Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
-                          style:
-                              TextStyle(fontSize: 14.0, color: Colors.white)),
-                    ));
-
-                    listAvances.add(Padding(
-                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text(
-                          "Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
-                          style:
-                              TextStyle(fontSize: 14.0, color: Colors.white)),
-                    ));
-                    listAvances.add(Padding(
-                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
-                          style:
-                              TextStyle(fontSize: 14.0, color: Colors.white)),
-                    ));
-                    listAvances.add(Padding(
-                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text(
-                          "Porcentaje del proyecto: " +
-                              avances[z]["PORCENTAJE"],
-                          style:
-                              TextStyle(fontSize: 14.0, color: Colors.white)),
-                    ));
-
-                    listAvances.add(Padding(
-                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text(
-                          "Observaciones: " + avances[z]["OBSERVACIONES"],
-                          style:
-                              TextStyle(fontSize: 14.0, color: Colors.white)),
-                    ));
-
-                    listAvances.add(Padding(
-                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
-                          style:
-                              TextStyle(fontSize: 14.0, color: Colors.white)),
-                    ));
-                  }
-                }
-
-                if (reqFuncionales != null) {
-                  for (int x = 0; x < reqFuncionales.length; x++) {
-                    listReqF.add(Padding(
-                      padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                      child: Text(reqFuncionales[x]["REQUERIMIENTO"],
-                          style:
-                              TextStyle(fontSize: 14.0, color: Colors.white)),
-                    ));
-                  }
-                }
-                return Container(
+          body:dataProject!=null?Container(
                   height: mediah,
                   decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
@@ -860,7 +865,17 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             fontSize: 27.0,
                                             color: Colors.white)),
                                   ),
-                                  Column(children: listReqF),
+                                  dataProject[0]['F_EN_DESARROLLO'] == "1"
+                                      ? dataProject[0]['F_REQ_F'] == "1"
+                                          ? Column(children: listReqF)
+                                          : Text("Sin requerimientos creados",
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.white))
+                                      : Text("Proyecto sin empezar",
+                                          style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.white)),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -1030,9 +1045,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                       ),
                     ],
                   ),
-                );
-              } else {
-                return Stack(
+                ): Stack(
                   children: <Widget>[
                     Container(
                       height: mediah,
@@ -1690,25 +1703,70 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                       ),
                     )
                   ],
-                );
-              }
-            },
-          )),
+                )
+          
+          
+          ),
     );
   }
 
   Future getInfooProject() async {
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          "https://findprogrammerceti.000webhostapp.com/loadInfoProjectPanel.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+      print(dataProject);
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       dataProject[0]["F_VISIBILIDAD"] == "1" ? _ligths = true : _ligths = false;
-
+if (dataProject[0]['F_A_CORRECION_REQ_D'] == "1") {
+                  showDialog(
+                      context: context,
+                      builder: (context) => new CupertinoAlertDialog(
+                            title: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.devices_other,
+                                  size: 80,
+                                  color: Colors.deepPurpleAccent,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("FindProgrammer",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20)),
+                              ],
+                            ),
+                            content: Text("El programador creo una nueva version de los requerimientos"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  
+                             Navigator.push(context, CupertinoPageRoute(builder: (context)=>ViewReqFormal(ID)));
+                                },
+                                child: Text("Ver ahora",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                               FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  
+                                },
+                                child: Text("Ver mas tarde",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                            ],
+                          ));
+                }
       // print(this.dataProject);
     } catch (f) {}
   }
@@ -1760,7 +1818,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
       var dataProject = json.decode(response.body);
       this.desarrollador = dataProject;
-      print("se obtuvo el desarrollodor en getdesarrolladorproyect en viewproject cliente");
+      print(
+          "se obtuvo el desarrollodor en getdesarrolladorproyect en viewproject cliente");
     } catch (error) {
       print("aqui hubo una excepcion getDesarrollador en viewProjectClient");
       print(error.toString());
