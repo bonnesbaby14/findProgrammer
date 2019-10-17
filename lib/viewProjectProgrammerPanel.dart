@@ -21,7 +21,7 @@ var contextoS;
 
 var listReqF = List<Widget>();
 var listAvances = List<Widget>();
-var serverResponse;
+
 var dataProjectw, reqFuncionales, avances, cliente;
 var IDout;
 
