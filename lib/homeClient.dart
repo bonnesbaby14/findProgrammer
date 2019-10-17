@@ -755,7 +755,7 @@ class _Homeclient extends State<Homeclient> {
           // "http://192.168.0.5/findprogrammerDB/loadMyProjects.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
-          });
+          }).timeout(Duration(seconds: 10));
 
       var datauser = json.decode(response.body);
 

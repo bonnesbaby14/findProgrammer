@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'login.dart';

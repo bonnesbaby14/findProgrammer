@@ -853,7 +853,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
             "F_D_E_WINDOWS": desarrollador["F_D_E_WINDOWS"].toString(),
             "F_D_E_MAC": desarrollador["F_D_E_MAC"].toString(),
             "F_D_REDES": desarrollador["F_D_REDES"].toString(),
-          });
+          }).timeout(Duration(seconds: 5));
 
       var datauser = json.decode(response.body);
       print(datauser);

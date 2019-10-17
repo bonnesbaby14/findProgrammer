@@ -1,9 +1,9 @@
 import 'package:findprogrammer/chatProgrammer.dart';
+import 'package:findprogrammer/createAdvance.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsProgrammer.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
-import 'package:findprogrammer/claseAlertCreateAdvance.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -37,13 +37,80 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
   var ID;
 
   _ViewProjectProgrammerPanel(this.ID);
-
+@override
+  void initState() {
+      funciones();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     IDout = ID;
     contextoS = context;
     final AsyncMemoizer _asyncMemoizer4 = AsyncMemoizer();
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+ listReqF = new List<Widget>();
+              listAvances = new List<Widget>();
+              if (avances != null) {
+                for (int z = 0; z < avances.length; z++) {
+                   listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "_______________________________________",
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(
+                        "Porcentaje del proyecto: " + avances[z]["PORCENTAJE"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text("Observaciones: " + avances[z]["OBSERVACIONES"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+
+                  listAvances.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                }
+              }
+
+              if (reqFuncionales != null) {
+                for (int x = 0; x < reqFuncionales.length; x++) {
+                  listReqF.add(Padding(
+                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+                    child: Text(reqFuncionales[x]["REQUERIMIENTO"].toString(),
+                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                  ));
+                }
+              }
+
+
+
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
@@ -494,74 +561,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        body: FutureBuilder(
-          future: _asyncMemoizer4.runOnce(() async {
-            await getInfooProject();
-            await getReqFProject();
-            await getAvancesProject();
-            await getClientProject();
-          }),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              listReqF = new List<Widget>();
-              listAvances = new List<Widget>();
-              if (avances != null) {
-                for (int z = 0; z < avances.length; z++) {
-                   listAvances.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text(
-                        "_______________________________________",
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-                  listAvances.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text(
-                        "Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-
-                  listAvances.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text(
-                        "Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-                  listAvances.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-                  listAvances.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text(
-                        "Porcentaje del proyecto: " + avances[z]["PORCENTAJE"],
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-
-                  listAvances.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text("Observaciones: " + avances[z]["OBSERVACIONES"],
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-
-                  listAvances.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-                }
-              }
-
-              if (reqFuncionales != null) {
-                for (int x = 0; x < reqFuncionales.length; x++) {
-                  listReqF.add(Padding(
-                    padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                    child: Text(reqFuncionales[x]["REQUERIMIENTO"].toString(),
-                        style: TextStyle(fontSize: 14.0, color: Colors.white)),
-                  ));
-                }
-              }
-              return Container(
+        body:dataProjectw!=null? Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
@@ -650,101 +650,9 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     InkWell(
-                                      onTap: () async {
-                                        
-                                        await showDialog(
-                                                context: contextoS,
-                                                builder: (context) =>
-                                                    AlertCreateAdvance())
-                                            .whenComplete(() {
-                                           
-                                          if (serverResponse == "1") {
-                                            
-                                            showDialog(
-                                                context: contextoS,
-                                                builder: (context) =>
-                                                    new CupertinoAlertDialog(
-                                                      title: Column(
-                                                        children: <Widget>[
-                                                          Icon(
-                                                            Icons.devices_other,
-                                                            size: 80,
-                                                            color: Colors
-                                                                .deepPurpleAccent,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                          Text("FindProgrammer",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      20)),
-                                                        ],
-                                                      ),
-                                                      content: Text(
-                                                          "El avance se creo correctamente"),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                            setState(() {});
-                                                          },
-                                                          child: Text("Aceptar",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      15)),
-                                                        ),
-                                                      ],
-                                                    ));
-                                          } else {
-                                            
-                                            showDialog(
-                                                context: contextoS,
-                                                builder: (context) =>
-                                                    new CupertinoAlertDialog(
-                                                      title: Column(
-                                                        children: <Widget>[
-                                                          Icon(
-                                                            Icons.devices_other,
-                                                            size: 80,
-                                                            color: Colors
-                                                                .deepPurpleAccent,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                          Text("FindProgrammer",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      20)),
-                                                        ],
-                                                      ),
-                                                      content: Text(
-                                                          "El avance no se registro, intentalo mas tarde. "),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text("Aceptar",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      15)),
-                                                        ),
-                                                      ],
-                                                    ));
-                                          }
-                                        });
+                                      onTap: (){
+                                        Navigator.push(context, CupertinoPageRoute(builder: (context)=>CreateAvance(this.ID)));
+
                                       },
                                       child: Padding(
                                         padding:
@@ -1077,9 +985,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                     ),
                   ],
                 ),
-              );
-            } else {
-              return Stack(
+              ):Stack(
                 children: <Widget>[
                   Container(
                     height: MediaQuery.of(context).size.height,
@@ -1541,10 +1447,10 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                     ),
                   )
                 ],
-              );
-            }
-          },
-        ));
+              )
+          
+        );
+        
   }
 
   Future getInfooProject() async {
@@ -1569,6 +1475,9 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           "error obteniendo info de proyecto en getInfoPryect en viewproyectProgrammerPanel ");
       print(f.toString());
     } finally {
+       setState(() {
+        
+      });
       cliente1.close();
     }
   }
@@ -1591,6 +1500,9 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       print(
           "error obteniendo reqf  en getReqFPryect en viewproyectProgrammerPanel ");
     } finally {
+       setState(() {
+        
+      });
       cliente1.close();
     }
   }
@@ -1612,6 +1524,9 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
       print(error.toString());
     } finally {
+       setState(() {
+        
+      });
       cliente1.close();
     }
   }
@@ -1637,49 +1552,26 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       print("aqui hubo una excepcion gecliente en viewProjectProgrammerpanel");
       print(error.toString());
     } finally {
+      setState(() {
+        
+      });
       cliente1.close();
     }
   }
+
+
+Future <void> funciones()async{
+await getInfooProject();
+      await getReqFProject();
+      await getAvancesProject();
+      await getClientProject();
+setState(() {
+  
+});
+}
+
+
+
 }
 
 //fin de clase normal
-Future createAdvance() async {
-  var cliente1 = http.Client();
-  print(tdcTimepo.text.toString());
-  print(tdcNumeroCambio.text.toString());
-  print(tdcCambios.text.toString());
-  print(tdcObservaciones.text.toString());
-  print(intPorcentaje.toString());
-  print(tdcDescripcion.text.toString());
-  print(sReq);
-  print(IDout.toString());
-  print(tdcEnlaces.text.toString());
-
-  try {
-    final response = await cliente1.post(
-        //"http://192.168.0.5/findprogrammerDB/registerAdvance.php",
-        "https://findprogrammerceti.000webhostapp.com/registerAdvance.php",
-        body: {
-          "TIEMPO": tdcTimepo.text.toString(),
-          "NOCAMBIOS": tdcNumeroCambio.text.toString(),
-          "CAMBIOS": tdcCambios.text.toString(),
-          "OBSERVACIONES": tdcObservaciones.text.toString(),
-          "PORCENTAJE": intPorcentaje.toStringAsFixed(2).toString(),
-          "DESCRIPCION": tdcDescripcion.text.toString(),
-          "REQ": sReq,
-          "ID": IDout.toString(),
-          "ENLACES": tdcEnlaces.text.toString(),
-        }).whenComplete(() {
-      print("Se termino la funcion de register de proyecto en home cliente");
-    });
-
-    serverResponse = response.body;
-    print("se creo el avance en viewProjectProgrammerpaenel");
-    print(serverResponse);
-  } catch (d) {
-    print("no se creo el avance en viewProjectProgrammerpaenel");
-    print(d.toString());
-  } finally {
-    cliente1.close();
-  }
-}
