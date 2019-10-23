@@ -813,7 +813,7 @@ class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsPr
           "https://findprogrammerceti.000webhostapp.com/loadDevelopmentProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),
-          });
+          }).timeout(Duration(seconds: 7));
 
       var datauser = json.decode(response.body);
       print(datauser);

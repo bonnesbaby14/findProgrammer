@@ -316,8 +316,8 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                           "¿Seguro que quieres aceptar los requermientos? El proramador se apegará a ellos para desarrollar el proyecto, por lo cual solo estará obligado a cumplir lo acordado en estos mismos."),
                                       actions: <Widget>[
                                         FlatButton(
-                                          onPressed: ()async {
-                                           await acceptReq();
+                                          onPressed: () async {
+                                            await acceptReq();
                                           },
                                           child: Text("Aceptar",
                                               style: TextStyle(
@@ -364,7 +364,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                 builder: (context) => CupertinoAlertDialog(
                                       actions: <Widget>[
                                         FlatButton(
-                                          onPressed: () async{
+                                          onPressed: () async {
                                             await noAcceptReq();
                                           },
                                           child: Text("Enviar",
@@ -498,7 +498,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/loadReq.php",
               // "http://192.168.0.5/findprogrammerDB/loadReq.php",
-              body: {"ID": ID.toString()});
+              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       requerimietos = s;
@@ -522,14 +522,14 @@ class _ViewReqFormal extends State<ViewReqFormal> {
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/acceptReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()});
+              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
-      if(s==1){
-print("se acceptaron los req");
-Navigator.pop(context);
-      }else{
+      if (s == 1) {
+        print("se acceptaron los req");
+        Navigator.pop(context);
+      } else {
         print("no se aceptaron los req");
       }
     } catch (f) {
@@ -541,8 +541,8 @@ Navigator.pop(context);
     }
   }
 
- Future noAcceptReq() async {
-      var cliente1 = new http.Client();
+  Future noAcceptReq() async {
+    var cliente1 = new http.Client();
     print(
         "=========================================================================");
     print("se manda corregir los requerimientos");
@@ -551,15 +551,15 @@ Navigator.pop(context);
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/correReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()});
+              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
-      if(s==1){
-print("se mndarona corrgir los req");
-Navigator.pop(context);
-Navigator.pop(context);
-      }else{
+      if (s == 1) {
+        print("se mndarona corrgir los req");
+        Navigator.pop(context);
+        Navigator.pop(context);
+      } else {
         print("no se mandaron a corrgir los req");
       }
     } catch (f) {
@@ -569,10 +569,5 @@ Navigator.pop(context);
       cliente1.close();
       setState(() {});
     }
-
+  }
 }
-
-
-
-}
- 

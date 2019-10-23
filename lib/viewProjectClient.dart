@@ -1707,7 +1707,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           "https://findprogrammerceti.000webhostapp.com/loadInfoProjectPanel.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
+          body: {"ID_PROYECTO": this.ID, "TYPE": "1"}).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
@@ -1773,7 +1773,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     final response = await http.post(
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).catchError((error) {});
+        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).catchError((error) {}).timeout(Duration(seconds: 7));
     try {
       var dataProject = json.decode(response.body);
       this.reqFuncionales = dataProject;
@@ -1788,7 +1788,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
+          body: {"ID_PROYECTO": this.ID, "TYPE": "4"}).timeout(Duration(seconds: 7));
 
       print(response.body);
       var dataProject = json.decode(response.body);
@@ -1809,7 +1809,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           body: {
             "ID_PROYECTO": this.ID,
             "TYPE": "5"
-          }).catchError((error) async {
+          }).timeout(Duration(seconds: 7)).catchError((error) async {
         await print("error no se econctro el servidor");
       });
 
@@ -1833,7 +1833,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           body: {
             "ID_PROYECTO": this.ID,
             "ESTADO": _ligths ? "0" : "1",
-          }).catchError((error) async {
+          }).timeout(Duration(seconds: 7)).catchError((error) async {
         await print("error no se econcontro el servidor updatestate");
       });
 
@@ -1864,7 +1864,7 @@ Future editProject(ID) async {
           "TIPO": intTipo.toString(),
           "TIEMPO": intFrecuencia.toString(),
           "ENTREGABLES": flat ? "1" : "0",
-        });
+        }).timeout(Duration(seconds: 7));
 
     dataResponse = response.body;
     print("Se edito el proyecto con respuesta: ");
@@ -1882,7 +1882,7 @@ Future eraseProject(ID) async {
         "https://findprogrammerceti.000webhostapp.com/eraseProject.php",
         body: {
           "ID": ID.toString(),
-        });
+        }).timeout(Duration(seconds: 7));
 
     dataResponse = response.body;
     print("menaje");

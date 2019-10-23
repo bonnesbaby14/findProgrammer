@@ -536,7 +536,7 @@ getComments();
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-              body: {"ID_USUARIO": client['ID_USUARIO'].toString()});
+              body: {"ID_USUARIO": client['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
 
       var comments = json.decode(response.body);
       this.comments = comments;

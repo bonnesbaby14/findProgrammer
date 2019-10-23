@@ -810,7 +810,7 @@ print(tdcEnlaces.text);
           "REQ": sReq,
           "ID": IDout.toString(),
           "ENLACES": tdcEnlaces.text,
-        });
+        }).timeout(Duration(seconds: 7));
     print("aqui sigo");
     serverResponse2 = response.body;
     print(serverResponse2);

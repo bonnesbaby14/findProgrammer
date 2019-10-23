@@ -1002,7 +1002,7 @@ class _RegisterUser extends State<RegisterUser> {
             "APELLIDOM": apellidoM.text,
             "TELEFONO": telefono.text,
             "TIPO": _groupvalue == 1 ? "1" : "0",
-          });
+          }).timeout(Duration(seconds: 7));
       print(response.body);
       print("66666666666666666666666666");
 
@@ -1167,7 +1167,7 @@ class _RegisterUser extends State<RegisterUser> {
             "REDES": redes ? "1" : "0",
             "WINDOWS": windows ? "1" : "0",
             "MAC": mac ? "1" : "0",
-          });
+          }).timeout(Duration(seconds: 7));
       print(response.body);
       print("66666666666666666666666666");
 

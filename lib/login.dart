@@ -308,7 +308,7 @@ class _Login extends State<Login> {
             body: {
               "google": user.providerId.toString(),
               "mail": user.email.toString(),
-            });
+            }).timeout(Duration(seconds: 7));
         print(user.uid);
         print(response.body);
        
@@ -455,7 +455,7 @@ Map<String, dynamic> MapDesarrollador = Map();
                 "mail": mail.text.toLowerCase().trim(),
                 "password": contrasena.text,
               })
-          .timeout(Duration(seconds: 5))
+          .timeout(Duration(seconds: 7))
           .whenComplete(() {
             Navigator.pop(context);
             

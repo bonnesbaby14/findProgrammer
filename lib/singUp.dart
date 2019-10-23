@@ -299,7 +299,7 @@ class _SingUp extends State<SingUp> {
           body: {
             "CORREO": correo.text,
             "CONTRASENA": contrasena1.text,
-          });
+          }).timeout(Duration(seconds: 7));
       print(response.body);
       print("66666666666666666666666666");
       var  respuesta=response.body.split("-");

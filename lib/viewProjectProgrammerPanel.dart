@@ -1468,7 +1468,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
+          body: {"ID_PROYECTO": this.ID, "TYPE": "1"}).timeout(Duration(seconds: 7));
       print("si hizo ");
       var dataProject1 = json.decode(response.body);
       dataProjectw = dataProject1;
@@ -1495,27 +1495,18 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                     ],
                   ),
                   content: Text(
-                      "El programador creo una nueva version de los requerimientos"),
+                      "El cliente solicitó una nueva versión de los requerimientos"),
                   actions: <Widget>[
                     FlatButton(
                       onPressed: () {
                         Navigator.pop(context);
 
-                        //   Navigator.push(
-                        //       context,
-                        //       CupertinoPageRoute(
-                        //           builder: (context) => ViewReqFormal(ID)));
+                  
                       },
-                      child: Text("Ver ahora",
+                      child: Text("Aceptar",
                           style: TextStyle(color: Colors.black, fontSize: 15)),
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Ver mas tarde",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
+                    
                   ],
                 ));
       }
@@ -1539,7 +1530,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       var response = await cliente1.post(
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-          body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
+          body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       reqFuncionales = dataProject;
@@ -1562,7 +1553,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
+          body: {"ID_PROYECTO": this.ID, "TYPE": "4"}).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       avances = dataProject;
@@ -1587,9 +1578,9 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           body: {
             "ID_PROYECTO": this.ID,
             "TYPE": "6"
-          }).catchError((error) async {
+          }).timeout(Duration(seconds: 7)).catchError((error) async {
         print("error en getclientePRoject en viewProjectPRogrammerpanel");
-      });
+      }).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       cliente = dataProject;

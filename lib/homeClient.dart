@@ -787,7 +787,7 @@ Future registerProject() async {
           "TIPO": intTipo.toString(),
           "TIEMPO": intFrecuencia.toString(),
           "ENTREGABLES": flat ? "1" : "0",
-        }).whenComplete(() {
+        }).timeout(Duration(seconds: 7)).whenComplete(() {
       print("Se termino la funcion de register de proyecto en home cliente");
     });
 

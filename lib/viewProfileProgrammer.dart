@@ -884,7 +884,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
       final response = await http.post(
           "https://findprogrammerceti.000webhostapp.com/loadComments.php",
           //"http://192.168.0.5/findprogrammerDB/loadComments.php",
-          body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()});
+          body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
 
       var comments = json.decode(response.body);
       this.comments = comments;
@@ -902,7 +902,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
       final response = await http.post(
           "https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
           //"http://192.168.0.5/findprogrammerDB/loadDeveloper.php",
-          body: {"ID_USUARIO": this.ID.toString()});
+          body: {"ID_USUARIO": this.ID.toString()}).timeout(Duration(seconds: 7));
 
       var developer = json.decode(response.body);
       this.developer = developer;
@@ -926,7 +926,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
           body: {
             "ID_USUARIO": this.ID.toString(),
             "ID_PROYECTO": this.IDProject.toString(),
-          });
+          }).timeout(Duration(seconds: 7));
       print("respuesta del server:");
       print(response.body);
       if (response.body == "1") {

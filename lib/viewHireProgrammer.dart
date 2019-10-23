@@ -796,7 +796,7 @@ var _keyH23 = new GlobalKey();
           "https://findprogrammerceti.000webhostapp.com/loadDevelopers.php",
           body: {
             "ID": this.ID.toString(),
-          });
+          }).timeout(Duration(seconds: 7));
 
       request = jsonDecode(response.body);
       print(request);

@@ -994,7 +994,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
 
           // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-          body: {"ID_PROYECTO": this.ID, "TYPE": "1"});
+          body: {"ID_PROYECTO": this.ID, "TYPE": "1"}).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
@@ -1006,7 +1006,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "2"});
+        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     this.reqFuncionales = dataProject;
@@ -1019,7 +1019,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "4"});
+        body: {"ID_PROYECTO": this.ID, "TYPE": "4"}).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     this.avances = dataProject;
@@ -1030,7 +1030,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "5"});
+        body: {"ID_PROYECTO": this.ID, "TYPE": "5"}).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     this.clienteP = dataProject;
@@ -1045,7 +1045,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
         body: {
           "ID_PROYECTO": this.ID.toString(),
           "ID_DESARROLLADOR": desarrollador['ID_DESARROLLADOR'].toString(),
-        });
+        }).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     print(dataProject);

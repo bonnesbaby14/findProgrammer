@@ -822,7 +822,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/loadReq.php",
               // "http://192.168.0.5/findprogrammerDB/loadReq.php",
-              body: {"ID": ID.toString()});
+              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       requerimietos = s;
@@ -846,7 +846,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/acceptReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()});
+              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -875,7 +875,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/correReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()});
+              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -905,7 +905,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/deleteReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": id.toString()});
+              body: {"ID": id.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -937,7 +937,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": ID.toString(),
               "REQ":reqS.text
-              });
+              }).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -975,7 +975,7 @@ var cliente1 = new http.Client();
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": ID.toString()
             
-              });
+              }).timeout(Duration(seconds: 7));
 print(response.body);
       var s = json.decode(response.body);
      

@@ -601,7 +601,7 @@ class _ChatClient extends State<ChatClient> {
           body: {
             "idProyecto": idProyecto.toString(),
             "idCliente": idCliente.toString(),
-          });
+          }).timeout(Duration(seconds: 7));
 
       dataResponse = response.body;
 
@@ -625,7 +625,7 @@ class _ChatClient extends State<ChatClient> {
             "idRemitente": idCliente.toString(),
             "idDestinatario": destinatario.toString(),
             "mensaje": _textEditingController.text,
-          });
+          }).timeout(Duration(seconds: 7));
       // print(idCliente.toString());
       // print(destinatario.toString());
       // print(_textEditingController.text);

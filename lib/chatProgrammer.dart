@@ -747,7 +747,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
           body: {
             "idProyecto": idProyecto.toString(),
             "idDesarrollador": idDesarrollador.toString(),
-          });
+          }).timeout(Duration(seconds: 7));
 
       var dataResponse = response.body;
       print(
@@ -773,7 +773,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
             "idRemitente": idDesarrollador.toString(),
             "idDestinatario": destinatario.toString(),
             "mensaje": _textEditingController.text,
-          });
+          }).timeout(Duration(seconds: 7));
       print(idDesarrollador.toString());
       print(destinatario.toString());
       print(_textEditingController.text);

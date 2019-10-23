@@ -687,7 +687,7 @@ print(client['ID_USUARIO'].toString());
           "https://findprogrammerceti.000webhostapp.com/loadDevelopmentsProjectsCliente.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
-          });
+          }).timeout(Duration(seconds: 7));
 
       var datauser = json.decode(response.body);
       print(datauser);
