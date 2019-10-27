@@ -108,7 +108,14 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       }
     }
 
-    return Scaffold(
+    return RefreshIndicator(
+      onRefresh: ()async{
+         await funciones();
+        await Future.delayed(Duration(milliseconds: 500));
+        setState(() {});
+      },
+
+      child: Scaffold(
         key: _scaffoldKey,
         drawer: Container(
           width: 260.0,
@@ -718,12 +725,52 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        print("###############################");
-                                        Navigator.push(
-                                            context,
-                                            CupertinoPageRoute(
-                                                builder: (context) =>
-                                                    ViewCreateReq(ID)));
+                                        if (dataProjectw[0]['F_REQ_F'] == "0") {
+                                          Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      ViewCreateReq(ID)));
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  new CupertinoAlertDialog(
+                                                    title: Column(
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.devices_other,
+                                                          size: 80,
+                                                          color: Colors
+                                                              .deepPurpleAccent,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Text("Requerimientos",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 20)),
+                                                      ],
+                                                    ),
+                                                    content: Text(
+                                                        "Los requermientos ya fueron creados!!!"),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("Aceptar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                    ],
+                                                  ));
+                                        }
                                       },
                                       child: Padding(
                                         padding:
@@ -1458,7 +1505,8 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                     ),
                   )
                 ],
-              ));
+              )),
+    );
   }
 
   Future getInfooProject() async {
@@ -1468,7 +1516,10 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "1"}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_PROYECTO": this.ID,
+            "TYPE": "1"
+          }).timeout(Duration(seconds: 7));
       print("si hizo ");
       var dataProject1 = json.decode(response.body);
       dataProjectw = dataProject1;
@@ -1495,18 +1546,15 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                     ],
                   ),
                   content: Text(
-                      "El cliente solicitó una nueva versión de los requerimientos"),
+                      "El cliente solicitó una nueva versión de los requerimientos \nObservaciones: \n"+dataProjectw[0]['OBSERVACIONES']+""),
                   actions: <Widget>[
                     FlatButton(
                       onPressed: () {
                         Navigator.pop(context);
-
-                  
                       },
                       child: Text("Aceptar",
                           style: TextStyle(color: Colors.black, fontSize: 15)),
                     ),
-                    
                   ],
                 ));
       }
@@ -1530,7 +1578,10 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       var response = await cliente1.post(
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-          body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_PROYECTO": this.ID,
+            "TYPE": "2"
+          }).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       reqFuncionales = dataProject;
@@ -1553,7 +1604,10 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "4"}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_PROYECTO": this.ID,
+            "TYPE": "4"
+          }).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       avances = dataProject;
@@ -1571,16 +1625,17 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
   Future<List> getClientProject() async {
     var cliente1 = http.Client();
     try {
-      final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
-          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+      final response = await cliente1
+          .post(
+              "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+              //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {
-            "ID_PROYECTO": this.ID,
-            "TYPE": "6"
-          }).timeout(Duration(seconds: 7)).catchError((error) async {
-        print("error en getclientePRoject en viewProjectPRogrammerpanel");
-      }).timeout(Duration(seconds: 7));
+              body: {"ID_PROYECTO": this.ID, "TYPE": "6"})
+          .timeout(Duration(seconds: 7))
+          .catchError((error) async {
+            print("error en getclientePRoject en viewProjectPRogrammerpanel");
+          })
+          .timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       cliente = dataProject;

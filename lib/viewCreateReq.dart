@@ -15,7 +15,8 @@ const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 var contextoS;
 var requerimietos;
-  TextEditingController reqS   = TextEditingController();
+TextEditingController reqS = TextEditingController();
+TextEditingController reqEdit = TextEditingController();
 
 class ViewCreateReq extends StatefulWidget {
   var ID;
@@ -539,7 +540,6 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                       children: <Widget>[
                         InkWell(
                           onTap: () {
-
                             showDialog(
                                 context: context,
                                 builder: (context) => CupertinoAlertDialog(
@@ -547,6 +547,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                                         FlatButton(
                                           onPressed: () async {
                                             await enviarReq();
+                                            Navigator.pop(context);
                                           },
                                           child: Text("Enviar",
                                               style: TextStyle(
@@ -577,19 +578,15 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 20)),
-                                                  SizedBox(
+                                          SizedBox(
                                             height: 20,
                                           ),
                                         ],
                                       ),
-                                      content: Text("¿Seguro que quieres enviar los requerimientos al cliente?",
-                                              ),
-                                    )
-                                    
-                                    );
-
-
-
+                                      content: Text(
+                                        "¿Seguro que quieres enviar los requerimientos al cliente?",
+                                      ),
+                                    ));
                           },
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -615,10 +612,10 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                         InkWell(
                           onTap: () {
                             showDialog(
-                                context: context,
-                                builder: (context) => ListView(
-                                  children: <Widget>[
-                                    CupertinoAlertDialog(
+                              context: context,
+                              builder: (context) => ListView(
+                                children: <Widget>[
+                                  CupertinoAlertDialog(
                                       actions: <Widget>[
                                         FlatButton(
                                           onPressed: () async {
@@ -653,7 +650,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 20)),
-                                                  SizedBox(
+                                          SizedBox(
                                             height: 20,
                                           ),
                                         ],
@@ -673,10 +670,9 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                                                 color:
                                                     Colors.deepPurpleAccent)),
                                       ))
-                                  ],
-                                ),
-                                    
-                                    );
+                                ],
+                              ),
+                            );
                           },
                           child: Padding(
                             padding: EdgeInsets.all(10),
@@ -715,6 +711,9 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                           itemBuilder: (BuildContext context, int position) {
                             return InkWell(
                               onTap: () {
+                                reqEdit.text =
+                                    requerimietos[position]['REQUERIMIENTO'];
+
                                 showDialog(
                                     context: context,
                                     builder: (context) => CupertinoAlertDialog(
@@ -728,14 +727,14 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              Text("Eliminar requerimiento",
+                                              Text("Requerimiento",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 20)),
                                             ],
                                           ),
                                           content: Text(
-                                              "¿Seguro que quieres eliminar este requerimiento?"),
+                                              "¿Quieres eliminar o editar requerimiento ?"),
                                           actions: <Widget>[
                                             FlatButton(
                                               onPressed: () async {
@@ -743,7 +742,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                                                     requerimietos[position]
                                                         ['ID_REQ_F']);
                                               },
-                                              child: Text("Aceptar",
+                                              child: Text("Eliminar",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 15)),
@@ -751,8 +750,81 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                                             FlatButton(
                                               onPressed: () {
                                                 Navigator.pop(context);
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        CupertinoAlertDialog(
+                                                          title: Column(
+                                                            children: <Widget>[
+                                                              Icon(
+                                                                Icons
+                                                                    .devices_other,
+                                                                size: 80,
+                                                                color: Colors
+                                                                    .deepPurpleAccent,
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Text("Editar",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          20)),
+                                                            ],
+                                                          ),
+                                                          content:
+                                                              CupertinoTextField(
+                                                            controller: reqEdit,
+                                                            placeholderStyle:
+                                                                TextStyle(
+                                                                    color: Colors
+                                                                        .black38),
+                                                            decoration: BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .deepPurpleAccent)),
+                                                          ),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                              onPressed: () async{
+                                                                //Aqui se modifica los requrimienos
+                                                                await editReq(requerimietos[position]
+                                                        ['ID_REQ_F']);
+                                                               
+
+                                                              },
+                                                              child: Text(
+                                                                  "Editar",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          15)),
+                                                            ),
+                                                            FlatButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                  "Cancelar",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          15)),
+                                                            ),
+                                                          ],
+                                                        ));
                                               },
-                                              child: Text("Cancelar",
+                                              child: Text("Editar",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 15)),
@@ -832,7 +904,9 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       print(f.toString());
     } finally {
       cliente1.close();
-      setState(() {});
+      setState(() {
+          
+      });
     }
   }
 
@@ -861,7 +935,8 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       print(f.toString());
     } finally {
       cliente1.close();
-      setState(() {});
+      setState(() { 
+      });
     }
   }
 
@@ -891,7 +966,9 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       print(f.toString());
     } finally {
       cliente1.close();
-      setState(() {});
+      setState(() {
+         
+      });
     }
   }
 
@@ -923,21 +1000,63 @@ class _ViewCreateReq extends State<ViewCreateReq> {
       cliente1.close();
       setState(() {});
     }
+    setState(() {
+  getReq();
+    });
   }
 
+
+  Future<void> editReq(var id) async {
+    var cliente1 = new http.Client();
+    print(
+        "=========================================================================");
+    print("se manda a editar el requerimientos los requerimientos");
+
+    try {
+      final response = await cliente1
+          .post("https://findprogrammerceti.000webhostapp.com/editReqP.php",
+              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+              body: {"ID": id.toString(),
+              "REQ":reqEdit.text,
+              }).timeout(Duration(seconds: 7));
+
+      var s = json.decode(response.body);
+      print(s);
+      if (s == 1) {
+        print("se mndarona editar  los req");
+        Navigator.pop(context);
+        setState(() {});
+      } else {
+        print("no se mandaron a editar los req");
+      }
+    } catch (f) {
+      print("hubo un error editando los requerimeintos");
+      print(f.toString());
+    } finally {
+      cliente1.close();
+      setState(() {
+          getReq();
+      });
+    }
+    
+  }
+
+
+
   Future<void> createReq() async {
-     var cliente1 = new http.Client();
+    var cliente1 = new http.Client();
     print(
         "=========================================================================");
     print("se manda aceptar los requerimientos");
 
     try {
-      final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/createReq.php",
-              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString(),
-              "REQ":reqS.text
-              }).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(
+          "https://findprogrammerceti.000webhostapp.com/createReq.php",
+          // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+          body: {
+            "ID": ID.toString(),
+            "REQ": reqS.text
+          }).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -953,18 +1072,13 @@ class _ViewCreateReq extends State<ViewCreateReq> {
     } finally {
       cliente1.close();
       setState(() {
-
         getReq();
       });
     }
-
   }
 
-
-
-
-Future<void> enviarReq()async{
-var cliente1 = new http.Client();
+  Future<void> enviarReq() async {
+    var cliente1 = new http.Client();
     print(
         "=========================================================================");
     print("se manda enviando los requerimientos");
@@ -973,12 +1087,10 @@ var cliente1 = new http.Client();
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/enviarReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()
-            
-              }).timeout(Duration(seconds: 7));
-print(response.body);
+              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
+      print(response.body);
       var s = json.decode(response.body);
-     
+
       if (s == 1) {
         print("se enviando los req");
         Navigator.pop(context);
@@ -990,18 +1102,7 @@ print(response.body);
       print(f.toString());
     } finally {
       cliente1.close();
-      setState(() {
-
-    
-      });
+      setState(() {});
     }
-
-
-
-}
-
-
-
-
-
+  }
 }

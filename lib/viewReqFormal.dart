@@ -8,6 +8,7 @@ import 'package:groovin_material_icons/groovin_material_icons.dart';
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 var _scaffoldKey = new GlobalKey<ScaffoldState>();
 var contextoS;
+TextEditingController reqOb=new TextEditingController();
 var requerimietos;
 
 class ViewReqFormal extends StatefulWidget {
@@ -398,8 +399,34 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                                   fontSize: 20)),
                                         ],
                                       ),
-                                      content: Text(
+                                      content: Column(
+                                        children: <Widget>[
+                                          Text(
                                           "¿Seguro que quieres enviar la corrección al programador?"),
+                                       SizedBox(
+                                         height: 20,
+                                       ),
+                                      CupertinoTextField(
+                                                            controller: reqOb,
+                                                            placeholder: "Que quieres cambiar...",
+                                                            maxLines: null,
+                                                            placeholderStyle:
+                                                          
+                                                                TextStyle(
+                                                                    color: Colors
+                                                                        .black38),
+                                                            decoration: BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                border: Border.all(
+                                                                    width: 0.5,
+                                                                    color: Colors
+                                                                        .deepPurpleAccent)),
+                                                          ),
+                                       ],
+                                      ),
                                     ));
                           },
                           child: Padding(
@@ -551,7 +578,9 @@ class _ViewReqFormal extends State<ViewReqFormal> {
       final response = await cliente1
           .post("https://findprogrammerceti.000webhostapp.com/correReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
+              body: {"ID": ID.toString(),
+              "obs":reqOb.text
+              }).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
