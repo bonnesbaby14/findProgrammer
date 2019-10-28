@@ -4,6 +4,7 @@ import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
+import 'package:findprogrammer/viewProjectClient.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -435,12 +436,12 @@ class _ViewDevelopmentProjectsClient
                                   (BuildContext context, int position) {
                                 return GestureDetector(
                                   onTap: () {
-                                    //Navigator.push(
-                                    //no se que es esto hay que checar
-                                    ///    context,
-                                    // MaterialPageRoute(
-                                    //   builder: (context) =>
-                                    //     ViewProjePanel()));
+                                   Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ViewProjectClient(
+                                            myProjects[position]
+                                                ['ID_PROYECTO'])));
                                   },
                                   child: Card(
                                     shape: RoundedRectangleBorder(

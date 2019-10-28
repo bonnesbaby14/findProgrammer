@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:async/async.dart';
 import 'package:findprogrammer/chatClient.dart';
 import 'package:findprogrammer/profileClient.dart';
+import 'package:findprogrammer/viewAdvance.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:findprogrammer/viewHireProgrammer.dart';
@@ -46,7 +47,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   @override
   Widget build(BuildContext context) {
     contextoS = context;
-    final AsyncMemoizer _asyncMemoizer3 = AsyncMemoizer();
+  
     var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
@@ -91,6 +92,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
           child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
+              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+        ));
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: avances[z]["F_ACEPTADO"]=="1"?Text("Aceptado",
+              style: TextStyle(fontSize: 14.0, color: Colors.white)):Text("No   aceptado",
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
       }
@@ -1758,6 +1765,49 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                   ],
                 ));
       }
+if (dataProject[0]['F_AVANCE_D'] == "1") {
+        showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text(
+                      "El programador creo un nuevo avance"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                      
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => ViewAdvance(ID)));
+                      },
+                      child: Text("Ver ahora",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Ver mas tarde",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+      }
+
       // print(this.dataProject);
     } catch (f) {
       print("Error obteniendo la info del proyecto");
@@ -1768,7 +1818,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     }
   }
 
-  Future<List> getReqFProject() async {
+  Future<void> getReqFProject() async {
     print("entro");
     final response = await http.post(
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
@@ -1782,7 +1832,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   }
 
   Future<List> getAvancesProject() async {
-    print("entro");
+    print("get desarrollado");
     try {
       final response = await http.post(
           "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
@@ -1815,6 +1865,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
       var dataProject = json.decode(response.body);
       this.desarrollador = dataProject;
+      print("-------------------------------------");
+      print(desarrollador);
       print(
           "se obtuvo el desarrollodor en getdesarrolladorproyect en viewproject cliente");
     } catch (error) {

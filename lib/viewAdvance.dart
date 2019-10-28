@@ -11,20 +11,22 @@ var contextoS;
 TextEditingController reqOb = new TextEditingController();
 var requerimietos;
 
-class ViewReqFormal extends StatefulWidget {
+class ViewAdvance extends StatefulWidget {
   var ID;
 
-  ViewReqFormal(this.ID);
+  ViewAdvance(this.ID);
   @override
-  _ViewReqFormal createState() => new _ViewReqFormal(ID);
+  _ViewAdvance createState() => new _ViewAdvance(ID);
 }
 
-class _ViewReqFormal extends State<ViewReqFormal> {
+class _ViewAdvance extends State<ViewAdvance> {
   var ID;
-  _ViewReqFormal(this.ID);
+  var listAvances;
+  var avances;
+  _ViewAdvance(this.ID);
   @override
   void initState() {
-    getReq();
+    getLastAvance();
     // TODO: implement initState
     super.initState();
   }
@@ -33,6 +35,63 @@ class _ViewReqFormal extends State<ViewReqFormal> {
   Widget build(BuildContext context) {
     print("el id para req es");
     print(ID);
+
+    listAvances = new List<Widget>();
+    if (avances != null) {
+      for (int z = 0; z < avances.length; z++) {
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("\n Nuevo avance!!!!",
+              style: TextStyle(fontSize: 24.0, color: Colors.white)),
+        ));
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("________________________________________",
+              style: TextStyle(fontSize: 19.0, color: Colors.white)),
+        ));
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
+              style: TextStyle(fontSize: 19.0, color: Colors.white)),
+        ));
+
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
+              style: TextStyle(fontSize: 19.0, color: Colors.white)),
+        ));
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
+              style: TextStyle(fontSize: 19.0, color: Colors.white)),
+        ));
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("Porcentaje del proyecto: " + avances[z]["PORCENTAJE"],
+              style: TextStyle(fontSize: 19.0, color: Colors.white)),
+        ));
+
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("Observaciones: " + avances[z]["OBSERVACIONES"],
+              style: TextStyle(fontSize: 19.0, color: Colors.white)),
+        ));
+
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: InkWell(
+            onTap: () {},
+            child: Text("Enlaces: " + avances[z]["ENLACES"],
+                style: TextStyle(fontSize: 19.0, color: Colors.white)),
+          ),
+        ));
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
+              style: TextStyle(fontSize: 19.0, color: Colors.white)),
+        ));
+      }
+    }
 
     return Scaffold(
         key: _scaffoldKey,
@@ -255,7 +314,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
             children: <Widget>[
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: (MediaQuery.of(context).size.height / 2),
+                height: (MediaQuery.of(context).size.height / 2)-90,
                 decoration: BoxDecoration(
                     color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.only(
@@ -284,7 +343,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                     ),
                     Padding(
                       padding: EdgeInsets.all(10),
-                      child: Text("Requerimientos \n                  Formales",
+                      child: Text("Nuevo Avance",
                           textAlign: TextAlign.justify,
                           style:
                               TextStyle(fontSize: 30.0, color: Colors.white)),
@@ -307,18 +366,18 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          Text("Aceptar Requerimientos",
+                                          Text("Aceptar Avance",
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 20)),
                                         ],
                                       ),
                                       content: Text(
-                                          "¿Seguro que quieres aceptar los requermientos? El proramador se apegará a ellos para desarrollar el proyecto, por lo cual solo estará obligado a cumplir lo acordado en estos mismos."),
+                                          "¿Seguro que quieres aceptar el avance?"),
                                       actions: <Widget>[
                                         FlatButton(
                                           onPressed: () async {
-                                            await acceptReq();
+                                            await acceptAdvance(avances[0]["ID_AVANCES"]);
                                           },
                                           child: Text("Aceptar",
                                               style: TextStyle(
@@ -350,7 +409,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "        Aceptar \n Requerimientos",
+                                  "Aceptar \n Avance",
                                   style: TextStyle(
                                       fontSize: 14.0, color: Colors.white),
                                 ),
@@ -366,7 +425,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                       actions: <Widget>[
                                         FlatButton(
                                           onPressed: () async {
-                                            await noAcceptReq();
+                                             await noAcceptAdvance(avances[0]["ID_AVANCES"]);
                                           },
                                           child: Text("Enviar",
                                               style: TextStyle(
@@ -455,53 +514,16 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                 height: 5,
               ),
               Expanded(
-                  child: requerimietos != null
-                      ? ListView.builder(
-                          itemCount:
-                              requerimietos == null ? 0 : requerimietos.length,
-                          itemBuilder: (BuildContext context, int position) {
-                            return Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              elevation: 10,
-                              color: Color.fromARGB(450, 41, 39, 42),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(20),
-                                    child: Icon(
-                                      Icons.star_half,
-                                      size: 50,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 25,
-                                      ),
-                                      Container(
-                                        width: 220,
-                                        child: Text(
-                                            requerimietos[position]
-                                                    ['REQUERIMIENTO']
-                                                .toString(),
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                              fontSize: 20.0,
-                                              color: Colors.white,
-                                            )),
-                                      ),
-                                      SizedBox(
-                                        height: 25,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                  child: listAvances != null
+                      ? Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 10,
+                          color: Color.fromARGB(450, 41, 39, 42),
+                          child: Column(
+                            children: listAvances,
+                          ),
                         )
                       : CircularProgressIndicator(
                           strokeWidth: 10,
@@ -511,89 +533,91 @@ class _ViewReqFormal extends State<ViewReqFormal> {
         ));
   }
 
-  Future getReq() async {
+  Future getLastAvance() async {
     var cliente1 = new http.Client();
     print(
         "=========================================================================");
-    print("se esta obteiendo los reqermientos");
-
-    try {
-      final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/loadReq.php",
-              // "http://192.168.0.5/findprogrammerDB/loadReq.php",
-              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
-
-      var s = json.decode(response.body);
-      requerimietos = s;
-      print("se obtuvieron los requerimientos");
-    } catch (f) {
-      print("hubo un error obteniendo los requerimeintos");
-      print(f.toString());
-    } finally {
-      cliente1.close();
-      setState(() {});
-    }
-  }
-
-  Future acceptReq() async {
-    var cliente1 = new http.Client();
-    print(
-        "=========================================================================");
-    print("se manda aceptar los requerimientos");
-
-    try {
-      final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/acceptReq.php",
-              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
-
-      var s = json.decode(response.body);
-      print(s);
-      if (s == 1) {
-        print("se acceptaron los req");
-        Navigator.pop(context);
-      } else {
-        print("no se aceptaron los req");
-      }
-    } catch (f) {
-      print("hubo un error obteniendo los requerimeintos");
-      print(f.toString());
-    } finally {
-      cliente1.close();
-      setState(() {});
-    }
-  }
-
-  Future noAcceptReq() async {
-    var cliente1 = new http.Client();
-    print(
-        "=========================================================================");
-    print("se manda corregir los requerimientos");
+    print("se esta obteiendo los el ultimo avance");
 
     try {
       final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/correReq.php",
-          // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-          body: {
-            "ID": ID.toString(),
-            "obs": reqOb.text
-          }).timeout(Duration(seconds: 7));
+          "https://findprogrammerceti.000webhostapp.com/loadLastAdvance.php",
+          // "http://192.168.0.5/findprogrammerDB/loadReq.php",
+          body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
-      print(s);
-      if (s == 1) {
-        print("se mndarona corrgir los req");
-        Navigator.pop(context);
-        Navigator.pop(context);
-      } else {
-        print("no se mandaron a corrgir los req");
-      }
+      this.avances = s;
+      print(avances);
+      print("se obtuvieron los el avance");
     } catch (f) {
-      print("hubo un error corrigiendo los requerimeintos");
+      print("hubo un error obteniendo los el avance");
       print(f.toString());
     } finally {
       cliente1.close();
       setState(() {});
     }
   }
+
+Future acceptAdvance(id) async {
+    var cliente1 = new http.Client();
+    print(
+        "=========================================================================");
+    print("se manda aceptar los advance");
+
+    try {
+      final response = await cliente1
+          .post("https://findprogrammerceti.000webhostapp.com/acceptAdvance.php",
+              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+              body: {"ID": id.toString()}).timeout(Duration(seconds: 7));
+
+      var s = json.decode(response.body);
+      print(s);
+      if (s == 1) {
+        print("se acceptaron los advance");
+        Navigator.pop(context);
+      } else {
+        print("no se aceptaron los advance");
+      }
+    } catch (f) {
+      print("hubo un error aceptado  los avance");
+      print(f.toString());
+    } finally {
+      cliente1.close();
+     
+    }
+  }
+
+
+  Future noAcceptAdvance(id) async {
+    var cliente1 = new http.Client();
+    print(
+        "=========================================================================");
+    print("se manda aceptar los advance");
+    print(ID.toString());
+
+    try {
+      final response = await cliente1
+          .post("https://findprogrammerceti.000webhostapp.com/noAcceptAdvance.php",
+              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+              body: {"ID": id.toString(),"obs":reqOb.text,"id":ID.toString()}).timeout(Duration(seconds: 7));
+
+      var s = json.decode(response.body);
+      print(s);
+      if (s == 1) {
+        print("se no acceptaron los advance");
+        Navigator.pop(context);
+      } else {
+        print("no no se aceptaron los advance");
+      }
+    } catch (f) {
+      print("hubo un error no aceptado  los avance");
+      print(f.toString());
+    } finally {
+      cliente1.close();
+     
+    }
+  }
+
 }
+
+

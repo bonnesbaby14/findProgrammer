@@ -95,6 +95,12 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: avances[z]["F_ACEPTADO"]=="1"?Text("Aceptado",
+              style: TextStyle(fontSize: 14.0, color: Colors.white)):Text("No   aceptado",
+              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+        ));
       }
     }
 
@@ -1547,6 +1553,37 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                   ),
                   content: Text(
                       "El cliente solicitó una nueva versión de los requerimientos \nObservaciones: \n"+dataProjectw[0]['OBSERVACIONES']+""),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+      }
+      if (dataProjectw[0]['F_AVANCE_A'] == "1") {
+        showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text(
+                      "El cliente solicitó una nueva versión del avance \nObservaciones: \n"+dataProjectw[0]['OBSERVACIONESA']+""),
                   actions: <Widget>[
                     FlatButton(
                       onPressed: () {
