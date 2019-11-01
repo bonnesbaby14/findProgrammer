@@ -8,6 +8,7 @@ import 'package:findprogrammer/viewProjectClient.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'componentes/variables.dart';
 import 'viewProjectProgrammerPanel.dart';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
@@ -685,7 +686,7 @@ class _ViewDevelopmentProjectsClient
 print(client['ID_USUARIO'].toString());
       final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
-          "https://findprogrammerceti.000webhostapp.com/loadDevelopmentsProjectsCliente.php",
+          server+"/loadDevelopmentsProjectsCliente.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
           }).timeout(Duration(seconds: 7));

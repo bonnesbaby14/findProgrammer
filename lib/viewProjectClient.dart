@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 import 'claseAlertEditProject.dart';
 import 'componentes/helperSQFLITE.dart';
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'login.dart';
 import 'homeClient.dart';
@@ -1711,7 +1712,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     var cliente1 = http.Client();
     try {
       final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProjectPanel.php",
+          server+"/loadInfoProjectPanel.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {"ID_PROYECTO": this.ID, "TYPE": "1"}).timeout(Duration(seconds: 7));
@@ -1822,7 +1823,7 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
     print("entro");
     final response = await http.post(
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        server+"/loadInfoProject.php",
         body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).catchError((error) {}).timeout(Duration(seconds: 7));
     try {
       var dataProject = json.decode(response.body);
@@ -1835,7 +1836,7 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
     print("get desarrollado");
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          server+"/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {"ID_PROYECTO": this.ID, "TYPE": "4"}).timeout(Duration(seconds: 7));
@@ -1853,7 +1854,7 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
   Future<List> getDesarrolladorProject() async {
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          server+"/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {
@@ -1879,7 +1880,7 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
     print("entro a updatestate");
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/updateStateProject.php",
+          server+"/updateStateProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {
@@ -1907,7 +1908,7 @@ Future editProject(ID) async {
   try {
     final response = await http.post(
         // "http://192.168.0.5/findprogrammerDB/editProject.php",
-        "https://findprogrammerceti.000webhostapp.com/editProject.php",
+        server+"/editProject.php",
         body: {
           "ID": ID.toString(),
           "TITULO": tdcTitulo.text,
@@ -1931,7 +1932,7 @@ Future eraseProject(ID) async {
   try {
     final response = await http.post(
         // "http://192.168.0.5/findprogrammerDB/eraseProject.php",
-        "https://findprogrammerceti.000webhostapp.com/eraseProject.php",
+        server+"/eraseProject.php",
         body: {
           "ID": ID.toString(),
         }).timeout(Duration(seconds: 7));

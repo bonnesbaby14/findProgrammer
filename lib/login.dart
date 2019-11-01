@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'componentes/helperSQFLITE.dart';
+import 'componentes/variables.dart';
 import 'main.dart';
 import 'package:http/http.dart' as http;
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -304,7 +305,7 @@ class _Login extends State<Login> {
 
       if (user != null) {
         final response = await http.post(
-            "https://findprogrammerceti.000webhostapp.com/google.php",
+            server+"/google.php",
             body: {
               "google": user.providerId.toString(),
               "mail": user.email.toString(),
@@ -448,7 +449,7 @@ Map<String, dynamic> MapDesarrollador = Map();
         var cliente=http.Client();
     try {
       final response = await cliente
-          .post("https://findprogrammerceti.000webhostapp.com/login.php",
+          .post(server+"/login.php",
               // "http://192.168.84.114/findprogrammerDB/login.php",
                 //     "http://192.168.0.5/findprogrammerDB/login.php",
               body: {

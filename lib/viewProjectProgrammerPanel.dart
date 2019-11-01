@@ -9,6 +9,7 @@ import 'package:findprogrammer/viewProjectClient.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'package:async/async.dart';
 import 'homeProgrammer.dart';
@@ -1519,7 +1520,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
     var cliente1 = http.Client();
     try {
       final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          server+"/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {
@@ -1614,7 +1615,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
     try {
       var response = await cliente1.post(
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          server+"/loadInfoProject.php",
           body: {
             "ID_PROYECTO": this.ID,
             "TYPE": "2"
@@ -1638,7 +1639,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
     var cliente1 = http.Client();
     try {
       final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          server+"/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
           body: {
@@ -1664,7 +1665,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
     try {
       final response = await cliente1
           .post(
-              "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+              server+"/loadInfoProject.php",
               //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
               body: {"ID_PROYECTO": this.ID, "TYPE": "6"})

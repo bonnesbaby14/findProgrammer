@@ -5,6 +5,7 @@ import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'componentes/variables.dart';
 import 'viewProjectProgrammerPanel.dart';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
@@ -810,7 +811,7 @@ class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsPr
       final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
            //         "http://192.168.0.5/findProgrammerDB/loadDevelopmentProjects.php",
-          "https://findprogrammerceti.000webhostapp.com/loadDevelopmentProjects.php",
+          server+"/loadDevelopmentProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),
           }).timeout(Duration(seconds: 7));

@@ -6,6 +6,7 @@ import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'componentes/variables.dart';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'viewDevelopmentProjectsProgrammer.dart';
@@ -844,7 +845,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadProjects.php",
   //"http://192.168.0.5/findProgrammerDB/loadProjects.php",
-          "https://findprogrammerceti.000webhostapp.com/loadProjects.php",
+          server+"/loadProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),
             "F_D_WEB": desarrollador["F_D_WEB"].toString(),

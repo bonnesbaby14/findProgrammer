@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'dart:convert';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -541,7 +542,7 @@ class _ViewAdvance extends State<ViewAdvance> {
 
     try {
       final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/loadLastAdvance.php",
+          server+"/loadLastAdvance.php",
           // "http://192.168.0.5/findprogrammerDB/loadReq.php",
           body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
@@ -566,7 +567,7 @@ Future acceptAdvance(id) async {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/acceptAdvance.php",
+          .post(server+"/acceptAdvance.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": id.toString()}).timeout(Duration(seconds: 7));
 
@@ -597,7 +598,7 @@ Future acceptAdvance(id) async {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/noAcceptAdvance.php",
+          .post(server+"/noAcceptAdvance.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": id.toString(),"obs":reqOb.text,"id":ID.toString()}).timeout(Duration(seconds: 7));
 

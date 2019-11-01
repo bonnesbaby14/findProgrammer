@@ -5,6 +5,7 @@ import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'componentes/helperSQFLITE.dart';
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'homeClient.dart';
 
@@ -384,7 +385,7 @@ getComments();
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               image: NetworkImage(
-                                  "http://findprogrammerceti.000webhostapp.com/images/image_" +
+                                  server+"/images/image_" +
                                       client['ID_USUARIO'].toString() +
                                       ".jpg"))),
                     ),
@@ -534,7 +535,7 @@ getComments();
     print(client['ID_USUARIO']);
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
+          .post(server+"/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
               body: {"ID_USUARIO": client['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
 

@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'componentes/variables.dart';
 import 'homeProgrammer.dart';
 import 'login.dart';
 import 'componentes/helperSQFLITE.dart';
@@ -743,7 +744,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
     try {
       final response = await http.post(
           //"http://192.168.0.5/findprogrammerDB/openRoom.php",
-          "https://findprogrammerceti.000webhostapp.com/openRoom1.php",
+          server+"/openRoom1.php",
           body: {
             "idProyecto": idProyecto.toString(),
             "idDesarrollador": idDesarrollador.toString(),
@@ -768,7 +769,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
     try {
       final response = await http.post(
           //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
-          "https://findprogrammerceti.000webhostapp.com/sendMessage.php",
+          server+"/sendMessage.php",
           body: {
             "idRemitente": idDesarrollador.toString(),
             "idDestinatario": destinatario.toString(),

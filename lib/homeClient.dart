@@ -2,6 +2,7 @@ import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:findprogrammer/claseAlertCreateProject.dart';
+import 'componentes/variables.dart';
 import 'viewProjectClient.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -751,7 +752,7 @@ class _Homeclient extends State<Homeclient> {
     try {
       print("ID" + client['ID_USUARIO'].toString());
       final response = await cliente.post(
-          "https://findprogrammerceti.000webhostapp.com/loadMyProjects.php",
+          server+"/loadMyProjects.php",
           // "http://192.168.0.5/findprogrammerDB/loadMyProjects.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
@@ -778,7 +779,7 @@ Future registerProject() async {
   try {
     final response = await cliente.post(
         //"http://192.168.0.5/findprogrammerDB/registerProject.php",
-        "https://findprogrammerceti.000webhostapp.com/registerProject.php",
+        server+"/registerProject.php",
         body: {
           "ID_USUARIO": client['ID_USUARIO'].toString(),
           "TITULO": tdcTitulo.text.toString(),

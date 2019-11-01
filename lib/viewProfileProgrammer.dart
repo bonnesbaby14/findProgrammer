@@ -4,6 +4,7 @@ import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'package:findprogrammer/homeClient.dart';
 import 'homeProgrammer.dart';
@@ -882,7 +883,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     // print(desarrollador['ID_USUARIO']);
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadComments.php",
+          server+"/loadComments.php",
           //"http://192.168.0.5/findprogrammerDB/loadComments.php",
           body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
 
@@ -900,7 +901,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     //print(this.ID.toString());
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/loadDeveloper.php",
+          server+"/loadDeveloper.php",
           //"http://192.168.0.5/findprogrammerDB/loadDeveloper.php",
           body: {"ID_USUARIO": this.ID.toString()}).timeout(Duration(seconds: 7));
 
@@ -921,7 +922,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     print(this.ID.toString());
     try {
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/createPanel.php",
+          server+"/createPanel.php",
           //"http://192.168.0.5/findprogrammerDB/createPanel.php",
           body: {
             "ID_USUARIO": this.ID.toString(),

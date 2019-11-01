@@ -3,6 +3,7 @@ import 'package:findprogrammer/viewProjectProgrammerPanel.dart';
 
 import 'componentes/reqRadio.dart';
 
+import 'componentes/variables.dart';
 import 'viewAvailableProjects.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/cupertino.dart';
@@ -784,9 +785,9 @@ class _CreateAvance extends State<CreateAvance> {
 }
 
 Future createAdvance1() async {
-  var cliente1 = http.Client();
-  print("object")
-;  print(tdcTimepo.text);
+  var cliente1 = new http.Client();
+  print("object");  
+print(tdcTimepo.text);
 print(tdcNumeroCambio.text);
 print(tdcCambios.text);
 print( tdcObservaciones.text);
@@ -799,7 +800,7 @@ print(tdcEnlaces.text);
   try {
     final response = await cliente1.post(
         //"http://192.168.0.5/findprogrammerDB/registerAdvance.php",
-        "http://findprogrammerceti.000webhostapp.com/registerAdvance.php",
+        server+"/registerAdvance2.php",
         body: {
           "TIEMPO": tdcTimepo.text,
           "NOCAMBIOS": tdcNumeroCambio.text,
@@ -807,7 +808,7 @@ print(tdcEnlaces.text);
           "OBSERVACIONES": tdcObservaciones.text,
           "PORCENTAJE": intPorcentaje.toStringAsFixed(2),
           "DESCRIPCION": tdcDescripcion.text,
-          "REQ": sReq,
+          "REQ": sReq ,
           "ID": IDout.toString(),
           "ENLACES": tdcEnlaces.text,
         }).timeout(Duration(seconds: 7));

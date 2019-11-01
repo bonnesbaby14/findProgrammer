@@ -2,6 +2,7 @@ import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'package:async/async.dart';
 import 'login.dart';
@@ -487,15 +488,11 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
         body: FutureBuilder(
           future: _asyncMemorizer.runOnce(() async {
             await getInfooProject();
-     
           }),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               print("se entro una vez y se recopilaron los datos ");
               print("+++++++++++++++++++++++++++++++++++++++++++");
-
-
-             
 
               return Container(
                 height: MediaQuery.of(context).size.height,
@@ -612,7 +609,6 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
                     Expanded(
                       child: ListView(
                         children: <Widget>[
-                          
                           Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),
@@ -991,10 +987,13 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
       final response = await http.post(
 
           // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-          "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+          server+"/loadInfoProject.php",
 
           // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-          body: {"ID_PROYECTO": this.ID, "TYPE": "1"}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_PROYECTO": this.ID,
+            "TYPE": "1"
+          }).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
@@ -1003,23 +1002,27 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
 
   Future<List> getReqFProject() async {
     final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        server+"/loadInfoProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).timeout(Duration(seconds: 7));
+        body: {
+          "ID_PROYECTO": this.ID,
+          "TYPE": "2"
+        }).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     this.reqFuncionales = dataProject;
   }
 
-
-
   Future<List> getAvancesProject() async {
     final response = await http.post(
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        server+"/loadInfoProject.php",
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "4"}).timeout(Duration(seconds: 7));
+        body: {
+          "ID_PROYECTO": this.ID,
+          "TYPE": "4"
+        }).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     this.avances = dataProject;
@@ -1028,9 +1031,12 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
   Future<List> getClientProject() async {
     final response = await http.post(
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-        "https://findprogrammerceti.000webhostapp.com/loadInfoProject.php",
+        server+"/loadInfoProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "5"}).timeout(Duration(seconds: 7));
+        body: {
+          "ID_PROYECTO": this.ID,
+          "TYPE": "5"
+        }).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     this.clienteP = dataProject;
@@ -1040,7 +1046,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
     print(desarrollador);
     final response = await http.post(
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-        "https://findprogrammerceti.000webhostapp.com/applyForProject.php",
+        server+"/applyForProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {
           "ID_PROYECTO": this.ID.toString(),
@@ -1051,73 +1057,66 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
     print(dataProject);
     if (dataProject == 2) {
       showDialog(
-                      context: context,
-                      builder: (context) => new CupertinoAlertDialog(
-                            title: Column(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.devices_other,
-                                  size: 80,
-                                  color: Colors.deepPurpleAccent,
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text("FindProgrammer",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20)),
-                              ],
-                            ),
-                            content: Text("Ya has solicitado este proyecto"),
-                            actions: <Widget>[
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                 
-                                },
-                                child: Text("Aceptar",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15)),
-                              ),
-                             
-                            ],
-                          ));
-                
-    } else if(dataProject==true) {
-
-showDialog(
-                      context: context,
-                      builder: (context) => new CupertinoAlertDialog(
-                            title: Column(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.devices_other,
-                                  size: 80,
-                                  color: Colors.deepPurpleAccent,
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text("FindProgrammer",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 20)),
-                              ],
-                            ),
-                            content: Text("La solicitud se hizo correctamente"),
-                            actions: <Widget>[
-                              FlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                 Navigator.push(context, CupertinoPageRoute(builder: (context)=>HomeProgrammer()));
-                                },
-                                child: Text("Aceptar",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15)),
-                              ),
-                             
-                            ],
-                          ));
-                
+          context: context,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content: Text("Ya has solicitado este proyecto"),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
+    } else if (dataProject == true) {
+      showDialog(
+          context: context,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content: Text("La solicitud se hizo correctamente"),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => HomeProgrammer()));
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
     }
   }
 }

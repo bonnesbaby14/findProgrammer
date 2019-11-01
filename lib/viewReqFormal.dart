@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'dart:convert';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -519,7 +520,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/loadReq.php",
+          .post(server+"/loadReq.php",
               // "http://192.168.0.5/findprogrammerDB/loadReq.php",
               body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
@@ -543,7 +544,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/acceptReq.php",
+          .post(server+"/acceptReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
@@ -572,7 +573,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
 
     try {
       final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/correReq.php",
+          server+"/correReq.php",
           // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
           body: {
             "ID": ID.toString(),

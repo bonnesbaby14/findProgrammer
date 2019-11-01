@@ -5,6 +5,7 @@ import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'componentes/variables.dart';
 import 'login.dart';
 import 'package:flutter/cupertino.dart';
 import 'homeClient.dart';
@@ -597,7 +598,7 @@ class _ChatClient extends State<ChatClient> {
     try {
       final response = await cliente.post(
           //"http://192.168.0.5/findprogrammerDB/openRoom.php",
-          "https://findprogrammerceti.000webhostapp.com/openRoom.php",
+          server+"/openRoom.php",
           body: {
             "idProyecto": idProyecto.toString(),
             "idCliente": idCliente.toString(),
@@ -620,7 +621,7 @@ class _ChatClient extends State<ChatClient> {
     try {
       final response = await cliente.post(
           //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
-          "https://findprogrammerceti.000webhostapp.com/sendMessage.php",
+          server+"/sendMessage.php",
           body: {
             "idRemitente": idCliente.toString(),
             "idDestinatario": destinatario.toString(),

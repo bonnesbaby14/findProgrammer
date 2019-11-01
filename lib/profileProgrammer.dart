@@ -1,3 +1,4 @@
+import 'componentes/variables.dart';
 import 'viewAvailableProjects.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/cupertino.dart';
@@ -680,7 +681,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
 var cliente1=new http.Client();
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/loadComments.php",
+          .post(server+"/loadComments.php",
               // "http://192.168.0.5/findprogrammerDB/loadComments.php",
               body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
 

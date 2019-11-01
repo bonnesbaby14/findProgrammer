@@ -7,6 +7,7 @@ import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'dart:convert';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
@@ -892,7 +893,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/loadReq.php",
+          .post(server+"/loadReq.php",
               // "http://192.168.0.5/findprogrammerDB/loadReq.php",
               body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
@@ -918,7 +919,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/acceptReq.php",
+          .post(server+"/acceptReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
@@ -948,7 +949,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/correReq.php",
+          .post(server+"/correReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
@@ -980,7 +981,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/deleteReq.php",
+          .post(server+"/deleteReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": id.toString()}).timeout(Duration(seconds: 7));
 
@@ -1014,7 +1015,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/editReqP.php",
+          .post(server+"/editReqP.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": id.toString(),
               "REQ":reqEdit.text,
@@ -1051,7 +1052,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
 
     try {
       final response = await cliente1.post(
-          "https://findprogrammerceti.000webhostapp.com/createReq.php",
+          server+"/createReq.php",
           // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
           body: {
             "ID": ID.toString(),
@@ -1085,7 +1086,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
 
     try {
       final response = await cliente1
-          .post("https://findprogrammerceti.000webhostapp.com/enviarReq.php",
+          .post(server+"/enviarReq.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
               body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
       print(response.body);

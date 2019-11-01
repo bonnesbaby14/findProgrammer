@@ -8,6 +8,7 @@ import 'package:findprogrammer/viewProfileProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'componentes/variables.dart';
 import 'homeClient.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 import 'customIcons.dart';
@@ -793,7 +794,7 @@ var _keyH23 = new GlobalKey();
       print("entro a getdevelopes");
       final response = await cliente1.post(
          // "http://192.168.0.5/findprogrammerDB/loadDevelopers.php",
-          "https://findprogrammerceti.000webhostapp.com/loadDevelopers.php",
+          server+"/loadDevelopers.php",
           body: {
             "ID": this.ID.toString(),
           }).timeout(Duration(seconds: 7));

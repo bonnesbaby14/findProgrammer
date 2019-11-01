@@ -1,5 +1,6 @@
 import 'package:findprogrammer/login.dart';
 import 'package:flutter/material.dart';
+import 'componentes/variables.dart';
 import 'main.dart';
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
@@ -993,7 +994,7 @@ class _RegisterUser extends State<RegisterUser> {
       print("ññññññññññññññññññññññññññññ");
 
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/registerUser2.php",
+          server+"/registerUser2.php",
           body: {
             "ID": ID.toString(),
             "NOMBRE": nombre.text,
@@ -1009,7 +1010,7 @@ class _RegisterUser extends State<RegisterUser> {
       var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
       var length = await img.length();
       var uri =
-          Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
+          Uri.parse("https://fineseraoye/image.php");
       var request = http.MultipartRequest("POST", uri);
       var multipartFile = http.MultipartFile("image", strem, length,
           filename: "image_" + ID.toString() + ".jpg");
@@ -1150,7 +1151,7 @@ class _RegisterUser extends State<RegisterUser> {
       print("ññññññññññññññññññññññññññññ");
 
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/registerUser2D.php",
+          server+"/registerUser2D.php",
           body: {
             "ID": ID.toString(),
             "NOMBRE": nombre.text,
@@ -1174,7 +1175,7 @@ class _RegisterUser extends State<RegisterUser> {
       var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
       var length = await img.length();
       var uri =
-          Uri.parse("https://findprogrammerceti.000webhostapp.com/image.php");
+          Uri.parse(server+"/image.php");
       var request = http.MultipartRequest("POST", uri);
       var multipartFile = http.MultipartFile("image", strem, length,
           filename: "image_" + ID.toString() + ".jpg");

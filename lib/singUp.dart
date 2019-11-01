@@ -1,6 +1,7 @@
 import 'package:findprogrammer/registerUser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'componentes/variables.dart';
 import 'main.dart';
 import 'package:http/http.dart' as http;
 
@@ -295,7 +296,7 @@ class _SingUp extends State<SingUp> {
       print("ññññññññññññññññññññññññññññ");
 
       final response = await http.post(
-          "https://findprogrammerceti.000webhostapp.com/registerUser.php",
+          server+"/registerUser.php",
           body: {
             "CORREO": correo.text,
             "CONTRASENA": contrasena1.text,
