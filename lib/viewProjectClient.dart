@@ -9,6 +9,7 @@ import 'package:findprogrammer/viewHireProgrammer.dart';
 import 'package:findprogrammer/viewReqFormal.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'claseAlertEditProject.dart';
 import 'componentes/helperSQFLITE.dart';
@@ -48,7 +49,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   @override
   Widget build(BuildContext context) {
     contextoS = context;
-  
+
     var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
@@ -97,9 +98,11 @@ class _ViewProjectClient extends State<ViewProjectClient> {
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: avances[z]["F_ACEPTADO"]=="1"?Text("Aceptado",
-              style: TextStyle(fontSize: 14.0, color: Colors.white)):Text("No   aceptado",
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+          child: avances[z]["F_ACEPTADO"] == "1"
+              ? Text("Aceptado",
+                  style: TextStyle(fontSize: 14.0, color: Colors.white))
+              : Text("No   aceptado",
+                  style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
       }
     }
@@ -715,27 +718,76 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              GroovinMaterialIcons
-                                                  .code_brackets,
-                                              color: Colors.grey,
-                                              size: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Text(
-                                              "Obtener  \n  Codigo",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
+                                      InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  new CupertinoAlertDialog(
+                                                    title: Column(
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.devices_other,
+                                                          size: 80,
+                                                          color: Colors
+                                                              .deepPurpleAccent,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Text("FindProgrammer",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 20)),
+                                                      ],
+                                                    ),
+                                                    content: Text(
+                                                        "El codigo del proyecto es: " +
+                                                            dataProject[0]
+                                                                ['codigo']),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Clipboard.setData(
+                                                              new ClipboardData(
+                                                                  text:dataProject[0]
+                                                                ['codigo']));
+                                                          
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("Copiar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                    ],
+                                                  ));
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .code_brackets,
+                                                color: Colors.grey,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Text(
+                                                "Obtener  \n  Codigo",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       InkWell(
@@ -1711,11 +1763,13 @@ class _ViewProjectClient extends State<ViewProjectClient> {
   Future getInfooProject() async {
     var cliente1 = http.Client();
     try {
-      final response = await cliente1.post(
-          server+"/loadInfoProjectPanel.php",
+      final response = await cliente1.post(server + "/loadInfoProjectPanel.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "1"}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_PROYECTO": this.ID,
+            "TYPE": "1"
+          }).timeout(Duration(seconds: 7));
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
@@ -1766,7 +1820,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                   ],
                 ));
       }
-if (dataProject[0]['F_AVANCE_D'] == "1") {
+      if (dataProject[0]['F_AVANCE_D'] == "1") {
         showDialog(
             context: context,
             builder: (context) => new CupertinoAlertDialog(
@@ -1784,12 +1838,10 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
                           style: TextStyle(color: Colors.black, fontSize: 20)),
                     ],
                   ),
-                  content: Text(
-                      "El programador creo un nuevo avance"),
+                  content: Text("El programador creo un nuevo avance"),
                   actions: <Widget>[
                     FlatButton(
                       onPressed: () {
-                      
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
@@ -1821,10 +1873,13 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
 
   Future<void> getReqFProject() async {
     print("entro");
-    final response = await http.post(
-        //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-        server+"/loadInfoProject.php",
-        body: {"ID_PROYECTO": this.ID, "TYPE": "2"}).catchError((error) {}).timeout(Duration(seconds: 7));
+    final response = await http
+        .post(
+            //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+            server + "/loadInfoProject.php",
+            body: {"ID_PROYECTO": this.ID, "TYPE": "2"})
+        .catchError((error) {})
+        .timeout(Duration(seconds: 7));
     try {
       var dataProject = json.decode(response.body);
       this.reqFuncionales = dataProject;
@@ -1835,11 +1890,13 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
   Future<List> getAvancesProject() async {
     print("get desarrollado");
     try {
-      final response = await http.post(
-          server+"/loadInfoProject.php",
+      final response = await http.post(server + "/loadInfoProject.php",
           //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {"ID_PROYECTO": this.ID, "TYPE": "4"}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_PROYECTO": this.ID,
+            "TYPE": "4"
+          }).timeout(Duration(seconds: 7));
 
       print(response.body);
       var dataProject = json.decode(response.body);
@@ -1853,16 +1910,15 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
 
   Future<List> getDesarrolladorProject() async {
     try {
-      final response = await http.post(
-          server+"/loadInfoProject.php",
-          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+      final response = await http
+          .post(server + "/loadInfoProject.php",
+              //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {
-            "ID_PROYECTO": this.ID,
-            "TYPE": "5"
-          }).timeout(Duration(seconds: 7)).catchError((error) async {
-        await print("error no se econctro el servidor");
-      });
+              body: {"ID_PROYECTO": this.ID, "TYPE": "5"})
+          .timeout(Duration(seconds: 7))
+          .catchError((error) async {
+            await print("error no se econctro el servidor");
+          });
 
       var dataProject = json.decode(response.body);
       this.desarrollador = dataProject;
@@ -1879,16 +1935,18 @@ if (dataProject[0]['F_AVANCE_D'] == "1") {
   Future updateState() async {
     print("entro a updatestate");
     try {
-      final response = await http.post(
-          server+"/updateStateProject.php",
-          //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
+      final response = await http
+          .post(server + "/updateStateProject.php",
+              //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
 
-          body: {
-            "ID_PROYECTO": this.ID,
-            "ESTADO": _ligths ? "0" : "1",
-          }).timeout(Duration(seconds: 7)).catchError((error) async {
-        await print("error no se econcontro el servidor updatestate");
-      });
+              body: {
+                "ID_PROYECTO": this.ID,
+                "ESTADO": _ligths ? "0" : "1",
+              })
+          .timeout(Duration(seconds: 7))
+          .catchError((error) async {
+            await print("error no se econcontro el servidor updatestate");
+          });
 
       var dataProject = json.decode(response.body);
 
@@ -1908,7 +1966,7 @@ Future editProject(ID) async {
   try {
     final response = await http.post(
         // "http://192.168.0.5/findprogrammerDB/editProject.php",
-        server+"/editProject.php",
+        server + "/editProject.php",
         body: {
           "ID": ID.toString(),
           "TITULO": tdcTitulo.text,
@@ -1932,7 +1990,7 @@ Future eraseProject(ID) async {
   try {
     final response = await http.post(
         // "http://192.168.0.5/findprogrammerDB/eraseProject.php",
-        server+"/eraseProject.php",
+        server + "/eraseProject.php",
         body: {
           "ID": ID.toString(),
         }).timeout(Duration(seconds: 7));
