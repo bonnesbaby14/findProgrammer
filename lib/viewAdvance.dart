@@ -569,7 +569,7 @@ Future acceptAdvance(id) async {
       final response = await cliente1
           .post(server+"/acceptAdvance.php",
               // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": id.toString()}).timeout(Duration(seconds: 7));
+              body: {"ID": id.toString(),"id": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
