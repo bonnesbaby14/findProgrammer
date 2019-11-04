@@ -2308,7 +2308,7 @@ Future finishProject(ID) async {
   print(ID.toString());
   print(dataProject[0]['FK_DESARROLLADOR'].toString());
   print(comentario.text);
-  print(calificacion.toString());
+  print((calificacion*2).toString());
   print(client['ID_USUARIO'].toString());
 
   try {
@@ -2316,7 +2316,7 @@ Future finishProject(ID) async {
       "ID": ID.toString(),
       "DESARROLLADOR": dataProject[0]['FK_DESARROLLADOR'].toString(),
       "COMENTARIO": comentario.text,
-      "CALIFICACION": calificacion.toString(),
+      "CALIFICACION": (calificacion*2).toString(),
       "CLIENTE": client['ID_USUARIO'].toString(),
     }).timeout(Duration(seconds: 7));
 
