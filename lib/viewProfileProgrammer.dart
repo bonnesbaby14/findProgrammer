@@ -76,7 +76,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
                                       image: NetworkImage(
-                                          "http://findprogrammerceti.000webhostapp.com/images/image_" +
+                                          server+"/images/image_" +
                                               client['ID_USUARIO'].toString() +
                                               ".jpg"))),
                             ),

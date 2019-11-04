@@ -809,8 +809,7 @@ class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsPr
       print("-------------------------------------");
 
       final response = await cliente1.post(
-          //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
-           //         "http://192.168.0.5/findProgrammerDB/loadDevelopmentProjects.php",
+
           server+"/loadDevelopmentProjects.php",
           body: {
             "ID": desarrollador['ID_USUARIO'].toString(),

@@ -5,8 +5,9 @@ import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewCreateReq.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsProgrammer.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
-import 'package:findprogrammer/viewProjectClient.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'componentes/variables.dart';
@@ -24,8 +25,12 @@ var contextoS;
 
 var listReqF = List<Widget>();
 var listAvances = List<Widget>();
+var dataResponse;
+var finish;
 
 var dataProjectw, reqFuncionales, avances, cliente;
+TextEditingController comentario=new TextEditingController();
+var calificacion;
 var IDout;
 
 class ViewProjectProgrammerPanel extends StatefulWidget {
@@ -854,30 +859,326 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                       ),
                                     ),
                                     InkWell(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              GroovinMaterialIcons.check_circle,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "Proyecto \nTerminado",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
+                                        onTap: () {
+                                          if (dataProjectw[0]['F_TERMINADO'] ==
+                                              "1") {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text(
+                                                              "Terminar proyecto",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "Este proyecto ya ha sido finalizado"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
+                                          if (dataProjectw[0]['F_TERMINADO_D'] ==
+                                              "0") {
+                                            //el pryecto no esta terminado
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (context) =>
+                                                        CupertinoAlertDialog(
+                                                          title: Column(
+                                                            children: <Widget>[
+                                                              Icon(
+                                                                Icons
+                                                                    .devices_other,
+                                                                size: 80,
+                                                                color: Colors
+                                                                    .deepPurpleAccent,
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Text(
+                                                                  "Terminar Proyecto ",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          20)),
+                                                            ],
+                                                          ),
+                                                          content: Column(
+                                                            children: <Widget>[
+                                                              SizedBox(
+                                                                height: 7,
+                                                              ),
+                                                              Container(
+                                                                width: 240,
+                                                                child: Text(
+                                                                  "¿Seguro que quieres dar por terminado el proyecto?",
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .justify,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 8,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+
+                                                                showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) =>
+                                                                            CupertinoAlertDialog(
+                                                                              title: Column(
+                                                                                children: <Widget>[
+                                                                                  Icon(
+                                                                                    Icons.devices_other,
+                                                                                    size: 80,
+                                                                                    color: Colors.deepPurpleAccent,
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    height: 20,
+                                                                                  ),
+                                                                                  Text("Terminar Proyecto", style: TextStyle(color: Colors.black, fontSize: 20)),
+                                                                                ],
+                                                                              ),
+                                                                              content: Column(
+                                                                                children: <Widget>[
+                                                                                  SizedBox(
+                                                                                    height: 7,
+                                                                                  ),
+                                                                                  Container(
+                                                                                    width: 240,
+                                                                                    child: Text(
+                                                                                      "Felicidades por finalizar tu proyecto, para terminar el proyecto oficialmente necesitamos que el programador marque el proyecto finalizado tambien. Mientras lo hace califica y agrega un comentario a este programador!!!",
+                                                                                      textAlign: TextAlign.justify,
+                                                                                    ),
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    height: 8,
+                                                                                  ),
+                                                                                  FlutterRatingBar(
+                                                                                    initialRating: 3,
+                                                                                    fillColor: Colors.deepPurpleAccent,
+                                                                                    borderColor: Colors.black38,
+                                                                                    allowHalfRating: true,
+                                                                                    onRatingUpdate: (rating) {
+                                                                                      calificacion = rating;
+                                                                                    },
+                                                                                  ),
+                                                                                  Text("Calificacion rango: 0-10", style: TextStyle(color: Colors.black, fontSize: 10)),
+                                                                                  SizedBox(
+                                                                                    height: 8,
+                                                                                  ),
+                                                                                  CupertinoTextField(
+                                                                                    controller: comentario,
+                                                                                    placeholder: "Comenta algo...",
+                                                                                    placeholderStyle: TextStyle(color: Colors.black38),
+                                                                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(width: 0.5, color: Colors.deepPurpleAccent)),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              actions: <Widget>[
+                                                                                FlatButton(
+                                                                                  onPressed: () async {
+                                                                                    await finishProject(ID);
+                                                                                    Navigator.pop(context);
+                                                                                    if (finish == "1") {
+                                                                                      showDialog(
+                                                                                          context: context,
+                                                                                          builder: (context) => new CupertinoAlertDialog(
+                                                                                                title: Column(
+                                                                                                  children: <Widget>[
+                                                                                                    Icon(
+                                                                                                      Icons.devices_other,
+                                                                                                      size: 80,
+                                                                                                      color: Colors.deepPurpleAccent,
+                                                                                                    ),
+                                                                                                    SizedBox(
+                                                                                                      height: 20,
+                                                                                                    ),
+                                                                                                    Text("Terminar proyecto", style: TextStyle(color: Colors.black, fontSize: 20)),
+                                                                                                  ],
+                                                                                                ),
+                                                                                                content: Text("¿El desarrollador ya habia dado por terminado el proyecto asi que oficialmente este proyecto ha concluido. Muchas gracias."),
+                                                                                                actions: <Widget>[
+                                                                                                  FlatButton(
+                                                                                                    onPressed: () {
+                                                                                                    
+                                                                                                      Navigator.pop(context);
+                                                                                                    },
+                                                                                                    child: Text("Aceptar", style: TextStyle(color: Colors.black, fontSize: 15)),
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ));
+                                                                                    }
+                                                                                  },
+                                                                                  child: Text("Terminar", style: TextStyle(color: Colors.black, fontSize: 15)),
+                                                                                ),
+                                                                              ],
+                                                                            ));
+                                                              },
+                                                              child: Text(
+                                                                  "Aceptar",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          15)),
+                                                            ),
+                                                            FlatButton(
+                                                              child: Text(
+                                                                  "Cancelar",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          15)),
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ));
+                                          } else {
+                                            //el proyecto ya esta terminado
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text(
+                                                              "Terminar Proyecto ",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Column(
+                                                        children: <Widget>[
+                                                          SizedBox(
+                                                            height: 7,
+                                                          ),
+                                                          Container(
+                                                            width: 240,
+                                                            child: Text(
+                                                              "Ya marcaste este proyecto como terminado ¿Quieres deshacer eso?",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .justify,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () async {
+                                                            await undoFinishProject(
+                                                                ID);
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                        FlatButton(
+                                                          child: Text(
+                                                              "Cancelar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ));
+                                          }
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .check_circle,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Text(
+                                                "Proyecto \nTerminado",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ],
@@ -1699,3 +2000,43 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
 }
 
 //fin de clase normal
+Future finishProject(ID) async {
+  print(ID.toString());
+  print(dataProjectw[0]['FK_DESARROLLADOR'].toString());
+  print(comentario.text);
+  print(calificacion.toString());
+  print(desarrollador['ID_USUARIO'].toString());
+
+  try {
+    final response = await http.post(server + "/finishProjectD.php", body: {
+      "ID": ID.toString(),
+      "DESARROLLADOR": desarrollador['ID_USUARIO'].toString(),
+      "COMENTARIO": comentario.text,
+      "CALIFICACION": calificacion.toString(),
+      "CLIENTE":  dataProjectw[0]['FK_CLIENTE'].toString(),
+    }).timeout(Duration(seconds: 7));
+
+    dataResponse = response.body;
+    print("Se finalizo el proyecto con respuesta: ");
+    print(dataResponse);
+    finish = dataResponse;
+  } catch (d) {
+    print("error finalizando el proyecto:");
+    print(d.toString());
+  }
+}
+
+Future undoFinishProject(ID) async {
+  try {
+    final response = await http.post(server + "/undoFinishProjectC.php", body: {
+      "ID": ID.toString(),
+    }).timeout(Duration(seconds: 7));
+
+    dataResponse = response.body;
+    print("Se deshizo finalizar el proyecto con respuesta: ");
+    print(dataResponse);
+  } catch (d) {
+    print("error deshaciendo finalizar el proyecto:");
+    print(d.toString());
+  }
+}

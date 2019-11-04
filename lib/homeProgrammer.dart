@@ -91,7 +91,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                           image: DecorationImage(
                                             fit: BoxFit.fill,
                                             image: NetworkImage(
-                                                "http://findprogrammerceti.000webhostapp.com/images/image_" +
+                                                server+"/images/image_" +
                                                     desarrollador['ID_USUARIO']
                                                         .toString() +
                                                     ".jpg"),
@@ -927,8 +927,8 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                         height: 15,
                       ),
                       Container(
-                        child: Text("Felicidades este proyecto ya esta siendo desarrollador por ti, consulta el panel para seguir con el desarrollo."),
-
+                        child: Text(
+                            "Felicidades este proyecto ya esta siendo desarrollador por ti, consulta el panel para seguir con el desarrollo."),
                       ),
                       SizedBox(
                         height: 8,
@@ -971,8 +971,9 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                         height: 15,
                       ),
                       Container(
-                        child: Text("El proyecto ya esta siendo desarrollado",)
-                      ),
+                          child: Text(
+                        "El proyecto ya esta siendo desarrollado",
+                      )),
                       SizedBox(
                         height: 8,
                       ),
