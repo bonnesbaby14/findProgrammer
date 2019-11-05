@@ -36,16 +36,16 @@ class _UpdateUserC extends State<UpdateUserC> {
       telefono = TextEditingController(),
       proyectos = TextEditingController(),
       preparacion = TextEditingController();
-
+@override
+  void initState() {
+    // TODO: implement initState
+ telefono.text = client['TELEFONO'];
+  
+    curp.text=client['CURP'];
+  }
   @override
   Widget build(BuildContext context) {
-    nombre.text = "dd";
-    apellidoP.text = "dd";
-    apellidoM.text = "dd";
-
-    telefono.text = "dd";
-    proyectos.text = "dd";
-    preparacion.text = "dd";
+ 
     print("el id obtenido es: " + ID.toString());
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
@@ -306,143 +306,15 @@ class _UpdateUserC extends State<UpdateUserC> {
                   child: OutlineButton(
                     borderSide: BorderSide(color: Colors.white),
                     onPressed: () {
-                      if (_groupvalue2 == 1) {
-                        if (nombre.text == "" ||
-                            curp.text == "" ||
-                            apellidoM.text == "" ||
-                            apellidoP.text == "" ||
-                            telefono.text == "" ||
-                            proyectos.text == "" ||
-                            preparacion.text == "" ||
-                            (!mac &&
-                                !ios &&
-                                !windows &&
-                                !web &&
-                                !android &&
-                                !redes)) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => new CupertinoAlertDialog(
-                                    title: Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.devices_other,
-                                          size: 80,
-                                          color: Colors.deepPurpleAccent,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text("Registrar Usuario",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20)),
-                                      ],
-                                    ),
-                                    content: Text(
-                                        "Alguno de los campos esta vacio, llenalos para poder continuar"),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        child: Text("Aceptar",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15)),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    ],
-                                  ));
-                          return;
-                        }
+                      
+                        
 
-                        if (img == null) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => new CupertinoAlertDialog(
-                                    title: Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.devices_other,
-                                          size: 80,
-                                          color: Colors.deepPurpleAccent,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text("Registrar Usuario",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20)),
-                                      ],
-                                    ),
-                                    content: Text(
-                                        "Debes subir una fotografia para poder continuar"),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        child: Text("Aceptar",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15)),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    ],
-                                  ));
-                          return;
-                        }
-
-                        showDialog(
-                            context: context,
-                            builder: (context) => new CupertinoAlertDialog(
-                                  title: Column(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.devices_other,
-                                        size: 80,
-                                        color: Colors.deepPurpleAccent,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text("Politicas de uso",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20)),
-                                    ],
-                                  ),
-                                  content: Text(
-                                      "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      child: Text("Aceptar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        print("clic");
-                                        ReRegisterUserDeveloper();
-                                      },
-                                    ),
-                                    FlatButton(
-                                      child: Text("Cancelar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        return;
-                                      },
-                                    ),
-                                  ],
-                                ));
-                      } else {
-                        if (nombre.text == "" ||
+                        
+                      
+                        if (
                             curp.text == "" ||
-                            apellidoM.text == "" ||
-                            apellidoP.text == "" ||
+                            
+                           
                             telefono.text == "") {
                           showDialog(
                               context: context,
@@ -480,89 +352,8 @@ class _UpdateUserC extends State<UpdateUserC> {
                           return;
                         }
 
-                        if (img == null) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => new CupertinoAlertDialog(
-                                    title: Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.devices_other,
-                                          size: 80,
-                                          color: Colors.deepPurpleAccent,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text("Registrar Usuario",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20)),
-                                      ],
-                                    ),
-                                    content: Text(
-                                        "Debes subir una fotografia para poder continuar"),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        child: Text("Aceptar",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15)),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    ],
-                                  ));
-                          return;
-                        }
-
-                        showDialog(
-                            context: context,
-                            builder: (context) => new CupertinoAlertDialog(
-                                  title: Column(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.devices_other,
-                                        size: 80,
-                                        color: Colors.deepPurpleAccent,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text("Politicas de uso",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20)),
-                                    ],
-                                  ),
-                                  content: Text(
-                                      "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      child: Text("Aceptar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        print("clic");
-                                        ReRegisterUser();
-                                      },
-                                    ),
-                                    FlatButton(
-                                      child: Text("Cancelar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        return;
-                                      },
-                                    ),
-                                  ],
-                                ));
-                      }
+                      updateCliente();
+                      
                     },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -584,27 +375,26 @@ class _UpdateUserC extends State<UpdateUserC> {
         ));
   }
 
-  Future ReRegisterUser() async {
+  Future updateCliente() async {
     try {
       print("ññññññññññññññññññññññññññññ");
 
       print("ññññññññññññññññññññññññññññ");
 
-      final response = await http.post(server + "/registerUser2.php", body: {
+      final response = await http.post(server + "/updateC.php", body: {
         "ID": ID.toString(),
-        "NOMBRE": nombre.text,
+      
         "CURP": curp.text,
-        "APELLIDOP": apellidoP.text,
-        "APELLIDOM": apellidoM.text,
+      
         "TELEFONO": telefono.text,
         "TIPO": _groupvalue == 1 ? "1" : "0",
       }).timeout(Duration(seconds: 7));
       print(response.body);
       print("66666666666666666666666666");
-
+if(img!=null){
       var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
       var length = await img.length();
-      var uri = Uri.parse("https://fineseraoye/image.php");
+      var uri = Uri.parse(server+"/image.php");
       var request = http.MultipartRequest("POST", uri);
       var multipartFile = http.MultipartFile("image", strem, length,
           filename: "image_" + ID.toString() + ".jpg");
@@ -617,8 +407,7 @@ class _UpdateUserC extends State<UpdateUserC> {
         print(response2.statusCode);
       }
 
-      Navigator.pop(context);
-
+}
       switch (response.body) {
         case "1":
           //registro completo
@@ -642,15 +431,12 @@ class _UpdateUserC extends State<UpdateUserC> {
                         ],
                       ),
                       content: Text(
-                          "Usuario creado con exito, Bienvenido a FindProgrammer, incia sesión para comenzar"),
+                          "Usuario editado con exito!!!!"),
                       actions: <Widget>[
                         FlatButton(
                           onPressed: () {
                             Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => Login()));
+                            
                           },
                           child: Text("Aceptar",
                               style:
@@ -738,163 +524,4 @@ class _UpdateUserC extends State<UpdateUserC> {
     }
   }
 
-  Future ReRegisterUserDeveloper() async {
-    try {
-      print("ññññññññññññññññññññññññññññ");
-
-      print("ññññññññññññññññññññññññññññ");
-
-      final response = await http.post(server + "/registerUser2D.php", body: {
-        "ID": ID.toString(),
-        "NOMBRE": nombre.text,
-        "CURP": curp.text,
-        "APELLIDOP": apellidoP.text,
-        "APELLIDOM": apellidoM.text,
-        "TELEFONO": telefono.text,
-        "TIPO": _groupvalue == 1 ? "1" : "0",
-        "PROYECTOS": proyectos.text,
-        "PREPARACION": preparacion.text,
-        "WEB": web ? "1" : "0",
-        "IOS": ios ? "1" : "0",
-        "ANDROID": android ? "1" : "0",
-        "REDES": redes ? "1" : "0",
-        "WINDOWS": windows ? "1" : "0",
-        "MAC": mac ? "1" : "0",
-      }).timeout(Duration(seconds: 7));
-      print(response.body);
-      print("66666666666666666666666666");
-
-      var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
-      var length = await img.length();
-      var uri = Uri.parse(server + "/image.php");
-      var request = http.MultipartRequest("POST", uri);
-      var multipartFile = http.MultipartFile("image", strem, length,
-          filename: "image_" + ID.toString() + ".jpg");
-      request.files.add(multipartFile);
-      var response2 = await request.send();
-      if (response2.statusCode == 200) {
-        print("si se pudo");
-      } else {
-        print("no se puedo");
-        print(response2.statusCode);
-      }
-
-      switch (response.body) {
-        case "1":
-          //registro completo
-          if (_groupvalue2 == 1) {
-            showDialog(
-                context: context,
-                builder: (context) => new CupertinoAlertDialog(
-                      title: Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.devices_other,
-                            size: 80,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text("FindProgrammer",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 20)),
-                        ],
-                      ),
-                      content: Text(
-                          "Usuario creado con exito, Bienvenido a FindProgrammer, incia sesión para comenzar"),
-                      actions: <Widget>[
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => Login()));
-                          },
-                          child: Text("Aceptar",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 15)),
-                        ),
-                      ],
-                    ));
-          }
-          break;
-        case "5":
-          //correo
-          showDialog(
-              context: context,
-              builder: (context) => new CupertinoAlertDialog(
-                    title: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.devices_other,
-                          size: 80,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text("FindProgrammer",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 20)),
-                      ],
-                    ),
-                    content: Text(
-                        "La CURP ya fue registrada, intenta iniciar sesión"),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("Aceptar",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 15)),
-                      ),
-                    ],
-                  ));
-
-          break;
-        case "":
-//error del server
-          showDialog(
-              context: context,
-              builder: (context) => new CupertinoAlertDialog(
-                    title: Column(
-                      children: <Widget>[
-                        Icon(
-                          Icons.devices_other,
-                          size: 80,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text("FindProgrammer",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 20)),
-                      ],
-                    ),
-                    content: Text(
-                        "Ocurrió un problema en el servidor o en la red, intentalo mas tarde"),
-                    actions: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text("Aceptar",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 15)),
-                      ),
-                    ],
-                  ));
-
-          break;
-      }
-    } catch (d) {
-      print("error registrando el usuario ");
-      print(d.toString());
-      Navigator.pop(context);
-    }
-  }
 }
