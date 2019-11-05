@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:findprogrammer/updateUserC.dart';
 import 'package:http/http.dart' as http;
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
@@ -70,7 +71,7 @@ getComments();
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
                                         image: NetworkImage(
-                                            "http://findprogrammerceti.000webhostapp.com/images/image_" +
+                                            server+"/images/image_" +
                                                 client['ID_USUARIO']
                                                     .toString() +
                                                 ".jpg"))),
@@ -275,6 +276,7 @@ getComments();
                                 onPressed: () {
                                   helper.DeleteCliente();
                                   Navigator.pop(context);
+                                  this.dispose();
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -436,7 +438,12 @@ getComments();
                             ],
                           ),
                         ),
-                        Padding(
+                        InkWell(
+                          onTap: (){
+
+                            Navigator.push(context, CupertinoPageRoute(builder: (context)=>UpdateUserC(client['ID_USUARIO'])));
+                          },
+                          child: Padding(
                           padding: EdgeInsets.all(10),
                           child: Column(
                             children: <Widget>[
@@ -452,7 +459,7 @@ getComments();
                               ),
                             ],
                           ),
-                        ),
+                        ),)
                       ],
                     ),
                   ],

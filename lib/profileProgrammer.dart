@@ -1,3 +1,5 @@
+import 'package:findprogrammer/updateUserD.dart';
+
 import 'componentes/variables.dart';
 import 'viewAvailableProjects.dart';
 import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
@@ -24,12 +26,14 @@ class ProfileProgrammer extends StatefulWidget {
 
 class _ProfileProgrammer extends State<ProfileProgrammer> {
   var comments;
-@override
+  @override
   void initState() {
     // TODO: implement initState
-  getComments();
+    
+    getComments();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     double mediaw = MediaQuery.of(context).size.width;
@@ -72,7 +76,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
                                         image: NetworkImage(
-                                            "http://findprogrammerceti.000webhostapp.com/images/image_" +
+                                            server+"/images/image_" +
                                                 desarrollador['ID_USUARIO']
                                                     .toString() +
                                                 ".jpg"))),
@@ -506,7 +510,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),
                 child: Column(
-                  children: <Widget>[
+                  children: <Widget>[ 
                     SizedBox(
                       height: 40,
                     ),
@@ -534,7 +538,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                           image: DecorationImage(
                             fit: BoxFit.fill,
                             image: NetworkImage(
-                                "http://findprogrammerceti.000webhostapp.com/images/image_" +
+                                server+"/images/image_" +
                                     desarrollador['ID_USUARIO'].toString() +
                                     ".jpg"),
                           )),
@@ -586,21 +590,30 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: <Widget>[
-                              Icon(
-                                GroovinMaterialIcons.edit_outline,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                              Text(
-                                "Editar Perfil",
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white),
-                              ),
-                            ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => UpdateUserD(
+                                        desarrollador['ID_USUARIO'])));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  GroovinMaterialIcons.edit_outline,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Editar Perfil",
+                                  style: TextStyle(
+                                      fontSize: 14.0, color: Colors.white),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -609,81 +622,84 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                 ),
               ),
               Expanded(
-                  child:comments!=null? ListView.builder(
-                      itemCount: comments == null ? 0 : comments.length,
-                      itemBuilder: (BuildContext context, int position) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          elevation: 10,
-                          color: Color.fromARGB(450, 41, 39, 42),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(20),
-                                child: Icon(
-                                  Icons.star_half,
-                                  size: 50,
-                                  color: Colors.white,
-                                ),
+                  child: comments != null
+                      ? ListView.builder(
+                          itemCount: comments == null ? 0 : comments.length,
+                          itemBuilder: (BuildContext context, int position) {
+                            return Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
-                              Column(
+                              elevation: 10,
+                              color: Color.fromARGB(450, 41, 39, 42),
+                              child: Row(
                                 children: <Widget>[
-                                  SizedBox(
-                                    height: 25,
+                                  Padding(
+                                    padding: EdgeInsets.all(20),
+                                    child: Icon(
+                                      Icons.star_half,
+                                      size: 50,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  Text(
-                                      comments[position]['nombre'].toString() +
-                                          " " +
-                                          comments[position]['apellido_P']
-                                              .toString() +
-                                          " " +
-                                          comments[position]['apellido_M']
-                                              .toString(),
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                          fontSize: 20.0, color: Colors.white)),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(
-                                    width: 220,
-                                    child: Text(
-                                        comments[position]['COMENTARIO']
-                                            .toString(),
-                                        textAlign: TextAlign.justify,
-                                        style: TextStyle(
-                                          fontSize: 10.0,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                  SizedBox(
-                                    height: 25,
+                                  Column(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                      Text(
+                                          comments[position]['nombre']
+                                                  .toString() +
+                                              " " +
+                                              comments[position]['apellido_P']
+                                                  .toString() +
+                                              " " +
+                                              comments[position]['apellido_M']
+                                                  .toString(),
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white)),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                        width: 220,
+                                        child: Text(
+                                            comments[position]['COMENTARIO']
+                                                .toString(),
+                                            textAlign: TextAlign.justify,
+                                            style: TextStyle(
+                                              fontSize: 10.0,
+                                              color: Colors.white,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                    ):CircularProgressIndicator(
-                      strokeWidth: 10,
-                    )
-                  
-                  ),
+                            );
+                          },
+                        )
+                      : CircularProgressIndicator(
+                          strokeWidth: 10,
+                        )),
             ],
           ),
         ));
   }
 
   Future getComments() async {
-var cliente1=new http.Client();
+    var cliente1 = new http.Client();
     try {
-      final response = await cliente1
-          .post(server+"/loadComments.php",
-              // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-              body: {"ID_USUARIO": desarrollador['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/loadComments.php",
+          // "http://192.168.0.5/findprogrammerDB/loadComments.php",
+          body: {
+            "ID_USUARIO": desarrollador['ID_USUARIO'].toString()
+          }).timeout(Duration(seconds: 7));
 
       var comments = json.decode(response.body);
       this.comments = comments;
@@ -691,11 +707,8 @@ var cliente1=new http.Client();
     } catch (f) {
       print("hubo un error obteniendo los comentarios");
       print(f.toString());
-    }
-    finally{
-      setState(() {
-        
-      });
+    } finally {
+      setState(() {});
       cliente1.close();
     }
   }
