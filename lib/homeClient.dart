@@ -761,6 +761,9 @@ class _Homeclient extends State<Homeclient> {
       var datauser = json.decode(response.body);
 
       myProjects = datauser;
+      setState(() {
+        
+      });
     } catch (d) {
       print("error obteniendo proyecto funcion get proyecto en homeclient" +
           d.toString());
@@ -795,6 +798,7 @@ Future registerProject() async {
     dataResponse = response.body;
     print("se creo el proyecto posiblemente en homecliente");
     print(dataResponse);
+    
   } catch (d) {
     print("error registrando el proyecto en homcliente");
     print(d.toString());

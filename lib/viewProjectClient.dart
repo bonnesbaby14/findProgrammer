@@ -25,12 +25,13 @@ const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 var contextoS;
 bool _ligths = false;
 var listReqF = List<Widget>();
+
 var listAvances = List<Widget>();
 double calificacion;
 var finish;
 var dataProject, reqFuncionales, avances, desarrollador;
 TextEditingController comentario = TextEditingController();
-
+TextEditingController reporte = TextEditingController();
 Helper helper = new Helper();
 
 class ViewProjectClient extends StatefulWidget {
@@ -47,8 +48,13 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   @override
   void initState() {
+    getInfooProject();
+    getReqFProject();
+    getAvancesProject();
+    getDesarrolladorProject();
     // TODO: implement initState
   }
+
   @override
   Widget build(BuildContext context) {
     contextoS = context;
@@ -818,31 +824,124 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              GroovinMaterialIcons.heart_broken,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Text(
-                                              "  Reportar \nProgramador",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
+                                      InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  CupertinoAlertDialog(
+                                                    title: Column(
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.devices_other,
+                                                          size: 80,
+                                                          color: Colors
+                                                              .deepPurpleAccent,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Text(
+                                                            "Reportar programador",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 20)),
+                                                      ],
+                                                    ),
+                                                    content: Column(
+                                                      children: <Widget>[
+                                                        SizedBox(
+                                                          height: 7,
+                                                        ),
+                                                        Container(
+                                                          width: 240,
+                                                          child: Text(
+                                                            "Escribe la razón del reporte.",
+                                                            textAlign: TextAlign
+                                                                .justify,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                        CupertinoTextField(
+                                                          maxLines: null,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          controller: reporte,
+                                                          placeholder:
+                                                              "El programador...",
+                                                          placeholderStyle:
+                                                              TextStyle(
+                                                                  color: Colors
+                                                                      .black38),
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              border: Border.all(
+                                                                  width: 0.5,
+                                                                  color: Colors
+                                                                      .deepPurpleAccent)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        onPressed: () async {
+                                                          await createReport(
+                                                              context);
+                                                        },
+                                                        child: Text("Reportar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("Cancelar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                    ],
+                                                  ));
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .heart_broken,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Text(
+                                                "  Reportar \nProgramador",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Navigator.pushReplacement(
+                                          Navigator.push(
                                               context,
                                               CupertinoPageRoute(
                                                   builder: (context) =>
@@ -905,7 +1004,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                       actions: <Widget>[
                                                         FlatButton(
                                                           onPressed: () {
-                                                           
                                                             Navigator.pop(
                                                                 context);
                                                           },
@@ -2225,9 +2323,10 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       var dataProject = json.decode(response.body);
       desarrollador = dataProject;
       print("-------------------------------------");
-      print(desarrollador);
+
       print(
           "se obtuvo el desarrollodor en getdesarrolladorproyect en viewproject cliente");
+      setState(() {});
     } catch (error) {
       print("aqui hubo una excepcion getDesarrollador en viewProjectClient");
       print(error.toString());
@@ -2308,7 +2407,7 @@ Future finishProject(ID) async {
   print(ID.toString());
   print(dataProject[0]['FK_DESARROLLADOR'].toString());
   print(comentario.text);
-  print((calificacion*2).toString());
+  print((calificacion * 2).toString());
   print(client['ID_USUARIO'].toString());
 
   try {
@@ -2316,7 +2415,7 @@ Future finishProject(ID) async {
       "ID": ID.toString(),
       "DESARROLLADOR": dataProject[0]['FK_DESARROLLADOR'].toString(),
       "COMENTARIO": comentario.text,
-      "CALIFICACION": (calificacion*2).toString(),
+      "CALIFICACION": (calificacion * 2).toString(),
       "CLIENTE": client['ID_USUARIO'].toString(),
     }).timeout(Duration(seconds: 7));
 
@@ -2341,6 +2440,87 @@ Future undoFinishProject(ID) async {
     print(dataResponse);
   } catch (d) {
     print("error deshaciendo finalizar el proyecto:");
+    print(d.toString());
+  }
+}
+
+Future createReport(context) async {
+  print(client['ID_USUARIO'].toString());
+  print(desarrollador[0]['ID_USUARIO'].toString());
+  print(reporte.text);
+
+  try {
+    final response = await http.post(server + "/createReport.php", body: {
+      "REMITENTE": client['ID_USUARIO'].toString(),
+      "DESTINATARIO": desarrollador[0]['ID_USUARIO'].toString(),
+      "REPORTE": reporte.text,
+    }).timeout(Duration(seconds: 7));
+
+    print("Se creo el reporte con respuesta: ");
+    print(response.body);
+    if (response.body == "1") {
+      Navigator.pop(context);
+      showDialog(
+          context: contextoS,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content: Text("El reporte se hizo correctamente."),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
+    }else if (response.body == "4") {
+      Navigator.pop(context);
+      showDialog(
+          context: contextoS,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content: Text("Ya habías realizado un reporte a este usuario."),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
+    }
+  } catch (d) {
+    print("error creando el reporte");
     print(d.toString());
   }
 }

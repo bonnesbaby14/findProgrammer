@@ -29,6 +29,7 @@ var dataResponse;
 var finish;
 
 var dataProjectw, reqFuncionales, avances, cliente;
+TextEditingController reporte = TextEditingController();
 TextEditingController comentario=new TextEditingController();
 var calificacion;
 var IDout;
@@ -834,30 +835,120 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                       ),
                                     ),
                                     InkWell(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              GroovinMaterialIcons.heart_broken,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "  Reportar \n   Cliente",
-                                              style: TextStyle(
-                                                  fontSize: 14.0,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  CupertinoAlertDialog(
+                                                    title: Column(
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.devices_other,
+                                                          size: 80,
+                                                          color: Colors
+                                                              .deepPurpleAccent,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Text(
+                                                            "Reportar cliente",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 20)),
+                                                      ],
+                                                    ),
+                                                    content: Column(
+                                                      children: <Widget>[
+                                                        SizedBox(
+                                                          height: 7,
+                                                        ),
+                                                        Container(
+                                                          width: 240,
+                                                          child: Text(
+                                                            "Escribe la razón del reporte.",
+                                                            textAlign: TextAlign
+                                                                .justify,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                        CupertinoTextField(
+                                                          maxLines: null,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          controller: reporte,
+                                                          placeholder:
+                                                              "El cliente...",
+                                                          placeholderStyle:
+                                                              TextStyle(
+                                                                  color: Colors
+                                                                      .black38),
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              border: Border.all(
+                                                                  width: 0.5,
+                                                                  color: Colors
+                                                                      .deepPurpleAccent)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        onPressed: () async {
+                                                          await createReport(
+                                                              context);
+                                                        },
+                                                        child: Text("Reportar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("Cancelar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                    ],
+                                                  ));
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              20, 10, 20, 10),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Icon(
+                                                GroovinMaterialIcons
+                                                    .heart_broken,
+                                                color: Colors.white,
+                                                size: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Text(
+                                                "  Reportar \n  Cliente",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
                                     InkWell(
                                         onTap: () {
                                           if (dataProjectw[0]['F_TERMINADO'] ==
@@ -2037,6 +2128,88 @@ Future undoFinishProject(ID) async {
     print(dataResponse);
   } catch (d) {
     print("error deshaciendo finalizar el proyecto:");
+    print(d.toString());
+  }
+}
+
+
+Future createReport(context) async {
+  print(desarrollador['ID_USUARIO'].toString());
+  print(dataProjectw[0]['FK_CLIENTE'].toString());
+  print(reporte.text);
+
+  try {
+    final response = await http.post(server + "/createReport.php", body: {
+      "REMITENTE": desarrollador['ID_USUARIO'].toString(),
+      "DESTINATARIO": dataProjectw[0]['FK_CLIENTE'].toString(),
+      "REPORTE": reporte.text,
+    }).timeout(Duration(seconds: 7));
+
+    print("Se creo el reporte con respuesta: ");
+    print(response.body);
+    if (response.body == "1") {
+      Navigator.pop(context);
+      showDialog(
+          context: contextoS,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content: Text("El reporte se hizo correctamente."),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
+    }else if (response.body == "4") {
+      Navigator.pop(context);
+      showDialog(
+          context: contextoS,
+          builder: (context) => new CupertinoAlertDialog(
+                title: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.devices_other,
+                      size: 80,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("FindProgrammer",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ],
+                ),
+                content: Text("Ya habías realizado un reporte a este usuario."),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Aceptar",
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
+                  ),
+                ],
+              ));
+    }
+  } catch (d) {
+    print("error creando el reporte");
     print(d.toString());
   }
 }
