@@ -23,7 +23,7 @@ TextEditingController tdcRequerimientos = TextEditingController();
 TextEditingController tdcObservaciones = TextEditingController();
 TextEditingController tdcDescripcion = TextEditingController();
 TextEditingController tdcEnlaces = TextEditingController();
-  var IDout2;
+var IDout2;
 int intReq = 0;
 double intPorcentaje = 0;
 var serverResponse2;
@@ -41,7 +41,6 @@ class CreateAvance extends StatefulWidget {
 }
 
 class _CreateAvance extends State<CreateAvance> {
- 
   _CreateAvance(IDout2);
 
   @override
@@ -694,83 +693,127 @@ class _CreateAvance extends State<CreateAvance> {
                   ),
                   FlatButton(
                     onPressed: () async {
-                       sReq = "";
-                       for (int x = 0; x < req.length; x++) {
-                         sReq +=
-                             req[x].id.toString() + "-" + req[x].valor.toString() + "/";
+                      sReq = "";
+                      for (int x = 0; x < req.length; x++) {
+                        sReq += req[x].id.toString() +
+                            "-" +
+                            req[x].valor.toString() +
+                            "/";
+                      }
+                      if (dataProjectw[0]['F_S_ENTREGABLES'] == "1" &&
+                          tdcEnlaces.text == "") {
+                            print("se detecto que se debe icluir avances");
+                        await showDialog(
+                            context: context,
+                            builder: (context) => new CupertinoAlertDialog(
+                                  title: Column(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.devices_other,
+                                        size: 80,
+                                        color: Colors.deepPurpleAccent,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text("FindProgrammer",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20)),
+                                    ],
+                                  ),
+                                  content: Text(
+                                      "Este proyecto requiere entregables con cada avance."),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        return;
+                                      },
+                                      child: Text("Aceptar",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15)),
+                                    ),
+                                  ],
+                                ));
+                      } else {
+                        await createAdvance1();
+                        if (serverResponse2 == "1") {
+                        
+                        await showDialog(
+                            context: context,
+                            builder: (context) => new CupertinoAlertDialog(
+                                  title: Column(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.devices_other,
+                                        size: 80,
+                                        color: Colors.deepPurpleAccent,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text("FindProgrammer",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20)),
+                                    ],
+                                  ),
+                                  content: Text(
+                                      "El Avance se registro correctamente"),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                        setState(() {});
+                                      },
+                                      child: Text("Aceptar",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15)),
+                                    ),
+                                  ],
+                                ));
+                      } else {
+                        Navigator.pop(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) => new CupertinoAlertDialog(
+                                  title: Column(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.devices_other,
+                                        size: 80,
+                                        color: Colors.deepPurpleAccent,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text("FindProgrammer",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20)),
+                                    ],
+                                  ),
+                                  content: Text(
+                                      "El Avance no se registro, intentalo mas tarde. "),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Aceptar",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15)),
+                                    ),
+                                  ],
+                                ));
+                      }
+                      }
 
-                       }
-
-                      await createAdvance1();
-                       if (serverResponse2 == "1") {
-                         Navigator.pop(context);
-                showDialog(
-                    context: context,
-                    builder: (context) => new CupertinoAlertDialog(
-                          title: Column(
-                            children: <Widget>[
-                              Icon(
-                                Icons.devices_other,
-                                size: 80,
-                                color: Colors.deepPurpleAccent,
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text("FindProgrammer",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20)),
-                            ],
-                          ),
-                          content:
-                              Text("El Avance se registro correctamente"),
-                          actions: <Widget>[
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                                setState(() {});
-                              },
-                              child: Text("Aceptar",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15)),
-                            ),
-                          ],
-                        ));
-              } else {
-                Navigator.pop(context);
-                showDialog(
-                    context: context,
-                    builder: (context) => new CupertinoAlertDialog(
-                          title: Column(
-                            children: <Widget>[
-                              Icon(
-                                Icons.devices_other,
-                                size: 80,
-                                color: Colors.deepPurpleAccent,
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text("FindProgrammer",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20)),
-                            ],
-                          ),
-                          content: Text(
-                              "El Avance no se registro, intentalo mas tarde. "),
-                          actions: <Widget>[
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("Aceptar",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15)),
-                            ),
-                          ],
-                        ));
-              }
-            
                       
                     },
                     child: Text("Enviar Avance",
@@ -786,21 +829,21 @@ class _CreateAvance extends State<CreateAvance> {
 
 Future createAdvance1() async {
   var cliente1 = new http.Client();
-  print("object");  
-print(tdcTimepo.text);
-print(tdcNumeroCambio.text);
-print(tdcCambios.text);
-print( tdcObservaciones.text);
-print(intPorcentaje.toStringAsFixed(2));
-print(tdcDescripcion.text);
-print(sReq);
-print(IDout.toString());
-print(tdcEnlaces.text);
+  print("object");
+  print(tdcTimepo.text);
+  print(tdcNumeroCambio.text);
+  print(tdcCambios.text);
+  print(tdcObservaciones.text);
+  print(intPorcentaje.toStringAsFixed(2));
+  print(tdcDescripcion.text);
+  print(sReq);
+  print(IDout.toString());
+  print(tdcEnlaces.text);
   print("se entro a la funcuon");
   try {
     final response = await cliente1.post(
         //"http://192.168.0.5/findprogrammerDB/registerAdvance.php",
-        server+"/registerAdvance2.php",
+        server + "/registerAdvance2.php",
         body: {
           "TIEMPO": tdcTimepo.text,
           "NOCAMBIOS": tdcNumeroCambio.text,
@@ -808,7 +851,7 @@ print(tdcEnlaces.text);
           "OBSERVACIONES": tdcObservaciones.text,
           "PORCENTAJE": intPorcentaje.toStringAsFixed(2),
           "DESCRIPCION": tdcDescripcion.text,
-          "REQ": sReq ,
+          "REQ": sReq,
           "ID": IDout.toString(),
           "ENLACES": tdcEnlaces.text,
         }).timeout(Duration(seconds: 7));

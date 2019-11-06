@@ -781,7 +781,6 @@ Future registerProject() async {
      var cliente=http.Client();
   try {
     final response = await cliente.post(
-        //"http://192.168.0.5/findprogrammerDB/registerProject.php",
         server+"/registerProject.php",
         body: {
           "ID_USUARIO": client['ID_USUARIO'].toString(),
