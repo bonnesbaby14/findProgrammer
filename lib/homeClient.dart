@@ -778,6 +778,8 @@ class _Homeclient extends State<Homeclient> {
 
 //fin de clase normal
 Future registerProject() async {
+  print("se entro a la funcion");
+  print(intFrecuencia);
      var cliente=http.Client();
   try {
     final response = await cliente.post(

@@ -262,9 +262,12 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
                   groupValue: intFrecuencia,
                   value: 0,
                   activeColor: Colors.deepPurpleAccent,
-                  onChanged: (int e) {
+                  onChanged: ( e) {
+                    
                     setState(() {
                       intFrecuencia = e;
+                      print("se cambio");
+                    print(intFrecuencia);
                     });
                   },
                 ),
@@ -288,9 +291,11 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
                   groupValue: intFrecuencia,
                   activeColor: Colors.deepPurpleAccent,
                   value: 1,
-                  onChanged: (int e) {
+                  onChanged: ( e) {
                     setState(() {
                       intFrecuencia = e;
+                      print("se cambio");
+                    print(intFrecuencia);
                     });
                   },
                 ),
@@ -314,9 +319,11 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
                   groupValue: intFrecuencia,
                   activeColor: Colors.deepPurpleAccent,
                   value: 2,
-                  onChanged: (int e) {
+                  onChanged: ( e) {
                     setState(() {
                       intFrecuencia = e;
+                      print("se cambio");
+                    print(intFrecuencia);
                     });
                   },
                 ),

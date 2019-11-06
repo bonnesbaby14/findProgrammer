@@ -548,12 +548,10 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            await showDialog(
-                                                context: contextoS,
-                                                builder: (context) =>
-                                                    AlertEditPorject(ID));
-                                            if (dataResponse == "1") {
-                                              showDialog(
+                                            if (dataProject[0]
+                                                    ['F_EN_DESARROLLO'] ==
+                                                "1") {
+                                              await showDialog(
                                                   context: contextoS,
                                                   builder: (context) =>
                                                       new CupertinoAlertDialog(
@@ -579,13 +577,12 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                           ],
                                                         ),
                                                         content: Text(
-                                                            "El proyecto se editó correctamente"),
+                                                            "El proyecto esta en desarrollo no es posible editarlo"),
                                                         actions: <Widget>[
                                                           FlatButton(
                                                             onPressed: () {
                                                               Navigator.pop(
                                                                   context);
-                                                              setState(() {});
                                                             },
                                                             child: Text(
                                                                 "Aceptar",
@@ -598,49 +595,100 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                         ],
                                                       ));
                                             } else {
-                                              showDialog(
+                                              await showDialog(
+                                                  context: contextoS,
                                                   builder: (context) =>
-                                                      new CupertinoAlertDialog(
-                                                        title: Column(
-                                                          children: <Widget>[
-                                                            Icon(
-                                                              Icons
-                                                                  .devices_other,
-                                                              size: 80,
-                                                              color: Colors
-                                                                  .deepPurpleAccent,
+                                                      AlertEditPorject(ID));
+                                              if (dataResponse == "1") {
+                                                showDialog(
+                                                    context: contextoS,
+                                                    builder: (context) =>
+                                                        new CupertinoAlertDialog(
+                                                          title: Column(
+                                                            children: <Widget>[
+                                                              Icon(
+                                                                Icons
+                                                                    .devices_other,
+                                                                size: 80,
+                                                                color: Colors
+                                                                    .deepPurpleAccent,
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Text(
+                                                                  "FindProgrammer",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          20)),
+                                                            ],
+                                                          ),
+                                                          content: Text(
+                                                              "El proyecto se editó correctamente"),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                                setState(() {});
+                                                              },
+                                                              child: Text(
+                                                                  "Aceptar",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          15)),
                                                             ),
-                                                            SizedBox(
-                                                              height: 20,
+                                                          ],
+                                                        ));
+                                              } else {
+                                                showDialog(
+                                                    builder: (context) =>
+                                                        new CupertinoAlertDialog(
+                                                          title: Column(
+                                                            children: <Widget>[
+                                                              Icon(
+                                                                Icons
+                                                                    .devices_other,
+                                                                size: 80,
+                                                                color: Colors
+                                                                    .deepPurpleAccent,
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Text(
+                                                                  "FindProgrammer",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          20)),
+                                                            ],
+                                                          ),
+                                                          content: Text(
+                                                              "El proyecto no se editó, intentalo mas tarde. "),
+                                                          actions: <Widget>[
+                                                            FlatButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                  "Aceptar",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          15)),
                                                             ),
-                                                            Text(
-                                                                "FindProgrammer",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        20)),
                                                           ],
                                                         ),
-                                                        content: Text(
-                                                            "El proyecto no se editó, intentalo mas tarde. "),
-                                                        actions: <Widget>[
-                                                          FlatButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            child: Text(
-                                                                "Aceptar",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        15)),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                  context: contextoS);
+                                                    context: contextoS);
+                                              }
                                             }
                                           },
                                           child: Column(
@@ -1351,11 +1399,27 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-                                    child: Text(
-                                        "-Se requieren Avances 'cada 15 dias' .",
-                                        style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: Colors.white)),
+                                    child: dataProject[0]
+                                                ['INTERVALO_DE_AVANCES'] ==
+                                            "0"
+                                        ? Text(
+                                            "-Se requieren Avances 'cada 15 dias' .",
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                color: Colors.white))
+                                        : dataProject[0]
+                                                    ['INTERVALO_DE_AVANCES'] ==
+                                                "1"
+                                            ? Text(
+                                                "-Se requieren Avances 'cada mes' .",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white))
+                                            : Text(
+                                                "-Se requieren Avances 'cada 2 meses' .",
+                                                style: TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.white)),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
@@ -2488,7 +2552,7 @@ Future createReport(context) async {
                   ),
                 ],
               ));
-    }else if (response.body == "4") {
+    } else if (response.body == "4") {
       Navigator.pop(context);
       showDialog(
           context: contextoS,
