@@ -6,12 +6,14 @@ import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:findprogrammer/viewHireProgrammer.dart';
 import 'package:findprogrammer/viewReqFormal.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'claseAlertEditProject.dart';
+import 'componentes/helperNotifications.dart';
 import 'componentes/helperSQFLITE.dart';
 import 'componentes/variables.dart';
 import 'customIcons.dart';
@@ -43,6 +45,8 @@ class ViewProjectClient extends StatefulWidget {
 
 class _ViewProjectClient extends State<ViewProjectClient> {
   String ID;
+    final notification = FlutterLocalNotificationsPlugin();
+
 
   _ViewProjectClient(this.ID);
 
@@ -2241,6 +2245,32 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       print(dataProject);
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       dataProject[0]["F_VISIBILIDAD"] == "1" ? _ligths = true : _ligths = false;
+
+
+      String fechaReporte = dataProject[0]['NEXT_ADVANCE'];
+      List<String> dates = fechaReporte.split("-");
+      DateTime date = new DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day);
+      DateTime last = DateTime(
+          int.parse(dates[0]), int.parse(dates[1]), int.parse(dates[2]));
+
+      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      print(date.toString());
+      print(last.toString());
+      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      var difference = date.difference(last).inDays;
+      print(difference);
+      if (difference == 0) {
+        showOngoingNotification(notification,
+            title: 'FindProgrammer',
+            body: 'El programador te tiene que entregar un avance hoy!!!',
+            id: 20);
+            
+      }
+
+
+
+
       if (dataProject[0]['F_A_CORRECION_REQ_D'] == "1") {
         showDialog(
             context: context,

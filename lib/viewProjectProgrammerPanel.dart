@@ -1964,6 +1964,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
           "Se obtuvo info de proyecto en getInfoPryect en viewproyectProgrammerPanel ");
       print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
       print(dataProjectw);
+
       String fechaReporte = dataProjectw[0]['NEXT_ADVANCE'];
       List<String> dates = fechaReporte.split("-");
       DateTime date = new DateTime(
@@ -1982,6 +1983,36 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
             title: 'FindProgrammer',
             body: 'Tienes que entregar un avance hoy!!!',
             id: 20);
+      }
+      if (difference <= 0) {
+        showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Debes entregar un reporte hoy!!!!"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
       }
 
       if (dataProjectw[0]['F_A_CORRECION_REQ_C'] == "1") {
