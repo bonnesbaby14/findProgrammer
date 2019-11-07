@@ -26,11 +26,12 @@ dependencies:
   path_provider: 0.4.1
   progress_dialog: ^1.1.0+1
   image_picker: 0.6.1
+  flutter_local_notifications: ^0.8.4
   firebase_core: 0.4.0+8  # add dependency for Firebase C
   firebase_auth: 0.14.0+1
   google_sign_in: 4.0.6
   flutter_launcher_icons: ^0.7.3
-
+  
 flutter_icons:
   android: "launcher_icon" 
   ios: true

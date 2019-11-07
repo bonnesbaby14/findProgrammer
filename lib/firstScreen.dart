@@ -3,6 +3,7 @@ import 'package:findprogrammer/registerUser.dart';
 import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class FirstScreen extends StatefulWidget {
   @override
@@ -10,7 +11,47 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreen extends State<FirstScreen> {
+  final notification =FlutterLocalNotificationsPlugin();
+  @override
+  void initState() {
+    // TODO: implement initState
+final settingAndroid =AndroidInitializationSettings('ic_launcher_background');
+final settingIos=IOSInitializationSettings(onDidReceiveLocalNotification: (id,title,body,payload)=>onSelectNotification(payload));
+notification.initialize(InitializationSettings(settingAndroid, settingIos),onSelectNotification: onSelectNotification);
+    super.initState();
+  }
+  Future showOngoingNotification(
+  FlutterLocalNotificationsPlugin notifications, {
+  @required String title,
+  @required String body,
+  int id = 0,
+}) =>
+    _showNotification(notifications,
+        title: title, body: body, id: id, type: _ongoing);
+        Future _showNotification(
+  FlutterLocalNotificationsPlugin notifications, {
+  @required String title,
+  @required String body,
+  @required NotificationDetails type,
+  int id = 0,
+}) =>
+    notifications.show(id, title, body, type);
+  Future onSelectNotification(payload)async =>await Navigator.pop(context);
+  NotificationDetails get _ongoing {
+  final androidChannelSpecifics = AndroidNotificationDetails(
+    '1',
+    'your channel name',
+    'your channel description',
+    importance: Importance.Max,
+    priority: Priority.High,
+    ongoing: true,
+    autoCancel: false,
+  );
   
+  final iOSChannelSpecifics = IOSNotificationDetails();
+  return NotificationDetails(androidChannelSpecifics, iOSChannelSpecifics);
+}
+
   @override
   Widget build(BuildContext context) {
   double mediaw=MediaQuery.of(context).size.width;
@@ -121,9 +162,11 @@ class _FirstScreen extends State<FirstScreen> {
                           borderRadius: new BorderRadius.circular(30.0)),
                       color: Colors.white,
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Login()));
-                      },
+showOngoingNotification(notification,
+                  title: 'OtherTitle', body: 'OtherBody', id: 20);
+                      //   Navigator.push(context,
+                      //       MaterialPageRoute(builder: (context) => Login()));
+                       },
                       child: new Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 20.0,
