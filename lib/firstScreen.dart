@@ -1,11 +1,10 @@
-import 'package:findprogrammer/login.dart';
-import 'package:findprogrammer/registerUser.dart';
 import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'componentes/helperNotifications.dart';
+import 'login.dart';
 
 class FirstScreen extends StatefulWidget {
   @override
@@ -134,10 +133,10 @@ notification.initialize(InitializationSettings(settingAndroid, settingIos),onSel
                           borderRadius: new BorderRadius.circular(30.0)),
                       color: Colors.white,
                       onPressed: () {
-showOngoingNotification(notification,
-                  title: 'OtherTitle', body: 'OtherBody', id: 20);
-                      //   Navigator.push(context,
-                      //       MaterialPageRoute(builder: (context) => Login()));
+// showOngoingNotification(notification,
+//                   title: 'OtherTitle', body: 'OtherBody', id: 20);
+                         Navigator.push(context,
+                             MaterialPageRoute(builder: (context) => Login()));
                        },
                       child: new Container(
                         padding: const EdgeInsets.symmetric(
