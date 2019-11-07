@@ -12,16 +12,13 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreen extends State<FirstScreen> {
-  final notification =FlutterLocalNotificationsPlugin();
+  
   @override
   void initState() {
     // TODO: implement initState
-final settingAndroid =AndroidInitializationSettings('ic_launcher_background');
-final settingIos=IOSInitializationSettings(onDidReceiveLocalNotification: (id,title,body,payload)=>onSelectNotification(payload));
-notification.initialize(InitializationSettings(settingAndroid, settingIos),onSelectNotification: onSelectNotification);
-    super.initState();
+  super.initState();
   }
-  Future onSelectNotification(payload)async =>await Navigator.pop(context);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -133,8 +130,7 @@ notification.initialize(InitializationSettings(settingAndroid, settingIos),onSel
                           borderRadius: new BorderRadius.circular(30.0)),
                       color: Colors.white,
                       onPressed: () {
-// showOngoingNotification(notification,
-//                   title: 'OtherTitle', body: 'OtherBody', id: 20);
+
                          Navigator.push(context,
                              MaterialPageRoute(builder: (context) => Login()));
                        },

@@ -27,7 +27,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
     importance: Importance.Max,
     priority: Priority.High,
     ongoing: true,
-    autoCancel: false,
+    autoCancel: true,
   );
   
   final iOSChannelSpecifics = IOSNotificationDetails();
