@@ -127,7 +127,7 @@ class _SingUp extends State<SingUp> {
                   style: new TextStyle(
                     color: Colors.white,
                   ),
-                  obscureText: hiden1 ? true : false,
+                  obscureText: hiden2 ? true : false,
                   decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),

@@ -41,13 +41,7 @@ class _RegisterUser extends State<RegisterUser> {
 
   @override
   Widget build(BuildContext context) {
-    nombre.text = "dd";
-    apellidoP.text = "dd";
-    apellidoM.text = "dd";
-
-    telefono.text = "dd";
-    proyectos.text = "dd";
-    preparacion.text = "dd";
+ 
     print("el id obtenido es: " + ID);
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
