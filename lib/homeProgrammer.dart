@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
@@ -17,6 +15,7 @@ import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
+bool sistemaBloqueado = false;
 List<Map<String, dynamic>> desarrolladorList = List();
 Map<String, dynamic> desarrollador = Map();
 TextEditingController tecCodigo = new TextEditingController();
@@ -33,8 +32,10 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   @override
   void initState() {
     // TODO: implement initState
+
     getProjects();
     getDesarrollador();
+    getDevelopmentsProjects();
   }
 
   @override
@@ -90,11 +91,11 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
                                             fit: BoxFit.fill,
-                                            image: NetworkImage(
-                                                server+"/images/image_" +
-                                                    desarrollador['ID_USUARIO']
-                                                        .toString() +
-                                                    ".jpg"),
+                                            image: NetworkImage(server +
+                                                "/images/image_" +
+                                                desarrollador['ID_USUARIO']
+                                                    .toString() +
+                                                ".jpg"),
                                           )),
                                     ),
                                   ),
@@ -282,11 +283,42 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                     ),
                     GestureDetector(
                       onTap: () {
+                       if(sistemaBloqueado){
+showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Sistema bloqueado :c"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
                         Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+                       }else{
+                          Navigator.pop(context);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ViewAvailableProjects()));
+                       }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -330,7 +362,37 @@ class _HomeProgrammer extends State<HomeProgrammer> {
 
                     GestureDetector(
                       onTap: () {
-                        showDialog(
+                         if(sistemaBloqueado){
+showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Sistema bloqueado :c"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+                       }else{
+                          showDialog(
                             context: context,
                             builder: (context) => new CupertinoAlertDialog(
                                   title: Column(
@@ -395,6 +457,8 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                     ),
                                   ],
                                 ));
+                       }
+                        
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -601,7 +665,9 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                               itemBuilder:
                                   (BuildContext context, int position) {
                                 return GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
+                                    registerVisit(
+                                        projects[position]['ID_PROYECTO']);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -869,7 +935,8 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       print(desarrollador['NOMBRE'].toString());
       print("######################################333");
 
-      final response = await cliente1.post(server + "/loadProjects.php", body: {
+      final response =
+          await cliente1.post(server + "/loadTrendingProjects.php", body: {
         "ID": desarrollador['ID_USUARIO'].toString(),
         "F_D_WEB": desarrollador["F_D_WEB"].toString(),
         "F_D_M_ANDROID": desarrollador["F_D_M_ANDROID"].toString(),
@@ -994,6 +1061,111 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       return response.body;
     } catch (f) {
       print(f.toString());
+    }
+  }
+
+  Future registerVisit(ID) async {
+    print("se entreo a la funcion de regstar visita");
+    print(desarrollador['ID_USUARIO'].toString());
+    print(ID.toString());
+
+    var cliente = http.Client();
+    try {
+      final response = await cliente
+          .post(server + "/createVisit.php", body: {
+            "ID_USUARIO": desarrollador['ID_USUARIO'].toString(),
+            "ID_PROYECTO": ID.toString(),
+          })
+          .timeout(Duration(seconds: 7))
+          .whenComplete(() {
+            print(
+                "Se termino la funcion de visita de proyecto en home desarrollador");
+          });
+
+      print("se registro la visita con respuesta:");
+      print(response.body);
+    } catch (d) {
+      print("error registrando el proyecto en homcliente");
+      print(d.toString());
+    } finally {
+      cliente.close();
+    }
+  }
+
+  Future getDevelopmentsProjects() async {
+    var cliente1 = new http.Client();
+    try {
+      print("-------------------------------------");
+
+      final response =
+          await cliente1.post(server + "/loadDevelopmentProjects.php", body: {
+        "ID": desarrollador['ID_USUARIO'].toString(),
+      }).timeout(Duration(seconds: 7));
+
+      var datauser = json.decode(response.body);
+      print(datauser);
+      if (datauser != null) {
+        for (int z = 0; z < datauser.length; z++) {
+          
+  String fechaReporte = datauser[z]['NEXT_ADVANCE'];
+      List<String> dates = fechaReporte.split("-");
+      DateTime date = new DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day);
+      DateTime last = DateTime(
+          int.parse(dates[0]), int.parse(dates[1]), int.parse(dates[2]));
+
+      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      print(date.toString());
+      print(last.toString());
+      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      var difference = date.difference(last).inDays;
+      print(difference);
+   
+      if (difference > 0) {
+        sistemaBloqueado=true;
+      }
+          
+        }
+      }
+      if(sistemaBloqueado){
+showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Sistema bloqueado :c"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+      }
+      print(
+          "se obtuvo los proyectos en desarrollo********************************");
+      print(projects);
+    } catch (d) {
+      print("hubo un error obteniendo los proyectos en desarrollo");
+      print(d.toString());
+    } finally {
+      cliente1.close();
+      setState(() {});
     }
   }
 }
