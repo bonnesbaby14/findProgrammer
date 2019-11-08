@@ -941,10 +941,47 @@ class _RegisterUser extends State<RegisterUser> {
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15)),
-                                      onPressed: () {
+                                      onPressed: ()async {
                                         Navigator.pop(context);
-                                        print("clic");
-                                        ReRegisterUser();
+                                         showDialog(
+                          context: context,
+                          builder: (context) => Center(
+                                child: SizedBox(
+                                  width: 250,
+                                  height: 250,
+                                  child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      elevation: 100,
+                                      color: Color.fromARGB(1000, 75, 74, 75),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: EdgeInsets.all(20),
+                                            child: SizedBox(
+                                              height: 120,
+                                              width: 120,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 10,
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                          Text("Cargando",
+                                              style: TextStyle(
+                                                  fontSize: 30.0,
+                                                  color: Colors.white))
+                                        ],
+                                      )),
+                                ),
+                              ));
+
+                                        await ReRegisterUser();
+                                        Navigator.pop(context);
                                       },
                                     ),
                                     FlatButton(
@@ -1004,7 +1041,7 @@ class _RegisterUser extends State<RegisterUser> {
       var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
       var length = await img.length();
       var uri =
-          Uri.parse("https://fineseraoye/image.php");
+          Uri.parse(server+"/image.php");
       var request = http.MultipartRequest("POST", uri);
       var multipartFile = http.MultipartFile("image", strem, length,
           filename: "image_" + ID.toString() + ".jpg");
