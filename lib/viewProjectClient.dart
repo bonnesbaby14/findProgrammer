@@ -31,9 +31,11 @@ var listReqF = List<Widget>();
 var listAvances = List<Widget>();
 double calificacion;
 var finish;
+var responseA;
 var dataProject, reqFuncionales, avances, desarrollador;
 TextEditingController comentario = TextEditingController();
 TextEditingController reporte = TextEditingController();
+TextEditingController razon = TextEditingController();
 Helper helper = new Helper();
 
 class ViewProjectClient extends StatefulWidget {
@@ -45,8 +47,7 @@ class ViewProjectClient extends StatefulWidget {
 
 class _ViewProjectClient extends State<ViewProjectClient> {
   String ID;
-    final notification = FlutterLocalNotificationsPlugin();
-
+  final notification = FlutterLocalNotificationsPlugin();
 
   _ViewProjectClient(this.ID);
 
@@ -852,7 +853,203 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () async {
+                                          print("object");
+                                          await showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  CupertinoAlertDialog(
+                                                    title: Column(
+                                                      children: <Widget>[
+                                                        Icon(
+                                                          Icons.devices_other,
+                                                          size: 80,
+                                                          color: Colors
+                                                              .deepPurpleAccent,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Text(
+                                                            "Abandnar proyecto",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 20)),
+                                                      ],
+                                                    ),
+                                                    content: Column(
+                                                      children: <Widget>[
+                                                        SizedBox(
+                                                          height: 7,
+                                                        ),
+                                                        Container(
+                                                          width: 240,
+                                                          child: Text(
+                                                            "Escribe la razón del abandono.",
+                                                            textAlign: TextAlign
+                                                                .justify,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                        CupertinoTextField(
+                                                          maxLines: null,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          controller: razon,
+                                                          placeholder: ".....",
+                                                          placeholderStyle:
+                                                              TextStyle(
+                                                                  color: Colors
+                                                                      .black38),
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              border: Border.all(
+                                                                  width: 0.5,
+                                                                  color: Colors
+                                                                      .deepPurpleAccent)),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        onPressed: () async {
+                                                          if (razon.text ==
+                                                              "") {
+                                                            await showDialog(
+                                                                context:
+                                                                    contextoS,
+                                                                builder:
+                                                                    (context) =>
+                                                                        new CupertinoAlertDialog(
+                                                                          title:
+                                                                              Column(
+                                                                            children: <Widget>[
+                                                                              Icon(
+                                                                                Icons.devices_other,
+                                                                                size: 80,
+                                                                                color: Colors.deepPurpleAccent,
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 20,
+                                                                              ),
+                                                                              Text("FindProgrammer", style: TextStyle(color: Colors.black, fontSize: 20)),
+                                                                            ],
+                                                                          ),
+                                                                          content:
+                                                                              Text("Debes escribir una razón para abandonar el proyecto"),
+                                                                          actions: <
+                                                                              Widget>[
+                                                                            FlatButton(
+                                                                              onPressed: () {
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: Text("Aceptar", style: TextStyle(color: Colors.black, fontSize: 15)),
+                                                                            ),
+                                                                          ],
+                                                                        ));
+                                                            return;
+                                                          }
+                                                          await abandonar(
+                                                              this.ID);
+                                                              if(responseA=="1"){
+                                                                Navigator.pop(context);
+                                                                await showDialog(
+                                                                context:
+                                                                    contextoS,
+                                                                builder:
+                                                                    (context) =>
+                                                                        new CupertinoAlertDialog(
+                                                                          title:
+                                                                              Column(
+                                                                            children: <Widget>[
+                                                                              Icon(
+                                                                                Icons.devices_other,
+                                                                                size: 80,
+                                                                                color: Colors.deepPurpleAccent,
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 20,
+                                                                              ),
+                                                                              Text("FindProgrammer", style: TextStyle(color: Colors.black, fontSize: 20)),
+                                                                            ],
+                                                                          ),
+                                                                          content:
+                                                                              Text("Abandonaste este proyecto con exito cuando el programador sea notificado el proyecto podra ser desarrollado por otro desarrollador."),
+                                                                          actions: <
+                                                                              Widget>[
+                                                                            FlatButton(
+                                                                              onPressed: () {
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: Text("Aceptar", style: TextStyle(color: Colors.black, fontSize: 15)),
+                                                                            ),
+                                                                          ],
+                                                                        ));
+
+
+                                                              }else{
+                                                                Navigator.pop(context);
+                                                                await showDialog(
+                                                                context:
+                                                                    contextoS,
+                                                                builder:
+                                                                    (context) =>
+                                                                        new CupertinoAlertDialog(
+                                                                          title:
+                                                                              Column(
+                                                                            children: <Widget>[
+                                                                              Icon(
+                                                                                Icons.devices_other,
+                                                                                size: 80,
+                                                                                color: Colors.deepPurpleAccent,
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 20,
+                                                                              ),
+                                                                              Text("FindProgrammer", style: TextStyle(color: Colors.black, fontSize: 20)),
+                                                                            ],
+                                                                          ),
+                                                                          content:
+                                                                              Text("Ocurrio un error intentalo mas tarde"),
+                                                                          actions: <
+                                                                              Widget>[
+                                                                            FlatButton(
+                                                                              onPressed: () {
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: Text("Aceptar", style: TextStyle(color: Colors.black, fontSize: 15)),
+                                                                            ),
+                                                                          ],
+                                                                        ));
+                                                              }
+                                                        },
+                                                        child: Text("Abandonar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("Cancelar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 15)),
+                                                      ),
+                                                    ],
+                                                  ));
+                                        },
                                         child: Padding(
                                           padding: EdgeInsets.fromLTRB(
                                               20, 10, 20, 10),
@@ -867,7 +1064,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                 height: 8,
                                               ),
                                               Text(
-                                                "Cancelar \n proyecto ",
+                                                "Abandonar \n proyecto ",
                                                 style: TextStyle(
                                                     fontSize: 14.0,
                                                     color: Colors.white),
@@ -2246,7 +2443,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       dataProject[0]["F_VISIBILIDAD"] == "1" ? _ligths = true : _ligths = false;
 
-
       String fechaReporte = dataProject[0]['NEXT_ADVANCE'];
       List<String> dates = fechaReporte.split("-");
       DateTime date = new DateTime(
@@ -2265,11 +2461,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
             title: 'FindProgrammer',
             body: 'El programador te tiene que entregar un avance hoy!!!',
             id: 20);
-            
       }
-
-
-
 
       if (dataProject[0]['F_A_CORRECION_REQ_D'] == "1") {
         showDialog(
@@ -2616,5 +2808,30 @@ Future createReport(context) async {
   } catch (d) {
     print("error creando el reporte");
     print(d.toString());
+  }
+}
+
+Future abandonar(ID) async {
+  print("se entro a la funcion abandonar");
+
+  var cliente = http.Client();
+  try {
+    final response = await cliente
+        .post(server + "/abandonarC.php", body: {
+          "ID_USUARIO": client['ID_USUARIO'].toString(),
+          "PROYECTO": ID.toString(),
+          "RAZON": razon.text,
+        })
+        .timeout(Duration(seconds: 7))
+        .whenComplete(() {
+          print("Se termino la funcion de abandonar proyecto");
+        });
+
+    responseA=response.body;
+    } catch (d) {
+    print("error abanodonando el prouecto");
+    print(d.toString());
+  } finally {
+    cliente.close();
   }
 }
