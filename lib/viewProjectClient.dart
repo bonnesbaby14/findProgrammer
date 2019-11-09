@@ -2443,6 +2443,44 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       dataProject[0]["F_VISIBILIDAD"] == "1" ? _ligths = true : _ligths = false;
 
+      if(dataProject[0]['F_ABANDONO_D']=="1"){
+
+ showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("El cliente decidió abandonar este proyecto, una vez aceptado este mensaje desaparecera de tus proyectos en desarrollo. \n La razón del abandono es la siguiente: "+dataProject[0]['OBSERVACIONESABANDONO'].toString()),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        confirmar(ID);
+                        Navigator.pop(context);
+                        Navigator.push(context, CupertinoPageRoute(builder: (context)=>Homeclient()));
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+
+
+
+return;
+}
+
       String fechaReporte = dataProject[0]['NEXT_ADVANCE'];
       List<String> dates = fechaReporte.split("-");
       DateTime date = new DateTime(
@@ -2834,4 +2872,29 @@ Future abandonar(ID) async {
   } finally {
     cliente.close();
   }
+}
+Future confirmar(ID)async{
+  print("se entro a la funcion abandonar");
+
+  var cliente = http.Client();
+  try {
+    final response = await cliente
+        .post(server + "/confirmarD.php", body: {
+
+          "PROYECTO": ID.toString(),
+      
+        })
+        .timeout(Duration(seconds: 7))
+        .whenComplete(() {
+          print("Se termino la ocnfirmacion");
+        });
+
+    responseA=response.body;
+    } catch (d) {
+    print("error en la confimacion");
+    print(d.toString());
+  } finally {
+    cliente.close();
+  }
+
 }
