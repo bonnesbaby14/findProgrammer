@@ -127,6 +127,24 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
     }
 
     if (reqFuncionales != null) {
+      if (dataProjectw[0]['F_A_CORRECION_REQ_C'] == "1") {
+        listReqF.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("Estado: No aceptados",
+              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+        ));
+        listReqF.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("Observaciones: "+dataProjectw[0]['OBSERVACIONES'].toString() ,
+              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+        ));
+        
+        listReqF.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("____________________________",
+              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+        ));
+      }
       for (int x = 0; x < reqFuncionales.length; x++) {
         listReqF.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
