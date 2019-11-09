@@ -113,7 +113,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.camera);
+                                          source: ImageSource.camera,imageQuality: 70);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
@@ -128,7 +128,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.gallery);
+                                          source: ImageSource.gallery,imageQuality: 70);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
@@ -305,7 +305,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                   width: 270.0,
                   child: OutlineButton(
                     borderSide: BorderSide(color: Colors.white),
-                    onPressed: () {
+                    onPressed: ()async {
                       
                         
 
@@ -316,7 +316,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                             
                            
                             telefono.text == "") {
-                          showDialog(
+                         await showDialog(
                               context: context,
                               builder: (context) => new CupertinoAlertDialog(
                                     title: Column(
@@ -351,8 +351,44 @@ class _UpdateUserC extends State<UpdateUserC> {
                                   ));
                           return;
                         }
-
-                      updateCliente();
+showDialog(
+                          context: context,
+                          builder: (context) => Center(
+                                child: SizedBox(
+                                  width: 250,
+                                  height: 250,
+                                  child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      elevation: 100,
+                                      color: Color.fromARGB(1000, 75, 74, 75),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: EdgeInsets.all(20),
+                                            child: SizedBox(
+                                              height: 120,
+                                              width: 120,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 10,
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                          Text("Cargando",
+                                              style: TextStyle(
+                                                  fontSize: 30.0,
+                                                  color: Colors.white))
+                                        ],
+                                      )),
+                                ),
+                              ));
+                      await updateCliente();
+                      
                       
                     },
                     color: Colors.white,
@@ -410,6 +446,7 @@ if(img!=null){
 }
       switch (response.body) {
         case "1":
+        Navigator.pop(context);
           //registro completo
           if (_groupvalue2 == 0) {
             showDialog(
