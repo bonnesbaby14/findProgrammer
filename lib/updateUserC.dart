@@ -435,8 +435,9 @@ if(img!=null){
                       actions: <Widget>[
                         FlatButton(
                           onPressed: () {
-                            Navigator.pop(context);
                             
+                            Navigator.pop(context);
+                             Navigator.pop(context);
                           },
                           child: Text("Aceptar",
                               style:
@@ -523,5 +524,15 @@ if(img!=null){
       Navigator.pop(context);
     }
   }
-
+ void getClient() async {
+    try {
+      clientList = await helper.SelectCliente();
+      client = clientList.first;
+      print("se obtuvo el cliente en getcliente en homecliente");
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
 }
