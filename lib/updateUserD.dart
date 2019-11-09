@@ -206,6 +206,8 @@ telefono.text = desarrollador['TELEFONO'];
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  maxLength: 20,
+                  keyboardType: TextInputType.number,
                   controller: telefono,
                   style: new TextStyle(
                     color: Colors.white,
@@ -306,6 +308,7 @@ telefono.text = desarrollador['TELEFONO'];
                               primaryColor: white,
                               primaryColorDark: white),
                           child: TextFormField(
+                            maxLength: 18,
                             controller: curp,
                             style: new TextStyle(
                               color: Colors.white,
@@ -523,6 +526,7 @@ telefono.text = desarrollador['TELEFONO'];
                                   primaryColor: white,
                                   primaryColorDark: white),
                               child: TextFormField(
+                                maxLength: 40,
                                 controller: preparacion,
                                 style: new TextStyle(
                                   color: Colors.white,
@@ -543,6 +547,7 @@ telefono.text = desarrollador['TELEFONO'];
                                   primaryColor: white,
                                   primaryColorDark: white),
                               child: TextFormField(
+                                maxLength: 80,
                                 controller: proyectos,
                                 style: new TextStyle(
                                   color: Colors.white,

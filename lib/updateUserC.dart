@@ -174,6 +174,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                     primaryColorDark: white),
                 child: TextFormField(
                   controller: curp,
+                  maxLength: 18,
                   style: new TextStyle(
                     color: Colors.white,
                   ),
@@ -200,6 +201,8 @@ class _UpdateUserC extends State<UpdateUserC> {
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  maxLength: 20,
                   controller: telefono,
                   style: new TextStyle(
                     color: Colors.white,

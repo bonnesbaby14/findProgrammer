@@ -166,6 +166,7 @@ class _RegisterUser extends State<RegisterUser> {
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  maxLength: 40,
                   controller: nombre,
                   style: new TextStyle(
                     color: Colors.white,
@@ -255,6 +256,7 @@ class _RegisterUser extends State<RegisterUser> {
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  maxLength:18,
                   controller: curp,
                   style: new TextStyle(
                     color: Colors.white,
@@ -283,6 +285,8 @@ class _RegisterUser extends State<RegisterUser> {
                     primaryColorDark: white),
                 child: TextFormField(
                   controller: telefono,
+                  maxLength: 20,
+                  keyboardType: TextInputType.phone,
                   style: new TextStyle(
                     color: Colors.white,
                   ),
@@ -652,6 +656,7 @@ class _RegisterUser extends State<RegisterUser> {
                                         primaryColor: white,
                                         primaryColorDark: white),
                                     child: TextFormField(
+                                      maxLength: 40,
                                       controller: preparacion,
                                       style: new TextStyle(
                                         color: Colors.white,
@@ -673,6 +678,7 @@ class _RegisterUser extends State<RegisterUser> {
                                         primaryColor: white,
                                         primaryColorDark: white),
                                     child: TextFormField(
+                                      maxLength: 80,
                                       controller: proyectos,
                                       style: new TextStyle(
                                         color: Colors.white,
