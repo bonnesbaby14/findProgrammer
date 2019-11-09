@@ -89,7 +89,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image:NetworkImage("http://findprogrammerceti.000webhostapp.com/images/image_"+client['ID_USUARIO'].toString()+".jpg")
+                                        image:NetworkImage(server+"/images/image_"+client['ID_USUARIO'].toString()+".jpg")
                                       )),
                                 ),
                               ),

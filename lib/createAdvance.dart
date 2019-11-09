@@ -131,7 +131,7 @@ class _CreateAvance extends State<CreateAvance> {
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: NetworkImage(
-                                              "https://findprogrammerceti.000webhostapp.com/images/image_" +
+                                              server+"/images/image_" +
                                                   desarrollador['ID_USUARIO']
                                                       .toString() +
                                                   ".jpg"))),
