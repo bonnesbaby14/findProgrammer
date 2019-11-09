@@ -62,6 +62,8 @@ class _SingUp extends State<SingUp> {
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  maxLength: 30,
                   controller: correo,
                   style: new TextStyle(
                     color: Colors.white,
@@ -83,6 +85,7 @@ class _SingUp extends State<SingUp> {
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  maxLength: 20,
                   controller: contrasena1,
                   style: new TextStyle(
                     color: Colors.white,
@@ -123,6 +126,7 @@ class _SingUp extends State<SingUp> {
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  maxLength: 20,
                   controller: contrasena2,
                   style: new TextStyle(
                     color: Colors.white,

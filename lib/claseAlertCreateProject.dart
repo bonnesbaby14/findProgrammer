@@ -53,9 +53,11 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
             height: 10,
           ),
           Container(
-            height: 60,
+            height: 100,
             child: CupertinoTextField(
-              placeholder: "Descripción...",
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              placeholder: "Descripción...(oraciones)\nEl proyecto deberá...\nEl proyecto tendrá...\nEl proyecto será...",
               controller: tdcDescripcion,
               placeholderStyle: TextStyle(color: Colors.black38),
               decoration: BoxDecoration(
