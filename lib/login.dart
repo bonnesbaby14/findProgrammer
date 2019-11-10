@@ -404,6 +404,7 @@ Map<String, dynamic> MapDesarrollador = Map();
 
           print(response.body);
 
+
           MapCliente['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
           MapCliente['NOMBRE'] = respuesta[1]['NOMBRE'];
           MapCliente['APELLIDO_P'] = respuesta[1]['APELLIDO_P'];
@@ -521,6 +522,7 @@ Map<String, dynamic> MapDesarrollador = Map();
       print("se accedio");
       var datauser;
       try {
+    
         datauser = json.decode(response.body);
       } catch (e) {
         Navigator.pop(context);
@@ -611,25 +613,26 @@ Map<String, dynamic> MapDesarrollador = Map();
           Map<String, dynamic> MapDesarrollador = Map();
 
           print(response.body);
+          print("llegue aqui[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[{{");
           helper.DeleteDesarrollador();
           MapDesarrollador['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
           MapDesarrollador['ID_DESARROLLADOR'] =
               datauser[1]['ID_DESARROLLADOR'];
 
           MapDesarrollador['GOOGLE_ID'] = datauser[1]['GOOGLE_ID'];
-          MapDesarrollador['NOMBRE'] = datauser[1]['NOMBRE'];
-          MapDesarrollador['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
-          MapDesarrollador['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
-          MapDesarrollador['CORREO'] = datauser[1]['CORREO'];
+          MapDesarrollador['NOMBRE'] =utf8.decode(base64.decode(datauser[1]['NOMBRE'])) ;
+          MapDesarrollador['APELLIDO_P'] =utf8.decode(base64.decode(datauser[1]['APELLIDO_P'])) ;
+          MapDesarrollador['APELLIDO_M'] = utf8.decode(base64.decode(datauser[1]['APELLIDO_M']));
+          MapDesarrollador['CORREO'] =utf8.decode(base64.decode(datauser[1]['CORREO'])) ;
           MapDesarrollador['FOTO'] = datauser[1]['FOTO'];
           MapDesarrollador['CALIFICACION'] = datauser[1]['CALIFICACION'];
           MapDesarrollador['F_ESTADO_REGISTRO'] =
               datauser[1]['F_ESTADO_REGISTRO'];
           MapDesarrollador['PASSWORD'] = datauser[1]['PASSWORD'];
-          MapDesarrollador['TELEFONO'] = datauser[1]['TELEFONO'];
+          MapDesarrollador['TELEFONO'] =utf8.decode(base64.decode(datauser[1]['TELEFONO'])) ;
           MapDesarrollador['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
           MapDesarrollador['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
-          MapDesarrollador['CURP'] = datauser[1]['CURP'];
+          MapDesarrollador['CURP'] = utf8.decode(base64.decode(datauser[1]['CURP']));
           MapDesarrollador['F_USUARIO_APRUEBA'] =
               datauser[1]['F_USUARIO_APRUEBA'];
           MapDesarrollador['F_D_WEB'] = datauser[1]['F_D_WEB'];
@@ -638,11 +641,10 @@ Map<String, dynamic> MapDesarrollador = Map();
           MapDesarrollador['F_D_E_WINDOWS'] = datauser[1]['F_D_E_WINDOWS'];
           MapDesarrollador['F_D_E_MAC'] = datauser[1]['F_D_E_MAC'];
           MapDesarrollador['F_D_REDES'] = datauser[1]['F_D_REDES'];
-          MapDesarrollador['PREPARACION'] = datauser[1]['PREPARACION'];
-          MapDesarrollador['PROYECTOS_TRABAJADOS'] =
-              datauser[1]['PROYECTOS_TRABAJADOS'];
-          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =
-              datauser[1]['F_SISTEMA_BLOQUEADO'];
+          MapDesarrollador['PREPARACION'] = utf8.decode(base64.decode(datauser[1]['PREPARACION']));
+          MapDesarrollador['PROYECTOS_TRABAJADOS'] =utf8.decode(base64.decode( datauser[1]['PROYECTOS_TRABAJADOS']))
+             ;
+          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =datauser[1]['F_SISTEMA_BLOQUEADO'];
           print(MapDesarrollador.toString());
 
 //insertar datos del programador logueado.
@@ -699,20 +701,19 @@ Map<String, dynamic> MapDesarrollador = Map();
           Map<String, dynamic> MapCliente = Map();
 
           print(response.body);
-
-          MapCliente['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
-          MapCliente['NOMBRE'] = datauser[1]['NOMBRE'];
-          MapCliente['APELLIDO_P'] = datauser[1]['APELLIDO_P'];
-          MapCliente['APELLIDO_M'] = datauser[1]['APELLIDO_M'];
-          MapCliente['CORREO'] = datauser[1]['CORREO'];
+  MapCliente['ID_USUARIO'] = datauser[1]['ID_USUARIO'];
+          MapCliente['NOMBRE'] = utf8.decode(base64.decode(datauser[1]['NOMBRE']));
+          MapCliente['APELLIDO_P'] = utf8.decode(base64.decode(datauser[1]['APELLIDO_P']));
+          MapCliente['APELLIDO_M'] = utf8.decode(base64.decode(datauser[1]['APELLIDO_M']));
+          MapCliente['CORREO'] = utf8.decode(base64.decode(datauser[1]['CORREO']));
           MapCliente['FOTO'] = datauser[1]['FOTO'];
           MapCliente['CALIFICACION'] = datauser[1]['CALIFICACION'];
           MapCliente['F_ESTADO_REGISTRO'] = datauser[1]['F_ESTADO_REGISTRO'];
           MapCliente['PASSWORD'] = datauser[1]['PASSWORD'];
-          MapCliente['TELEFONO'] = datauser[1]['TELEFONO'];
+          MapCliente['TELEFONO'] = utf8.decode(base64.decode(datauser[1]['TELEFONO']));
           MapCliente['F_BAJA_USUARIO'] = datauser[1]['F_BAJA_USUARIO'];
           MapCliente['F_ESTADO_LOGIN'] = datauser[1]['F_ESTADO_LOGIN'];
-          MapCliente['CURP'] = datauser[1]['CURP'];
+          MapCliente['CURP'] = utf8.decode(base64.decode(datauser[1]['CURP']));
           MapCliente['F_USUARIO_APRUEBA'] = datauser[1]['F_USUARIO_APRUEBA'];
 
           print(MapCliente.toString());
