@@ -7,6 +7,7 @@ import 'package:findprogrammer/viewFinishProjectsProgrammer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'componentes/helperSQFLITE.dart';
 import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'dart:convert';
@@ -40,7 +41,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
   @override
   Widget build(BuildContext context) {
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+Helper helper=new Helper();
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
@@ -427,11 +428,21 @@ class _ViewCreateReq extends State<ViewCreateReq> {
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()));
+                                    helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(

@@ -35,7 +35,8 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
-    var _keydos = new GlobalKey();
+
+Helper helper=new Helper();
 
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
@@ -573,11 +574,21 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
                                 actions: <Widget>[
                                   FlatButton(
                                     onPressed: () {
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Login()));
+                                     helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
                                     },
                                     child: Text("Cerrar Sesion",
                                         style: TextStyle(

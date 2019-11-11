@@ -308,7 +308,7 @@ class _Login extends State<Login> {
         final response = await http.post(
             server+"/google.php",
             body: {
-              "google": user.providerId.toString(),
+              "google": user.uid.toString(),
               "mail": user.email.toString(),
             }).timeout(Duration(seconds: 7));
         print(user.uid);
@@ -355,26 +355,26 @@ class _Login extends State<Login> {
         }else if(respuesta[0]==1){
 Map<String, dynamic> MapDesarrollador = Map();
 
-          print(response.body);
           helper.DeleteDesarrollador();
           MapDesarrollador['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
           MapDesarrollador['ID_DESARROLLADOR'] =
               respuesta[1]['ID_DESARROLLADOR'];
 
           MapDesarrollador['GOOGLE_ID'] = respuesta[1]['GOOGLE_ID'];
-          MapDesarrollador['NOMBRE'] = respuesta[1]['NOMBRE'];
-          MapDesarrollador['APELLIDO_P'] = respuesta[1]['APELLIDO_P'];
-          MapDesarrollador['APELLIDO_M'] = respuesta[1]['APELLIDO_M'];
-          MapDesarrollador['CORREO'] = respuesta[1]['CORREO'];
+          MapDesarrollador['NOMBRE'] =utf8.decode(base64.decode(respuesta[1]['NOMBRE'])) ;
+          MapDesarrollador['APELLIDO_P'] =utf8.decode(base64.decode(respuesta[1]['APELLIDO_P'])) ;
+          MapDesarrollador['APELLIDO_M'] = utf8.decode(base64.decode(respuesta[1]['APELLIDO_M']));
+          MapDesarrollador['CORREO'] =utf8.decode(base64.decode(respuesta[1]['CORREO'])) ;
           MapDesarrollador['FOTO'] = respuesta[1]['FOTO'];
           MapDesarrollador['CALIFICACION'] = respuesta[1]['CALIFICACION'];
           MapDesarrollador['F_ESTADO_REGISTRO'] =
               respuesta[1]['F_ESTADO_REGISTRO'];
           MapDesarrollador['PASSWORD'] = respuesta[1]['PASSWORD'];
-          MapDesarrollador['TELEFONO'] = respuesta[1]['TELEFONO'];
+          MapDesarrollador['TELEFONO'] =utf8.decode(base64.decode(respuesta[1]['TELEFONO'])) ;
           MapDesarrollador['F_BAJA_USUARIO'] = respuesta[1]['F_BAJA_USUARIO'];
           MapDesarrollador['F_ESTADO_LOGIN'] = respuesta[1]['F_ESTADO_LOGIN'];
-          MapDesarrollador['CURP'] = respuesta[1]['CURP'];
+          MapDesarrollador['CURP'] = utf8.decode(base64.decode(respuesta[1]['CURP']));
+           print("llegue aqui[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[{{");
           MapDesarrollador['F_USUARIO_APRUEBA'] =
               respuesta[1]['F_USUARIO_APRUEBA'];
           MapDesarrollador['F_D_WEB'] = respuesta[1]['F_D_WEB'];
@@ -383,11 +383,10 @@ Map<String, dynamic> MapDesarrollador = Map();
           MapDesarrollador['F_D_E_WINDOWS'] = respuesta[1]['F_D_E_WINDOWS'];
           MapDesarrollador['F_D_E_MAC'] = respuesta[1]['F_D_E_MAC'];
           MapDesarrollador['F_D_REDES'] = respuesta[1]['F_D_REDES'];
-          MapDesarrollador['PREPARACION'] = respuesta[1]['PREPARACION'];
-          MapDesarrollador['PROYECTOS_TRABAJADOS'] =
-              respuesta[1]['PROYECTOS_TRABAJADOS'];
-          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =
-              respuesta[1]['F_SISTEMA_BLOQUEADO'];
+          MapDesarrollador['PREPARACION'] = utf8.decode(base64.decode(respuesta[1]['PREPARACION']));
+          MapDesarrollador['PROYECTOS_TRABAJADOS'] =utf8.decode(base64.decode( respuesta[1]['PROYECTOS_TRABAJADOS']))
+             ;
+          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =respuesta[1]['F_SISTEMA_BLOQUEADO'];
           print(MapDesarrollador.toString());
 
 //insertar datos del programador logueado.
@@ -406,19 +405,19 @@ Map<String, dynamic> MapDesarrollador = Map();
           print(response.body);
 
 
-          MapCliente['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
-          MapCliente['NOMBRE'] = respuesta[1]['NOMBRE'];
-          MapCliente['APELLIDO_P'] = respuesta[1]['APELLIDO_P'];
-          MapCliente['APELLIDO_M'] = respuesta[1]['APELLIDO_M'];
-          MapCliente['CORREO'] = respuesta[1]['CORREO'];
+         MapCliente['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
+          MapCliente['NOMBRE'] = utf8.decode(base64.decode(respuesta[1]['NOMBRE']));
+          MapCliente['APELLIDO_P'] = utf8.decode(base64.decode(respuesta[1]['APELLIDO_P']));
+          MapCliente['APELLIDO_M'] = utf8.decode(base64.decode(respuesta[1]['APELLIDO_M']));
+          MapCliente['CORREO'] = utf8.decode(base64.decode(respuesta[1]['CORREO']));
           MapCliente['FOTO'] = respuesta[1]['FOTO'];
           MapCliente['CALIFICACION'] = respuesta[1]['CALIFICACION'];
           MapCliente['F_ESTADO_REGISTRO'] = respuesta[1]['F_ESTADO_REGISTRO'];
           MapCliente['PASSWORD'] = respuesta[1]['PASSWORD'];
-          MapCliente['TELEFONO'] = respuesta[1]['TELEFONO'];
+          MapCliente['TELEFONO'] = utf8.decode(base64.decode(respuesta[1]['TELEFONO']));
           MapCliente['F_BAJA_USUARIO'] = respuesta[1]['F_BAJA_USUARIO'];
           MapCliente['F_ESTADO_LOGIN'] = respuesta[1]['F_ESTADO_LOGIN'];
-          MapCliente['CURP'] = respuesta[1]['CURP'];
+          MapCliente['CURP'] = utf8.decode(base64.decode(respuesta[1]['CURP']));
           MapCliente['F_USUARIO_APRUEBA'] = respuesta[1]['F_USUARIO_APRUEBA'];
 
           print(MapCliente.toString());

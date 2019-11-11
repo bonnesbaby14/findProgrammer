@@ -696,6 +696,16 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                     helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
                                         context,
@@ -960,7 +970,8 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                                           dataProjectw[0]
                                                               ['ID_PROYECTO'],
                                                           desarrollador[
-                                                              'ID_USUARIO'])));
+                                                              'ID_USUARIO'],dataProjectw[0]
+                                                              ['FK_CLIENTE'])));
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.all(10),

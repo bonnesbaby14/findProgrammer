@@ -1,3 +1,4 @@
+import 'package:findprogrammer/componentes/helperSQFLITE.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewProjectProgrammerPanel.dart';
 
@@ -35,6 +36,7 @@ var req = new List<ReqRadio>();
 
 class CreateAvance extends StatefulWidget {
   var ID;
+
   CreateAvance(this.ID);
   @override
   _CreateAvance createState() => new _CreateAvance(ID);
@@ -54,6 +56,7 @@ class _CreateAvance extends State<CreateAvance> {
   }
 
   var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
+  Helper helper=new Helper();
   @override
   Widget build(BuildContext context) {
     try {
@@ -486,6 +489,16 @@ class _CreateAvance extends State<CreateAvance> {
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                    helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
                                         context,

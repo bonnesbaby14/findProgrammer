@@ -20,16 +20,16 @@ var destinatario;
 
 @override
 class ChatProgrammer extends StatefulWidget {
-  var idProyecto, idDesarrollador;
-  ChatProgrammer(this.idProyecto, this.idDesarrollador);
+  var idProyecto, idDesarrollador,destinor;
+  ChatProgrammer(this.idProyecto, this.idDesarrollador,this.destinor);
   _ChatProgrammer createState() =>
-      new _ChatProgrammer(idProyecto, idDesarrollador);
+      new _ChatProgrammer(idProyecto, idDesarrollador,destinor);
 }
 
 class _ChatProgrammer extends State<ChatProgrammer> {
   var mensajes;
-  var idProyecto, idDesarrollador;
-  _ChatProgrammer(this.idProyecto, this.idDesarrollador);
+  var idProyecto, idDesarrollador, destino;
+  _ChatProgrammer(this.idProyecto, this.idDesarrollador,this.destino);
   TextEditingController _textEditingController;
   ScrollController _scrollController;
   @override
@@ -433,6 +433,16 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                    helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
                                         context,
@@ -772,7 +782,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
           server+"/sendMessage.php",
           body: {
             "idRemitente": idDesarrollador.toString(),
-            "idDestinatario": destinatario.toString(),
+            "idDestinatario": destino.toString(),
             "mensaje": _textEditingController.text,
           }).timeout(Duration(seconds: 7));
       print(idDesarrollador.toString());
