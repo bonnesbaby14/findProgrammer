@@ -120,7 +120,41 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
               height: 15,
             ),
             InkWell(
-              onTap: () {
+              onTap: () {if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                 Navigator.pop(context);
                 Navigator.push(
                     context,

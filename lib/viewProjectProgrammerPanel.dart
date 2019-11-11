@@ -251,6 +251,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                 ),
                 GestureDetector(
                   onTap: () {
+                         if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                     Navigator.pop(context);
                     Navigator.push(
                         context,
@@ -295,6 +330,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
 
                 GestureDetector(
                   onTap: () {
+                         if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                     Navigator.pop(context);
                     Navigator.push(
                         context,
@@ -388,6 +458,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                     Navigator.pop(context);
                     Navigator.push(
                         context,
@@ -434,6 +539,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
 
                 GestureDetector(
                   onTap: () {
+                         if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                     showDialog(
                         context: context,
                         builder: (context) => new CupertinoAlertDialog(
@@ -711,8 +851,43 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       InkWell(
-                                        onTap: () {
+                                        onTap: () {if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                                           Navigator.push(
+                                                 
                                               context,
                                               CupertinoPageRoute(
                                                   builder: (context) =>
@@ -742,7 +917,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {
+                                        onTap: () {     if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                                           Navigator.push(
                                               context,
                                               CupertinoPageRoute(
@@ -778,6 +987,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                               if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                                           if (dataProjectw[0]['F_REQ_F'] ==
                                               "0") {
                                             Navigator.push(
@@ -854,7 +1098,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                       ),
                  InkWell(
                                         onTap: () async {
-                                          print("object");
+                                               if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                                           await showDialog(
                                               context: context,
                                               builder: (context) =>
@@ -1074,7 +1352,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {
+                                        onTap: () {     if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                                           showDialog(
                                               context: context,
                                               builder: (context) =>
@@ -1188,7 +1500,41 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {
+                                        onTap: () {     if(!statusRed){
+                       showDialog(
+                        context: context,
+                        builder: (context) => new CupertinoAlertDialog(
+                              title: Column(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.devices_other,
+                                    size: 80,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text("FindProgrammer",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 20)),
+                                ],
+                              ),
+                              content:
+                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              actions: <Widget>[
+                                
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Aceptar",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15)),
+                                ),
+                              ],
+                            ));
+                            return;
+                    }
                                           if (dataProjectw[0]['F_TERMINADO'] ==
                                               "1") {
                                             showDialog(
