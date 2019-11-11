@@ -1,9 +1,11 @@
+import 'package:findprogrammer/componentes/variables.dart';
 import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'componentes/helperNotifications.dart';
+import 'package:connectivity/connectivity.dart';
 import 'login.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -16,12 +18,15 @@ class _FirstScreen extends State<FirstScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    internet();
   super.initState();
   }
   
 
   @override
   Widget build(BuildContext context) {
+
+    
   double mediaw=MediaQuery.of(context).size.width;
   double mediah=MediaQuery.of(context).size.height;
     return Scaffold(
@@ -164,4 +169,16 @@ class _FirstScreen extends State<FirstScreen> {
       ),
     ));
   }
+Future internet()async{
+
+var connectivityResult = await (Connectivity().checkConnectivity());
+if (connectivityResult == ConnectivityResult.mobile) {
+print("SI hay internet");
+statusRed=true;
+} else if (connectivityResult == ConnectivityResult.wifi) {
+  // I am connected to a wifi network.
+statusRed=true;
+}
+
+}
 }
