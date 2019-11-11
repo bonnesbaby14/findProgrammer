@@ -190,7 +190,7 @@ class _SingUp extends State<SingUp> {
                                               fontSize: 20)),
                                     ],
                                   ),
-                                  content: Text("Algun campo esta vacio"),
+                                  content: Text("Algún campo está vacío"),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () {
@@ -374,7 +374,7 @@ class _SingUp extends State<SingUp> {
                       ],
                     ),
                     content: Text(
-                        "El correo ya fue registrado, intenta iniciar sesión"),
+                        "El correo ya fue registradó, intenta iniciar sesión"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {

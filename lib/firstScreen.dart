@@ -113,7 +113,7 @@ class _FirstScreen extends State<FirstScreen> {
                           children: <Widget>[
                             new Expanded(
                               child: Text(
-                                "REGISTRATE",
+                                "REGÍSTRATE",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
@@ -154,7 +154,7 @@ class _FirstScreen extends State<FirstScreen> {
                           children: <Widget>[
                             new Expanded(
                               child: Text(
-                                "INICIA SESION",
+                                "INICIA SESIÓN",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.deepPurple,
