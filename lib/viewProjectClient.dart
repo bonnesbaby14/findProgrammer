@@ -55,11 +55,22 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   @override
   void initState() {
-    getInfooProject();
+
+       if(statusRed){
+getInfooProject();
     getReqFProject();
     getAvancesProject();
     getDesarrolladorProject();
     getVisits(ID);
+    }else{
+      getUno();
+      getDos();
+      getCuatro();
+      getCinco();
+      getSeis();
+    }
+
+    
     // TODO: implement initState
   }
 
@@ -82,35 +93,35 @@ class _ViewProjectClient extends State<ViewProjectClient> {
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
+          child: Text("Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
 
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
+          child: Text("Fecha de entrega: " + avances[z]["FECHA_ENTREGA"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
+          child: Text("Decripcion: " + avances[z]["DESCRIPCION"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Porcentaje del proyecto: " + avances[z]["PORCENTAJE"],
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
-        ));
-
-        listAvances.add(Padding(
-          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Observaciones: " + avances[z]["OBSERVACIONES"],
+          child: Text("Porcentaje del proyecto: " + avances[z]["PORCENTAJE"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
 
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
+          child: Text("Observaciones: " + avances[z]["OBSERVACIONES"].toString(),
+              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+        ));
+
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
@@ -137,11 +148,21 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
-        await getInfooProject();
+             if(statusRed){
+                await getInfooProject();
         await getReqFProject();
         await getAvancesProject();
         await getDesarrolladorProject();
         await getVisits(ID);
+
+    }else{
+      await getUno();
+      await getDos();
+      await getCuatro();
+      await getCinco();
+      await getSeis();
+    }
+       
         await Future.delayed(Duration(milliseconds: 500));
 
         setState(() {});
@@ -2475,7 +2496,17 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                 )),
     );
   }
-
+ void getUno() async {
+    try {
+      dataProject = await helper.SelectProyecto1();
+      print("se obtuvo los uno ofline");
+      print(dataProject);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future getInfooProject() async {
     var cliente1 = http.Client();
     try {
@@ -2655,6 +2686,18 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     }
   }
 
+
+ void getDos() async {
+    try {
+      reqFuncionales = await helper.SelectProyecto2();
+      print("se obtuvo los dos ofline");
+      print(reqFuncionales);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future<void> getReqFProject() async {
     print("entro");
     final response = await http
@@ -2680,6 +2723,18 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     } catch (error) {}
   }
 
+
+ void getCuatro() async {
+    try {
+      avances = await helper.SelectProyecto4();
+      print("se obtuvo los cuatro ofline");
+      print(avances);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future<List> getAvancesProject() async {
     print("get desarrollado");
     try {
@@ -2711,6 +2766,20 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     // print(avances);
   }
 
+
+
+
+ void getCinco() async {
+    try {
+      desarrollador = await helper.SelectProyecto5();
+      print("se obtuvo los cinco ofline");
+      print(desarrollador);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future<List> getDesarrolladorProject() async {
     try {
       final response = await http
@@ -2985,6 +3054,17 @@ Future confirmar(ID) async {
     cliente.close();
   }
 }
+ void getSeis() async {
+    try {
+      visitas = await helper.SelectProyecto6();
+      print("se obtuvo los seis ofline");
+      print(visitas);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+   
+  }
 
 Future getVisits(ID) async {
   try {
@@ -2993,6 +3073,12 @@ Future getVisits(ID) async {
     }).timeout(Duration(seconds: 7));
     visitas = null;
     visitas = json.decode(response.body);
+
+      helper.DeleteProyecto6();
+      for (int x = 0; x < visitas.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto6(visitas[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
 
     print("-------------------------");
     print(visitas);

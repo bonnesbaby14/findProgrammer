@@ -35,6 +35,7 @@ void _OnCreate(Database db, int version)async{
         await db.execute("CREATE TABLE PROYECTO2(ID_REQ_F integer , REQUERIMIENTO text, FECHA text, F_REQ_CUMPLIDO integer, FK_PROYECTO integer );");
         await db.execute("CREATE TABLE PROYECTO4(ID_AVANCES integer , TIEMPO_TRABAJO integer, FECHA_ENTREGA text, DESCRIPCION text, PORCENTAJE text, OBSERVACIONES text, No_CAMBIOS integer, CAMBIOS text, ENLACES text, F_ACEPTADO integer, FK_PROYECTO integer );");
         await db.execute("CREATE TABLE PROYECTO5(ID_USUARIO integer, nombre text, apellido_p text, apellido_m text);");
+  await db.execute("CREATE TABLE PROYECTO6(ID_VISITA integer , FECHA text, FK_PROYECTO integer, FK_DESAROLLADOR integer);");
 
         
     
@@ -83,6 +84,11 @@ Future <int> InsertProyecto5(Map <String,dynamic> map)async{
     var result= await DB.insert("PROYECTO5", map);
     return result;
 }
+Future <int> InsertProyecto6(Map <String,dynamic> map)async{
+    Database DB=await database;
+    var result= await DB.insert("PROYECTO6", map);
+    return result;
+}
 
 
 // Future <int> BDUpdate(List<int> id,Map<String, dynamic> map)async{
@@ -108,6 +114,11 @@ Future <int> InsertProyecto5(Map <String,dynamic> map)async{
  Future <int> DeleteProyecto5() async{
   Database DB=await database;
     var result= await DB.delete("PROYECTO5");
+     return result;
+}
+ Future <int> DeleteProyecto6() async{
+  Database DB=await database;
+    var result= await DB.delete("PROYECTO6");
      return result;
 }
 
@@ -154,7 +165,31 @@ Future <int> DeleteProyectoInfo() async{
      var result= await DB.query('CLIENTE');
      return result;
  }
-
+  Future<List<Map<String,dynamic>>> SelectProyecto1() async{
+     Database DB=await database;
+     var result= await DB.query('PROYECTO1');
+     return result;
+ }
+  Future<List<Map<String,dynamic>>> SelectProyecto2() async{
+     Database DB=await database;
+     var result= await DB.query('PROYECTO2');
+     return result;
+ }
+  Future<List<Map<String,dynamic>>> SelectProyecto4() async{
+     Database DB=await database;
+     var result= await DB.query('PROYECTO4');
+     return result;
+ }
+  Future<List<Map<String,dynamic>>> SelectProyecto5() async{
+     Database DB=await database;
+     var result= await DB.query('PROYECTO5');
+     return result;
+ }
+   Future<List<Map<String,dynamic>>> SelectProyecto6() async{
+     Database DB=await database;
+     var result= await DB.query('PROYECTO6');
+     return result;
+ }
 // Future<int> Count()async{
 // Database DB=await database;
 // List<Map<String,dynamic>> mapa=List<Map<String,dynamic>>();
