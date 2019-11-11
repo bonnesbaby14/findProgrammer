@@ -22,17 +22,17 @@ var destinatario;
 const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
 
 class ChatClient extends StatefulWidget {
-  var idProyecto, idCliente;
-  ChatClient(this.idProyecto, this.idCliente);
+  var idProyecto, idCliente,iddesa;
+  ChatClient(this.idProyecto, this.idCliente, this.iddesa);
 
   @override
-  _ChatClient createState() => new _ChatClient(idProyecto, idCliente);
+  _ChatClient createState() => new _ChatClient(idProyecto, idCliente,iddesa);
 }
 
 class _ChatClient extends State<ChatClient> {
   var mensajes;
-  var idProyecto, idCliente;
-  _ChatClient(this.idProyecto, this.idCliente);
+  var idProyecto, idCliente, iddesa;
+  _ChatClient(this.idProyecto, this.idCliente,this.iddesa);
   TextEditingController _textEditingController;
   ScrollController _scrollController;
   @override
@@ -632,7 +632,7 @@ class _ChatClient extends State<ChatClient> {
           server + "/sendMessage.php",
           body: {
             "idRemitente": idCliente.toString(),
-            "idDestinatario": destinatario.toString(),
+            "idDestinatario": iddesa.toString(),
             "mensaje": _textEditingController.text,
           }).timeout(Duration(seconds: 7));
       // print(idCliente.toString());

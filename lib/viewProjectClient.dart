@@ -940,7 +940,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                           dataProject[0]
                                                               ['ID_PROYECTO'],
                                                           dataProject[0]
-                                                              ['FK_CLIENTE'])));
+                                                              ['FK_CLIENTE'],desarrollador[0]['ID_USUARIO'])));
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.all(10),
@@ -2461,15 +2461,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           InkWell(
                                             onTap: () {
                                               print(dataProject);
-                                              Navigator.push(
-                                                  context,
-                                                  CupertinoPageRoute(
-                                                      builder: (context) =>
-                                                          ChatClient(
-                                                              dataProject[0][
-                                                                  'ID_PROYECTO'],
-                                                              dataProject[0][
-                                                                  'FK_CLIENTE'])));
+                                              
                                             },
                                             child: Padding(
                                               padding: EdgeInsets.all(10),
