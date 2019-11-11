@@ -74,6 +74,11 @@ Future <int> DeleteCliente() async{
     var result= await DB.delete("CLIENTE");
      return result;
 }
+Future <int> DeleteProyectoInfo() async{
+  Database DB=await database;
+    var result= await DB.delete("PROYECTO_INFO");
+     return result;
+}
 
  Future<List<Map<String,dynamic>>> SelectDesarrollador() async{
      Database DB=await database;
