@@ -1741,14 +1741,19 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
                                     child: desarrollador.length != 0
-                                        ? Text(utf8.decode(base64.decode(desarrollador[0]['nombre'])) 
-                                            
+                                        ? Text(
+                                            utf8.decode(base64.decode(desarrollador[0]['nombre'])).toString() +
+                                                " " +
+                                                utf8
+                                                    .decode(base64.decode(
+                                                        desarrollador[0]
+                                                            ['apellido_p']))
                                                     .toString() +
-                                                " " +utf8.decode(base64.decode(desarrollador[0]['apellido_p']))
-                                                
-                                                    .toString() +
-                                                " " +utf8.decode(base64.decode(desarrollador[0]['apellido_m']))
-                                                
+                                                " " +
+                                                utf8
+                                                    .decode(base64.decode(
+                                                        desarrollador[0]
+                                                            ['apellido_m']))
                                                     .toString(),
                                             style: TextStyle(
                                                 fontSize: 14.0,
@@ -1779,15 +1784,24 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             fontSize: 27.0,
                                             color: Colors.white)),
                                   ),
-                                  visitas==null?Padding(
-          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("0" ,
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
-        ):Padding(
-          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text(""+visitas.length.toString(),
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
-        ),
+                                  visitas == null
+                                      ? Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                          child: Text("0",
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.white)),
+                                        )
+                                      : Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(15, 5, 0, 0),
+                                          child: Text(
+                                              "" + visitas.length.toString(),
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.white)),
+                                        ),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -2475,6 +2489,13 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
       var dataProject2 = json.decode(response.body);
       dataProject = dataProject2;
+
+      helper.DeleteProyecto1();
+      for (int x = 0; x < dataProject2.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto1(dataProject[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
+
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD1");
       print(dataProject);
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
@@ -2646,7 +2667,13 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     try {
       var dataProject = json.decode(response.body);
       reqFuncionales = dataProject;
-         print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD2");
+      helper.DeleteProyecto2();
+      for (int x = 0; x < reqFuncionales.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto2(reqFuncionales[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
+
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD2");
       print(reqFuncionales);
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       // print(reqFuncionales);
@@ -2667,7 +2694,14 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       print(response.body);
       var dataProject = json.decode(response.body);
       avances = dataProject;
-         print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD4");
+
+      helper.DeleteProyecto4();
+      for (int x = 0; x < avances.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto4(avances[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
+
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD4");
       print(avances);
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
     } catch (error) {
@@ -2691,7 +2725,14 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
       var dataProject = json.decode(response.body);
       desarrollador = dataProject;
-         print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD5");
+
+      helper.DeleteProyecto5();
+      for (int x = 0; x < desarrollador.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto5(desarrollador[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
+
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD5");
       print(desarrollador);
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       print("-------------------------------------");
@@ -2950,7 +2991,7 @@ Future getVisits(ID) async {
     final response = await http.post(server + "/getVisits.php", body: {
       "ID": ID.toString(),
     }).timeout(Duration(seconds: 7));
-visitas=null;
+    visitas = null;
     visitas = json.decode(response.body);
 
     print("-------------------------");

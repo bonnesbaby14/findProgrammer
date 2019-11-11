@@ -31,6 +31,12 @@ void _OnCreate(Database db, int version)async{
         await db.execute("CREATE TABLE CLIENTE(ID_USUARIO integer, GOOGLE_ID text, NOMBRE text, APELLIDO_P text,APELLIDO_M text,CORREO text,FOTO text,CALIFICACION real,F_ESTADO_REGISTRO integer,PASSWORD text,TELEFONO text,F_BAJA_USUARIO integer,F_ESTADO_LOGIN integer,CURP text,F_USUARIO_APRUEBA integer);");
         await db.execute("CREATE TABLE PROYECTO_INFO(ID_PROYECTO_INFO integer,TITULO text,DESCRIPCION text,FECHA_DE_PUBLICACION text,PRESUPUESTO text,F_TIPO_DE_PROYECTO integer,F_TERMINADO integer,F_VISIBILIDAD integer,F_EN_DESARROLLO integer,F_ABANDONO_C integer,F_ABANDONO_D integer,OBSERVACIONESABANDONO text,INTERVALO_DE_AVANCES integer,F_S_ENTREGABLES integer,FK_CLIENTE integer,codigo text);");
         await db.execute("CREATE TABLE PROYECTO_PANEL(ID_PROYECTO_PANEL integer,FECHA_DE_INICIO text,NEXT_ADVANCE text,F_REQ_F integer,F_A_CORRECION_REQ_D integer,F_A_CORRECION_REQ_C integer,F_S_CORRECCION_REQ integer,OBSERVACIONES text,OBSERVACIONESA text,F_AVANCE_D integer,F_AVANCE_A integer,F_AVANCE_R integer,F_TERMINADO_D integer,F_TERMINADO_C integer,FK_DESARROLLADOR integer,FK_PROYECTO integer);");
+        await db.execute("CREATE TABLE PROYECTO1(ID_PROYECTO integer , TITULO text, DESCRIPCION text, FECHA_DE_PUBLICACION text , PRESUPUESTO text, F_TIPO_DE_PROYECTO integer, F_TERMINADO integer, F_VISIBILIDAD integer, F_EN_DESARROLLO integer, F_ABANDONO_C integer, F_ABANDONO_D integer, OBSERVACIONESABANDONO text, INTERVALO_DE_AVANCES integer, F_S_ENTREGABLES integer, FK_CLIENTE integer, codigo text, ID_PROYECTO_PANEL integer, FECHA_DE_INICIO text, NEXT_ADVANCE text, F_REQ_F integer, F_A_CORRECION_REQ_D integer, F_A_CORRECION_REQ_C integer, F_S_CORRECCION_REQ integer, OBSERVACIONES text, OBSERVACIONESA text , F_AVANCE_D integer, F_AVANCE_A integer, F_AVANCE_R integer, F_TERMINADO_D integer, F_TERMINADO_C integer, FK_DESARROLLADOR integer, FK_PROYECTO integer);");
+        await db.execute("CREATE TABLE PROYECTO2(ID_REQ_F integer , REQUERIMIENTO text, FECHA text, F_REQ_CUMPLIDO integer, FK_PROYECTO integer );");
+        await db.execute("CREATE TABLE PROYECTO4(ID_AVANCES integer , TIEMPO_TRABAJO integer, FECHA_ENTREGA text, DESCRIPCION text, PORCENTAJE text, OBSERVACIONES text, No_CAMBIOS integer, CAMBIOS text, ENLACES text, F_ACEPTADO integer, FK_PROYECTO integer );");
+        await db.execute("CREATE TABLE PROYECTO5(ID_USUARIO integer, nombre text, apellido_p text, apellido_m text);");
+
+        
     
 }
 
@@ -57,12 +63,53 @@ Future <int> InsertProyectoPanel(Map <String,dynamic> map)async{
     var result= await DB.insert("PROYECTO_PANEL", map);
     return result;
 }
+Future <int> InsertProyecto1(Map <String,dynamic> map)async{
+    Database DB=await database;
+    var result= await DB.insert("PROYECTO1", map);
+    return result;
+}
+Future <int> InsertProyecto2(Map <String,dynamic> map)async{
+    Database DB=await database;
+    var result= await DB.insert("PROYECTO2", map);
+    return result;
+}
+Future <int> InsertProyecto4(Map <String,dynamic> map)async{
+    Database DB=await database;
+    var result= await DB.insert("PROYECTO4", map);
+    return result;
+}
+Future <int> InsertProyecto5(Map <String,dynamic> map)async{
+    Database DB=await database;
+    var result= await DB.insert("PROYECTO5", map);
+    return result;
+}
+
 
 // Future <int> BDUpdate(List<int> id,Map<String, dynamic> map)async{
 //  Database DB=await database;
 //    var result= await DB.update("Tareas", map,where: "_id=?",whereArgs: id);
 //     return result;
 // }
+ Future <int> DeleteProyecto1() async{
+  Database DB=await database;
+    var result= await DB.delete("PROYECTO1");
+     return result;
+}
+ Future <int> DeleteProyecto2() async{
+  Database DB=await database;
+    var result= await DB.delete("PROYECTO2");
+     return result;
+}
+ Future <int> DeleteProyecto4() async{
+  Database DB=await database;
+    var result= await DB.delete("PROYECTO4");
+     return result;
+}
+ Future <int> DeleteProyecto5() async{
+  Database DB=await database;
+    var result= await DB.delete("PROYECTO5");
+     return result;
+}
 
  Future <int> DeleteDesarrollador() async{
   Database DB=await database;
