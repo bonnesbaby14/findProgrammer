@@ -48,7 +48,7 @@ getProject();
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {  
-        if(false){
+        if(statusRed){
 await getProject();
     }else{
       await getProjectOfline();

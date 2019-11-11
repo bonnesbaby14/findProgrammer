@@ -30,19 +30,28 @@ class ViewFinishProjectsClient extends StatefulWidget {
 class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
   @override
   void initState() {
-    getFinishProjects();
+     if(statusRed){
+getFinishProjects();
+    }else{
+      getProjectFinishOfline();
+    }
+    
     // TODO: implement initState
   }
 
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
-    var _keydos = new GlobalKey();
+ 
 
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
-        await getFinishProjects();
+           if(statusRed){
+await getFinishProjects();
+    }else{
+      await getProjectFinishOfline();
+    }
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -645,6 +654,17 @@ GestureDetector(
           )),
     );
   }
+ void getProjectFinishOfline() async {
+    try {
+      myProjects = await helper.SelectProjectInfoFinish();
+      print("se obtuvo los proyectos ofline");
+      print(myProjects);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
 
   Future getFinishProjects() async {
     var cliente1=new http.Client();
@@ -652,9 +672,9 @@ GestureDetector(
       print("-------------------------------------");
 
       final response = await cliente1.post(
-          //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
+      
 
-           server+"/loadFinishProjects.php",
+           server+"/loadFinishProjectsC.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
           }).timeout(Duration(seconds: 7));

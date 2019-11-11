@@ -90,6 +90,18 @@ Future <int> DeleteProyectoInfo() async{
      var result= await DB.query('PROYECTO_INFO');
      return result;
  }
+
+   Future<List<Map<String,dynamic>>> SelectProjectInfoFinish() async{
+     Database DB=await database;
+     var result= await DB.query('PROYECTO_INFO',where: "F_TERMINADO=?",whereArgs: ["1"]);
+     return result;
+ } 
+ 
+   Future<List<Map<String,dynamic>>> SelectProjectInfoDevelop() async{
+     Database DB=await database;
+     var result= await DB.query('PROYECTO_INFO',where: "F_EN_DESARROLLO=?",whereArgs: ["1"]);
+     return result;
+ } 
   Future<List<Map<String,dynamic>>> SelectCliente() async{
      Database DB=await database;
      var result= await DB.query('CLIENTE');

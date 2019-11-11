@@ -35,7 +35,12 @@ class _ViewDevelopmentProjectsClient
     extends State<ViewDevelopmentProjectsClient> {
   @override
   void initState() {
-    getDevelopmentsProjects();
+     if(statusRed){
+getDevelopmentsProjects();
+    }else{
+      getDevelopmentsProjectsOfline();
+    }
+    
     // TODO: implement initState
   }
 
@@ -47,7 +52,11 @@ class _ViewDevelopmentProjectsClient
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
-            await getDevelopmentsProjects();
+                if(statusRed){
+await getDevelopmentsProjects();
+    }else{
+      await getDevelopmentsProjectsOfline();
+    }
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -707,4 +716,19 @@ print(client['ID_USUARIO'].toString());
       cliente1.close();
     }
   }
+
+
+
+   void getDevelopmentsProjectsOfline() async {
+    try {
+      myProjects = await helper.SelectProjectInfoDevelop();
+      print("se obtuvo los proyectos ofline");
+      print(myProjects);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
+
 }
