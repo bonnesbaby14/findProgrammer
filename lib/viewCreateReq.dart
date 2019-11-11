@@ -424,7 +424,7 @@ Helper helper=new Helper();
                                         color: Colors.black, fontSize: 20)),
                               ],
                             ),
-                            content: Text("¿Seguro que quieres cerrar sesion?"),
+                            content: Text("¿Seguro que quieres cerrar sesión?"),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {

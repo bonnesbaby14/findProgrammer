@@ -429,7 +429,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                 ],
                               ),
                               content:
-                                  Text("¿Seguro que quieres cerrar sesion?"),
+                                  Text("¿Seguro que quieres cerrar sesión?"),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {

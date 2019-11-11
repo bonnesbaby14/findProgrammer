@@ -570,7 +570,7 @@ Helper helper=new Helper();
                                   ],
                                 ),
                                 content:
-                                    Text("¿Seguro que quieres cerrar sesion?"),
+                                    Text("¿Seguro que quieres cerrar sesión?"),
                                 actions: <Widget>[
                                   FlatButton(
                                     onPressed: () {

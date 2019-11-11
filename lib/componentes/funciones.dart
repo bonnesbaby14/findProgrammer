@@ -969,7 +969,7 @@ void alertEditProject(context){
                           height: 15,
                         ),
                         CupertinoTextField(
-                          placeholder: "Titulo...",
+                          placeholder: "Título...",
                           placeholderStyle: TextStyle(color: Colors.black38),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
