@@ -410,6 +410,15 @@ getInfooProject();
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
+                                    helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
                                     helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
@@ -2499,6 +2508,10 @@ getInfooProject();
  void getUno() async {
     try {
       dataProject = await helper.SelectProyecto1();
+      if(dataProject.isEmpty){
+        Navigator.pop(context);
+
+      }
       print("se obtuvo los uno ofline");
       print(dataProject);     
     } catch (e) {
@@ -2688,6 +2701,10 @@ getInfooProject();
 
 
  void getDos() async {
+     if(reqFuncionales.isEmpty){
+        Navigator.pop(context);
+
+      }
     try {
       reqFuncionales = await helper.SelectProyecto2();
       print("se obtuvo los dos ofline");
@@ -2725,6 +2742,10 @@ getInfooProject();
 
 
  void getCuatro() async {
+     if(avances.isEmpty){
+        Navigator.pop(context);
+
+      }
     try {
       avances = await helper.SelectProyecto4();
       print("se obtuvo los cuatro ofline");
@@ -2770,6 +2791,10 @@ getInfooProject();
 
 
  void getCinco() async {
+     if(desarrollador.isEmpty){
+        Navigator.pop(context);
+
+      }
     try {
       desarrollador = await helper.SelectProyecto5();
       print("se obtuvo los cinco ofline");
@@ -3055,6 +3080,7 @@ Future confirmar(ID) async {
   }
 }
  void getSeis() async {
+     
     try {
       visitas = await helper.SelectProyecto6();
       print("se obtuvo los seis ofline");

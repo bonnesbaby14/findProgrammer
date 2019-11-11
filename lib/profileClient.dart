@@ -28,8 +28,15 @@ class _ProfileClient extends State<ProfileClient> {
   @override
   void initState() {
     // TODO: implement initState
-
+        if(statusRed){
+      print("se conculta la red");
 getComments();
+    }else{
+      print("se conculta la db local");
+      getProjectOfline();
+    }
+
+
     super.initState();
   }
   var comments;
@@ -274,13 +281,21 @@ getComments();
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
-                                  helper.DeleteCliente();
-                                  Navigator.pop(context);
-                                  this.dispose();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()));
+                                  helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(
@@ -533,7 +548,17 @@ getComments();
           ),
         ));
   }
-
+ void getProjectOfline() async {
+    try {
+       this.comments = await helper.SelectComments();
+      print("se obtuvo los proyectos ofline");
+      print(myProjects);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future getComments() async {
     var cliente1=new http.Client();
     print(

@@ -183,6 +183,9 @@ statusRed=true;
 } else if (connectivityResult == ConnectivityResult.wifi) {
   // I am connected to a wifi network.
 statusRed=true;
+}else{
+  statusRed=false;
+  print("no hay internet---------------------------");
 }
 
 }
@@ -191,17 +194,22 @@ Future checkDB() async{
  
   var d= await helper.SelectCliente();
 
-  if(d!=null){
+  if(!d.isEmpty){
     Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => Homeclient()));
+            print("_____________________-");
+            print(d);
+            print("_____________________-");
 
   }
   var w= await helper.SelectDesarrollador();
 
-  if(w!=null){
+  if(!w.isEmpty){
     Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => HomeProgrammer()));
-
+  print("_____________________-");
+            print(w);
+            print("_____________________-");
   }
   
 

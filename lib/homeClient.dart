@@ -32,8 +32,10 @@ class _Homeclient extends State<Homeclient> {
   @override
   void initState() {
     if(statusRed){
+      print("se conculta la red");
 getProject();
     }else{
+      print("se conculta la db local");
       getProjectOfline();
     }
     getClient();
@@ -517,8 +519,9 @@ await getProject();
                                           builder: (context) =>
                                               ViewProjectClient(
                                                   myProjects[position]
-                                                      ['ID_PROYECTO'])));
-                                },
+                                                      ['ID_PROYECTO'].toString())));
+                                print("se termino-------------");
+                                                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.0),
@@ -753,6 +756,7 @@ await getProject();
   void getClient() async {
     try {
       clientList = await helper.SelectCliente();
+   
       print("!!!!!!!!!!!!!!!!!!11");
       print(clientList[0]['NOMBRE']);
       print("!!!!!!!!!!!!!!!!!!11");
@@ -792,7 +796,7 @@ await getProject();
 helper.DeleteProyectoInfo();
       for (int x = 0; x < myProjects.length; x++) {
         Map<String, dynamic> mapProyecto = Map();
-        mapProyecto['ID_PROYECTO_INFO'] = datauser[x]['ID_PROYECTO_INFO'];
+        mapProyecto['ID_PROYECTO'] = datauser[x]['ID_PROYECTO'];
         mapProyecto['TITULO'] = datauser[x]['TITULO'];
         mapProyecto['DESCRIPCION'] = datauser[x]['DESCRIPCION'];
         mapProyecto['FECHA_DE_PUBLICACION'] =

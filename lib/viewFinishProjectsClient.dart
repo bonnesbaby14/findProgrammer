@@ -300,7 +300,16 @@ GestureDetector(
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
-                                      helper.DeleteCliente();
+                                       helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
                                         context,
@@ -656,7 +665,7 @@ GestureDetector(
   }
  void getProjectFinishOfline() async {
     try {
-      myProjects = await helper.SelectProjectInfoFinish();
+      projects = await helper.SelectProjectInfoFinish();
       print("se obtuvo los proyectos ofline");
       print(myProjects);     
     } catch (e) {
