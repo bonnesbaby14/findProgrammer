@@ -1014,7 +1014,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                       ],
                                                     ),
                                                     content: Text(
-                                                        "El codigo del proyecto es: " +
+                                                        "El código del proyecto es: " +
                                                             dataProject[0]
                                                                 ['codigo']),
                                                     actions: <Widget>[

@@ -655,7 +655,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                 Padding(
                                   padding: EdgeInsets.all(9),
                                   child: Text(
-                                    "Ingresar Codigo",
+                                    "Ingresar Código",
                                     style: TextStyle(
                                         fontSize: 17.0, color: Colors.white),
                                   ),
@@ -686,7 +686,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text("Cerrar Sesion",
+                                  Text("Cerrar Sesión",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 20)),
                                 ],
