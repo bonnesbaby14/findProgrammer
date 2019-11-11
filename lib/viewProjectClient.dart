@@ -1270,7 +1270,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                                                   Text("FindProgrammer", style: TextStyle(color: Colors.black, fontSize: 20)),
                                                                                 ],
                                                                               ),
-                                                                              content: Text("Ocurrio un error inténtalo mas tarde"),
+                                                                              content: Text("Ocurrió un error inténtalo mas tarde"),
                                                                               actions: <Widget>[
                                                                                 FlatButton(
                                                                                   onPressed: () {
