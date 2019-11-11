@@ -818,11 +818,11 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                             ),
                             Text(
                               "por: " +
-                                  cliente[0]['nombre'].toString() +
+                                 utf8.decode(base64.decode( cliente[0]['nombre'])).toString() +
                                   " " +
-                                  cliente[0]['apellido_p'].toString() +
+                                  utf8.decode(base64.decode(cliente[0]['apellido_p'])).toString() +
                                   " " +
-                                  cliente[0]['apellido_m']
+                                  utf8.decode(base64.decode(cliente[0]['apellido_m']))
                                       .toString(), //aqui añadir cliente
                               style: TextStyle(
                                   fontSize: 18.0, color: Colors.white),
@@ -2593,14 +2593,16 @@ return;
       List<String> dates = fechaReporte.split("-");
       DateTime date = new DateTime(
           DateTime.now().year, DateTime.now().month, DateTime.now().day);
+         
       DateTime last = DateTime(
           int.parse(dates[0]), int.parse(dates[1]), int.parse(dates[2]));
+
 
       print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
       print(date.toString());
       print(last.toString());
       print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-      var difference = date.difference(last).inDays;
+      var difference = last.difference(date).inDays;
       print(difference);
       if (difference == 0) {
         showOngoingNotification(notification,

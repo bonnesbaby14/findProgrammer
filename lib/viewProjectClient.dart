@@ -2837,7 +2837,7 @@ if(!statusRed){
       print(date.toString());
       print(last.toString());
       print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-      var difference = date.difference(last).inDays;
+      var difference = last.difference(date).inDays;
       print(difference);
       if (difference == 0) {
         showOngoingNotification(notification,

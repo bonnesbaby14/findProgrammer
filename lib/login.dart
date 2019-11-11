@@ -83,6 +83,7 @@ class _Login extends State<Login> {
                     primaryColor: white,
                     primaryColorDark: white),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: mail,
                   style: new TextStyle(
                     color: Colors.white,
