@@ -324,7 +324,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text("Codigo de Proyecto",
+                                  Text("Código de Proyecto",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 20)),
                                 ],
@@ -336,7 +336,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                   ),
                                   Container(
                                     child: CupertinoTextField(
-                                      placeholder: "Codigo de proyecto...",
+                                      placeholder: "Código de proyecto...",
                                       placeholderStyle:
                                           TextStyle(color: Colors.black38),
                                       decoration: BoxDecoration(
@@ -392,7 +392,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                 Padding(
                                   padding: EdgeInsets.all(9),
                                   child: Text(
-                                    "Ingresar Codigo",
+                                    "Ingresar Código",
                                     style: TextStyle(
                                         fontSize: 17.0, color: Colors.white),
                                   ),
@@ -423,7 +423,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text("Cerrar Sesion",
+                                  Text("Cerrar Sesión",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 20)),
                                 ],
@@ -486,7 +486,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                 Padding(
                                   padding: EdgeInsets.all(9),
                                   child: Text(
-                                    "Cerrar Sesion",
+                                    "Cerrar Sesión",
                                     style: TextStyle(
                                         fontSize: 17.0, color: Colors.white),
                                   ),

@@ -63,7 +63,7 @@ class _Login extends State<Login> {
               Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Inicia Sesion",
+                    "Inicia Sesión",
                     style: TextStyle(fontSize: 42.0, color: Colors.white),
                   )),
               Padding(
@@ -174,7 +174,7 @@ class _Login extends State<Login> {
                                     ],
                                   ),
                                   content: Text(
-                                      "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                      "Alguno de los campos están vacíos, llenálos para poder continuar"),
                                   actions: <Widget>[
                                     FlatButton(
                                       child: Text("Aceptar",
@@ -235,7 +235,7 @@ class _Login extends State<Login> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     child: Text(
-                      "Inicia Sesion",
+                      "Inicia Sesión",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

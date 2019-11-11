@@ -304,7 +304,7 @@ class _Homeclient extends State<Homeclient> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    Text("Cerrar Sesion",
+                                    Text("Cerrar Sesión",
                                         style: TextStyle(
                                             color: Colors.black, fontSize: 20)),
                                   ],
@@ -330,7 +330,7 @@ class _Homeclient extends State<Homeclient> {
                                           MaterialPageRoute(
                                               builder: (context) => Login()));
                                     },
-                                    child: Text("Cerrar Sesion",
+                                    child: Text("Cerrar Sesión",
                                         style: TextStyle(
                                             color: Colors.black, fontSize: 15)),
                                   ),
@@ -368,7 +368,7 @@ class _Homeclient extends State<Homeclient> {
                                   Padding(
                                     padding: EdgeInsets.all(9),
                                     child: Text(
-                                      "Cerrar Sesion",
+                                      "Cerrar Sesión",
                                       style: TextStyle(
                                           fontSize: 17.0, color: Colors.white),
                                     ),
@@ -410,7 +410,7 @@ class _Homeclient extends State<Homeclient> {
                               ],
                             ),
                             content:
-                                Text("El proyecto se registro correctamente"),
+                                Text("El proyecto se registró correctamente"),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
@@ -443,7 +443,7 @@ class _Homeclient extends State<Homeclient> {
                               ],
                             ),
                             content: Text(
-                                "El proyecto no se registro, inténtalo mas tarde. "),
+                                "El proyecto no se registró, inténtalo mas tarde. "),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {

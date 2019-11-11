@@ -49,7 +49,7 @@ class _AlertEditPorject extends State<AlertEditPorject>{
           ),
           CupertinoTextField(
             controller: tdcTitulo,
-            placeholder: "Titulo...",
+            placeholder: "Título...",
             placeholderStyle: TextStyle(color: Colors.black38),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -338,7 +338,7 @@ class _AlertEditPorject extends State<AlertEditPorject>{
               Container(
                 width: 180,
                 child: Text(
-                  "Solictar Entregables",
+                  "Solicitar Entregables",
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.black45),
                 ),

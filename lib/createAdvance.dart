@@ -505,7 +505,7 @@ class _CreateAvance extends State<CreateAvance> {
                                         MaterialPageRoute(
                                             builder: (context) => Login()));
                                   },
-                                  child: Text("Cerrar Sesion",
+                                  child: Text("Cerrar Sesión",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
@@ -542,7 +542,7 @@ class _CreateAvance extends State<CreateAvance> {
                                 Padding(
                                   padding: EdgeInsets.all(9),
                                   child: Text(
-                                    "Cerrar Sesion",
+                                    "Cerrar Sesión",
                                     style: TextStyle(
                                         fontSize: 17.0, color: Colors.white),
                                   ),
@@ -775,7 +775,7 @@ class _CreateAvance extends State<CreateAvance> {
                                       ],
                                     ),
                                     content: Text(
-                                        "El Avance se registro correctamente"),
+                                        "El Avance se registró correctamente"),
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () {
@@ -812,7 +812,7 @@ class _CreateAvance extends State<CreateAvance> {
                                       ],
                                     ),
                                     content: Text(
-                                        "El Avance no se registro, inténtalo mas tarde. "),
+                                        "El Avance no se registró, inténtalo mas tarde. "),
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () {
