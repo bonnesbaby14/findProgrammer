@@ -31,8 +31,13 @@ class Homeclient extends StatefulWidget {
 class _Homeclient extends State<Homeclient> {
   @override
   void initState() {
+    if(statusRed){
+getProject();
+    }else{
+      getProjectOfline();
+    }
     getClient();
-    getProject();
+    
   }
 
   @override
@@ -42,8 +47,13 @@ class _Homeclient extends State<Homeclient> {
 
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
-      onRefresh: () async {
-        await getProject();
+      onRefresh: () async {  
+        if(false){
+await getProject();
+    }else{
+      await getProjectOfline();
+    }
+       
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -743,6 +753,9 @@ class _Homeclient extends State<Homeclient> {
   void getClient() async {
     try {
       clientList = await helper.SelectCliente();
+      print("!!!!!!!!!!!!!!!!!!11");
+      print(clientList[0]['NOMBRE']);
+      print("!!!!!!!!!!!!!!!!!!11");
       client = clientList.first;
       print("se obtuvo el cliente en getcliente en homecliente");
     } catch (e) {
@@ -751,7 +764,17 @@ class _Homeclient extends State<Homeclient> {
     }
     setState(() {});
   }
-
+ void getProjectOfline() async {
+    try {
+      myProjects = await helper.SelectProjectInfo();
+      print("se obtuvo los proyectos ofline");
+      print(myProjects);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future getProject() async {
     var cliente = http.Client();
     try {
