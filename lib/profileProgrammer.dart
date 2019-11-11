@@ -1,3 +1,4 @@
+import 'package:findprogrammer/componentes/helperSQFLITE.dart';
 import 'package:findprogrammer/updateUserD.dart';
 
 import 'componentes/variables.dart';
@@ -26,11 +27,18 @@ class ProfileProgrammer extends StatefulWidget {
 
 class _ProfileProgrammer extends State<ProfileProgrammer> {
   var comments;
+  Helper helper=new Helper();
   @override
   void initState() {
     // TODO: implement initState
     
-    getComments();
+       if(statusRed){
+      print("se conculta la red");
+getComments();
+    }else{
+      print("se conculta la db local");
+      getProjectOfline();
+    }
     super.initState();
   }
 
@@ -691,7 +699,17 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
           ),
         ));
   }
-
+void getProjectOfline() async {
+    try {
+       this.comments = await helper.SelectComments();
+      print("se obtuvo los proyectos ofline");
+      print(myProjects);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future getComments() async {
     var cliente1 = new http.Client();
     try {
@@ -703,6 +721,12 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
 
       var comments = json.decode(response.body);
       this.comments = comments;
+      helper.DeleteComents();
+      for (int x = 0; x < this.comments.length; x++) {
+        var insertarPRoeycto = await helper.InsertComentarios(this.comments[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
+
       print("se obtuvieron los comentarios");
     } catch (f) {
       print("hubo un error obteniendo los comentarios");

@@ -831,4 +831,18 @@ class _ViewFinishProjectsProgrammer extends State<ViewFinishProjectsProgrammer> 
       });
     }
   }
+    void getDevelopmentsProjectsOfline() async {
+    try {
+      projects = await helper.SelectProjectInfoDevelop();
+      print("se obtuvo los proyectos ofline");
+      print(projects);     
+      setState(() {
+        
+      });
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+  
+  }
 }

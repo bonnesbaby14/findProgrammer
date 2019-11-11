@@ -13,6 +13,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'componentes/helperNotifications.dart';
+import 'componentes/helperSQFLITE.dart';
 import 'componentes/variables.dart';
 import 'customIcons.dart';
 import 'package:async/async.dart';
@@ -37,6 +38,7 @@ TextEditingController comentario = new TextEditingController();
 TextEditingController razon = new TextEditingController();
 var calificacion;
 var responseA;
+Helper helper=new Helper();
 var IDout;
 
 class ViewProjectProgrammerPanel extends StatefulWidget {
@@ -86,35 +88,35 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"],
+          child: Text("Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
 
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Fecha de entrega: " + avances[z]["FECHA_ENTREGA"],
+          child: Text("Fecha de entrega: " + avances[z]["FECHA_ENTREGA"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
+          child: Text("Decripcion: " + avances[z]["DESCRIPCION"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Porcentaje del proyecto: " + avances[z]["PORCENTAJE"],
-              style: TextStyle(fontSize: 14.0, color: Colors.white)),
-        ));
-
-        listAvances.add(Padding(
-          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Observaciones: " + avances[z]["OBSERVACIONES"],
+          child: Text("Porcentaje del proyecto: " + avances[z]["PORCENTAJE"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
 
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"],
+          child: Text("Observaciones: " + avances[z]["OBSERVACIONES"].toString(),
+              style: TextStyle(fontSize: 14.0, color: Colors.white)),
+        ));
+
+        listAvances.add(Padding(
+          padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
+          child: Text("No. de cambios: " + avances[z]["No_CAMBIOS"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
@@ -2162,7 +2164,21 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                 )),
     );
   }
+void getUno() async {
+    try {
+      dataProjectw = await helper.SelectProyecto1();
+      if(dataProjectw.isEmpty){
+        Navigator.pop(context);
 
+      }
+      print("se obtuvo los uno ofline");
+      print(dataProjectw);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future getInfooProject() async {
     var cliente1 = http.Client();
     try {
@@ -2176,6 +2192,11 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
       print("si hizo ");
       var dataProject1 = json.decode(response.body);
       dataProjectw = dataProject1;
+      helper.DeleteProyecto1();
+      for (int x = 0; x < dataProjectw.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto1(dataProjectw[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
       print(
           "Se obtuvo info de proyecto en getInfoPryect en viewproyectProgrammerPanel ");
       print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
@@ -2350,6 +2371,21 @@ return;
       cliente1.close();
     }
   }
+ void getDos() async {
+     if(reqFuncionales.isEmpty){
+        Navigator.pop(context);
+
+      }
+    try {
+      reqFuncionales = await helper.SelectProyecto2();
+      print("se obtuvo los dos ofline");
+      print(reqFuncionales);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
 
   Future<List> getReqFProject() async {
     print("entro");
@@ -2365,6 +2401,12 @@ return;
 
       var dataProject = json.decode(response.body);
       reqFuncionales = dataProject;
+        helper.DeleteProyecto2();
+      for (int x = 0; x < reqFuncionales.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto2(reqFuncionales[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
+
 
       print(
           "se obtuvieron los requerimientos en getReqFPryect en viewproyectProgrammerPanel");
@@ -2377,6 +2419,21 @@ return;
     }
   }
 
+void getCuatro() async {
+     if(avances.isEmpty){
+        Navigator.pop(context);
+
+      }
+    try {
+      avances = await helper.SelectProyecto4();
+      print("se obtuvo los cuatro ofline");
+      print(avances);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future<List> getAvancesProject() async {
     var cliente1 = http.Client();
     try {
@@ -2390,6 +2447,12 @@ return;
 
       var dataProject = json.decode(response.body);
       avances = dataProject;
+      
+      helper.DeleteProyecto4();
+      for (int x = 0; x < avances.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto4(avances[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
       print(
           "Se obtuvieron los avances en getAvancesProject en viewProjectProgrammerPanel");
     } catch (error) {
@@ -2400,7 +2463,21 @@ return;
       cliente1.close();
     }
   }
+void getCinco() async {
+     if(desarrollador.isEmpty){
+        Navigator.pop(context);
 
+      }
+    try {
+      cliente = await helper.SelectProyecto5();
+      print("se obtuvo los cinco ofline");
+      print(cliente);     
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+    setState(() {});
+  }
   Future<List> getClientProject() async {
     var cliente1 = http.Client();
     try {
@@ -2417,6 +2494,11 @@ return;
 
       var dataProject = json.decode(response.body);
       cliente = dataProject;
+        helper.DeleteProyecto5();
+      for (int x = 0; x < cliente.length; x++) {
+        var insertarPRoeycto = await helper.InsertProyecto5(cliente[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
       print("Se obtuvo el cliente del proyecto");
       print(cliente);
     } catch (error) {
@@ -2429,10 +2511,20 @@ return;
   }
 
   Future<void> funciones() async {
-    await getClientProject();
+     if(statusRed){
+ await getClientProject();
     await getInfooProject();
     await getReqFProject();
     await getAvancesProject();
+
+    }else{
+      getUno();
+      getDos();
+      getCuatro();
+      getCinco();
+   
+    }
+   
 
     setState(() {});
   }

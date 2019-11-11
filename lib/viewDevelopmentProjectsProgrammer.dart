@@ -30,18 +30,30 @@ class ViewDevelopmentProjectsProgrammer extends StatefulWidget {
 class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsProgrammer> {
   @override
   void initState() {
-    getDevelopmentsProjects();
+    
+       if(statusRed){
+   getDevelopmentsProjects();
+    }else{
+      getDevelopmentsProjectsOfline();
+    }
+
+ 
     // TODO: implement initState
   }
 
   @override
   Widget build(BuildContext context) {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
-    var _keydos = new GlobalKey();
+
 
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
+               if(statusRed){
+  await  getDevelopmentsProjects();
+    }else{
+     await  getDevelopmentsProjectsOfline();
+    }
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -818,6 +830,33 @@ class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsPr
       var datauser = json.decode(response.body);
       print(datauser);
       projects = datauser;
+      helper.DeleteProyectoInfo();
+      for (int x = 0; x < projects.length; x++) {
+        Map<String, dynamic> mapProyecto = Map();
+        mapProyecto['ID_PROYECTO'] = datauser[x]['ID_PROYECTO'];
+        mapProyecto['TITULO'] = datauser[x]['TITULO'];
+        mapProyecto['DESCRIPCION'] = datauser[x]['DESCRIPCION'];
+        mapProyecto['FECHA_DE_PUBLICACION'] =
+            datauser[x]['FECHA_DE_PUBLICACION'];
+        mapProyecto['PRESUPUESTO'] = datauser[x]['PRESUPUESTO'];
+        mapProyecto['F_TIPO_DE_PROYECTO'] = datauser[x]['F_TIPO_DE_PROYECTO'];
+        mapProyecto['F_TERMINADO'] = datauser[x]['F_TERMINADO'];
+        mapProyecto['F_VISIBILIDAD'] = datauser[x]['F_VISIBILIDAD'];
+        mapProyecto['F_EN_DESARROLLO'] = datauser[x]['F_EN_DESARROLLO'];
+        mapProyecto['F_ABANDONO_C'] = datauser[x]['F_ABANDONO_C'];
+        mapProyecto['F_ABANDONO_D'] = datauser[x]['F_ABANDONO_D'];
+        mapProyecto['OBSERVACIONESABANDONO'] =
+            datauser[x]['OBSERVACIONESABANDONO'];
+        mapProyecto['INTERVALO_DE_AVANCES'] =
+            datauser[x]['INTERVALO_DE_AVANCES'];
+        mapProyecto['F_S_ENTREGABLES'] = datauser[x]['F_S_ENTREGABLES'];
+        mapProyecto['FK_CLIENTE'] = datauser[x]['FK_CLIENTE'];
+        mapProyecto['codigo'] = datauser[x]['codigo'];
+        
+        var insertarPRoeycto =
+              await helper.InsertProyectoInfo(mapProyecto);
+              print(">>>>$insertarPRoeycto<<<<<");
+      }
       print(
           "se obtuvo los proyectos en desarrollo********************************");
       print(projects);
@@ -831,5 +870,20 @@ class _ViewDevelopmentProjectsProgrammer extends State<ViewDevelopmentProjectsPr
         
       });
     }
+  }
+
+   void getDevelopmentsProjectsOfline() async {
+    try {
+      projects = await helper.SelectProjectInfoDevelop();
+      print("se obtuvo los proyectos ofline");
+      print(projects);     
+      setState(() {
+        
+      });
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homeprogrammer" +
+          e.toString());
+    }
+  
   }
 }
