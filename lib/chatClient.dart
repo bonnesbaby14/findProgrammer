@@ -91,11 +91,10 @@ class _ChatClient extends State<ChatClient> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            server+"/images/image_" +
-                                                client['ID_USUARIO']
-                                                    .toString() +
-                                                ".jpg"))),
+                                        image: NetworkImage(server +
+                                            "/images/image_" +
+                                            client['ID_USUARIO'].toString() +
+                                            ".jpg"))),
                               ),
                             ),
                             Padding(
@@ -297,20 +296,20 @@ class _ChatClient extends State<ChatClient> {
                               FlatButton(
                                 onPressed: () {
                                   helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                  helper.DeleteDesarrollador();
+                                  helper.DeleteProyecto1();
+                                  helper.DeleteProyecto2();
+                                  helper.DeleteProyecto6();
+                                  helper.DeleteProyecto4();
+                                  helper.DeleteProyecto5();
+                                  helper.DeleteProyectoInfo();
+
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(
@@ -603,11 +602,11 @@ class _ChatClient extends State<ChatClient> {
   }
 
   Future loadMessage() async {
-       var cliente=http.Client();
+    var cliente = http.Client();
     try {
       final response = await cliente.post(
           //"http://192.168.0.5/findprogrammerDB/openRoom.php",
-          server+"/openRoom.php",
+          server + "/openRoom.php",
           body: {
             "idProyecto": idProyecto.toString(),
             "idCliente": idCliente.toString(),
@@ -620,17 +619,17 @@ class _ChatClient extends State<ChatClient> {
     } catch (d) {
       print("error caragando mensaje del servidor");
       print(d.toString());
-    }finally{
+    } finally {
       cliente.close();
     }
   }
 
   Future sendMessage() async {
-       var cliente=http.Client();
+    var cliente = http.Client();
     try {
       final response = await cliente.post(
           //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
-          server+"/sendMessage.php",
+          server + "/sendMessage.php",
           body: {
             "idRemitente": idCliente.toString(),
             "idDestinatario": destinatario.toString(),
@@ -653,8 +652,7 @@ class _ChatClient extends State<ChatClient> {
     } catch (d) {
       print("error mandando el proyecto");
       print(d.toString());
-    }
-    finally{
+    } finally {
       cliente.close();
     }
   }

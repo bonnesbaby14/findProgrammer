@@ -24,21 +24,20 @@ class ProfileClient extends StatefulWidget {
 }
 
 class _ProfileClient extends State<ProfileClient> {
-
   @override
   void initState() {
     // TODO: implement initState
-        if(statusRed){
+    if (statusRed) {
       print("se conculta la red");
-getComments();
-    }else{
+      getComments();
+    } else {
       print("se conculta la db local");
       getProjectOfline();
     }
 
-
     super.initState();
   }
+
   var comments;
   @override
   Widget build(BuildContext context) {
@@ -77,11 +76,10 @@ getComments();
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            server+"/images/image_" +
-                                                client['ID_USUARIO']
-                                                    .toString() +
-                                                ".jpg"))),
+                                        image: NetworkImage(server +
+                                            "/images/image_" +
+                                            client['ID_USUARIO'].toString() +
+                                            ".jpg"))),
                               ),
                             ),
                             Padding(
@@ -282,20 +280,20 @@ getComments();
                               FlatButton(
                                 onPressed: () {
                                   helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                  helper.DeleteDesarrollador();
+                                  helper.DeleteProyecto1();
+                                  helper.DeleteProyecto2();
+                                  helper.DeleteProyecto6();
+                                  helper.DeleteProyecto4();
+                                  helper.DeleteProyecto5();
+                                  helper.DeleteProyectoInfo();
+
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(
@@ -401,10 +399,10 @@ getComments();
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  server+"/images/image_" +
-                                      client['ID_USUARIO'].toString() +
-                                      ".jpg"))),
+                              image: NetworkImage(server +
+                                  "/images/image_" +
+                                  client['ID_USUARIO'].toString() +
+                                  ".jpg"))),
                     ),
                     SizedBox(
                       height: 10,
@@ -414,7 +412,7 @@ getComments();
                           " " +
                           client['APELLIDO_P'].toString() +
                           " " +
-                         client['APELLIDO_M'].toString(),
+                          client['APELLIDO_M'].toString(),
                       style: TextStyle(
                           fontSize: mediah * .04, color: Colors.white),
                     ),
@@ -454,144 +452,157 @@ getComments();
                           ),
                         ),
                         InkWell(
-                          onTap: (){
-
-                            Navigator.push(context, CupertinoPageRoute(builder: (context)=>UpdateUserC(client['ID_USUARIO'])));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) =>
+                                        UpdateUserC(client['ID_USUARIO'])));
                           },
                           child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: <Widget>[
-                              Icon(
-                                GroovinMaterialIcons.edit_outline,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                              Text(
-                                "Editar Perfil",
-                                style: TextStyle(
-                                    fontSize: 14.0, color: Colors.white),
-                              ),
-                            ],
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  GroovinMaterialIcons.edit_outline,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Editar Perfil",
+                                  style: TextStyle(
+                                      fontSize: 14.0, color: Colors.white),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),)
+                        )
                       ],
                     ),
                   ],
                 ),
               ),
               Expanded(
-                  child:comments!=null?ListView.builder(
-                      itemCount: comments == null ? 0 : comments.length,
-                      itemBuilder: (BuildContext context, int position) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          elevation: 10,
-                          color: Color.fromARGB(450, 41, 39, 42),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(20),
-                                child: Icon(
-                                  Icons.star_half,
-                                  size: 50,
-                                  color: Colors.white,
-                                ),
+                  child: comments != null
+                      ? ListView.builder(
+                          itemCount: comments == null ? 0 : comments.length,
+                          itemBuilder: (BuildContext context, int position) {
+                            return Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
-                              Column(
+                              elevation: 10,
+                              color: Color.fromARGB(450, 41, 39, 42),
+                              child: Row(
                                 children: <Widget>[
-                                  SizedBox(
-                                    height: 25,
+                                  Padding(
+                                    padding: EdgeInsets.all(20),
+                                    child: Icon(
+                                      Icons.star_half,
+                                      size: 50,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  Text(
-                                      utf8.decode(base64.decode(comments[position]['nombre'])).toString() +
-                                          " " +
-                                          utf8.decode(base64.decode(comments[position]['apellido_P']))
-                                              .toString() +
-                                          " " +
-                                          utf8.decode(base64.decode(comments[position]['apellido_M']))
-                                              .toString(),
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                          fontSize: 20.0, color: Colors.white)),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(
-                                    width: 220,
-                                    child: Text(
-                                        comments[position]['COMENTARIO']
-                                            .toString(),
-                                        textAlign: TextAlign.justify,
-                                        style: TextStyle(
-                                          fontSize: 10.0,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                  SizedBox(
-                                    height: 25,
+                                  Column(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                      Text(
+                                          utf8
+                                                  .decode(base64.decode(
+                                                      comments[position]
+                                                          ['nombre']))
+                                                  .toString() +
+                                              " " +
+                                              utf8
+                                                  .decode(base64.decode(
+                                                      comments[position]
+                                                          ['apellido_P']))
+                                                  .toString() +
+                                              " " +
+                                              utf8
+                                                  .decode(base64.decode(
+                                                      comments[position]
+                                                          ['apellido_M']))
+                                                  .toString(),
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white)),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                        width: 220,
+                                        child: Text(
+                                            comments[position]['COMENTARIO']
+                                                .toString(),
+                                            textAlign: TextAlign.justify,
+                                            style: TextStyle(
+                                              fontSize: 10.0,
+                                              color: Colors.white,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                    ): CircularProgressIndicator(
-                      strokeWidth: 10,
-                    )
-                  
-                  ),
+                            );
+                          },
+                        )
+                      : CircularProgressIndicator(
+                          strokeWidth: 10,
+                        )),
             ],
           ),
         ));
   }
- void getProjectOfline() async {
+
+  void getProjectOfline() async {
     try {
-       this.comments = await helper.SelectComments();
+      this.comments = await helper.SelectComments();
       print("se obtuvo los proyectos ofline");
-      print(myProjects);     
+      print(myProjects);
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
     setState(() {});
   }
+
   Future getComments() async {
-    var cliente1=new http.Client();
+    var cliente1 = new http.Client();
     print(
         "=========================================================================");
     print("se esta obteiendo los comentarios");
     print(client['ID_USUARIO']);
     try {
-      final response = await cliente1
-          .post(server+"/loadComments.php",
-              // "http://192.168.0.5/findprogrammerDB/loadComments.php",
-              body: {"ID_USUARIO": client['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/loadComments.php",
+          // "http://192.168.0.5/findprogrammerDB/loadComments.php",
+          body: {
+            "ID_USUARIO": client['ID_USUARIO'].toString()
+          }).timeout(Duration(seconds: 7));
 
       var comments = json.decode(response.body);
       this.comments = comments;
- helper.DeleteComents();
+      helper.DeleteComents();
       for (int x = 0; x < this.comments.length; x++) {
         var insertarPRoeycto = await helper.InsertComentarios(this.comments[x]);
         print(">>>>$insertarPRoeycto<<<<<");
       }
-
-
 
       print(comments);
       print("se obtuvieron los comentarios");
     } catch (f) {
       print("hubo un error obteniendo los comentarios");
       print(f.toString());
-    }finally{
-
+    } finally {
       cliente1.close();
-    setState(() {
-      
-    });
+      setState(() {});
     }
   }
 }

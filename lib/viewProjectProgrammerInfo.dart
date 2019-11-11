@@ -32,7 +32,7 @@ class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
   _ViewProjectProgrammerInfo(this.ID);
   final AsyncMemoizer _asyncMemorizer = new AsyncMemoizer();
   var dataProject, reqFuncionales, reqNoFuncionales, avances, clienteP;
-Helper helper=new Helper();
+  Helper helper = new Helper();
   @override
   Widget build(BuildContext context) {
     setState(() {});
@@ -73,11 +73,11 @@ Helper helper=new Helper();
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            server+"/images/image_" +
-                                                desarrollador['ID_USUARIO']
-                                                    .toString() +
-                                                ".jpg"))),
+                                        image: NetworkImage(server +
+                                            "/images/image_" +
+                                            desarrollador['ID_USUARIO']
+                                                .toString() +
+                                            ".jpg"))),
                               ),
                             ),
                             Padding(
@@ -426,21 +426,21 @@ Helper helper=new Helper();
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
-                                    helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                  helper.DeleteComents();
+                                  helper.DeleteDesarrollador();
+                                  helper.DeleteProyecto1();
+                                  helper.DeleteProyecto2();
+                                  helper.DeleteProyecto6();
+                                  helper.DeleteProyecto4();
+                                  helper.DeleteProyecto5();
+                                  helper.DeleteProyectoInfo();
+
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(
@@ -998,7 +998,7 @@ Helper helper=new Helper();
       final response = await http.post(
 
           // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
-          server+"/loadInfoProject.php",
+          server + "/loadInfoProject.php",
 
           // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
           body: {
@@ -1012,8 +1012,7 @@ Helper helper=new Helper();
   }
 
   Future<List> getReqFProject() async {
-    final response = await http.post(
-        server+"/loadInfoProject.php",
+    final response = await http.post(server + "/loadInfoProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         //  "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         body: {
@@ -1026,8 +1025,7 @@ Helper helper=new Helper();
   }
 
   Future<List> getAvancesProject() async {
-    final response = await http.post(
-        server+"/loadInfoProject.php",
+    final response = await http.post(server + "/loadInfoProject.php",
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
         //"http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {
@@ -1042,7 +1040,7 @@ Helper helper=new Helper();
   Future<List> getClientProject() async {
     final response = await http.post(
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-        server+"/loadInfoProject.php",
+        server + "/loadInfoProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {
           "ID_PROYECTO": this.ID,
@@ -1057,7 +1055,7 @@ Helper helper=new Helper();
     print(desarrollador);
     final response = await http.post(
         // "http://192.168.84.114/findprogrammerDB/loadInfoProject.php",
-        server+"/applyForProject.php",
+        server + "/applyForProject.php",
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {
           "ID_PROYECTO": this.ID.toString(),

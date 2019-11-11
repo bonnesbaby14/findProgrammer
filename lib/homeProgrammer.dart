@@ -46,7 +46,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
-        await     getDesarrollador();
+        await getDesarrollador();
         await getProjects();
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
@@ -71,37 +71,42 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                     ),
 
                     GestureDetector(
-                      onTap: () {     if(sistemaBloqueado){
-showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Text("Sistema bloqueado :c"),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-                return;
-      }
+                      onTap: () {
+                        if (sistemaBloqueado) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text("Sistema bloqueado :c"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
                         Navigator.pop(context);
                         Navigator.push(
                             context,
@@ -177,37 +182,41 @@ showDialog(
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
-                             if(sistemaBloqueado){
-showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Text("Sistema bloqueado :c"),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-                return;
-      }
+                        if (sistemaBloqueado) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text("Sistema bloqueado :c"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -248,72 +257,78 @@ showDialog(
                     //otro widget
 
                     GestureDetector(
-                      onTap: () {     if(sistemaBloqueado){
-showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Text("Sistema bloqueado :c"),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-                return;
-      }
-                        if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                      onTap: () {
+                        if (sistemaBloqueado) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text("Sistema bloqueado :c"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
+                        if (!statusRed) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        "No hay conexión a internet, intenta mas tarde"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
                         Navigator.pop(context);
                         Navigator.push(
                             context,
@@ -362,7 +377,6 @@ showDialog(
                     ),
                     GestureDetector(
                       onTap: () {
-                        
                         Navigator.pop(context);
                         Navigator.push(
                             context,
@@ -411,108 +425,119 @@ showDialog(
                       height: 15,
                     ),
                     GestureDetector(
-                      onTap: () {     if(sistemaBloqueado){
-showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Text("Sistema bloqueado :c"),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-                return;
-      }
-                        if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
-                       if(sistemaBloqueado){
-showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Text("Sistema bloqueado :c"),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-                       }else{
+                      onTap: () {
+                        if (sistemaBloqueado) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text("Sistema bloqueado :c"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
+                        if (!statusRed) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        "No hay conexión a internet, intenta mas tarde"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                          return;
+                        }
+                        if (sistemaBloqueado) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text("Sistema bloqueado :c"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                        } else {
                           Navigator.pop(context);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ViewAvailableProjects()));
-                       }
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ViewAvailableProjects()));
+                        }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -556,138 +581,143 @@ showDialog(
 
                     GestureDetector(
                       onTap: () {
-                        if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
-                         if(sistemaBloqueado){
-showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Text("Sistema bloqueado :c"),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-                       }else{
+                        if (!statusRed) {
                           showDialog(
-                            context: context,
-                            builder: (context) => new CupertinoAlertDialog(
-                                  title: Column(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.devices_other,
-                                        size: 80,
-                                        color: Colors.deepPurpleAccent,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text("Codigo de Proyecto",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20)),
-                                    ],
-                                  ),
-                                  content: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Container(
-                                        child: CupertinoTextField(
-                                          controller: tecCodigo,
-                                          placeholder: "Codigo de proyecto...",
-                                          placeholderStyle:
-                                              TextStyle(color: Colors.black38),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  width: 0.5,
-                                                  color:
-                                                      Colors.deepPurpleAccent)),
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        "No hay conexión a internet, intenta mas tarde"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
                                       ),
                                     ],
-                                  ),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      onPressed: () async {
-                                        await createPanel2();
-                                      },
-                                      child: Text("Aceptar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
+                                  ));
+                          return;
+                        }
+                        if (sistemaBloqueado) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
                                     ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Cancelar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
+                                    content: Text("Sistema bloqueado :c"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("Codigo de Proyecto",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
                                     ),
-                                  ],
-                                ));
-                       }
-                        
+                                    content: Column(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Container(
+                                          child: CupertinoTextField(
+                                            controller: tecCodigo,
+                                            placeholder:
+                                                "Codigo de proyecto...",
+                                            placeholderStyle: TextStyle(
+                                                color: Colors.black38),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                border: Border.all(
+                                                    width: 0.5,
+                                                    color: Colors
+                                                        .deepPurpleAccent)),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                      ],
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () async {
+                                          await createPanel2();
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Cancelar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                        }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -755,21 +785,21 @@ showDialog(
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () {
-                                          helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                        helper.DeleteComents();
+                                        helper.DeleteDesarrollador();
+                                        helper.DeleteProyecto1();
+                                        helper.DeleteProyecto2();
+                                        helper.DeleteProyecto6();
+                                        helper.DeleteProyecto4();
+                                        helper.DeleteProyecto5();
+                                        helper.DeleteProyectoInfo();
+
+                                        helper.DeleteCliente();
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Login()));
                                       },
                                       child: Text("Cerrar Sesion",
                                           style: TextStyle(
@@ -1154,23 +1184,20 @@ showDialog(
     try {
       desarrolladorList = await helper.SelectDesarrollador();
       desarrollador = desarrolladorList.first;
-      if(desarrollador['F_BAJA_USUARIO']==1){
-   helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+      if (desarrollador['F_BAJA_USUARIO'] == 1) {
+        helper.DeleteComents();
+        helper.DeleteDesarrollador();
+        helper.DeleteProyecto1();
+        helper.DeleteProyecto2();
+        helper.DeleteProyecto6();
+        helper.DeleteProyecto4();
+        helper.DeleteProyecto5();
+        helper.DeleteProyectoInfo();
 
+        helper.DeleteCliente();
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
       }
       print("se obtuvo el desarrollador********************************");
       setState(() {});
@@ -1206,8 +1233,6 @@ showDialog(
       var datauser = json.decode(response.body);
       print(datauser);
       projects = datauser;
-
-
 
       print("se obtuvo los proyectos********************************");
       print(projects);
@@ -1366,30 +1391,28 @@ showDialog(
       print(datauser);
       if (datauser != null) {
         for (int z = 0; z < datauser.length; z++) {
-          
-  String fechaReporte = datauser[z]['NEXT_ADVANCE'];
-      List<String> dates = fechaReporte.split("-");
-      DateTime date = new DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day);
-      DateTime last = DateTime(
-          int.parse(dates[0]), int.parse(dates[1]), int.parse(dates[2]));
+          String fechaReporte = datauser[z]['NEXT_ADVANCE'];
+          List<String> dates = fechaReporte.split("-");
+          DateTime date = new DateTime(
+              DateTime.now().year, DateTime.now().month, DateTime.now().day);
+          DateTime last = DateTime(
+              int.parse(dates[0]), int.parse(dates[1]), int.parse(dates[2]));
 
-      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-      print(date.toString());
-      print(last.toString());
-      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-      var difference = date.difference(last).inDays;
-      print(difference);
-   
-      if (difference > 0) {
-        sistemaBloqueado=true;
-        print("sistema bloqueado");
-      }
-          
+          print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+          print(date.toString());
+          print(last.toString());
+          print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+          var difference = date.difference(last).inDays;
+          print(difference);
+
+          if (difference > 0) {
+            sistemaBloqueado = true;
+            print("sistema bloqueado");
+          }
         }
       }
-      if(sistemaBloqueado){
-showDialog(
+      if (sistemaBloqueado) {
+        showDialog(
             context: context,
             builder: (context) => new CupertinoAlertDialog(
                   title: Column(
@@ -1417,7 +1440,7 @@ showDialog(
                     ),
                   ],
                 ));
-                return;
+        return;
       }
       print(
           "se obtuvo los proyectos en desarrollo********************************");

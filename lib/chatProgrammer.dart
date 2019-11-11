@@ -20,16 +20,16 @@ var destinatario;
 
 @override
 class ChatProgrammer extends StatefulWidget {
-  var idProyecto, idDesarrollador,destinor;
-  ChatProgrammer(this.idProyecto, this.idDesarrollador,this.destinor);
+  var idProyecto, idDesarrollador, destinor;
+  ChatProgrammer(this.idProyecto, this.idDesarrollador, this.destinor);
   _ChatProgrammer createState() =>
-      new _ChatProgrammer(idProyecto, idDesarrollador,destinor);
+      new _ChatProgrammer(idProyecto, idDesarrollador, destinor);
 }
 
 class _ChatProgrammer extends State<ChatProgrammer> {
   var mensajes;
   var idProyecto, idDesarrollador, destino;
-  _ChatProgrammer(this.idProyecto, this.idDesarrollador,this.destino);
+  _ChatProgrammer(this.idProyecto, this.idDesarrollador, this.destino);
   TextEditingController _textEditingController;
   ScrollController _scrollController;
   @override
@@ -77,11 +77,11 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: NetworkImage(
-                                              server+"/images/image_" +
-                                                  desarrollador['ID_USUARIO']
-                                                      .toString() +
-                                                  ".jpg"))),
+                                          image: NetworkImage(server +
+                                              "/images/image_" +
+                                              desarrollador['ID_USUARIO']
+                                                  .toString() +
+                                              ".jpg"))),
                                 ),
                               ),
                               Padding(
@@ -441,7 +441,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                     helper.DeleteProyecto4();
                                     helper.DeleteProyecto5();
                                     helper.DeleteProyectoInfo();
-                                  
+
                                     helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
@@ -754,7 +754,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
     try {
       final response = await http.post(
           //"http://192.168.0.5/findprogrammerDB/openRoom.php",
-          server+"/openRoom1.php",
+          server + "/openRoom1.php",
           body: {
             "idProyecto": idProyecto.toString(),
             "idDesarrollador": idDesarrollador.toString(),
@@ -779,7 +779,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
     try {
       final response = await http.post(
           //"http://192.168.0.5/findprogrammerDB/sendMessage.php",
-          server+"/sendMessage.php",
+          server + "/sendMessage.php",
           body: {
             "idRemitente": idDesarrollador.toString(),
             "idDestinatario": destino.toString(),

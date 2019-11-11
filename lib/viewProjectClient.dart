@@ -843,7 +843,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
+                                          if (dataProject[0]
+                                                  ["F_EN_DESARROLLO"] ==
+                                              "0") {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) =>
@@ -1064,7 +1066,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
+                                          if (dataProject[0]
+                                                  ["F_EN_DESARROLLO"] ==
+                                              "0") {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) =>
@@ -1374,7 +1378,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
+                                          if (dataProject[0]
+                                                  ["F_EN_DESARROLLO"] ==
+                                              "0") {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) =>
@@ -1650,7 +1656,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
+                                          if (dataProject[0]
+                                                  ["F_EN_DESARROLLO"] ==
+                                              "0") {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) =>
@@ -2452,7 +2460,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           ),
                                           InkWell(
                                             onTap: () {
-
                                               print(dataProject);
                                               Navigator.push(
                                                   context,

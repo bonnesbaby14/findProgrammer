@@ -31,15 +31,14 @@ class Homeclient extends StatefulWidget {
 class _Homeclient extends State<Homeclient> {
   @override
   void initState() {
-    if(statusRed){
+    if (statusRed) {
       print("se conculta la red");
-getProject();
-    }else{
+      getProject();
+    } else {
       print("se conculta la db local");
       getProjectOfline();
     }
     getClient();
-    
   }
 
   @override
@@ -49,14 +48,14 @@ getProject();
 
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
-      onRefresh: () async {  
-        if(statusRed){
+      onRefresh: () async {
+        if (statusRed) {
           await getClient();
-await getProject();
-    }else{
-      await getProjectOfline();
-    }
-       
+          await getProject();
+        } else {
+          await getProjectOfline();
+        }
+
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -316,20 +315,20 @@ await getProject();
                                   FlatButton(
                                     onPressed: () {
                                       helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                      helper.DeleteDesarrollador();
+                                      helper.DeleteProyecto1();
+                                      helper.DeleteProyecto2();
+                                      helper.DeleteProyecto6();
+                                      helper.DeleteProyecto4();
+                                      helper.DeleteProyecto5();
+                                      helper.DeleteProyectoInfo();
+
+                                      helper.DeleteCliente();
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Login()));
                                     },
                                     child: Text("Cerrar Sesion",
                                         style: TextStyle(
@@ -529,9 +528,10 @@ await getProject();
                                           builder: (context) =>
                                               ViewProjectClient(
                                                   myProjects[position]
-                                                      ['ID_PROYECTO'].toString())));
-                                print("se termino-------------");
-                                                                },
+                                                          ['ID_PROYECTO']
+                                                      .toString())));
+                                  print("se termino-------------");
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.0),
@@ -766,30 +766,28 @@ await getProject();
   void getClient() async {
     try {
       clientList = await helper.SelectCliente();
-   
+
       print("!!!!!!!!!!!!!!!!!!11");
       print(clientList[0]['NOMBRE']);
       print("!!!!!!!!!!!!!!!!!!11");
       client = clientList.first;
       print("se obtuvo el cliente en getcliente en homecliente");
       print(client['F_BAJA_USUARIO']);
-      if(client['F_BAJA_USUARIO']==1){
+      if (client['F_BAJA_USUARIO'] == 1) {
         print("object");
-              helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+        helper.DeleteComents();
+        helper.DeleteDesarrollador();
+        helper.DeleteProyecto1();
+        helper.DeleteProyecto2();
+        helper.DeleteProyecto6();
+        helper.DeleteProyecto4();
+        helper.DeleteProyecto5();
+        helper.DeleteProyectoInfo();
+
+        helper.DeleteCliente();
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
       }
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
@@ -797,17 +795,19 @@ await getProject();
     }
     setState(() {});
   }
- void getProjectOfline() async {
+
+  void getProjectOfline() async {
     try {
       myProjects = await helper.SelectProjectInfo();
       print("se obtuvo los proyectos ofline");
-      print(myProjects);     
+      print(myProjects);
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
     setState(() {});
   }
+
   Future getProject() async {
     var cliente = http.Client();
     try {
@@ -822,7 +822,7 @@ await getProject();
 
       myProjects = datauser;
 
-helper.DeleteProyectoInfo();
+      helper.DeleteProyectoInfo();
       for (int x = 0; x < myProjects.length; x++) {
         Map<String, dynamic> mapProyecto = Map();
         mapProyecto['ID_PROYECTO'] = datauser[x]['ID_PROYECTO'];
@@ -844,10 +844,9 @@ helper.DeleteProyectoInfo();
         mapProyecto['F_S_ENTREGABLES'] = datauser[x]['F_S_ENTREGABLES'];
         mapProyecto['FK_CLIENTE'] = datauser[x]['FK_CLIENTE'];
         mapProyecto['codigo'] = datauser[x]['codigo'];
-        
-        var insertarPRoeycto =
-              await helper.InsertProyectoInfo(mapProyecto);
-              print(">>>>$insertarPRoeycto<<<<<");
+
+        var insertarPRoeycto = await helper.InsertProyectoInfo(mapProyecto);
+        print(">>>>$insertarPRoeycto<<<<<");
       }
 
       print(datauser);

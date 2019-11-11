@@ -27,15 +27,15 @@ class ProfileProgrammer extends StatefulWidget {
 
 class _ProfileProgrammer extends State<ProfileProgrammer> {
   var comments;
-  Helper helper=new Helper();
+  Helper helper = new Helper();
   @override
   void initState() {
     // TODO: implement initState
-    
-       if(statusRed){
+
+    if (statusRed) {
       print("se conculta la red");
-getComments();
-    }else{
+      getComments();
+    } else {
       print("se conculta la db local");
       getProjectOfline();
     }
@@ -83,11 +83,11 @@ getComments();
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            server+"/images/image_" +
-                                                desarrollador['ID_USUARIO']
-                                                    .toString() +
-                                                ".jpg"))),
+                                        image: NetworkImage(server +
+                                            "/images/image_" +
+                                            desarrollador['ID_USUARIO']
+                                                .toString() +
+                                            ".jpg"))),
                               ),
                             ),
                             Padding(
@@ -132,8 +132,9 @@ getComments();
                 height: 15,
               ),
               GestureDetector(
-                onTap: () {if(!statusRed){
-                       showDialog(
+                onTap: () {
+                  if (!statusRed) {
+                    showDialog(
                         context: context,
                         builder: (context) => new CupertinoAlertDialog(
                               title: Column(
@@ -151,10 +152,9 @@ getComments();
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              content: Text(
+                                  "No hay conexión a internet, intenta mas tarde"),
                               actions: <Widget>[
-                                
                                 FlatButton(
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -165,8 +165,8 @@ getComments();
                                 ),
                               ],
                             ));
-                            return;
-                    }
+                    return;
+                  }
                   Navigator.pop(context);
                   Navigator.push(
                       context,
@@ -209,8 +209,9 @@ getComments();
               //otro widget
 
               GestureDetector(
-                onTap: () {if(!statusRed){
-                       showDialog(
+                onTap: () {
+                  if (!statusRed) {
+                    showDialog(
                         context: context,
                         builder: (context) => new CupertinoAlertDialog(
                               title: Column(
@@ -228,10 +229,9 @@ getComments();
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              content: Text(
+                                  "No hay conexión a internet, intenta mas tarde"),
                               actions: <Widget>[
-                                
                                 FlatButton(
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -242,8 +242,8 @@ getComments();
                                 ),
                               ],
                             ));
-                            return;
-                    }
+                    return;
+                  }
                   Navigator.pop(context);
                   Navigator.push(
                       context,
@@ -336,8 +336,9 @@ getComments();
                 height: 15,
               ),
               GestureDetector(
-                onTap: () {if(!statusRed){
-                       showDialog(
+                onTap: () {
+                  if (!statusRed) {
+                    showDialog(
                         context: context,
                         builder: (context) => new CupertinoAlertDialog(
                               title: Column(
@@ -355,10 +356,9 @@ getComments();
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              content: Text(
+                                  "No hay conexión a internet, intenta mas tarde"),
                               actions: <Widget>[
-                                
                                 FlatButton(
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -369,8 +369,8 @@ getComments();
                                 ),
                               ],
                             ));
-                            return;
-                    }
+                    return;
+                  }
                   Navigator.pop(context);
                   Navigator.push(
                       context,
@@ -416,8 +416,9 @@ getComments();
               ),
 
               GestureDetector(
-                onTap: () {if(!statusRed){
-                       showDialog(
+                onTap: () {
+                  if (!statusRed) {
+                    showDialog(
                         context: context,
                         builder: (context) => new CupertinoAlertDialog(
                               title: Column(
@@ -435,10 +436,9 @@ getComments();
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
+                              content: Text(
+                                  "No hay conexión a internet, intenta mas tarde"),
                               actions: <Widget>[
-                                
                                 FlatButton(
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -449,8 +449,8 @@ getComments();
                                 ),
                               ],
                             ));
-                            return;
-                    }
+                    return;
+                  }
                   showDialog(
                       context: context,
                       builder: (context) => new CupertinoAlertDialog(
@@ -572,20 +572,20 @@ getComments();
                               FlatButton(
                                 onPressed: () {
                                   helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                  helper.DeleteDesarrollador();
+                                  helper.DeleteProyecto1();
+                                  helper.DeleteProyecto2();
+                                  helper.DeleteProyecto6();
+                                  helper.DeleteProyecto4();
+                                  helper.DeleteProyecto5();
+                                  helper.DeleteProyectoInfo();
+
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(
@@ -664,7 +664,7 @@ getComments();
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),
                 child: Column(
-                  children: <Widget>[ 
+                  children: <Widget>[
                     SizedBox(
                       height: 40,
                     ),
@@ -691,10 +691,10 @@ getComments();
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: NetworkImage(
-                                server+"/images/image_" +
-                                    desarrollador['ID_USUARIO'].toString() +
-                                    ".jpg"),
+                            image: NetworkImage(server +
+                                "/images/image_" +
+                                desarrollador['ID_USUARIO'].toString() +
+                                ".jpg"),
                           )),
                     ),
                     SizedBox(
@@ -802,13 +802,22 @@ getComments();
                                         height: 25,
                                       ),
                                       Text(
-                                          utf8.decode(base64.decode(comments[position]['nombre']))
+                                          utf8
+                                                  .decode(base64.decode(
+                                                      comments[position]
+                                                          ['nombre']))
                                                   .toString() +
                                               " " +
-                                              utf8.decode(base64.decode(comments[position]['apellido_P']))
+                                              utf8
+                                                  .decode(base64.decode(
+                                                      comments[position]
+                                                          ['apellido_P']))
                                                   .toString() +
                                               " " +
-                                              utf8.decode(base64.decode(comments[position]['apellido_M']))
+                                              utf8
+                                                  .decode(base64.decode(
+                                                      comments[position]
+                                                          ['apellido_M']))
                                                   .toString(),
                                           textAlign: TextAlign.justify,
                                           style: TextStyle(
@@ -845,17 +854,19 @@ getComments();
           ),
         ));
   }
-void getProjectOfline() async {
+
+  void getProjectOfline() async {
     try {
-       this.comments = await helper.SelectComments();
+      this.comments = await helper.SelectComments();
       print("se obtuvo los proyectos ofline");
-      print(myProjects);     
+      print(myProjects);
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
     setState(() {});
   }
+
   Future getComments() async {
     var cliente1 = new http.Client();
     try {

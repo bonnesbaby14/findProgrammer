@@ -35,12 +35,12 @@ class _ViewDevelopmentProjectsClient
     extends State<ViewDevelopmentProjectsClient> {
   @override
   void initState() {
-     if(statusRed){
-getDevelopmentsProjects();
-    }else{
+    if (statusRed) {
+      getDevelopmentsProjects();
+    } else {
       getDevelopmentsProjectsOfline();
     }
-    
+
     // TODO: implement initState
   }
 
@@ -48,15 +48,14 @@ getDevelopmentsProjects();
   Widget build(BuildContext context) {
     var _scaffoldKeyhome = new GlobalKey<ScaffoldState>();
 
-
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
-                if(statusRed){
-await getDevelopmentsProjects();
-    }else{
-      await getDevelopmentsProjectsOfline();
-    }
+        if (statusRed) {
+          await getDevelopmentsProjects();
+        } else {
+          await getDevelopmentsProjectsOfline();
+        }
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -103,11 +102,11 @@ await getDevelopmentsProjects();
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
                                               fit: BoxFit.fill,
-                                              image: NetworkImage(
-                                                  server+"/images/image_" +
-                                                      client['ID_USUARIO']
-                                                          .toString() +
-                                                      ".jpg"))),
+                                              image: NetworkImage(server +
+                                                  "/images/image_" +
+                                                  client['ID_USUARIO']
+                                                      .toString() +
+                                                  ".jpg"))),
                                     ),
                                   ),
                                   Padding(
@@ -318,21 +317,21 @@ await getDevelopmentsProjects();
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () {
-                                         helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                        helper.DeleteComents();
+                                        helper.DeleteDesarrollador();
+                                        helper.DeleteProyecto1();
+                                        helper.DeleteProyecto2();
+                                        helper.DeleteProyecto6();
+                                        helper.DeleteProyecto4();
+                                        helper.DeleteProyecto5();
+                                        helper.DeleteProyectoInfo();
+
+                                        helper.DeleteCliente();
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Login()));
                                       },
                                       child: Text("Cerrar Sesion",
                                           style: TextStyle(
@@ -455,12 +454,13 @@ await getDevelopmentsProjects();
                                   (BuildContext context, int position) {
                                 return GestureDetector(
                                   onTap: () {
-                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ViewProjectClient(
-                                            projects[position]
-                                                ['ID_PROYECTO'])));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ViewProjectClient(
+                                                    projects[position]
+                                                        ['ID_PROYECTO'])));
                                   },
                                   child: Card(
                                     shape: RoundedRectangleBorder(
@@ -698,13 +698,13 @@ await getDevelopmentsProjects();
   }
 
   Future getDevelopmentsProjects() async {
-    var cliente1=new http.Client();
+    var cliente1 = new http.Client();
     try {
       print("-------------------------------------");
-print(client['ID_USUARIO'].toString());
+      print(client['ID_USUARIO'].toString());
       final response = await cliente1.post(
           //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
-          server+"/loadDevelopmentsProjectsCliente.php",
+          server + "/loadDevelopmentsProjectsCliente.php",
           body: {
             "ID": client['ID_USUARIO'].toString(),
           }).timeout(Duration(seconds: 7));
@@ -718,29 +718,21 @@ print(client['ID_USUARIO'].toString());
     } catch (d) {
       print("hubo un error obteniendo los proyectos en desarrollo");
       print(d.toString());
-    }finally{
-      setState(() {
-        
-      });
+    } finally {
+      setState(() {});
       cliente1.close();
     }
   }
 
-
-
-   void getDevelopmentsProjectsOfline() async {
+  void getDevelopmentsProjectsOfline() async {
     try {
       projects = await helper.SelectProjectInfoDevelop();
       print("se obtuvo los proyectos ofline");
-      print(myProjects);     
-      setState(() {
-        
-      });
+      print(myProjects);
+      setState(() {});
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
-  
   }
-
 }

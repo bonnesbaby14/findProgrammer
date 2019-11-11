@@ -29,17 +29,18 @@ class ViewHireProgrammer extends StatefulWidget {
 
 class _ViewHireProgrammer extends State<ViewHireProgrammer> {
   var ID;
-  
+
   _ViewHireProgrammer(this.ID);
   @override
   void initState() {
- getDevelopers();   // TODO: implement initState
+    getDevelopers(); // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var _keyH = new GlobalKey<ScaffoldState>();
-var _keyH23 = new GlobalKey();
+    var _keyH23 = new GlobalKey();
     print("siempre entra aqui");
     print(this.ID);
     return Scaffold(
@@ -59,7 +60,6 @@ var _keyH23 = new GlobalKey();
                 onTap: () {
                   Navigator.pop(context);
 
-
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ProfileClient()));
                 },
@@ -78,11 +78,10 @@ var _keyH23 = new GlobalKey();
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: NetworkImage(
-                                            server+"/images/image_" +
-                                                client['ID_USUARIO']
-                                                    .toString() +
-                                                ".jpg"))),
+                                        image: NetworkImage(server +
+                                            "/images/image_" +
+                                            client['ID_USUARIO'].toString() +
+                                            ".jpg"))),
                               ),
                             ),
                             Padding(
@@ -284,21 +283,21 @@ var _keyH23 = new GlobalKey();
                               FlatButton(
                                 onPressed: () {
                                   helper.DeleteCliente();
-                                    helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                  helper.DeleteComents();
+                                  helper.DeleteDesarrollador();
+                                  helper.DeleteProyecto1();
+                                  helper.DeleteProyecto2();
+                                  helper.DeleteProyecto6();
+                                  helper.DeleteProyecto4();
+                                  helper.DeleteProyecto5();
+                                  helper.DeleteProyectoInfo();
+
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(
@@ -353,7 +352,8 @@ var _keyH23 = new GlobalKey();
         ),
         appBar: null,
         resizeToAvoidBottomPadding: false,
-        body: request!=null?Container(
+        body: request != null
+            ? Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   color: Colors.deepPurpleAccent,
@@ -421,7 +421,6 @@ var _keyH23 = new GlobalKey();
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: () {
-                        
                               Navigator.pushReplacement(
                                   context,
                                   CupertinoPageRoute(
@@ -460,10 +459,20 @@ var _keyH23 = new GlobalKey();
                                       Container(
                                         width: 160,
                                         child: Text(
-                                          utf8.decode(base64.decode(request[index]['NOMBRE'])).toString() +
-                                                utf8.decode(base64.decode(request[index]['APELLIDO_P'])) 
+                                            utf8
+                                                    .decode(base64.decode(
+                                                        request[index]
+                                                            ['NOMBRE']))
                                                     .toString() +
-                                                utf8.decode(base64.decode(request[index]['APELLIDO_M'])) 
+                                                utf8
+                                                    .decode(base64.decode(
+                                                        request[index]
+                                                            ['APELLIDO_P']))
+                                                    .toString() +
+                                                utf8
+                                                    .decode(base64.decode(
+                                                        request[index]
+                                                            ['APELLIDO_M']))
                                                     .toString(),
                                             textAlign: TextAlign.justify,
                                             style: TextStyle(
@@ -499,7 +508,8 @@ var _keyH23 = new GlobalKey();
                     ),
                   ],
                 ),
-              ):Stack(
+              )
+            : Stack(
                 children: <Widget>[
                   new Container(
                     height: MediaQuery.of(context).size.height,
@@ -567,9 +577,7 @@ var _keyH23 = new GlobalKey();
                           child: ListView(
                             children: <Widget>[
                               InkWell(
-                                onTap: () {
-                                
-                                },
+                                onTap: () {},
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.0),
@@ -792,18 +800,16 @@ var _keyH23 = new GlobalKey();
                     ),
                   )
                 ],
-              )
-        
-      );
+              ));
   }
 
   Future getDevelopers() async {
-    var cliente1=new http.Client();
+    var cliente1 = new http.Client();
     try {
       print("entro a getdevelopes");
       final response = await cliente1.post(
-         // "http://192.168.0.5/findprogrammerDB/loadDevelopers.php",
-          server+"/loadDevelopers.php",
+          // "http://192.168.0.5/findprogrammerDB/loadDevelopers.php",
+          server + "/loadDevelopers.php",
           body: {
             "ID": this.ID.toString(),
           }).timeout(Duration(seconds: 7));
@@ -813,11 +819,9 @@ var _keyH23 = new GlobalKey();
     } catch (d) {
       print("error obteniendo solicitudes el proyecto");
       print(d.toString());
-    }finally{
+    } finally {
       cliente1.close();
-      setState(() {
-        
-      });
+      setState(() {});
     }
   }
 }

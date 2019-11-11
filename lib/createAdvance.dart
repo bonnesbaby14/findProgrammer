@@ -56,7 +56,7 @@ class _CreateAvance extends State<CreateAvance> {
   }
 
   var _scaffoldKey1 = new GlobalKey<ScaffoldState>();
-  Helper helper=new Helper();
+  Helper helper = new Helper();
   @override
   Widget build(BuildContext context) {
     try {
@@ -133,11 +133,11 @@ class _CreateAvance extends State<CreateAvance> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: NetworkImage(
-                                              server+"/images/image_" +
-                                                  desarrollador['ID_USUARIO']
-                                                      .toString() +
-                                                  ".jpg"))),
+                                          image: NetworkImage(server +
+                                              "/images/image_" +
+                                              desarrollador['ID_USUARIO']
+                                                  .toString() +
+                                              ".jpg"))),
                                 ),
                               ),
                               Padding(
@@ -497,7 +497,7 @@ class _CreateAvance extends State<CreateAvance> {
                                     helper.DeleteProyecto4();
                                     helper.DeleteProyecto5();
                                     helper.DeleteProyectoInfo();
-                                  
+
                                     helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
@@ -717,7 +717,7 @@ class _CreateAvance extends State<CreateAvance> {
                       }
                       if (dataProjectw[0]['F_S_ENTREGABLES'] == "1" &&
                           tdcEnlaces.text == "") {
-                            print("se detecto que se debe icluir avances");
+                        print("se detecto que se debe icluir avances");
                         await showDialog(
                             context: context,
                             builder: (context) => new CupertinoAlertDialog(
@@ -755,81 +755,78 @@ class _CreateAvance extends State<CreateAvance> {
                       } else {
                         await createAdvance1();
                         if (serverResponse2 == "1") {
-                        
-                        await showDialog(
-                            context: context,
-                            builder: (context) => new CupertinoAlertDialog(
-                                  title: Column(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.devices_other,
-                                        size: 80,
-                                        color: Colors.deepPurpleAccent,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text("FindProgrammer",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20)),
-                                    ],
-                                  ),
-                                  content: Text(
-                                      "El Avance se registro correctamente"),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                        setState(() {});
-                                      },
-                                      child: Text("Aceptar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
+                          await showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
                                     ),
-                                  ],
-                                ));
-                      } else {
-                        Navigator.pop(context);
-                        showDialog(
-                            context: context,
-                            builder: (context) => new CupertinoAlertDialog(
-                                  title: Column(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.devices_other,
-                                        size: 80,
-                                        color: Colors.deepPurpleAccent,
+                                    content: Text(
+                                        "El Avance se registro correctamente"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                          setState(() {});
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
                                       ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text("FindProgrammer",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20)),
                                     ],
-                                  ),
-                                  content: Text(
-                                      "El Avance no se registro, inténtalo mas tarde. "),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Aceptar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
+                                  ));
+                        } else {
+                          Navigator.pop(context);
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
                                     ),
-                                  ],
-                                ));
+                                    content: Text(
+                                        "El Avance no se registro, inténtalo mas tarde. "),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                        }
                       }
-                      }
-
-                      
                     },
                     child: Text("Enviar Avance",
                         style: TextStyle(color: Colors.black, fontSize: 15)),

@@ -41,7 +41,7 @@ class _ViewCreateReq extends State<ViewCreateReq> {
   @override
   Widget build(BuildContext context) {
     var _scaffoldKey = new GlobalKey<ScaffoldState>();
-Helper helper=new Helper();
+    Helper helper = new Helper();
     return Scaffold(
         key: _scaffoldKey,
         drawer: Container(
@@ -78,11 +78,11 @@ Helper helper=new Helper();
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          server+"images/image_" +
-                                              desarrollador['ID_USUARIO']
-                                                  .toString() +
-                                              ".jpg"),
+                                      image: NetworkImage(server +
+                                          "images/image_" +
+                                          desarrollador['ID_USUARIO']
+                                              .toString() +
+                                          ".jpg"),
                                     )),
                               ),
                             ),
@@ -428,21 +428,21 @@ Helper helper=new Helper();
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
-                                    helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                  helper.DeleteComents();
+                                  helper.DeleteDesarrollador();
+                                  helper.DeleteProyecto1();
+                                  helper.DeleteProyecto2();
+                                  helper.DeleteProyecto6();
+                                  helper.DeleteProyecto4();
+                                  helper.DeleteProyecto5();
+                                  helper.DeleteProyectoInfo();
+
+                                  helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
                                 },
                                 child: Text("Cerrar Sesion",
                                     style: TextStyle(
@@ -805,12 +805,14 @@ Helper helper=new Helper();
                                                           ),
                                                           actions: <Widget>[
                                                             FlatButton(
-                                                              onPressed: () async{
+                                                              onPressed:
+                                                                  () async {
                                                                 //Aqui se modifica los requrimienos
-                                                                await editReq(requerimietos[position]
-                                                        ['ID_REQ_F']);
-                                                               
-
+                                                                await editReq(
+                                                                    requerimietos[
+                                                                            position]
+                                                                        [
+                                                                        'ID_REQ_F']);
                                                               },
                                                               child: Text(
                                                                   "Editar",
@@ -903,10 +905,9 @@ Helper helper=new Helper();
     print("se esta obteiendo los reqermientos");
 
     try {
-      final response = await cliente1
-          .post(server+"/loadReq.php",
-              // "http://192.168.0.5/findprogrammerDB/loadReq.php",
-              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/loadReq.php",
+          // "http://192.168.0.5/findprogrammerDB/loadReq.php",
+          body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       requerimietos = s;
@@ -916,9 +917,7 @@ Helper helper=new Helper();
       print(f.toString());
     } finally {
       cliente1.close();
-      setState(() {
-          
-      });
+      setState(() {});
     }
   }
 
@@ -929,10 +928,9 @@ Helper helper=new Helper();
     print("se manda aceptar los requerimientos");
 
     try {
-      final response = await cliente1
-          .post(server+"/acceptReq.php",
-              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/acceptReq.php",
+          // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+          body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -947,8 +945,7 @@ Helper helper=new Helper();
       print(f.toString());
     } finally {
       cliente1.close();
-      setState(() { 
-      });
+      setState(() {});
     }
   }
 
@@ -959,10 +956,9 @@ Helper helper=new Helper();
     print("se manda corregir los requerimientos");
 
     try {
-      final response = await cliente1
-          .post(server+"/correReq.php",
-              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/correReq.php",
+          // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+          body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -978,9 +974,7 @@ Helper helper=new Helper();
       print(f.toString());
     } finally {
       cliente1.close();
-      setState(() {
-         
-      });
+      setState(() {});
     }
   }
 
@@ -991,10 +985,9 @@ Helper helper=new Helper();
     print("se manda a eliminar los requerimientos");
 
     try {
-      final response = await cliente1
-          .post(server+"/deleteReq.php",
-              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": id.toString()}).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/deleteReq.php",
+          // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+          body: {"ID": id.toString()}).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -1013,10 +1006,9 @@ Helper helper=new Helper();
       setState(() {});
     }
     setState(() {
-  getReq();
+      getReq();
     });
   }
-
 
   Future<void> editReq(var id) async {
     var cliente1 = new http.Client();
@@ -1025,12 +1017,12 @@ Helper helper=new Helper();
     print("se manda a editar el requerimientos los requerimientos");
 
     try {
-      final response = await cliente1
-          .post(server+"/editReqP.php",
-              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": id.toString(),
-              "REQ":reqEdit.text,
-              }).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/editReqP.php",
+          // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+          body: {
+            "ID": id.toString(),
+            "REQ": reqEdit.text,
+          }).timeout(Duration(seconds: 7));
 
       var s = json.decode(response.body);
       print(s);
@@ -1047,13 +1039,10 @@ Helper helper=new Helper();
     } finally {
       cliente1.close();
       setState(() {
-          getReq();
+        getReq();
       });
     }
-    
   }
-
-
 
   Future<void> createReq() async {
     var cliente1 = new http.Client();
@@ -1062,8 +1051,7 @@ Helper helper=new Helper();
     print("se manda aceptar los requerimientos");
 
     try {
-      final response = await cliente1.post(
-          server+"/createReq.php",
+      final response = await cliente1.post(server + "/createReq.php",
           // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
           body: {
             "ID": ID.toString(),
@@ -1096,10 +1084,9 @@ Helper helper=new Helper();
     print("se manda enviando los requerimientos");
 
     try {
-      final response = await cliente1
-          .post(server+"/enviarReq.php",
-              // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
-              body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
+      final response = await cliente1.post(server + "/enviarReq.php",
+          // "http://192.168.0.5/findprogrammerDB/acceptReq.php",
+          body: {"ID": ID.toString()}).timeout(Duration(seconds: 7));
       print(response.body);
       var s = json.decode(response.body);
 

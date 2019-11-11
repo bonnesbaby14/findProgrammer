@@ -39,7 +39,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     double mediaw = MediaQuery.of(context).size.width;
     double mediah = MediaQuery.of(context).size.height;
     var _scaffoldKey2 = new GlobalKey<ScaffoldState>();
-    contextoS=context;
+    contextoS = context;
     return Scaffold(
       key: _scaffoldKey2,
       drawer: Container(
@@ -75,10 +75,10 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          server+"/images/image_" +
-                                              client['ID_USUARIO'].toString() +
-                                              ".jpg"))),
+                                      image: NetworkImage(server +
+                                          "/images/image_" +
+                                          client['ID_USUARIO'].toString() +
+                                          ".jpg"))),
                             ),
                           ),
                           Padding(
@@ -120,41 +120,41 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
               height: 15,
             ),
             InkWell(
-              onTap: () {if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
+              onTap: () {
+                if (!statusRed) {
+                  showDialog(
+                      context: context,
+                      builder: (context) => new CupertinoAlertDialog(
+                            title: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.devices_other,
+                                  size: 80,
+                                  color: Colors.deepPurpleAccent,
                                 ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text("FindProgrammer",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 20)),
                               ],
-                            ));
-                            return;
-                    }
+                            ),
+                            content: Text(
+                                "No hay conexión a internet, intenta mas tarde"),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Aceptar",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15)),
+                              ),
+                            ],
+                          ));
+                  return;
+                }
                 Navigator.pop(context);
                 Navigator.push(
                     context,
@@ -314,20 +314,20 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                               onPressed: () {
                                 helper.DeleteCliente();
                                 helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
-                                  
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
+                                helper.DeleteDesarrollador();
+                                helper.DeleteProyecto1();
+                                helper.DeleteProyecto2();
+                                helper.DeleteProyecto6();
+                                helper.DeleteProyecto4();
+                                helper.DeleteProyecto5();
+                                helper.DeleteProyectoInfo();
+
+                                helper.DeleteCliente();
+                                Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Login()));
                               },
                               child: Text("Cerrar Sesion",
                                   style: TextStyle(
@@ -443,22 +443,30 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                      server+"/images/image_" +
-                                          developer[0]['ID_USUARIO']
-                                              .toString() +
-                                          ".jpg"),
+                                  image: NetworkImage(server +
+                                      "/images/image_" +
+                                      developer[0]['ID_USUARIO'].toString() +
+                                      ".jpg"),
                                 )),
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Text(utf8.decode(base64.decode(developer[0]['NOMBRE']))
-                            .toString() +
+                          Text(
+                            utf8
+                                    .decode(
+                                        base64.decode(developer[0]['NOMBRE']))
+                                    .toString() +
                                 " " +
-                                utf8.decode(base64.decode(developer[0]['APELLIDO_P'])).toString() +
+                                utf8
+                                    .decode(base64
+                                        .decode(developer[0]['APELLIDO_P']))
+                                    .toString() +
                                 " " +
-                                utf8.decode(base64.decode(developer[0]['APELLIDO_M'])).toString(),
+                                utf8
+                                    .decode(base64
+                                        .decode(developer[0]['APELLIDO_M']))
+                                    .toString(),
                             style: TextStyle(
                                 fontSize: mediah * .04, color: Colors.white),
                           ),
@@ -538,7 +546,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                                 onPressed: () async {
                                                   var d = await createPanel();
                                                   if (d == "1") {
-                                                         Navigator.pop(context);
+                                                    Navigator.pop(context);
                                                     showDialog(
                                                         context: contextoS,
                                                         builder: (context) =>
@@ -700,13 +708,22 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                           height: 25,
                                         ),
                                         Text(
-                                            utf8.decode(base64.decode(comments[position]['nombre']))
+                                            utf8
+                                                    .decode(base64.decode(
+                                                        comments[position]
+                                                            ['nombre']))
                                                     .toString() +
                                                 " " +
-                                                utf8.decode(base64.decode(comments[position]['apellido_P']))
+                                                utf8
+                                                    .decode(base64.decode(
+                                                        comments[position]
+                                                            ['apellido_P']))
                                                     .toString() +
                                                 " " +
-                                                utf8.decode(base64.decode(comments[position]['apellido_M']))
+                                                utf8
+                                                    .decode(base64.decode(
+                                                        comments[position]
+                                                            ['apellido_M']))
                                                     .toString(),
                                             textAlign: TextAlign.justify,
                                             style: TextStyle(
@@ -926,10 +943,11 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     //print("se esta obteiendo los comentarios");
     // print(desarrollador['ID_USUARIO']);
     try {
-      final response = await http.post(
-          server+"/loadComments.php",
+      final response = await http.post(server + "/loadComments.php",
           //"http://192.168.0.5/findprogrammerDB/loadComments.php",
-          body: {"ID_USUARIO": developer[0]['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_USUARIO": developer[0]['ID_USUARIO'].toString()
+          }).timeout(Duration(seconds: 7));
 
       var comments = json.decode(response.body);
       this.comments = comments;
@@ -944,10 +962,11 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     //print("el id es: ");
     //print(this.ID.toString());
     try {
-      final response = await http.post(
-          server+"/loadDeveloper.php",
+      final response = await http.post(server + "/loadDeveloper.php",
           //"http://192.168.0.5/findprogrammerDB/loadDeveloper.php",
-          body: {"ID_USUARIO": this.ID.toString()}).timeout(Duration(seconds: 7));
+          body: {
+            "ID_USUARIO": this.ID.toString()
+          }).timeout(Duration(seconds: 7));
 
       var developer = json.decode(response.body);
       this.developer = developer;
@@ -965,8 +984,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
     print("el id es: ");
     print(this.ID.toString());
     try {
-      final response = await http.post(
-          server+"/createPanel.php",
+      final response = await http.post(server + "/createPanel.php",
           //"http://192.168.0.5/findprogrammerDB/createPanel.php",
           body: {
             "ID_USUARIO": this.ID.toString(),
