@@ -113,7 +113,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.camera,imageQuality: 70);
+                                          source: ImageSource.camera,imageQuality: 50);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
@@ -128,7 +128,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.gallery,imageQuality: 70);
+                                          source: ImageSource.gallery,imageQuality: 50);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
