@@ -51,6 +51,7 @@ getProject();
       color: Colors.deepPurpleAccent,
       onRefresh: () async {  
         if(statusRed){
+          await getClient();
 await getProject();
     }else{
       await getProjectOfline();
@@ -771,9 +772,10 @@ await getProject();
       print("!!!!!!!!!!!!!!!!!!11");
       client = clientList.first;
       print("se obtuvo el cliente en getcliente en homecliente");
-
-      if(client['F_BAJA_USUARIO']=="1"){
-  helper.DeleteComents();
+      print(client['F_BAJA_USUARIO']);
+      if(client['F_BAJA_USUARIO']==1){
+        print("object");
+              helper.DeleteComents();
                                     helper.DeleteDesarrollador();
                                     helper.DeleteProyecto1();
                                     helper.DeleteProyecto2();

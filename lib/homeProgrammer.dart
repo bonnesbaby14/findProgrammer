@@ -1,6 +1,7 @@
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
+import 'package:findprogrammer/viewProjectClient.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -45,6 +46,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
+        await     getDesarrollador();
         await getProjects();
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
@@ -69,7 +71,37 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                     ),
 
                     GestureDetector(
-                      onTap: () {
+                      onTap: () {     if(sistemaBloqueado){
+showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Sistema bloqueado :c"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+                return;
+      }
                         Navigator.pop(context);
                         Navigator.push(
                             context,
@@ -145,6 +177,37 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
+                             if(sistemaBloqueado){
+showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Sistema bloqueado :c"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+                return;
+      }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -185,7 +248,37 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                     //otro widget
 
                     GestureDetector(
-                      onTap: () {
+                      onTap: () {     if(sistemaBloqueado){
+showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Sistema bloqueado :c"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+                return;
+      }
                         if(!statusRed){
                        showDialog(
                         context: context,
@@ -318,7 +411,37 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                       height: 15,
                     ),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () {     if(sistemaBloqueado){
+showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Text("Sistema bloqueado :c"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+                return;
+      }
                         if(!statusRed){
                        showDialog(
                         context: context,
@@ -1031,6 +1154,24 @@ showDialog(
     try {
       desarrolladorList = await helper.SelectDesarrollador();
       desarrollador = desarrolladorList.first;
+      if(desarrollador['F_BAJA_USUARIO']==1){
+   helper.DeleteComents();
+                                    helper.DeleteDesarrollador();
+                                    helper.DeleteProyecto1();
+                                    helper.DeleteProyecto2();
+                                    helper.DeleteProyecto6();
+                                    helper.DeleteProyecto4();
+                                    helper.DeleteProyecto5();
+                                    helper.DeleteProyectoInfo();
+                                  
+                                    helper.DeleteCliente();
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
+
+      }
       print("se obtuvo el desarrollador********************************");
       setState(() {});
     } catch (e) {
@@ -1242,6 +1383,7 @@ showDialog(
    
       if (difference > 0) {
         sistemaBloqueado=true;
+        print("sistema bloqueado");
       }
           
         }
@@ -1275,6 +1417,7 @@ showDialog(
                     ),
                   ],
                 ));
+                return;
       }
       print(
           "se obtuvo los proyectos en desarrollo********************************");

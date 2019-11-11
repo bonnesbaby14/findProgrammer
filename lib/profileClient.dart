@@ -506,12 +506,12 @@ getComments();
                                     height: 25,
                                   ),
                                   Text(
-                                      comments[position]['nombre'].toString() +
+                                      utf8.decode(base64.decode(comments[position]['nombre'])).toString() +
                                           " " +
-                                          comments[position]['apellido_P']
+                                          utf8.decode(base64.decode(comments[position]['apellido_P']))
                                               .toString() +
                                           " " +
-                                          comments[position]['apellido_M']
+                                          utf8.decode(base64.decode(comments[position]['apellido_M']))
                                               .toString(),
                                       textAlign: TextAlign.justify,
                                       style: TextStyle(
