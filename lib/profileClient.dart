@@ -548,6 +548,15 @@ getComments();
 
       var comments = json.decode(response.body);
       this.comments = comments;
+ helper.DeleteComents();
+      for (int x = 0; x < this.comments.length; x++) {
+        var insertarPRoeycto = await helper.InsertComentarios(this.comments[x]);
+        print(">>>>$insertarPRoeycto<<<<<");
+      }
+
+
+
+      print(comments);
       print("se obtuvieron los comentarios");
     } catch (f) {
       print("hubo un error obteniendo los comentarios");

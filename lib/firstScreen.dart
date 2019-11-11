@@ -1,4 +1,6 @@
 import 'package:findprogrammer/componentes/variables.dart';
+import 'package:findprogrammer/homeClient.dart';
+import 'package:findprogrammer/homeProgrammer.dart';
 import 'package:findprogrammer/singUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'componentes/helperNotifications.dart';
 import 'package:connectivity/connectivity.dart';
+import 'componentes/helperSQFLITE.dart';
 import 'login.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -19,8 +22,10 @@ class _FirstScreen extends State<FirstScreen> {
   void initState() {
     // TODO: implement initState
     internet();
+    checkDB();
   super.initState();
-  }
+  } 
+   Helper helper = new Helper();
   
 
   @override
@@ -181,4 +186,26 @@ statusRed=true;
 }
 
 }
+
+Future checkDB() async{
+ 
+  var d= await helper.SelectCliente();
+
+  if(d!=null){
+    Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => Homeclient()));
+
+  }
+  var w= await helper.SelectDesarrollador();
+
+  if(w!=null){
+    Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => HomeProgrammer()));
+
+  }
+  
+
+
+}
+
 }
