@@ -813,7 +813,7 @@ class _CreateAvance extends State<CreateAvance> {
                                     ],
                                   ),
                                   content: Text(
-                                      "El Avance no se registro, intentalo mas tarde. "),
+                                      "El Avance no se registro, inténtalo mas tarde. "),
                                   actions: <Widget>[
                                     FlatButton(
                                       onPressed: () {

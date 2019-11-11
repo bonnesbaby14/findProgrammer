@@ -55,14 +55,13 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
   @override
   void initState() {
-
-       if(statusRed){
-getInfooProject();
-    getReqFProject();
-    getAvancesProject();
-    getDesarrolladorProject();
-    getVisits(ID);
-    }else{
+    if (statusRed) {
+      getInfooProject();
+      getReqFProject();
+      getAvancesProject();
+      getDesarrolladorProject();
+      getVisits(ID);
+    } else {
       getUno();
       getDos();
       getCuatro();
@@ -70,7 +69,6 @@ getInfooProject();
       getSeis();
     }
 
-    
     // TODO: implement initState
   }
 
@@ -93,13 +91,15 @@ getInfooProject();
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"].toString(),
+          child: Text(
+              "Tiempo trabajado: " + avances[z]["TIEMPO_TRABAJO"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
 
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Fecha de entrega: " + avances[z]["FECHA_ENTREGA"].toString(),
+          child: Text(
+              "Fecha de entrega: " + avances[z]["FECHA_ENTREGA"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
@@ -109,13 +109,15 @@ getInfooProject();
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Porcentaje del proyecto: " + avances[z]["PORCENTAJE"].toString(),
+          child: Text(
+              "Porcentaje del proyecto: " + avances[z]["PORCENTAJE"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
 
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Observaciones: " + avances[z]["OBSERVACIONES"].toString(),
+          child: Text(
+              "Observaciones: " + avances[z]["OBSERVACIONES"].toString(),
               style: TextStyle(fontSize: 14.0, color: Colors.white)),
         ));
 
@@ -148,21 +150,20 @@ getInfooProject();
     return RefreshIndicator(
       color: Colors.deepPurpleAccent,
       onRefresh: () async {
-             if(statusRed){
-                await getInfooProject();
-        await getReqFProject();
-        await getAvancesProject();
-        await getDesarrolladorProject();
-        await getVisits(ID);
+        if (statusRed) {
+          await getInfooProject();
+          await getReqFProject();
+          await getAvancesProject();
+          await getDesarrolladorProject();
+          await getVisits(ID);
+        } else {
+          await getUno();
+          await getDos();
+          await getCuatro();
+          await getCinco();
+          await getSeis();
+        }
 
-    }else{
-      await getUno();
-      await getDos();
-      await getCuatro();
-      await getCinco();
-      await getSeis();
-    }
-       
         await Future.delayed(Duration(milliseconds: 500));
 
         setState(() {});
@@ -418,7 +419,7 @@ getInfooProject();
                                     helper.DeleteProyecto4();
                                     helper.DeleteProyecto5();
                                     helper.DeleteProyectoInfo();
-                                  
+
                                     helper.DeleteCliente();
                                     Navigator.pop(context);
                                     Navigator.push(
@@ -536,41 +537,49 @@ getInfooProject();
                                       CupertinoSwitch(
                                         value: _ligths,
                                         onChanged: (bool value) async {
-                                          if(!statusRed){
-                      await showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                                          if (!statusRed) {
+                                            await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "No hay conexión a internet, intenta mas tarde"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           await updateState();
 
                                           setState(() {
@@ -622,41 +631,52 @@ getInfooProject();
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            if(!statusRed){
-                       await showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                                            if (!statusRed) {
+                                              await showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      new CupertinoAlertDialog(
+                                                        title: Column(
+                                                          children: <Widget>[
+                                                            Icon(
+                                                              Icons
+                                                                  .devices_other,
+                                                              size: 80,
+                                                              color: Colors
+                                                                  .deepPurpleAccent,
+                                                            ),
+                                                            SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                            Text(
+                                                                "FindProgrammer",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        20)),
+                                                          ],
+                                                        ),
+                                                        content: Text(
+                                                            "No hay conexión a internet, intenta mas tarde"),
+                                                        actions: <Widget>[
+                                                          FlatButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Text(
+                                                                "Aceptar",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        15)),
+                                                          ),
+                                                        ],
+                                                      ));
+                                              return;
+                                            }
                                             if (dataProject[0]
                                                     ['F_EN_DESARROLLO'] ==
                                                 "1") {
@@ -779,7 +799,7 @@ getInfooProject();
                                                             ],
                                                           ),
                                                           content: Text(
-                                                              "El proyecto no se editó, intentalo mas tarde. "),
+                                                              "El proyecto no se editó, inténtalo mas tarde. "),
                                                           actions: <Widget>[
                                                             FlatButton(
                                                               onPressed: () {
@@ -822,41 +842,93 @@ getInfooProject();
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                                        onTap: () {
+                                          if (!statusRed) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto no esta en desarrollo"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
+                                          if (!statusRed) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "No hay conexión a internet, intenta mas tarde"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           print(dataProject);
                                           Navigator.push(
                                               context,
@@ -992,41 +1064,49 @@ getInfooProject();
                                       ),
                                       InkWell(
                                         onTap: () async {
-if(!statusRed){
-                      await showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                                          if (!statusRed) {
+                                            await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "No hay conexión a internet, intenta mas tarde"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           print("object");
                                           await showDialog(
                                               context: context,
@@ -1190,7 +1270,7 @@ if(!statusRed){
                                                                                   Text("FindProgrammer", style: TextStyle(color: Colors.black, fontSize: 20)),
                                                                                 ],
                                                                               ),
-                                                                              content: Text("Ocurrio un error intentalo mas tarde"),
+                                                                              content: Text("Ocurrio un error inténtalo mas tarde"),
                                                                               actions: <Widget>[
                                                                                 FlatButton(
                                                                                   onPressed: () {
@@ -1250,41 +1330,50 @@ if(!statusRed){
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                                        onTap: () {
+                                          if (!statusRed) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "No hay conexión a internet, intenta mas tarde"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           showDialog(
                                               context: context,
                                               builder: (context) =>
@@ -1399,41 +1488,50 @@ if(!statusRed){
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                                        onTap: () {
+                                          if (!statusRed) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "No hay conexión a internet, intenta mas tarde"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           Navigator.push(
                                               context,
                                               CupertinoPageRoute(
@@ -1465,41 +1563,50 @@ if(!statusRed){
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {if(!statusRed){
-                       showDialog(
-                        context: context,
-                        builder: (context) => new CupertinoAlertDialog(
-                              title: Column(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.devices_other,
-                                    size: 80,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("FindProgrammer",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 20)),
-                                ],
-                              ),
-                              content:
-                                  Text("No hay conexión a internet, intenta mas tarde"),
-                              actions: <Widget>[
-                                
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Aceptar",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15)),
-                                ),
-                              ],
-                            ));
-                            return;
-                    }
+                                        onTap: () {
+                                          if (!statusRed) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "No hay conexión a internet, intenta mas tarde"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           if (dataProject[0]['F_TERMINADO'] ==
                                               "1") {
                                             showDialog(
@@ -2746,21 +2853,22 @@ if(!statusRed){
                 )),
     );
   }
- void getUno() async {
+
+  void getUno() async {
     try {
       dataProject = await helper.SelectProyecto1();
-      if(dataProject.isEmpty){
+      if (dataProject.isEmpty) {
         Navigator.pop(context);
-
       }
       print("se obtuvo los uno ofline");
-      print(dataProject);     
+      print(dataProject);
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
     setState(() {});
   }
+
   Future getInfooProject() async {
     var cliente1 = http.Client();
     try {
@@ -2940,22 +3048,21 @@ if(!statusRed){
     }
   }
 
-
- void getDos() async {
-     if(reqFuncionales.isEmpty){
-        Navigator.pop(context);
-
-      }
+  void getDos() async {
+    if (reqFuncionales.isEmpty) {
+      Navigator.pop(context);
+    }
     try {
       reqFuncionales = await helper.SelectProyecto2();
       print("se obtuvo los dos ofline");
-      print(reqFuncionales);     
+      print(reqFuncionales);
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
     setState(() {});
   }
+
   Future<void> getReqFProject() async {
     print("entro");
     final response = await http
@@ -2981,22 +3088,21 @@ if(!statusRed){
     } catch (error) {}
   }
 
-
- void getCuatro() async {
-     if(avances.isEmpty){
-        Navigator.pop(context);
-
-      }
+  void getCuatro() async {
+    if (avances.isEmpty) {
+      Navigator.pop(context);
+    }
     try {
       avances = await helper.SelectProyecto4();
       print("se obtuvo los cuatro ofline");
-      print(avances);     
+      print(avances);
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
     setState(() {});
   }
+
   Future<List> getAvancesProject() async {
     print("get desarrollado");
     try {
@@ -3028,24 +3134,21 @@ if(!statusRed){
     // print(avances);
   }
 
-
-
-
- void getCinco() async {
-     if(desarrollador.isEmpty){
-        Navigator.pop(context);
-
-      }
+  void getCinco() async {
+    if (desarrollador.isEmpty) {
+      Navigator.pop(context);
+    }
     try {
       desarrollador = await helper.SelectProyecto5();
       print("se obtuvo los cinco ofline");
-      print(desarrollador);     
+      print(desarrollador);
     } catch (e) {
       print("aqui hay un error de no se que, funcion getClient en homecliente" +
           e.toString());
     }
     setState(() {});
   }
+
   Future<List> getDesarrolladorProject() async {
     try {
       final response = await http
@@ -3320,18 +3423,17 @@ Future confirmar(ID) async {
     cliente.close();
   }
 }
- void getSeis() async {
-     
-    try {
-      visitas = await helper.SelectProyecto6();
-      print("se obtuvo los seis ofline");
-      print(visitas);     
-    } catch (e) {
-      print("aqui hay un error de no se que, funcion getClient en homecliente" +
-          e.toString());
-    }
-   
+
+void getSeis() async {
+  try {
+    visitas = await helper.SelectProyecto6();
+    print("se obtuvo los seis ofline");
+    print(visitas);
+  } catch (e) {
+    print("aqui hay un error de no se que, funcion getClient en homecliente" +
+        e.toString());
   }
+}
 
 Future getVisits(ID) async {
   try {
@@ -3341,11 +3443,11 @@ Future getVisits(ID) async {
     visitas = null;
     visitas = json.decode(response.body);
 
-      helper.DeleteProyecto6();
-      for (int x = 0; x < visitas.length; x++) {
-        var insertarPRoeycto = await helper.InsertProyecto6(visitas[x]);
-        print(">>>>$insertarPRoeycto<<<<<");
-      }
+    helper.DeleteProyecto6();
+    for (int x = 0; x < visitas.length; x++) {
+      var insertarPRoeycto = await helper.InsertProyecto6(visitas[x]);
+      print(">>>>$insertarPRoeycto<<<<<");
+    }
 
     print("-------------------------");
     print(visitas);

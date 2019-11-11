@@ -1159,7 +1159,7 @@ class _RegisterUser extends State<RegisterUser> {
                       ],
                     ),
                     content: Text(
-                        "Ocurrió un problema en el servidor o en la red, intentalo mas tarde"),
+                        "Ocurrió un problema en el servidor o en la red, inténtalo mas tarde"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {
@@ -1322,7 +1322,7 @@ class _RegisterUser extends State<RegisterUser> {
                       ],
                     ),
                     content: Text(
-                        "Ocurrió un problema en el servidor o en la red, intentalo mas tarde"),
+                        "Ocurrió un problema en el servidor o en la red, inténtalo mas tarde"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {

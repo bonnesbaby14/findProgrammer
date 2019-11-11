@@ -411,7 +411,7 @@ class _SingUp extends State<SingUp> {
                       ],
                     ),
                     content: Text(
-                        "Algo salió mal, intentalo mas tarde"),
+                        "Algo salió mal, inténtalo mas tarde"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {

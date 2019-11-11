@@ -1306,7 +1306,7 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
                                                                             ],
                                                                           ),
                                                                           content:
-                                                                              Text("Ocurrio un error intentalo mas tarde"),
+                                                                              Text("Ocurrio un error inténtalo mas tarde"),
                                                                           actions: <
                                                                               Widget>[
                                                                             FlatButton(

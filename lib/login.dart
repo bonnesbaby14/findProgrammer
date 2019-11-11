@@ -494,7 +494,7 @@ Map<String, dynamic> MapDesarrollador = Map();
                           Container(
                             width: 240,
                             child: Text(
-                              "Algo salió mal, intentalo mas tarde",
+                              "Algo salió mal, inténtalo mas tarde",
                               textAlign: TextAlign.justify,
                             ),
                           ),

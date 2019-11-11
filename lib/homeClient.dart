@@ -444,7 +444,7 @@ await getProject();
                               ],
                             ),
                             content: Text(
-                                "El proyecto no se registro, intentalo mas tarde. "),
+                                "El proyecto no se registro, inténtalo mas tarde. "),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
