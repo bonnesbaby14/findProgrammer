@@ -843,7 +843,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          if (!statusRed) {
+                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) =>
@@ -1064,6 +1064,49 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () async {
+                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto no esta en desarrollo"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           if (!statusRed) {
                                             await showDialog(
                                                 context: context,
@@ -1331,6 +1374,49 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto no esta en desarrollo"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           if (!statusRed) {
                                             showDialog(
                                                 context: context,
@@ -1564,6 +1650,49 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                          if (dataProject[0]["F_EN_DESARROLLO"]=="0") {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgrammer",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto no esta en desarrollo"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                            return;
+                                          }
                                           if (!statusRed) {
                                             showDialog(
                                                 context: context,
@@ -2323,6 +2452,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           ),
                                           InkWell(
                                             onTap: () {
+
                                               print(dataProject);
                                               Navigator.push(
                                                   context,
