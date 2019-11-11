@@ -2843,7 +2843,7 @@ if(!statusRed){
         showOngoingNotification(notification,
             title: 'FindProgrammer',
             body: 'El programador te tiene que entregar un avance hoy!!!',
-            id: 20);
+            id: 0);
       }
 
       if (dataProject[0]['F_A_CORRECION_REQ_D'] == "1") {

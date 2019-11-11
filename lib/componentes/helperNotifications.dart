@@ -6,7 +6,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
   FlutterLocalNotificationsPlugin notifications, {
   @required String title,
   @required String body,
-  int id = 0,
+  int id = 1,
 }) =>
     _showNotification(notifications,
         title: title, body: body, id: id, type: _ongoing);
@@ -15,7 +15,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
   @required String title,
   @required String body,
   @required NotificationDetails type,
-  int id = 0,
+  int id = 1,
 }) =>
     notifications.show(id, title, body, type);
  

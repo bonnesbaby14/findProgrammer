@@ -621,6 +621,8 @@ class _CreateAvance extends State<CreateAvance> {
                     ),
                     Container(
                       child: CupertinoTextField(
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
                         controller: tdcCambios,
                         placeholder: "Cambio No.1...",
                         placeholderStyle: TextStyle(color: Colors.black38),
