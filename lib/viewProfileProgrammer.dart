@@ -409,12 +409,12 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            developer[0]['NOMBRE'].toString() +
+                          Text(utf8.decode(base64.decode(developer[0]['NOMBRE']))
+                            .toString() +
                                 " " +
-                                developer[0]['APELLIDO_P'].toString() +
+                                utf8.decode(base64.decode(developer[0]['APELLIDO_P'])).toString() +
                                 " " +
-                                developer[0]['APELLIDO_M'].toString(),
+                                utf8.decode(base64.decode(developer[0]['APELLIDO_M'])).toString(),
                             style: TextStyle(
                                 fontSize: mediah * .04, color: Colors.white),
                           ),

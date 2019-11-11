@@ -450,11 +450,10 @@ var _keyH23 = new GlobalKey();
                                       Container(
                                         width: 160,
                                         child: Text(
-                                            request[index]['NOMBRE']
+                                          utf8.decode(base64.decode(request[index]['NOMBRE'])).toString() +
+                                                utf8.decode(base64.decode(request[index]['APELLIDO_P'])) 
                                                     .toString() +
-                                                request[index]['APELLIDO_P']
-                                                    .toString() +
-                                                request[index]['APELLIDO_M']
+                                                utf8.decode(base64.decode(request[index]['APELLIDO_M'])) 
                                                     .toString(),
                                             textAlign: TextAlign.justify,
                                             style: TextStyle(

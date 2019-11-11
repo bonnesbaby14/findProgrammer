@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:findprogrammer/chatClient.dart';
+import 'package:findprogrammer/homeProgrammer.dart';
 import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewAdvance.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
@@ -1740,14 +1741,14 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
                                     child: desarrollador.length != 0
-                                        ? Text(
-                                            desarrollador[0]['nombre']
+                                        ? Text(utf8.decode(base64.decode(desarrollador[0]['nombre'])) 
+                                            
                                                     .toString() +
-                                                " " +
-                                                desarrollador[0]['apellido_p']
+                                                " " +utf8.decode(base64.decode(desarrollador[0]['apellido_p']))
+                                                
                                                     .toString() +
-                                                " " +
-                                                desarrollador[0]['apellido_m']
+                                                " " +utf8.decode(base64.decode(desarrollador[0]['apellido_m']))
+                                                
                                                     .toString(),
                                             style: TextStyle(
                                                 fontSize: 14.0,
@@ -2474,7 +2475,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
       var dataProject2 = json.decode(response.body);
       dataProject = dataProject2;
-      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD1");
       print(dataProject);
       print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       dataProject[0]["F_VISIBILIDAD"] == "1" ? _ligths = true : _ligths = false;
@@ -2645,6 +2646,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
     try {
       var dataProject = json.decode(response.body);
       reqFuncionales = dataProject;
+         print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD2");
+      print(reqFuncionales);
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       // print(reqFuncionales);
     } catch (error) {}
   }
@@ -2663,6 +2667,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       print(response.body);
       var dataProject = json.decode(response.body);
       avances = dataProject;
+         print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD4");
+      print(avances);
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
     } catch (error) {
       print("aqui hubo una excepcion getavancesproyecto en viewProjectClient");
       print(error.toString());
@@ -2684,6 +2691,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
       var dataProject = json.decode(response.body);
       desarrollador = dataProject;
+         print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD5");
+      print(desarrollador);
+      print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
       print("-------------------------------------");
 
       print(
