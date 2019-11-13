@@ -428,9 +428,9 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
                       height: 15,
                     ),
 
-                    GestureDetector(
-                      onTap: () {
-                        if (!statusRed) {
+                      GestureDetector(
+                  onTap: () {
+if (!statusRed) {
                           showDialog(
                               context: context,
                               builder: (context) => new CupertinoAlertDialog(
@@ -466,104 +466,142 @@ class _ViewAvailableProjects extends State<ViewAvailableProjects> {
                                   ));
                           return;
                         }
-                        showDialog(
-                            context: context,
-                            builder: (context) => new CupertinoAlertDialog(
-                                  title: Column(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.devices_other,
-                                        size: 80,
-                                        color: Colors.deepPurpleAccent,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text("Código de Proyecto",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20)),
-                                    ],
-                                  ),
-                                  content: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Container(
-                                        child: CupertinoTextField(
-                                          placeholder: "Código de proyecto...",
-                                          placeholderStyle:
-                                              TextStyle(color: Colors.black38),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  width: 0.5,
-                                                  color:
-                                                      Colors.deepPurpleAccent)),
+                        if (sistemaBloqueado) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("FindProgrammer",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
+                                    ),
+                                    content: Text("Sistema bloqueado :c"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
                                       ),
                                     ],
-                                  ),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      onPressed: () {},
-                                      child: Text("Aceptar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Cancelar",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15)),
-                                    ),
-                                  ],
-                                ));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                                padding: EdgeInsets.all(1),
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
-                                      child: Container(
-                                        child: Icon(
-                                          GroovinMaterialIcons.keyboard,
-                                          size: 35,
-                                          color: Colors.grey,
+                                  ));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => new CupertinoAlertDialog(
+                                    title: Column(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.devices_other,
+                                          size: 80,
+                                          color: Colors.deepPurpleAccent,
                                         ),
-                                      ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text("Código de Proyecto",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20)),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.all(9),
-                                      child: Text(
-                                        "Ingresar Codigo",
-                                        style: TextStyle(
-                                            fontSize: 17.0,
-                                            color: Colors.white),
+                                    content: Column(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Container(
+                                          child: CupertinoTextField(
+                                            controller: tecCodigo,
+                                            placeholder:
+                                                "Código de proyecto...",
+                                            placeholderStyle: TextStyle(
+                                                color: Colors.black38),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                border: Border.all(
+                                                    width: 0.5,
+                                                    color: Colors
+                                                        .deepPurpleAccent)),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                      ],
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () async {
+                                          await createPanel2(context);
+                                        },
+                                        child: Text("Aceptar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
                                       ),
-                                    )
-                                  ],
-                                )),
-                          ],
-                        ),
-                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Cancelar",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15)),
+                                      ),
+                                    ],
+                                  ));
+                        }
+                        },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 4, 15, 4),
+                                  child: Container(
+                                    child: Icon(
+                                      GroovinMaterialIcons.keyboard,
+                                      size: 35,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    "Ingresar Código",
+                                    style: TextStyle(
+                                        fontSize: 17.0, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
                     ),
+                  ),
+                ),
+
 
 //nuevo wighet
                     SizedBox(

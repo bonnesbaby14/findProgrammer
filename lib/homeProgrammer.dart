@@ -699,7 +699,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () async {
-                                          await createPanel2();
+                                          await createPanel2(context);
                                         },
                                         child: Text("Aceptar",
                                             style: TextStyle(
@@ -1245,109 +1245,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     }
   }
 
-  Future<String> createPanel2() async {
-    try {
-      final response =
-          await http.post(server + "/createPanelCodigo.php", body: {
-        "ID_USUARIO": desarrollador['ID_USUARIO'].toString(),
-        "CODIGO": tecCodigo.text,
-      }).timeout(Duration(seconds: 7));
-      print("respuesta del server:");
-      print(response.body);
-      if (response.body == "1") {
-        Navigator.pop(context);
-        showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        child: Text(
-                            "Felicidades este proyecto ya esta siendo desarrollador por ti, consulta el panel para seguir con el desarrollo."),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                    ],
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-      } else if (response.body == "2") {
-        print("este proyecto ya tiene desarrolador");
-        Navigator.pop(context);
-        showDialog(
-            context: context,
-            builder: (context) => new CupertinoAlertDialog(
-                  title: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.devices_other,
-                        size: 80,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text("FindProgrammer",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ],
-                  ),
-                  content: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                          child: Text(
-                        "El proyecto ya esta siendo desarrollado",
-                      )),
-                      SizedBox(
-                        height: 8,
-                      ),
-                    ],
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("Aceptar",
-                          style: TextStyle(color: Colors.black, fontSize: 15)),
-                    ),
-                  ],
-                ));
-      }
-
-      return response.body;
-    } catch (f) {
-      print(f.toString());
-    }
-  }
+  
 
   Future registerVisit(ID) async {
     print("se entreo a la funcion de regstar visita");
@@ -1453,4 +1351,108 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       setState(() {});
     }
   }
+  
 }
+Future<String> createPanel2(context) async {
+    try {
+      final response =
+          await http.post(server + "/createPanelCodigo.php", body: {
+        "ID_USUARIO": desarrollador['ID_USUARIO'].toString(),
+        "CODIGO": tecCodigo.text,
+      }).timeout(Duration(seconds: 7));
+      print("respuesta del server:");
+      print(response.body);
+      if (response.body == "1") {
+        Navigator.pop(context);
+        showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        child: Text(
+                            "Felicidades este proyecto ya esta siendo desarrollador por ti, consulta el panel para seguir con el desarrollo."),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+      } else if (response.body == "2") {
+        print("este proyecto ya tiene desarrolador");
+        Navigator.pop(context);
+        showDialog(
+            context: context,
+            builder: (context) => new CupertinoAlertDialog(
+                  title: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.devices_other,
+                        size: 80,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("FindProgrammer",
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ],
+                  ),
+                  content: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                          child: Text(
+                        "El proyecto ya esta siendo desarrollado",
+                      )),
+                      SizedBox(
+                        height: 8,
+                      ),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Aceptar",
+                          style: TextStyle(color: Colors.black, fontSize: 15)),
+                    ),
+                  ],
+                ));
+      }
+
+      return response.body;
+    } catch (f) {
+      print(f.toString());
+    }
+  }
