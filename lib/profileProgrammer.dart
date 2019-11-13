@@ -230,7 +230,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                                 ],
                               ),
                               content: Text(
-                                  "No hay conexión a internet, intenta mas tarde"),
+                                  "No hay conexión a internet, intenta más tarde"),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
@@ -357,7 +357,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                                 ],
                               ),
                               content: Text(
-                                  "No hay conexión a internet, intenta mas tarde"),
+                                  "No hay conexión a internet, intenta más tarde"),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {
@@ -437,7 +437,7 @@ class _ProfileProgrammer extends State<ProfileProgrammer> {
                                 ],
                               ),
                               content: Text(
-                                  "No hay conexión a internet, intenta mas tarde"),
+                                  "No hay conexión a internet, intenta más tarde"),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () {

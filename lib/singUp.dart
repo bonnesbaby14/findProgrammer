@@ -335,7 +335,7 @@ class _SingUp extends State<SingUp> {
                       ],
                     ),
                     content: Text(
-                        "Usuario creado con exito, ahora completa tu información para comenzar a usar FindProgrammer"),
+                        "Usuario creado con éxito, ahora completa tu información para comenzar a usar FindProgrammer"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {
@@ -374,7 +374,7 @@ class _SingUp extends State<SingUp> {
                       ],
                     ),
                     content: Text(
-                        "El correo ya fue registradó, intenta iniciar sesión"),
+                        "El correo ya fue registrado, intenta iniciar sesión"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {

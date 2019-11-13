@@ -380,7 +380,7 @@ class _CreateAvance extends State<CreateAvance> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text("Codigo de Proyecto",
+                                  Text("Código de Proyecto",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 20)),
                                 ],
@@ -392,7 +392,7 @@ class _CreateAvance extends State<CreateAvance> {
                                   ),
                                   Container(
                                     child: CupertinoTextField(
-                                      placeholder: "Codigo de proyecto...",
+                                      placeholder: "Código de proyecto...",
                                       placeholderStyle:
                                           TextStyle(color: Colors.black38),
                                       decoration: BoxDecoration(
@@ -479,7 +479,7 @@ class _CreateAvance extends State<CreateAvance> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text("Cerrar Sesion",
+                                  Text("Cerrar Sesión",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 20)),
                                 ],

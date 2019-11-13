@@ -170,7 +170,7 @@ void alertAcceptReqClient(context) {
           ],
         ),
         content: Text(
-            "¿Seguro que quieres aceptar los requermientos? El proramador se apegará a ellos para desarrollar el proyecto, por lo cual solo estará obligado a cumplir lo acordado en estos mismos."),
+            "¿Seguro que quieres aceptar los requerimientos? El programador se apegará a ellos para desarrollar el proyecto, por lo cual solo estará obligado a cumplir lo acordado en estos mismos. "),
         actions: <Widget>[
           FlatButton(
             onPressed: () {},
@@ -1516,7 +1516,7 @@ void alertProjectCode(context){
             children: <Widget>[
                 Icon(Icons.devices_other,size: 80,color: Colors.deepPurpleAccent,),
                 SizedBox(height: 20,),
-                Text("Codigo de Proyecto",style: TextStyle(color: Colors.black,fontSize: 20 )),
+                Text("Código de Proyecto",style: TextStyle(color: Colors.black,fontSize: 20 )),
 
             ],
           ),

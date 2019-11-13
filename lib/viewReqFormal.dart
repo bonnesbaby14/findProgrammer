@@ -225,7 +225,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                             Padding(
                               padding: EdgeInsets.all(9),
                               child: Text(
-                                "Cerrar Sesion",
+                                "Cerrar Sesión",
                                 style: TextStyle(
                                     fontSize: 17.0, color: Colors.white),
                               ),
@@ -285,7 +285,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                     ),
                     Padding(
                       padding: EdgeInsets.all(10),
-                      child: Text("Requerimientos \n                  Formales",
+                      child: Text("Requerimientos ",
                           textAlign: TextAlign.justify,
                           style:
                               TextStyle(fontSize: 30.0, color: Colors.white)),
@@ -315,7 +315,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                         ],
                                       ),
                                       content: Text(
-                                          "¿Seguro que quieres aceptar los requermientos? El proramador se apegará a ellos para desarrollar el proyecto, por lo cual solo estará obligado a cumplir lo acordado en estos mismos."),
+                                          "¿Seguro que quieres aceptar los requerimientos? El programador se apegará a ellos para desarrollar el proyecto, por lo cual solo estará obligado a cumplir lo acordado en estos mismos. "),
                                       actions: <Widget>[
                                         FlatButton(
                                           onPressed: () async {
@@ -439,7 +439,7 @@ class _ViewReqFormal extends State<ViewReqFormal> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "  Solicitar\nCorreción",
+                                  "  Solicitar\nCorrección",
                                   style: TextStyle(
                                       fontSize: 14.0, color: Colors.white),
                                 ),

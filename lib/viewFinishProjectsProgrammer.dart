@@ -340,7 +340,7 @@ class _ViewFinishProjectsProgrammer
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text("Codigo de Proyecto",
+                                      Text("Código de Proyecto",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20)),
@@ -353,7 +353,7 @@ class _ViewFinishProjectsProgrammer
                                       ),
                                       Container(
                                         child: CupertinoTextField(
-                                          placeholder: "Codigo de proyecto...",
+                                          placeholder: "Código de proyecto...",
                                           placeholderStyle:
                                               TextStyle(color: Colors.black38),
                                           decoration: BoxDecoration(
@@ -445,7 +445,7 @@ class _ViewFinishProjectsProgrammer
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text("Cerrar Sesion",
+                                      Text("Cerrar Sesión",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20)),
@@ -472,7 +472,7 @@ class _ViewFinishProjectsProgrammer
                                             MaterialPageRoute(
                                                 builder: (context) => Login()));
                                       },
-                                      child: Text("Cerrar Sesion",
+                                      child: Text("Cerrar Sesión",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15)),
@@ -512,7 +512,7 @@ class _ViewFinishProjectsProgrammer
                                     Padding(
                                       padding: EdgeInsets.all(9),
                                       child: Text(
-                                        "Cerrar Sesion",
+                                        "Cerrar Sesión",
                                         style: TextStyle(
                                             fontSize: 17.0,
                                             color: Colors.white),

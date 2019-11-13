@@ -63,7 +63,7 @@ class _ViewAdvance extends State<ViewAdvance> {
         ));
         listAvances.add(Padding(
           padding: EdgeInsets.fromLTRB(15, 5, 0, 0),
-          child: Text("Decripcion: " + avances[z]["DESCRIPCION"],
+          child: Text("Descripción: " + avances[z]["DESCRIPCION"],
               style: TextStyle(fontSize: 19.0, color: Colors.white)),
         ));
         listAvances.add(Padding(
@@ -284,7 +284,7 @@ class _ViewAdvance extends State<ViewAdvance> {
                             Padding(
                               padding: EdgeInsets.all(9),
                               child: Text(
-                                "Cerrar Sesion",
+                                "Cerrar Sesión",
                                 style: TextStyle(
                                     fontSize: 17.0, color: Colors.white),
                               ),
@@ -498,7 +498,7 @@ class _ViewAdvance extends State<ViewAdvance> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "  Solicitar\nCorreción",
+                                  "  Solicitar \n Corrección",
                                   style: TextStyle(
                                       fontSize: 14.0, color: Colors.white),
                                 ),

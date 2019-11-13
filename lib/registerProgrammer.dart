@@ -90,7 +90,7 @@ class _RegisterProgrammer extends State<RegisterProgrammer> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Text("Desarrollo \n movil (Android)",
+                                  Text("Desarrollo \n móvil (Android)",
                                       style: TextStyle(
                                         color: Colors.white,
                                       )),
@@ -112,7 +112,7 @@ class _RegisterProgrammer extends State<RegisterProgrammer> {
                               Row(
                                 children: <Widget>[
                                   Text(
-                                      "Desarrollador \n movil (IOS)            ",
+                                      "Desarrollador \n móvil (IOS)            ",
                                       style: TextStyle(
                                         color: Colors.white,
                                       )),
@@ -200,7 +200,7 @@ class _RegisterProgrammer extends State<RegisterProgrammer> {
                     color: Colors.white,
                   ),
                   decoration: InputDecoration(
-                    labelText: "Preparación Academica (Mención)",
+                    labelText: "Preparación Académica (Mención)",
                     fillColor: Colors.white,
                   ),
                   cursorColor: Colors.white,
@@ -250,13 +250,13 @@ class _RegisterProgrammer extends State<RegisterProgrammer> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    Text("Politicas de uso",
+                                    Text("Políticas de uso",
                                         style: TextStyle(
                                             color: Colors.black, fontSize: 20)),
                                   ],
                                 ),
                                 content: Text(
-                                    "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
+                                    "Al dar clic en Aceptar el usuario está de acuerdo que todos los proyectos registrados así como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona será capaz de copiar y reproducir este proyecto sin problema alguno"),
                                 actions: <Widget>[
                                   FlatButton(
                                     child: Text("Aceptar",

@@ -300,7 +300,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text("Cerrar Sesion",
+                                      Text("Cerrar Sesión",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20)),
@@ -327,7 +327,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                                             MaterialPageRoute(
                                                 builder: (context) => Login()));
                                       },
-                                      child: Text("Cerrar Sesion",
+                                      child: Text("Cerrar Sesión",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15)),
@@ -367,7 +367,7 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                                     Padding(
                                       padding: EdgeInsets.all(9),
                                       child: Text(
-                                        "Cerrar Sesion",
+                                        "Cerrar Sesión",
                                         style: TextStyle(
                                             fontSize: 17.0,
                                             color: Colors.white),

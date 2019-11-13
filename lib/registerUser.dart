@@ -102,7 +102,7 @@ class _RegisterUser extends State<RegisterUser> {
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              content: Text("Selecciona Camara o Galeria"),
+                              content: Text("Selecciona Cámara o Galería"),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () async {
@@ -115,7 +115,7 @@ class _RegisterUser extends State<RegisterUser> {
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
-                                  child: Text("Camara",
+                                  child: Text("Cámara",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
@@ -130,7 +130,7 @@ class _RegisterUser extends State<RegisterUser> {
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
-                                  child: Text("Galeria",
+                                  child: Text("Galería",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
@@ -151,7 +151,7 @@ class _RegisterUser extends State<RegisterUser> {
                                 color: Colors.white,
                               ),
                               Text(
-                                "Subir Fotografia",
+                                "Subir Fotografía",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20.0),
                               ),
@@ -297,7 +297,7 @@ class _RegisterUser extends State<RegisterUser> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    labelText: "Telefono",
+                    labelText: "Teléfono",
                     fillColor: Colors.white,
                   ),
                   cursorColor: Colors.white,
@@ -492,7 +492,7 @@ class _RegisterUser extends State<RegisterUser> {
                                                   Row(
                                                     children: <Widget>[
                                                       Text(
-                                                          "Desarrollo \n movil (Android)",
+                                                          "Desarrollo \n móvil (Android)",
                                                           style: TextStyle(
                                                             color: Colors.white,
                                                           )),
@@ -526,7 +526,7 @@ class _RegisterUser extends State<RegisterUser> {
                                                   Row(
                                                     children: <Widget>[
                                                       Text(
-                                                          "Desarrollador \n movil (IOS)            ",
+                                                          "Desarrollador \n móvil (IOS)            ",
                                                           style: TextStyle(
                                                             color: Colors.white,
                                                           )),
@@ -743,7 +743,7 @@ class _RegisterUser extends State<RegisterUser> {
                                       ],
                                     ),
                                     content: Text(
-                                        "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                        "Alguno de los campos esta vacío, llénalos para poder continuar"),
                                     actions: <Widget>[
                                       FlatButton(
                                         child: Text("Aceptar",
@@ -780,7 +780,7 @@ class _RegisterUser extends State<RegisterUser> {
                                       ],
                                     ),
                                     content: Text(
-                                        "Debes subir una fotografia para poder continuar"),
+                                        "Debes subir una fotografía para poder continuar"),
                                     actions: <Widget>[
                                       FlatButton(
                                         child: Text("Aceptar",
@@ -809,14 +809,14 @@ class _RegisterUser extends State<RegisterUser> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text("Politicas de uso",
+                                      Text("Políticas de uso",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20)),
                                     ],
                                   ),
                                   content: Text(
-                                      "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
+                                      "Al dar clic en Aceptar el usuario está de acuerdo que todos los proyectos registrados así como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona será capaz de copiar y reproducir este proyecto sin problema alguno"),
                                   actions: <Widget>[
                                     FlatButton(
                                       child: Text("Aceptar",
@@ -867,7 +867,7 @@ class _RegisterUser extends State<RegisterUser> {
                                       ],
                                     ),
                                     content: Text(
-                                        "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                        "Alguno de los campos esta vacío, llénalos para poder continuar"),
                                     actions: <Widget>[
                                       FlatButton(
                                         child: Text("Aceptar",
@@ -904,7 +904,7 @@ class _RegisterUser extends State<RegisterUser> {
                                       ],
                                     ),
                                     content: Text(
-                                        "Debes subir una fotografia para poder continuar"),
+                                        "Debes subir una fotografía para poder continuar"),
                                     actions: <Widget>[
                                       FlatButton(
                                         child: Text("Aceptar",
@@ -933,14 +933,14 @@ class _RegisterUser extends State<RegisterUser> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Text("Politicas de uso",
+                                      Text("Políticas de uso",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20)),
                                     ],
                                   ),
                                   content: Text(
-                                      "Al dar click en Aceptar el usuario esta de acuerdo que todos los proyectos registrados asi como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona sera capaz de copiar y repoducir este proyecto sin problema alguno"),
+                                      "Al dar clic en Aceptar el usuario está de acuerdo que todos los proyectos registrados así como sus derechos de autor pasan a hacer de la comunidad por lo mismo cualquier persona será capaz de copiar y reproducir este proyecto sin problema alguno"),
                                   actions: <Widget>[
                                     FlatButton(
                                       child: Text("Aceptar",
@@ -1085,7 +1085,7 @@ class _RegisterUser extends State<RegisterUser> {
                         ],
                       ),
                       content: Text(
-                          "Usuario creado con exito, Bienvenido a FindProgrammer, incia sesión para comenzar"),
+                          "Usuario creado con éxito, Bienvenido a FindProgrammer, inicia sesión para comenzar"),
                       actions: <Widget>[
                         FlatButton(
                           onPressed: () {
@@ -1159,7 +1159,7 @@ class _RegisterUser extends State<RegisterUser> {
                       ],
                     ),
                     content: Text(
-                        "Ocurrió un problema en el servidor o en la red, inténtalo mas tarde"),
+                        "Ocurrió un problema en el servidor o en la red, inténtalo más tarde"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {

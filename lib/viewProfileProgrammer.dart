@@ -141,7 +141,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                               ],
                             ),
                             content: Text(
-                                "No hay conexión a internet, intenta mas tarde"),
+                                "No hay conexión a internet, intenta más tarde"),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () {
@@ -303,7 +303,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Text("Cerrar Sesion",
+                              Text("Cerrar Sesión",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 20)),
                             ],
@@ -329,7 +329,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                                     MaterialPageRoute(
                                         builder: (context) => Login()));
                               },
-                              child: Text("Cerrar Sesion",
+                              child: Text("Cerrar Sesión",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 15)),
                             ),
@@ -366,7 +366,7 @@ class _ViewProfileProgrammer extends State<ViewProfileProgrammer> {
                             Padding(
                               padding: EdgeInsets.all(9),
                               child: Text(
-                                "Cerrar Sesion",
+                                "Cerrar Sesión",
                                 style: TextStyle(
                                     fontSize: 17.0, color: Colors.white),
                               ),

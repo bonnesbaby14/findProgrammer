@@ -106,7 +106,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              content: Text("Selecciona Camara o Galeria"),
+                              content: Text("Selecciona Cámara o Galería"),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () async {
@@ -119,7 +119,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
-                                  child: Text("Camara",
+                                  child: Text("Cámara",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
@@ -134,7 +134,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
-                                  child: Text("Galeria",
+                                  child: Text("Galería",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
@@ -155,7 +155,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                 color: Colors.white,
                               ),
                               Text(
-                                "Subir Fotografia",
+                                "Subir Fotografía",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20.0),
                               ),
@@ -214,7 +214,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    labelText: "Telefono",
+                    labelText: "Teléfono",
                     fillColor: Colors.white,
                   ),
                   cursorColor: Colors.white,
@@ -339,7 +339,7 @@ class _UpdateUserC extends State<UpdateUserC> {
                                       ],
                                     ),
                                     content: Text(
-                                        "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                        "Alguno de los campos esta vacío, llénalos para poder continuar"),
                                     actions: <Widget>[
                                       FlatButton(
                                         child: Text("Aceptar",
@@ -471,7 +471,7 @@ if(img!=null){
                         ],
                       ),
                       content: Text(
-                          "Usuario editado con exito!!!!"),
+                          "Usuario editado con éxito!!!! "),
                       actions: <Widget>[
                         FlatButton(
                           onPressed: () {
@@ -543,7 +543,7 @@ if(img!=null){
                       ],
                     ),
                     content: Text(
-                        "Ocurrió un problema en el servidor o en la red, inténtalo mas tarde"),
+                        "Ocurrió un problema en el servidor o en la red, inténtalo más tarde"),
                     actions: <Widget>[
                       FlatButton(
                         onPressed: () {

@@ -139,7 +139,7 @@ telefono.text = desarrollador['TELEFONO'];
                                           color: Colors.black, fontSize: 20)),
                                 ],
                               ),
-                              content: Text("Selecciona Camara o Galeria"),
+                              content: Text("Selecciona Cámara o Galería"),
                               actions: <Widget>[
                                 FlatButton(
                                   onPressed: () async {
@@ -152,7 +152,7 @@ telefono.text = desarrollador['TELEFONO'];
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
-                                  child: Text("Camara",
+                                  child: Text("Cámara",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
@@ -167,7 +167,7 @@ telefono.text = desarrollador['TELEFONO'];
                                     Navigator.of(context).pop();
                                     setState(() {});
                                   },
-                                  child: Text("Galeria",
+                                  child: Text("Galería",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
@@ -188,7 +188,7 @@ telefono.text = desarrollador['TELEFONO'];
                                 color: Colors.white,
                               ),
                               Text(
-                                "Subir Fotografia",
+                                "Subir Fotografía",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20.0),
                               ),
@@ -219,7 +219,7 @@ telefono.text = desarrollador['TELEFONO'];
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
-                    labelText: "Telefono",
+                    labelText: "Teléfono",
                     fillColor: Colors.white,
                   ),
                   cursorColor: Colors.white,
@@ -607,7 +607,7 @@ telefono.text = desarrollador['TELEFONO'];
                                       ],
                                     ),
                                     content: Text(
-                                        "Alguno de los campos esta vacio, llenalos para poder continuar"),
+                                        "Alguno de los campos esta vacío, llénalos para poder continuar"),
                                     actions: <Widget>[
                                       FlatButton(
                                         child: Text("Aceptar",
@@ -742,7 +742,7 @@ if(img!=null){
                         ],
                       ),
                       content: Text(
-                          "Usuario editado con exito!!!!"),
+                          "Usuario editado con éxito!!!! "),
                       actions: <Widget>[
                         FlatButton(
                           onPressed: () {

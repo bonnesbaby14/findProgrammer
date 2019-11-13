@@ -314,7 +314,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                       ],
                                     ),
                                     content: Text(
-                                        "No hay conexión a internet, intenta mas tarde"),
+                                        "No hay conexión a internet, intenta más tarde"),
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () {
@@ -482,7 +482,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                       ],
                                     ),
                                     content: Text(
-                                        "No hay conexión a internet, intenta mas tarde"),
+                                        "No hay conexión a internet, intenta más tarde"),
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () {
@@ -602,7 +602,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                       ],
                                     ),
                                     content: Text(
-                                        "No hay conexión a internet, intenta mas tarde"),
+                                        "No hay conexión a internet, intenta más tarde"),
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () {
@@ -664,7 +664,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        Text("Codigo de Proyecto",
+                                        Text("Código de Proyecto",
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 20)),
@@ -679,7 +679,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                                           child: CupertinoTextField(
                                             controller: tecCodigo,
                                             placeholder:
-                                                "Codigo de proyecto...",
+                                                "Código de proyecto...",
                                             placeholderStyle: TextStyle(
                                                 color: Colors.black38),
                                             decoration: BoxDecoration(

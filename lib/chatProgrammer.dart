@@ -449,7 +449,7 @@ class _ChatProgrammer extends State<ChatProgrammer> {
                                         MaterialPageRoute(
                                             builder: (context) => Login()));
                                   },
-                                  child: Text("Cerrar Sesion",
+                                  child: Text("Cerrar Sesión",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
                                 ),
