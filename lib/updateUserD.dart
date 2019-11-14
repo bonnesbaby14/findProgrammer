@@ -146,7 +146,7 @@ telefono.text = desarrollador['TELEFONO'];
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.camera,imageQuality: 70);
+source: ImageSource.camera,imageQuality: 20);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
@@ -161,7 +161,7 @@ telefono.text = desarrollador['TELEFONO'];
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.gallery,imageQuality: 70);
+                                          source: ImageSource.gallery,imageQuality: 20);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
@@ -704,11 +704,11 @@ showDialog(
       print(response.body);
       print("66666666666666666666666666");
 if(img!=null){
-      var strem = http.ByteStream(DelegatingStream.typed(img.openRead()));
+      var strem = await http.ByteStream(DelegatingStream.typed(img.openRead()));
       var length = await img.length();
-      var uri = Uri.parse(server + "/image.php");
-      var request = http.MultipartRequest("POST", uri);
-      var multipartFile = http.MultipartFile("image", strem, length,
+      var uri = await Uri.parse(server + "/image.php");
+      var request = await http.MultipartRequest("POST", uri);
+      var multipartFile = await http.MultipartFile("image", strem, length,
           filename: "image_" + ID.toString() + ".jpg");
       request.files.add(multipartFile);
       var response2 = await request.send();

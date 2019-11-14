@@ -109,7 +109,7 @@ class _RegisterUser extends State<RegisterUser> {
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.camera,imageQuality: 50);
+                                          source: ImageSource.camera,imageQuality: 20);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
@@ -124,7 +124,7 @@ class _RegisterUser extends State<RegisterUser> {
                                     try {
                                       img = null;
                                       img = await ImagePicker.pickImage(
-                                          source: ImageSource.gallery,imageQuality: 50);
+                                          source: ImageSource.gallery,imageQuality: 20);
                                     } catch (e) {}
 
                                     Navigator.of(context).pop();
