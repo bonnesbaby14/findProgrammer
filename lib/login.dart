@@ -404,7 +404,7 @@ Map<String, dynamic> MapDesarrollador = Map();
 
           print(response.body);
 
-
+helper.DeleteCliente();
          MapCliente['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
           MapCliente['NOMBRE'] = utf8.decode(base64.decode(respuesta[1]['NOMBRE']));
           MapCliente['APELLIDO_P'] = utf8.decode(base64.decode(respuesta[1]['APELLIDO_P']));

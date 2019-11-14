@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:findprogrammer/login.dart';
 import 'package:flutter/material.dart';
 import 'componentes/variables.dart';
@@ -658,7 +660,7 @@ showDialog(
                                       )),
                                 ),
                               ));
-                       await UpdateDeveloper();
+                       await UpdateDeveloper(context);
                     
                     },
                     color: Colors.white,
@@ -681,7 +683,7 @@ showDialog(
         ));
   }
 
-  Future UpdateDeveloper() async {
+  Future UpdateDeveloper(context) async {
     try {
       print("ññññññññññññññññññññññññññññ");
 
@@ -722,6 +724,9 @@ if(img!=null){
       switch (response.body) {
         case "1":
           //registro completo
+await getUser();
+await getDesarrollador2(context);
+    
        Navigator.pop(context);
             showDialog(
                 context: context,
@@ -836,3 +841,96 @@ if(img!=null){
     }
   }
 }
+  Future getUser() async {
+    var cliente1 = new http.Client();
+    print(
+        "=========================================================================");
+    print("se esta obteiendo los reqermientos");
+
+    try {
+      final response = await cliente1
+          .post(server+"/loadUser.php",
+              // "http://192.168.0.5/findprogrammerDB/loadReq.php",
+              body: {"ID": desarrollador['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
+
+             var respuesta =await json.decode(response.body);
+
+Map<String, dynamic> MapDesarrollador = Map();
+
+          helper.DeleteDesarrollador();
+          MapDesarrollador['ID_USUARIO'] = respuesta[0]['ID_USUARIO'];
+          MapDesarrollador['ID_DESARROLLADOR'] =
+              respuesta[0]['ID_DESARROLLADOR'];
+
+          MapDesarrollador['GOOGLE_ID'] = respuesta[0]['GOOGLE_ID'];
+          MapDesarrollador['NOMBRE'] =utf8.decode(base64.decode(respuesta[0]['NOMBRE'])) ;
+          MapDesarrollador['APELLIDO_P'] =utf8.decode(base64.decode(respuesta[0]['APELLIDO_P'])) ;
+          MapDesarrollador['APELLIDO_M'] = utf8.decode(base64.decode(respuesta[0]['APELLIDO_M']));
+          MapDesarrollador['CORREO'] =utf8.decode(base64.decode(respuesta[0]['CORREO'])) ;
+          MapDesarrollador['FOTO'] = respuesta[0]['FOTO'];
+          MapDesarrollador['CALIFICACION'] = respuesta[0]['CALIFICACION'];
+          MapDesarrollador['F_ESTADO_REGISTRO'] =
+              respuesta[0]['F_ESTADO_REGISTRO'];
+          MapDesarrollador['PASSWORD'] = respuesta[0]['PASSWORD'];
+          MapDesarrollador['TELEFONO'] =utf8.decode(base64.decode(respuesta[0]['TELEFONO'])) ;
+          MapDesarrollador['F_BAJA_USUARIO'] = respuesta[0]['F_BAJA_USUARIO'];
+          MapDesarrollador['F_ESTADO_LOGIN'] = respuesta[0]['F_ESTADO_LOGIN'];
+          MapDesarrollador['CURP'] = utf8.decode(base64.decode(respuesta[0]['CURP']));
+           
+          MapDesarrollador['F_USUARIO_APRUEBA'] =
+              respuesta[0]['F_USUARIO_APRUEBA'];
+          MapDesarrollador['F_D_WEB'] = respuesta[0]['F_D_WEB'];
+          MapDesarrollador['F_D_M_ANDROID'] = respuesta[0]['F_D_M_ANDROID'];
+          MapDesarrollador['F_D_M_IOS'] = respuesta[0]['F_D_M_IOS'];
+          MapDesarrollador['F_D_E_WINDOWS'] = respuesta[0]['F_D_E_WINDOWS'];
+          MapDesarrollador['F_D_E_MAC'] = respuesta[0]['F_D_E_MAC'];
+          MapDesarrollador['F_D_REDES'] = respuesta[0]['F_D_REDES'];
+
+          MapDesarrollador['PREPARACION'] = utf8.decode(base64.decode(respuesta[0]['PREPARACION']));
+                    print("llegue aqui[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[{{");
+          MapDesarrollador['PROYECTOS_TRABAJADOS'] =utf8.decode(base64.decode( respuesta[0]['PROYECTOS_TRABAJADOS']));
+          MapDesarrollador['F_SISTEMA_BLOQUEADO'] =respuesta[0]['F_SISTEMA_BLOQUEADO'];
+        
+          print(MapDesarrollador.toString());
+
+//insertar datos del programador logueado.
+
+          var insertDesarrollador =
+              await helper.InsertDesarrollador(MapDesarrollador);
+          print("//$insertDesarrollador//");
+
+      
+      print("se actualizo el usuario");
+    } catch (f) {
+      print("hubo un error obteniendo los requerimeintos");
+      print(f.toString());
+    } finally {
+      cliente1.close();
+      
+    }
+  }
+   void getDesarrollador2(context) async {
+    try {
+      desarrolladorList = await helper.SelectDesarrollador();
+      desarrollador = desarrolladorList.first;
+      if (desarrollador['F_BAJA_USUARIO'] == 1) {
+        helper.DeleteComents();
+        helper.DeleteDesarrollador();
+        helper.DeleteProyecto1();
+        helper.DeleteProyecto2();
+        helper.DeleteProyecto6();
+        helper.DeleteProyecto4();
+        helper.DeleteProyecto5();
+        helper.DeleteProyectoInfo();
+
+        helper.DeleteCliente();
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      }
+      print("se obtuvo el desarrollador********************************");
+    
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getDesarrollador");
+    }
+  }

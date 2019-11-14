@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:findprogrammer/login.dart';
 import 'package:flutter/material.dart';
 import 'componentes/variables.dart';
@@ -390,7 +392,7 @@ showDialog(
                                       )),
                                 ),
                               ));
-                      await updateCliente();
+                      await updateCliente(context);
                       
                       
                     },
@@ -414,7 +416,7 @@ showDialog(
         ));
   }
 
-  Future updateCliente() async {
+  Future updateCliente(context) async {
     try {
       print("ññññññññññññññññññññññññññññ");
 
@@ -449,6 +451,8 @@ if(img!=null){
 }
       switch (response.body) {
         case "1":
+        await getUser();
+        await getClient2(context);
         Navigator.pop(context);
           //registro completo
           if (_groupvalue2 == 0) {
@@ -576,3 +580,87 @@ if(img!=null){
     setState(() {});
   }
 }
+Future getUser() async {
+    var cliente1 = new http.Client();
+    print(
+        "=========================================================================");
+    print("se esta obteiendo los reqermientos");
+
+    try {
+      final response = await cliente1
+          .post(server+"/loadUserC.php",
+              // "http://192.168.0.5/findprogrammerDB/loadReq.php",
+              body: {"ID": client['ID_USUARIO'].toString()}).timeout(Duration(seconds: 7));
+
+             var respuesta =await json.decode(response.body);
+
+ Map<String, dynamic> MapCliente = Map();
+
+          print(response.body);
+
+helper.DeleteCliente();
+         MapCliente['ID_USUARIO'] = respuesta[0]['ID_USUARIO'];
+          MapCliente['NOMBRE'] = utf8.decode(base64.decode(respuesta[0]['NOMBRE']));
+          MapCliente['APELLIDO_P'] = utf8.decode(base64.decode(respuesta[0]['APELLIDO_P']));
+          MapCliente['APELLIDO_M'] = utf8.decode(base64.decode(respuesta[0]['APELLIDO_M']));
+          MapCliente['CORREO'] = utf8.decode(base64.decode(respuesta[0]['CORREO']));
+          MapCliente['FOTO'] = respuesta[0]['FOTO'];
+          MapCliente['CALIFICACION'] = respuesta[0]['CALIFICACION'];
+          MapCliente['F_ESTADO_REGISTRO'] = respuesta[0]['F_ESTADO_REGISTRO'];
+          MapCliente['PASSWORD'] = respuesta[0]['PASSWORD'];
+          MapCliente['TELEFONO'] = utf8.decode(base64.decode(respuesta[0]['TELEFONO']));
+          MapCliente['F_BAJA_USUARIO'] = respuesta[0]['F_BAJA_USUARIO'];
+          MapCliente['F_ESTADO_LOGIN'] = respuesta[0]['F_ESTADO_LOGIN'];
+          MapCliente['CURP'] = utf8.decode(base64.decode(respuesta[0]['CURP']));
+          MapCliente['F_USUARIO_APRUEBA'] = respuesta[0]['F_USUARIO_APRUEBA'];
+
+          print(MapCliente.toString());
+
+//insertar datos del programador logueado.
+          var insertCliente = await helper.InsertCliente(MapCliente);
+          print("//$insertCliente//");
+
+
+      
+      print("se actualizo el usuario");
+    } catch (f) {
+      print("hubo un error obteniendo los requerimeintos");
+      print(f.toString());
+    } finally {
+      cliente1.close();
+      
+    }
+  }
+
+  void getClient2(context) async {
+    try {
+      clientList = await helper.SelectCliente();
+
+      print("!!!!!!!!!!!!!!!!!!11");
+      print(clientList[0]['NOMBRE']);
+      print("!!!!!!!!!!!!!!!!!!11");
+      client = clientList.first;
+      print("se obtuvo el cliente en getcliente en homecliente");
+      print(client['F_BAJA_USUARIO']);
+      if (client['F_BAJA_USUARIO'] == 1) {
+        print("object");
+        helper.DeleteComents();
+        helper.DeleteDesarrollador();
+        helper.DeleteProyecto1();
+        helper.DeleteProyecto2();
+        helper.DeleteProyecto6();
+        helper.DeleteProyecto4();
+        helper.DeleteProyecto5();
+        helper.DeleteProyectoInfo();
+
+        helper.DeleteCliente();
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      }
+    } catch (e) {
+      print("aqui hay un error de no se que, funcion getClient en homecliente" +
+          e.toString());
+    }
+
+  }
