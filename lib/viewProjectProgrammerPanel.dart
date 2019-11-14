@@ -63,6 +63,8 @@ class _ViewProjectProgrammerPanel extends State<ViewProjectProgrammerPanel> {
             onSelectNotification(payload));
     notification.initialize(InitializationSettings(settingAndroid, settingIos),
         onSelectNotification: onSelectNotification);
+        
+      
 
     funciones();
     // TODO: implement initState
@@ -2725,10 +2727,7 @@ if (!statusRed) {
       var difference = last.difference(date).inDays;
       print(difference);
       if (difference == 0) {
-        showOngoingNotification(notification,
-            title: 'FindProgrammer',
-            body: 'Tienes que entregar un avance hoy!!!',
-            id: 20);
+   
       }
       if (difference <= 0) {
         showDialog(

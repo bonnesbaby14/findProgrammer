@@ -3,8 +3,10 @@ import 'package:findprogrammer/profileProgrammer.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewProjectClient.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'componentes/helperNotifications.dart';
 import 'componentes/variables.dart';
 import 'viewProjectProgrammerInfo.dart';
 import 'componentes/helperSQFLITE.dart';
@@ -30,14 +32,23 @@ class HomeProgrammer extends StatefulWidget {
 }
 
 class _HomeProgrammer extends State<HomeProgrammer> {
+
+    final notification2 = FlutterLocalNotificationsPlugin();
   @override
   void initState() {
     // TODO: implement initState
-
+  final settingAndroid =
+        AndroidInitializationSettings('ic_launcher_background');
+    final settingIos = IOSInitializationSettings(
+        onDidReceiveLocalNotification: (id, title, body, payload) =>
+            onSelectNotification(payload));
+    notification2.initialize(InitializationSettings(settingAndroid, settingIos),
+        onSelectNotification: onSelectNotification);
     getProjects();
     getDesarrollador();
     getDevelopmentsProjects();
   }
+    Future onSelectNotification(payload) async {}
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +59,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       onRefresh: () async {
         await getDesarrollador();
         await getProjects();
+        await  getDevelopmentsProjects();
         await Future.delayed(Duration(milliseconds: 500));
         setState(() {});
       },
@@ -1302,7 +1314,12 @@ class _HomeProgrammer extends State<HomeProgrammer> {
           print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
           var difference = date.difference(last).inDays;
           print(difference);
-
+ if (difference == 0) {
+        showOngoingNotification(notification2,
+            title: 'FindProgrammer',
+            body: 'Tienes que entregar un avance hoy de '+datauser[z]['TITULO']+'',
+            id: 20);
+      }
           if (difference > 0) {
             sistemaBloqueado = true;
             print("sistema bloqueado");
