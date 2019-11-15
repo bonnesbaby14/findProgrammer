@@ -1,7 +1,9 @@
+import 'package:findprogrammer/componentes/helperNotifications.dart';
 import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
 import 'package:findprogrammer/viewFinishProjectsClient.dart';
 import 'package:findprogrammer/claseAlertCreateProject.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'componentes/variables.dart';
 import 'viewProjectClient.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +29,15 @@ class Homeclient extends StatefulWidget {
   @override
   _Homeclient createState() => new _Homeclient();
 }
-
+    final notification = FlutterLocalNotificationsPlugin();
 class _Homeclient extends State<Homeclient> {
+
   @override
   void initState() {
     if (statusRed) {
       print("se conculta la red");
       getProject();
+        getDevelopmentsProjects();
     } else {
       print("se conculta la db local");
       getProjectOfline();
@@ -52,6 +56,7 @@ class _Homeclient extends State<Homeclient> {
         if (statusRed) {
           await getClient();
           await getProject();
+          await   getDevelopmentsProjects();
         } else {
           await getProjectOfline();
         }
@@ -893,3 +898,59 @@ Future registerProject() async {
     cliente.close();
   }
 }
+
+Future getDevelopmentsProjects() async {
+    var cliente1 = new http.Client();
+    try {
+      print("-------------------------------------");
+      print(client['ID_USUARIO'].toString());
+      final response = await cliente1.post(
+          //"http://192.168.84.114/findProgrammerDB/loadDevelopmentProjects.php",
+          server + "/loadDevelopmentsProjectsCliente.php",
+          body: {
+            "ID": client['ID_USUARIO'].toString(),
+          }).timeout(Duration(seconds: 7));
+
+      var datauser = json.decode(response.body);
+      print(datauser);
+    
+
+String fechaReporte = datauser[0]['NEXT_ADVANCE'];
+      List<String> dates = fechaReporte.split("-");
+      DateTime date = new DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day);
+      DateTime last = DateTime(
+          int.parse(dates[0]), int.parse(dates[1]), int.parse(dates[2]));
+
+      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      print(date.toString());
+      print(last.toString());
+      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      var difference = last.difference(date).inDays;
+      print(difference);
+      if (difference == 0) {
+        showOngoingNotification(notification,
+            title: 'FindProgrammer',
+            body: 'El programador te tiene que entregar un avance hoy de '+datauser[0]['TITULO']+'',
+            id: 0);
+      }
+
+
+
+      print(
+          "se obtuvo los proyectos en desarrollo********************************");
+
+    } catch (d) {
+      print("hubo un error obteniendo los proyectos en desarrollo");
+      print(d.toString());
+    } finally {
+      
+      cliente1.close();
+    }
+  }
+
+
+
+
+
+ 

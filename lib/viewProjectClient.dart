@@ -61,6 +61,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       getAvancesProject();
       getDesarrolladorProject();
       getVisits(ID);
+    
     } else {
       getUno();
       getDos();
@@ -156,6 +157,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           await getAvancesProject();
           await getDesarrolladorProject();
           await getVisits(ID);
+         
         } else {
           await getUno();
           await getDos();
@@ -3063,25 +3065,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
         return;
       }
 
-      String fechaReporte = dataProject[0]['NEXT_ADVANCE'];
-      List<String> dates = fechaReporte.split("-");
-      DateTime date = new DateTime(
-          DateTime.now().year, DateTime.now().month, DateTime.now().day);
-      DateTime last = DateTime(
-          int.parse(dates[0]), int.parse(dates[1]), int.parse(dates[2]));
-
-      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-      print(date.toString());
-      print(last.toString());
-      print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-      var difference = last.difference(date).inDays;
-      print(difference);
-      if (difference == 0) {
-        showOngoingNotification(notification,
-            title: 'FindProgrammer',
-            body: 'El programador te tiene que entregar un avance hoy!!!',
-            id: 0);
-      }
+     
 
       if (dataProject[0]['F_A_CORRECION_REQ_D'] == "1") {
         showDialog(
