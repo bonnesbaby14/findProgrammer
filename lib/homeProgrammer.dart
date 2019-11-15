@@ -1199,6 +1199,47 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       desarrolladorList = await helper.SelectDesarrollador();
       desarrollador = desarrolladorList.first;
       if (desarrollador['F_BAJA_USUARIO'] == 1) {
+         await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "Tu cuenta ha sido dada de baja debido a que en un periodo de seis meses has recibido más de 2 reportes de la comunidad, lamentamos los inconvenientes "),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          
         await helper.DeleteComents();
         await helper.DeleteDesarrollador();
         await helper.DeleteProyecto1();
