@@ -4,13 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
-TextEditingController tdcTitulo = TextEditingController();
-TextEditingController tdcDescripcion = TextEditingController();
-TextEditingController tdcPresupuesto = TextEditingController();
-TextEditingController tdcRequerimientos = TextEditingController();
-int intFrecuencia = 0;
-int intTipo = 0;
-bool flat = false;
+
 
 //clase para la alerta con estado
 class AlertEditPorject extends StatefulWidget {
@@ -26,6 +20,9 @@ class _AlertEditPorject extends State<AlertEditPorject>{
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return SingleChildScrollView(
         child: CupertinoAlertDialog(
 

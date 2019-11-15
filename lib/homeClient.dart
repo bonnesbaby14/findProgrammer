@@ -875,12 +875,12 @@ Future registerProject() async {
     final response = await cliente
         .post(server + "/registerProject.php", body: {
           "ID_USUARIO": client['ID_USUARIO'].toString(),
-          "TITULO": tdcTitulo.text.toString(),
-          "DESCRIPCION": tdcDescripcion.text.toString(),
-          "PRESUPUESTO": tdcPresupuesto.text.toString(),
-          "TIPO": intTipo.toString(),
-          "TIEMPO": intFrecuencia.toString(),
-          "ENTREGABLES": flat ? "1" : "0",
+          "TITULO": tdcTitulo2.text.toString(),
+          "DESCRIPCION": tdcDescripcion2.text.toString(),
+          "PRESUPUESTO": tdcPresupuesto2.text.toString(),
+          "TIPO": intTipo2.toString(),
+          "TIEMPO": intFrecuencia2.toString(),
+          "ENTREGABLES": flat2 ? "1" : "0",
         })
         .timeout(Duration(seconds: 7))
         .whenComplete(() {

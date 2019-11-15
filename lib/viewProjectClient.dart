@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:findprogrammer/chatClient.dart';
+import 'package:findprogrammer/claseAlertCreateProject.dart';
 import 'package:findprogrammer/homeProgrammer.dart';
 import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewAdvance.dart';
@@ -38,6 +39,14 @@ var dataProject, reqFuncionales, avances, desarrollador;
 TextEditingController comentario = TextEditingController();
 TextEditingController reporte = TextEditingController();
 TextEditingController razon = TextEditingController();
+
+TextEditingController tdcTitulo = TextEditingController();
+TextEditingController tdcDescripcion = TextEditingController();
+TextEditingController tdcPresupuesto = TextEditingController();
+int intFrecuencia = 0;
+int intTipo = 0;
+bool flat = false;
+
 Helper helper = new Helper();
 
 class ViewProjectClient extends StatefulWidget {
@@ -61,7 +70,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
       getAvancesProject();
       getDesarrolladorProject();
       getVisits(ID);
-    
     } else {
       getUno();
       getDos();
@@ -157,7 +165,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
           await getAvancesProject();
           await getDesarrolladorProject();
           await getVisits(ID);
-         
         } else {
           await getUno();
           await getDos();
@@ -582,6 +589,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                     ));
                                             return;
                                           }
+                                          
                                           await updateState();
 
                                           setState(() {
@@ -633,6 +641,26 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
                                         child: GestureDetector(
                                           onTap: () async {
+                                            tdcTitulo.text = dataProject[0]["TITULO"];
+                                          tdcDescripcion.text =
+                                              dataProject[0]["DESCRIPCION"];
+                                          tdcPresupuesto.text =
+                                              dataProject[0]["PRESUPUESTO"];
+intFrecuencia=int.parse(dataProject[0]["INTERVALO_DE_AVANCES"]);
+dataProject[0]["F_S_ENTREGABLES"]=="1"?flat=true:flat=false;
+intTipo=int.parse(dataProject[0]["F_TIPO_DE_PROYECTO"]);
+
+
+
+
+
+
+
+
+
+
+
+
                                             if (!statusRed) {
                                               await showDialog(
                                                   context: context,
@@ -845,6 +873,8 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                         
+
                                           if (dataProject[0]
                                                   ["F_EN_DESARROLLO"] ==
                                               "0") {
@@ -942,7 +972,9 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                           dataProject[0]
                                                               ['ID_PROYECTO'],
                                                           dataProject[0]
-                                                              ['FK_CLIENTE'],desarrollador[0]['ID_USUARIO'])));
+                                                              ['FK_CLIENTE'],
+                                                          desarrollador[0]
+                                                              ['ID_USUARIO'])));
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.all(10),
@@ -2463,7 +2495,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                           InkWell(
                                             onTap: () {
                                               print(dataProject);
-                                              
                                             },
                                             child: Padding(
                                               padding: EdgeInsets.all(10),
@@ -3064,8 +3095,6 @@ class _ViewProjectClient extends State<ViewProjectClient> {
 
         return;
       }
-
-     
 
       if (dataProject[0]['F_A_CORRECION_REQ_D'] == "1") {
         showDialog(

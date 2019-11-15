@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'homeClient.dart';
 
-TextEditingController tdcTitulo = TextEditingController();
-TextEditingController tdcDescripcion = TextEditingController();
-TextEditingController tdcPresupuesto = TextEditingController();
+TextEditingController tdcTitulo2 = TextEditingController();
+TextEditingController tdcDescripcion2 = TextEditingController();
+TextEditingController tdcPresupuesto2 = TextEditingController();
 TextEditingController tdcRequerimientos = TextEditingController();
-int intFrecuencia = 0;
-int intTipo = 0;
-bool flat = false;
+int intFrecuencia2 = 0;
+int intTipo2 = 0;
+bool flat2 = false;
 
 //clase para la alerta con estado
 class AlertCreatePorject extends StatefulWidget {
@@ -42,7 +42,7 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
             height: 15,
           ),
           CupertinoTextField(
-            controller: tdcTitulo,
+            controller: tdcTitulo2,
             placeholder: "Título...",
             placeholderStyle: TextStyle(color: Colors.black38),
             decoration: BoxDecoration(
@@ -58,7 +58,7 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               maxLines: null,
               keyboardType: TextInputType.multiline,
               placeholder: "Descripción...(oraciones)\nEl proyecto deberá...\nEl proyecto tendrá...\nEl proyecto será...",
-              controller: tdcDescripcion,
+              controller: tdcDescripcion2,
               placeholderStyle: TextStyle(color: Colors.black38),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -70,7 +70,7 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
             height: 10,
           ),
           CupertinoTextField(
-            controller: tdcPresupuesto,
+            controller: tdcPresupuesto2,
             placeholder: "Presupuesto...",
             placeholderStyle: TextStyle(color: Colors.black38),
             decoration: BoxDecoration(
@@ -99,11 +99,11 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
                 color: Colors.transparent,
                 child: Radio(
                   activeColor: Colors.deepPurpleAccent,
-                  groupValue: intTipo,
+                  groupValue: intTipo2,
                   value: 0,
                   onChanged: (int e) {
                     setState(() {
-                      intTipo = e;
+                      intTipo2 = e;
                     });
                   },
                 ),
@@ -124,12 +124,12 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               Material(
                 color: Colors.transparent,
                 child: Radio(
-                  groupValue: intTipo,
+                  groupValue: intTipo2,
                   value: 1,
                   activeColor: Colors.deepPurpleAccent,
                   onChanged: (int e) {
                     setState(() {
-                      intTipo = e;
+                      intTipo2 = e;
                     });
                   },
                 ),
@@ -151,11 +151,11 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
                 color: Colors.transparent,
                 child: Radio(
                   activeColor: Colors.deepPurpleAccent,
-                  groupValue: intTipo,
+                  groupValue: intTipo2,
                   value: 2,
                   onChanged: (int e) {
                     setState(() {
-                      intTipo = e;
+                      intTipo2 = e;
                     });
                   },
                 ),
@@ -176,12 +176,12 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               Material(
                 color: Colors.transparent,
                 child: Radio(
-                  groupValue: intTipo,
+                  groupValue: intTipo2,
                   activeColor: Colors.deepPurpleAccent,
                   value: 3,
                   onChanged: (int e) {
                     setState(() {
-                      intTipo = e;
+                      intTipo2 = e;
                     });
                   },
                 ),
@@ -202,12 +202,12 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               Material(
                 color: Colors.transparent,
                 child: Radio(
-                  groupValue: intTipo,
+                  groupValue: intTipo2,
                   activeColor: Colors.deepPurpleAccent,
                   value: 4,
                   onChanged: (int e) {
                     setState(() {
-                      intTipo = e;
+                      intTipo2 = e;
                     });
                   },
                 ),
@@ -228,12 +228,12 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               Material(
                 color: Colors.transparent,
                 child: Radio(
-                  groupValue: intTipo,
+                  groupValue: intTipo2,
                   value: 5,
                   activeColor: Colors.deepPurpleAccent,
                   onChanged: (e) {
                     setState(() {
-                      intTipo = e;
+                      intTipo2 = e;
                     });
                   },
                 ),
@@ -261,15 +261,15 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               Material(
                 color: Colors.transparent,
                 child: Radio(
-                  groupValue: intFrecuencia,
+                  groupValue: intFrecuencia2,
                   value: 0,
                   activeColor: Colors.deepPurpleAccent,
                   onChanged: ( e) {
                     
                     setState(() {
-                      intFrecuencia = e;
+                      intFrecuencia2 = e;
                       print("se cambio");
-                    print(intFrecuencia);
+                    print(intFrecuencia2);
                     });
                   },
                 ),
@@ -290,14 +290,14 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               Material(
                 color: Colors.transparent,
                 child: Radio(
-                  groupValue: intFrecuencia,
+                  groupValue: intFrecuencia2,
                   activeColor: Colors.deepPurpleAccent,
                   value: 1,
                   onChanged: ( e) {
                     setState(() {
-                      intFrecuencia = e;
+                      intFrecuencia2 = e;
                       print("se cambio");
-                    print(intFrecuencia);
+                    print(intFrecuencia2);
                     });
                   },
                 ),
@@ -318,14 +318,14 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
               Material(
                 color: Colors.transparent,
                 child: Radio(
-                  groupValue: intFrecuencia,
+                  groupValue: intFrecuencia2,
                   activeColor: Colors.deepPurpleAccent,
                   value: 2,
                   onChanged: ( e) {
                     setState(() {
-                      intFrecuencia = e;
+                      intFrecuencia2 = e;
                       print("se cambio");
-                    print(intFrecuencia);
+                    print(intFrecuencia2);
                     });
                   },
                 ),
@@ -352,10 +352,10 @@ class _AlertCreatePorject extends State<AlertCreatePorject>{
                     activeColor: Colors.deepPurpleAccent,
                     onChanged: (e) {
                       setState(() {
-                        flat = e;
+                        flat2 = e;
                       });
                     },
-                    value: flat,
+                    value: flat2,
                   )),
             ],
           ),

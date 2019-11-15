@@ -535,8 +535,9 @@ helper.DeleteCliente();
       }
 
       print(datauser.toString());
+          print(datauser.length);
 
-      if (datauser.length == 0) {
+      if (datauser.length <2) {
         showDialog(
             context: context,
             builder: (context) => new CupertinoAlertDialog(

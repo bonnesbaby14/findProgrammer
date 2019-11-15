@@ -1349,6 +1349,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
                     FlatButton(
                       onPressed: () {
                         Navigator.pop(context);
+                        Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context)=>ViewDevelopmentProjectsProgrammer()));
                       },
                       child: Text("Aceptar",
                           style: TextStyle(color: Colors.black, fontSize: 15)),
