@@ -419,23 +419,23 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                   Text("¿Seguro que quieres cerrar sesión?"),
                               actions: <Widget>[
                                 FlatButton(
-                                  onPressed: () async{
-                                 await helper.DeleteComents();
-                                  await helper.DeleteDesarrollador();
-                                  await helper.DeleteProyecto1();
-                                  await helper.DeleteProyecto2();
-                                  await helper.DeleteProyecto6();
-                                  await helper.DeleteProyecto4();
-                                  await helper.DeleteProyecto5();
-                                  await helper.DeleteProyectoInfo();
+                                  onPressed: () async {
+                                    await helper.DeleteComents();
+                                    await helper.DeleteDesarrollador();
+                                    await helper.DeleteProyecto1();
+                                    await helper.DeleteProyecto2();
+                                    await helper.DeleteProyecto6();
+                                    await helper.DeleteProyecto4();
+                                    await helper.DeleteProyecto5();
+                                    await helper.DeleteProyectoInfo();
 
-                                  await helper.DeleteCliente();
-                                  Navigator.pop(context);
-                                  await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()));
-                                },
+                                    await helper.DeleteCliente();
+                                    Navigator.pop(context);
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
+                                  },
                                   child: Text("Cerrar Sesión",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
@@ -589,7 +589,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                     ));
                                             return;
                                           }
-                                          
+
                                           await updateState();
 
                                           setState(() {
@@ -641,25 +641,21 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            tdcTitulo.text = dataProject[0]["TITULO"];
-                                          tdcDescripcion.text =
-                                              dataProject[0]["DESCRIPCION"];
-                                          tdcPresupuesto.text =
-                                              dataProject[0]["PRESUPUESTO"];
-intFrecuencia=int.parse(dataProject[0]["INTERVALO_DE_AVANCES"]);
-dataProject[0]["F_S_ENTREGABLES"]=="1"?flat=true:flat=false;
-intTipo=int.parse(dataProject[0]["F_TIPO_DE_PROYECTO"]);
-
-
-
-
-
-
-
-
-
-
-
+                                            tdcTitulo.text =
+                                                dataProject[0]["TITULO"];
+                                            tdcDescripcion.text =
+                                                dataProject[0]["DESCRIPCION"];
+                                            tdcPresupuesto.text =
+                                                dataProject[0]["PRESUPUESTO"];
+                                            intFrecuencia = int.parse(
+                                                dataProject[0]
+                                                    ["INTERVALO_DE_AVANCES"]);
+                                            dataProject[0]["F_S_ENTREGABLES"] ==
+                                                    "1"
+                                                ? flat = true
+                                                : flat = false;
+                                            intTipo = int.parse(dataProject[0]
+                                                ["F_TIPO_DE_PROYECTO"]);
 
                                             if (!statusRed) {
                                               await showDialog(
@@ -873,8 +869,6 @@ intTipo=int.parse(dataProject[0]["F_TIPO_DE_PROYECTO"]);
                                       ),
                                       InkWell(
                                         onTap: () {
-                                         
-
                                           if (dataProject[0]
                                                   ["F_EN_DESARROLLO"] ==
                                               "0") {
@@ -2218,29 +2212,29 @@ intTipo=int.parse(dataProject[0]["F_TIPO_DE_PROYECTO"]);
                                   Padding(
                                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                       child: dataProject[0]["F_TIPO_DE_PROYECTO"] == "0"
-                                          ? Text("Aplicación Web",
+                                          ? Text("Aplicación Movil Android",
                                               style: TextStyle(
                                                   fontSize: 14.0,
                                                   color: Colors.white))
                                           : dataProject[0]["F_TIPO_DE_PROYECTO"] == "1"
-                                              ? Text("Aplicación Movil Android",
+                                              ? Text("Aplicación Movil IOS",
                                                   style: TextStyle(
                                                       fontSize: 14.0,
                                                       color: Colors.white))
                                               : dataProject[0]["F_TIPO_DE_PROYECTO"] == "2"
-                                                  ? Text("Aplicación Movil IOS",
+                                                  ? Text("Aplicación Escritorio Windows",
                                                       style: TextStyle(
                                                           fontSize: 14.0,
                                                           color: Colors.white))
                                                   : dataProject[0]["F_TIPO_DE_PROYECTO"] == "3"
-                                                      ? Text("Aplicación Escritorio Windows",
+                                                      ? Text("Aplicación Escritorio MAC OS",
                                                           style: TextStyle(
                                                               fontSize: 14.0,
                                                               color:
                                                                   Colors.white))
-                                                      : dataProject[0]["F_TIPO_DE_PROYECTO"] ==
-                                                              "4"
-                                                          ? Text("Aplicación Escritorio MAC", style: TextStyle(fontSize: 14.0, color: Colors.white))
+                                                      : dataProject[0]["F_TIPO_DE_PROYECTO"] == "4"
+                                                          ? Text("Aplicación Web",
+                                                              style: TextStyle(fontSize: 14.0, color: Colors.white))
                                                           : dataProject[0]["F_TIPO_DE_PROYECTO"] == "5" ? Text("Proyecto de Redes", style: TextStyle(fontSize: 14.0, color: Colors.white)) : Text("ERROR", style: TextStyle(fontSize: 14.0, color: Colors.white))),
                                   SizedBox(
                                     height: 10,

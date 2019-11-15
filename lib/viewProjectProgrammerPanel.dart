@@ -2091,32 +2091,32 @@ if (!statusRed) {
                                             fontSize: 27.0,
                                             color: Colors.white)),
                                   ),
-                                  Padding(
+                                   Padding(
                                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                       child: dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "0"
-                                          ? Text("Aplicación Web",
+                                          ? Text("Aplicación Movil Android",
                                               style: TextStyle(
                                                   fontSize: 14.0,
                                                   color: Colors.white))
                                           : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "1"
-                                              ? Text("Aplicación Movil Android",
+                                              ? Text("Aplicación Movil IOS",
                                                   style: TextStyle(
                                                       fontSize: 14.0,
                                                       color: Colors.white))
                                               : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "2"
-                                                  ? Text("Aplicación Movil IOS",
+                                                  ? Text("Aplicación Escritorio Windows",
                                                       style: TextStyle(
                                                           fontSize: 14.0,
                                                           color: Colors.white))
                                                   : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "3"
-                                                      ? Text("Aplicación Escritorio Windows",
+                                                      ? Text("Aplicación Escritorio MAC OS",
                                                           style: TextStyle(
                                                               fontSize: 14.0,
                                                               color:
                                                                   Colors.white))
-                                                      : dataProjectw[0]["F_TIPO_DE_PROYECTO"] ==
-                                                              "4"
-                                                          ? Text("Aplicación Escritorio MAC", style: TextStyle(fontSize: 14.0, color: Colors.white))
+                                                      : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "4"
+                                                          ? Text("Aplicación Web",
+                                                              style: TextStyle(fontSize: 14.0, color: Colors.white))
                                                           : dataProjectw[0]["F_TIPO_DE_PROYECTO"] == "5" ? Text("Proyecto de Redes", style: TextStyle(fontSize: 14.0, color: Colors.white)) : Text("ERROR", style: TextStyle(fontSize: 14.0, color: Colors.white))),
                                   SizedBox(
                                     height: 10,
