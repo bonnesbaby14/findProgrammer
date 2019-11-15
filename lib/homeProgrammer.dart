@@ -37,7 +37,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     final notification2 = FlutterLocalNotificationsPlugin();
   @override
   void initState() {
-    desarrollador=null;
+
     // TODO: implement initState
   final settingAndroid =
         AndroidInitializationSettings('ic_launcher_background');

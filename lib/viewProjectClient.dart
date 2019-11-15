@@ -31,7 +31,7 @@ bool _ligths = false;
 var listReqF = List<Widget>();
 
 var listAvances = List<Widget>();
-double calificacion;
+double calificacion=2.5;
 var finish;
 var responseA;
 var visitas;
@@ -546,6 +546,50 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       CupertinoSwitch(
                                         value: _ligths,
                                         onChanged: (bool value) async {
+                                           if (dataProject[0]['F_TERMINADO'] ==
+                                              "1") {
+                                           await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto ya fue finalizado!!!"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          return;
+                                          }
                                           if (!statusRed) {
                                             await showDialog(
                                                 context: context,
@@ -641,6 +685,50 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                             EdgeInsets.fromLTRB(20, 10, 20, 10),
                                         child: GestureDetector(
                                           onTap: () async {
+                                            if (dataProject[0]['F_TERMINADO'] ==
+                                              "1") {
+                                           showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto ya fue finalizado!!!"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          return;
+                                          }
                                             tdcTitulo.text =
                                                 dataProject[0]["TITULO"];
                                             tdcDescripcion.text =
@@ -869,6 +957,50 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                          if (dataProject[0]['F_TERMINADO'] ==
+                                              "1") {
+                                           showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto ya fue finalizado!!!"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          return;
+                                          }
                                           if (dataProject[0]
                                                   ["F_EN_DESARROLLO"] ==
                                               "0") {
@@ -1021,6 +1153,50 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                          if (dataProject[0]['F_TERMINADO'] ==
+                                              "1") {
+                                           showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto ya fue finalizado!!!"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          return;
+                                          }
                                           showDialog(
                                               context: context,
                                               builder: (context) =>
@@ -1094,6 +1270,50 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () async {
+                                          if (dataProject[0]['F_TERMINADO'] ==
+                                              "1") {
+                                           await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto ya fue finalizado!!!"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          return;
+                                          }
                                           if (dataProject[0]
                                                   ["F_EN_DESARROLLO"] ==
                                               "0") {
@@ -1406,6 +1626,50 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                          if (dataProject[0]['F_TERMINADO'] ==
+                                              "1") {
+                                           showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto ya fue finalizado!!!"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          return;
+                                          }
                                           if (dataProject[0]
                                                   ["F_EN_DESARROLLO"] ==
                                               "0") {
@@ -1609,6 +1873,51 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                       ),
                                       InkWell(
                                         onTap: () {
+                                           if (dataProject[0]['F_TERMINADO'] ==
+                                              "1") {
+                                           showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    new CupertinoAlertDialog(
+                                                      title: Column(
+                                                        children: <Widget>[
+                                                          Icon(
+                                                            Icons.devices_other,
+                                                            size: 80,
+                                                            color: Colors
+                                                                .deepPurpleAccent,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text("FindProgramemr",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20)),
+                                                        ],
+                                                      ),
+                                                      content: Text(
+                                                          "El proyecto ya fue finalizado!!!"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text("Aceptar",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      15)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          return;
+                                          }
+
                                           if (!statusRed) {
                                             showDialog(
                                                 context: context,
@@ -1871,7 +2180,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                                 Navigator.pop(
                                                                     context);
 
-                                                                showDialog(
+                                                                 showDialog(
                                                                     context:
                                                                         context,
                                                                     builder:
@@ -1930,9 +2239,10 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                                                 FlatButton(
                                                                                   onPressed: () async {
                                                                                     await finishProject(ID);
+                                                                                    await print("se termino finish");
                                                                                     Navigator.pop(context);
                                                                                     if (finish == "1") {
-                                                                                      showDialog(
+                                                                                      await showDialog(
                                                                                           context: context,
                                                                                           builder: (context) => new CupertinoAlertDialog(
                                                                                                 title: Column(
@@ -1991,7 +2301,7 @@ class _ViewProjectClient extends State<ViewProjectClient> {
                                                         ));
                                           } else {
                                             //el proyecto ya esta terminado
-                                            showDialog(
+                                           showDialog(
                                                 context: context,
                                                 builder: (context) =>
                                                     CupertinoAlertDialog(
@@ -3394,7 +3704,7 @@ Future finishProject(ID) async {
   print(ID.toString());
   print(dataProject[0]['FK_DESARROLLADOR'].toString());
   print(comentario.text);
-  print((calificacion * 2).toString());
+  print((calificacion+calificacion).toString());
   print(client['ID_USUARIO'].toString());
 
   try {
@@ -3402,7 +3712,7 @@ Future finishProject(ID) async {
       "ID": ID.toString(),
       "DESARROLLADOR": dataProject[0]['FK_DESARROLLADOR'].toString(),
       "COMENTARIO": comentario.text,
-      "CALIFICACION": (calificacion * 2).toString(),
+      "CALIFICACION": (calificacion+calificacion).toString(),
       "CLIENTE": client['ID_USUARIO'].toString(),
     }).timeout(Duration(seconds: 7));
 

@@ -1,6 +1,7 @@
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileClient.dart';
 import 'package:findprogrammer/viewDevelopmentProjectsClient.dart';
+import 'package:findprogrammer/viewProjectClient.dart';
 import 'package:findprogrammer/viewProjectProgrammerPanel.dart';
 
 import 'package:flutter/material.dart';
@@ -447,7 +448,16 @@ class _ViewFinishProjectsClient extends State<ViewFinishProjectsClient> {
                               itemBuilder:
                                   (BuildContext context, int position) {
                                 return GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                     Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewProjectClient(
+                                                  myProjects[position]
+                                                          ['ID_PROYECTO']
+                                                      .toString())));
+                                  },
                                   child: Card(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.0),
