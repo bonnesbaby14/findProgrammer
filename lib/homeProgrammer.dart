@@ -1322,10 +1322,14 @@ class _HomeProgrammer extends State<HomeProgrammer> {
           var difference = date.difference(last).inDays;
           print(difference);
  if (difference == 0) {
-        showOngoingNotification(notification2,
+       try{
+ showOngoingNotification(notification2,
             title: 'FindProgrammer',
             body: 'Tienes que entregar un avance hoy de '+datauser[z]['TITULO']+'',
             id: 20);
+       }catch(e){
+
+       }
       }
           if (difference > 0) {
             sistemaBloqueado = true;

@@ -930,10 +930,14 @@ String fechaReporte = datauser[0]['NEXT_ADVANCE'];
       var difference = last.difference(date).inDays;
       print(difference);
       if (difference == 0) {
-        showOngoingNotification(notification,
+       try{
+    showOngoingNotification(notification,
             title: 'FindProgrammer',
             body: 'El programador te tiene que entregar un avance hoy de '+datauser[0]['TITULO']+'',
-            id: 0);
+            id: 0);      
+       }catch(e){
+
+       }
       }
 
 
