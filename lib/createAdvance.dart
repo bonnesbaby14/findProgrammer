@@ -568,23 +568,23 @@ if (!statusRed) {
                                   Text("¿Seguro que quieres cerrar sesión?"),
                               actions: <Widget>[
                                 FlatButton(
-                                  onPressed: () {
-                                    helper.DeleteComents();
-                                    helper.DeleteDesarrollador();
-                                    helper.DeleteProyecto1();
-                                    helper.DeleteProyecto2();
-                                    helper.DeleteProyecto6();
-                                    helper.DeleteProyecto4();
-                                    helper.DeleteProyecto5();
-                                    helper.DeleteProyectoInfo();
+                                 onPressed: () async{
+                                 await helper.DeleteComents();
+                                  await helper.DeleteDesarrollador();
+                                  await helper.DeleteProyecto1();
+                                  await helper.DeleteProyecto2();
+                                  await helper.DeleteProyecto6();
+                                  await helper.DeleteProyecto4();
+                                  await helper.DeleteProyecto5();
+                                  await helper.DeleteProyectoInfo();
 
-                                    helper.DeleteCliente();
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Login()));
-                                  },
+                                  await helper.DeleteCliente();
+                                  Navigator.pop(context);
+                                  await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                },
                                   child: Text("Cerrar Sesión",
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 15)),
