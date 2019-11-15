@@ -1,5 +1,6 @@
 import 'package:findprogrammer/login.dart';
 import 'package:findprogrammer/profileProgrammer.dart';
+import 'package:findprogrammer/updateUserD.dart';
 import 'package:findprogrammer/viewAvailableProjects.dart';
 import 'package:findprogrammer/viewProjectClient.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
     final notification2 = FlutterLocalNotificationsPlugin();
   @override
   void initState() {
+    desarrollador=null;
     // TODO: implement initState
   final settingAndroid =
         AndroidInitializationSettings('ic_launcher_background');
@@ -1197,16 +1199,16 @@ class _HomeProgrammer extends State<HomeProgrammer> {
       desarrolladorList = await helper.SelectDesarrollador();
       desarrollador = desarrolladorList.first;
       if (desarrollador['F_BAJA_USUARIO'] == 1) {
-        helper.DeleteComents();
-        helper.DeleteDesarrollador();
-        helper.DeleteProyecto1();
-        helper.DeleteProyecto2();
-        helper.DeleteProyecto6();
-        helper.DeleteProyecto4();
-        helper.DeleteProyecto5();
-        helper.DeleteProyectoInfo();
+        await helper.DeleteComents();
+        await helper.DeleteDesarrollador();
+        await helper.DeleteProyecto1();
+        await helper.DeleteProyecto2();
+        await helper.DeleteProyecto6();
+        await helper.DeleteProyecto4();
+        await helper.DeleteProyecto5();
+        await helper.DeleteProyectoInfo();
 
-        helper.DeleteCliente();
+        await helper.DeleteCliente();
         Navigator.pop(context);
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Login()));
@@ -1219,6 +1221,10 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   }
 
   Future getProjects() async {
+
+    await getDesarrollador();
+    await getDesarrollador();
+
     var cliente1 = new http.Client();
     try {
       print("#######################################3");
@@ -1288,6 +1294,7 @@ class _HomeProgrammer extends State<HomeProgrammer> {
   }
 
   Future getDevelopmentsProjects() async {
+    sistemaBloqueado=false;
     var cliente1 = new http.Client();
     try {
       print("-------------------------------------");

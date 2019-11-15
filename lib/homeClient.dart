@@ -34,6 +34,7 @@ class _Homeclient extends State<Homeclient> {
 
   @override
   void initState() {
+    client=null;
     if (statusRed) {
       print("se conculta la red");
       getProject();

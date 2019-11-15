@@ -355,7 +355,7 @@ class _Login extends State<Login> {
         }else if(respuesta[0]==1){
 Map<String, dynamic> MapDesarrollador = Map();
 
-          helper.DeleteDesarrollador();
+          await helper.DeleteDesarrollador();
           MapDesarrollador['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
           MapDesarrollador['ID_DESARROLLADOR'] =
               respuesta[1]['ID_DESARROLLADOR'];
@@ -404,7 +404,7 @@ Map<String, dynamic> MapDesarrollador = Map();
 
           print(response.body);
 
-helper.DeleteCliente();
+await helper.DeleteCliente();
          MapCliente['ID_USUARIO'] = respuesta[1]['ID_USUARIO'];
           MapCliente['NOMBRE'] = utf8.decode(base64.decode(respuesta[1]['NOMBRE']));
           MapCliente['APELLIDO_P'] = utf8.decode(base64.decode(respuesta[1]['APELLIDO_P']));
