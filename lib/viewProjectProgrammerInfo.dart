@@ -28,11 +28,20 @@ class ViewProjectProgrammerInfo extends StatefulWidget {
 }
 
 class _ViewProjectProgrammerInfo extends State<ViewProjectProgrammerInfo> {
+  
   String ID;
   _ViewProjectProgrammerInfo(this.ID);
   final AsyncMemoizer _asyncMemorizer = new AsyncMemoizer();
   var dataProject, reqFuncionales, reqNoFuncionales, avances, clienteP;
   Helper helper = new Helper();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getInfooProject();
+    getClientProject();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     setState(() {});
@@ -601,7 +610,7 @@ if (!statusRed) {
                   children: <Widget>[
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      height: (MediaQuery.of(context).size.height / 2) + 50,
+                      height: (MediaQuery.of(context).size.height / 2) + 60,
                       decoration: BoxDecoration(
                           color: Colors.deepPurpleAccent,
                           borderRadius: BorderRadius.only(
@@ -638,16 +647,16 @@ if (!statusRed) {
                                 TextStyle(fontSize: 25.0, color: Colors.white),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Text(
-                            "por: Gabriel Rodriguez",
-                            style:
+                            "por: "+utf8.decode(base64.decode(clienteP[0]['nombre'])).toString()+" "+utf8.decode(base64.decode(clienteP[0]['apellido_p'])).toString()+" "+utf8.decode(base64.decode(clienteP[0]['apellido_m'])).toString(),
+                            style: 
                                 TextStyle(fontSize: 18.0, color: Colors.white),
                           ),
                           Container(
                             width: (MediaQuery.of(context).size.width / 4) * 3,
-                            height: 90,
+                            height: 80,
                             child: ListView(
                               children: <Widget>[
                                 Text(
@@ -676,10 +685,10 @@ if (!statusRed) {
                                         Icon(
                                           GroovinMaterialIcons.comment_question,
                                           color: Colors.white,
-                                          size: 30,
+                                          size: 25,
                                         ),
                                         SizedBox(
-                                          height: 10,
+                                          height: 5,
                                         ),
                                         Text(
                                           " Solicitar \nProyecto ",
@@ -750,33 +759,33 @@ if (!statusRed) {
                                       style: TextStyle(
                                           fontSize: 27.0, color: Colors.white)),
                                 ),
-                                Padding(
-                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                    child: dataProject[0]["F_TIPO_DE_PROYECTO"] == "0"
-                                        ? Text("Aplicación Web",
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.white))
-                                        : dataProject[0]["F_TIPO_DE_PROYECTO"] == "1"
-                                            ? Text("Aplicación Movil Android",
-                                                style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    color: Colors.white))
-                                            : dataProject[0]["F_TIPO_DE_PROYECTO"] == "2"
-                                                ? Text("Aplicación Movil IOS",
-                                                    style: TextStyle(
-                                                        fontSize: 14.0,
-                                                        color: Colors.white))
-                                                : dataProject[0]["F_TIPO_DE_PROYECTO"] == "3"
-                                                    ? Text("Aplicación Escritorio Windows",
-                                                        style: TextStyle(
-                                                            fontSize: 14.0,
-                                                            color:
-                                                                Colors.white))
-                                                    : dataProject[0]["F_TIPO_DE_PROYECTO"] == "4"
-                                                        ? Text("Aplicación Escritorio MAC",
-                                                            style: TextStyle(fontSize: 14.0, color: Colors.white))
-                                                        : dataProject[0]["F_TIPO_DE_PROYECTO"] == "5" ? Text("Proyecto de Redes", style: TextStyle(fontSize: 14.0, color: Colors.white)) : Text("ERROR", style: TextStyle(fontSize: 14.0, color: Colors.white))),
+                               Padding(
+                                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: dataProject[0]["F_TIPO_DE_PROYECTO"] == "0"
+                                          ? Text("Aplicación Movil Android",
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.white))
+                                          : dataProject[0]["F_TIPO_DE_PROYECTO"] == "1"
+                                              ? Text("Aplicación Movil IOS",
+                                                  style: TextStyle(
+                                                      fontSize: 14.0,
+                                                      color: Colors.white))
+                                              : dataProject[0]["F_TIPO_DE_PROYECTO"] == "2"
+                                                  ? Text("Aplicación Escritorio Windows",
+                                                      style: TextStyle(
+                                                          fontSize: 14.0,
+                                                          color: Colors.white))
+                                                  : dataProject[0]["F_TIPO_DE_PROYECTO"] == "3"
+                                                      ? Text("Aplicación Escritorio MAC OS",
+                                                          style: TextStyle(
+                                                              fontSize: 14.0,
+                                                              color:
+                                                                  Colors.white))
+                                                      : dataProject[0]["F_TIPO_DE_PROYECTO"] == "4"
+                                                          ? Text("Aplicación Web",
+                                                              style: TextStyle(fontSize: 14.0, color: Colors.white))
+                                                          : dataProject[0]["F_TIPO_DE_PROYECTO"] == "5" ? Text("Proyecto de Redes", style: TextStyle(fontSize: 14.0, color: Colors.white)) : Text("ERROR", style: TextStyle(fontSize: 14.0, color: Colors.white))),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -1088,6 +1097,7 @@ if (!statusRed) {
 
       var dataProject = json.decode(response.body);
       this.dataProject = dataProject;
+    
     } catch (f) {}
   }
 
@@ -1124,11 +1134,13 @@ if (!statusRed) {
         // "http://192.168.0.5/findprogrammerDB/loadInfoProject.php",
         body: {
           "ID_PROYECTO": this.ID,
-          "TYPE": "5"
+          "TYPE": "6"
         }).timeout(Duration(seconds: 7));
 
     var dataProject = json.decode(response.body);
     this.clienteP = dataProject;
+    print("_______________________________________________");
+    print(clienteP);
   }
 
   Future applyForProject() async {

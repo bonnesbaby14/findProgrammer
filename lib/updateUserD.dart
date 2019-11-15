@@ -361,7 +361,7 @@ source: ImageSource.camera,imageQuality: 20);
                                           children: <Widget>[
                                             Row(
                                               children: <Widget>[
-                                                Text("Desarrollo web      ",
+                                                Text("Desarrollo \nweb                 ",
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                     )),
@@ -415,7 +415,7 @@ source: ImageSource.camera,imageQuality: 20);
                                             Row(
                                               children: <Widget>[
                                                 Text(
-                                                    "Desarrollador \n movil (IOS)            ",
+                                                    "Desarrollador \n movil (IOS)    ",
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                     )),
@@ -440,7 +440,7 @@ source: ImageSource.camera,imageQuality: 20);
                                             Row(
                                               children: <Widget>[
                                                 Text(
-                                                    "Desarrollador \n de RED               ",
+                                                    "Desarrollador \n de RED              ",
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                     )),
@@ -469,7 +469,7 @@ source: ImageSource.camera,imageQuality: 20);
                                             Row(
                                               children: <Widget>[
                                                 Text(
-                                                    "Desarrollador \n Windows               ",
+                                                    "Desarrollador \n Windows     ",
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                     )),
@@ -494,7 +494,7 @@ source: ImageSource.camera,imageQuality: 20);
                                             Row(
                                               children: <Widget>[
                                                 Text(
-                                                    "Desarrollo \n MAC OS             ",
+                                                    "Desarrollo \n MAC OS            ",
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                     )),
